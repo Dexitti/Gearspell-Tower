@@ -1,0 +1,362 @@
+fileFormatVersion: 2
+guid: 515e4c31f28ebd74588b7c84a8834ec7
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2136688084491689121
+    second: fire drill 1-7_0
+  - first:
+      213: -2787103969295429366
+    second: fire drill 1-7_1
+  - first:
+      213: 703725309196358752
+    second: fire drill 1-7_2
+  - first:
+      213: 8182199189412857460
+    second: fire drill 1-7_3
+  - first:
+      213: 4253583904491830725
+    second: fire drill 1-7_4
+  - first:
+      213: -72978877194112573
+    second: fire drill 1-7_5
+  - first:
+      213: 7685668993481121496
+    second: fire drill 1-7_6
+  - first:
+      213: -2397504030527247382
+    second: fire drill 1-7_7
+  - first:
+      213: 7105515969693087733
+    second: fire drill 1-7_8
+  - first:
+      213: 5392815642997183484
+    second: fire drill 1-7_9
+  - first:
+      213: 3221650953519750712
+    second: fire drill 1-7_10
+  - first:
+      213: 1017764757002273093
+    second: fire drill 1-7_11
+  - first:
+      213: 8038171532988522123
+    second: fire drill 1-7_12
+  - first:
+      213: 6416043688568553510
+    second: fire drill 1-7_13
+  - first:
+      213: -7919942477398035328
+    second: fire drill 1-7_14
+  - first:
+      213: 1080864512465924382
+    second: fire drill 1-7_15
+  - first:
+      213: 7055991695992569022
+    second: fire drill 1-7_16
+  - first:
+      213: -870431971013671124
+    second: fire drill 1-7_17
+  - first:
+      213: -2348311352285253663
+    second: fire drill 1-7_18
+  - first:
+      213: -2995309617674931091
+    second: fire drill 1-7_19
+  - first:
+      213: -5705307698514771418
+    second: fire drill 1-7_20
+  - first:
+      213: -3745942511679248938
+    second: fire drill 1-7_21
+  - first:
+      213: -6878724096460797518
+    second: fire drill 1-7_22
+  - first:
+      213: 8008685806056219423
+    second: fire drill 1-7_23
+  - first:
+      213: -6269554914819821044
+    second: fire drill 1-7_24
+  - first:
+      213: 3620406597508670899
+    second: fire drill 1-7_25
+  - first:
+      213: -4980202058039433461
+    second: fire drill 1-7_26
+  - first:
+      213: -4853108937150108248
+    second: fire drill 1-7_27
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: fire drill 1-7_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1acdfeffd7a07ad10800000000000000
+      internalID: 2136688084491689121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire drill 1-7_1
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a019016e4b73259d0800000000000000
+      internalID: -2787103969295429366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire drill 1-7_2
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 064d912b07224c900800000000000000
+      internalID: 703725309196358752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire drill 1-7_3
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4764176cfc20d8170800000000000000
+      internalID: 8182199189412857460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire drill 1-7_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5cdfd815604c70b30800000000000000
+      internalID: 4253583904491830725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire drill 1-7_5
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f923c98d874d03848acbf06bfa3e059a
+      internalID: -72978877194112573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire drill 1-7_6
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: feb9863bfb1052a44b21e44c89ef847e
+      internalID: 7685668993481121496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 7f68ccdc0ceedfa4f9c0f2cb2703c88c
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      fire drill 1-7_0: 2136688084491689121
+      fire drill 1-7_1: -2787103969295429366
+      fire drill 1-7_2: 703725309196358752
+      fire drill 1-7_3: 8182199189412857460
+      fire drill 1-7_4: 4253583904491830725
+      fire drill 1-7_5: -72978877194112573
+      fire drill 1-7_6: 7685668993481121496
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
