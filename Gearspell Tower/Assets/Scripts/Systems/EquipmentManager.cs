@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class EquipmentManager : MonoBehaviour
 {
-    [SerializeField] private BaseEquipment[] activeEquipment = new BaseEquipment[4]; // 4 слота
-    private List<BaseEquipment> equippedItems = new List<BaseEquipment>(); //?
+    [SerializeField] private EquipmentController[] activeEquipment = new EquipmentController[4]; // 4 слота
+    private List<EquipmentController> equippedItems = new List<EquipmentController>(); //?
     [SerializeField] private Transform equipmentPivot;
 
     void Awake()
@@ -32,7 +32,7 @@ public class EquipmentManager : MonoBehaviour
     /// <summary>
     /// Ёкипировать предмет в указанный слот
     /// </summary>
-    public bool EquipItem(BaseEquipment newEquipment, int slotIndex)
+    public bool EquipItem(EquipmentController newEquipment, int slotIndex)
     {
         if (slotIndex < 0 || slotIndex >= activeEquipment.Length)
         {
