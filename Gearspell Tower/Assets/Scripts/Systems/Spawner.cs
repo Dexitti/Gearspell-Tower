@@ -15,7 +15,6 @@ public class Spawner : MonoBehaviour
     public GameObject[] enemyPrefabs;
     private Queue<GameObject> enemyPool = new Queue<GameObject>();
     private List<GameObject> availableEnemies = new List<GameObject>();
-    private Coroutine spawnCoroutine;
 
     public void Awake()
     {
@@ -33,7 +32,7 @@ public class Spawner : MonoBehaviour
     {
         for (int i = 0; i < enemyPrefabs.Length; i++)
         {
-            GameObject enemy = Instantiate(enemyPrefabs[i]);
+            GameObject enemy = Instantiate(enemyPrefabs[i], transform);
             enemy.SetActive(false);
             enemyPool.Enqueue(enemy);
         }
@@ -94,7 +93,7 @@ public class Spawner : MonoBehaviour
             enemy = enemyPool.Dequeue();
             enemy.SetActive(true);
         }
-        else enemy = Instantiate(enemyPrefab);
+        else enemy = Instantiate(enemyPrefab, transform);
 
         enemy.transform.position = GetSpawnPosition();
         availableEnemies.Add(enemy);
@@ -124,7 +123,7 @@ public class Spawner : MonoBehaviour
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(tower.transform.position, spawnDistance);
 
-            // Рисуем позиции активных врагов
+            // Рисуем линии до врагов
             Gizmos.color = Color.yellow;
             foreach (var enemy in availableEnemies)
             {

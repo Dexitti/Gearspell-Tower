@@ -61,11 +61,4 @@ public class Tower : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }
-
-    private void OnDrawGizmos()
-    {
-        // Линия пути до ближайшего врага
-        Gizmos.color = Color.blue;
-        Gizmos.DrawLine(transform.position, detectedEnemies.Min(x => x.transform.position));
-    }
 }

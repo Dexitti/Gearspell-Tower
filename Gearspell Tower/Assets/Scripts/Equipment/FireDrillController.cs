@@ -6,31 +6,121 @@ using UnityEngine.UIElements;
 
 public class FireDrillController : EquipmentController
 {
-    private List<GameObject> projPool = new List<GameObject>();
+    private Queue<GameObject> shotPool = new Queue<GameObject>();
+    private Queue<GameObject> projPool = new Queue<GameObject>();
+    private List<Vector3> availableEnemies = new List<Vector3>();
+    private List<Vector3> firePoints = new List<Vector3>();
+
+    private float height = 6f;
 
     protected override void OnEnable()
     {
         base.OnEnable();
-        foreach (GameObject projPrefab in data.projectilesPrefabs)
+        for (int i = 0; i < data.projectileCount; i++)
         {
-            for (int i = 0; i < data.projectileCount; i++)
+            GameObject shot = Instantiate(data.projectilesPrefabs[0], transform);
+            shot.SetActive(false);
+            shotPool.Enqueue(shot);
+        }
+
+        for (int i = 0; i < data.projectileCount; i++)
+        {
+            GameObject proj = Instantiate(data.projectilesPrefabs[1], transform);
+            proj.SetActive(false);
+            projPool.Enqueue(proj);
+        }
+    }
+
+    protected override IEnumerator Attack()
+    {
+        availableEnemies.Clear();
+        firePoints.Clear();
+
+        InitializeFirePoints();
+        if (firePoints.Count == 0) yield break;
+
+        FireShells();
+        yield return new WaitForSeconds(0.75f);
+
+        FireDrills();
+        //yield return new WaitWhile(() => IsSecondActionRunning());
+
+        //OnInteractionComplete?.Invoke();
+    }
+
+    private void InitializeFirePoints()
+    {
+        GameObject[] enemyArray = GameObject.FindGameObjectsWithTag("Enemy");
+        if (enemyArray.Length == 0 ) return;
+
+        foreach (var enemy in enemyArray)
+        {
+            if (Vector3.Distance(towerTransform.position, enemy.transform.position) <= currentRange)
             {
-                projPool[i] = Instantiate(projPrefab);
+                availableEnemies.Add(enemy.transform.position);
+                Debug.Log($"{enemy} by FireDrillController found");
+            }
+        }
+
+        List<int> positions = new List<int>();
+        for (int i = 0; i < Mathf.Min(currentProjectileCount, availableEnemies.Count); i++)
+        {
+            while (true)
+            {
+                int randomInt = Random.Range(0, availableEnemies.Count - 1);
+                if (!positions.Contains(randomInt))
+                {
+                    positions.Add(randomInt);
+                    Vector3 randomEnemy = availableEnemies[randomInt];
+                    firePoints.Add(randomEnemy + Vector3.up * height);
+                    Debug.Log($"Fire point {randomEnemy + Vector3.up * height} was created");
+                    break;
+                }
             }
         }
     }
 
-    public override void Attack()
+    private void FireShells()
     {
-        
+        for (int i = 0; i < Mathf.Min(currentProjectileCount, availableEnemies.Count); i++)
+        {
+            GameObject shot;
+            if (shotPool.Count > 0)
+            {
+                shot = shotPool.Dequeue();
+                shot.SetActive(true);
+
+            }
+            else shot = Instantiate(data.projectilesPrefabs[0], transform);
+            shot.transform.position = towerTransform.position + Vector3.up * 0.65f;
+            if (firePoints[i].x <= towerTransform.position.x)
+                shot.transform.Rotate(0f, 0f, Random.Range(2f, 25f));
+            else shot.transform.Rotate(0f, 0f, Random.Range(-25f, -2f));
+        }
     }
 
-    public override void Upgrade(int upgradeIndex)
+    private void FireDrills()
+    {
+        for (int i = 0; i < Mathf.Min(currentProjectileCount, availableEnemies.Count); i++)
+        {
+            GameObject drill;
+            if (projPool.Count > 0) {
+                drill = projPool.Dequeue();
+                drill.SetActive(true);
+            }
+            else drill = Instantiate(data.projectilesPrefabs[1], transform);
+            drill.transform.position = firePoints[i];
+        }
+    }
+
+
+
+    protected override void Upgrade(int upgradeIndex)
     {
         throw new System.NotImplementedException();
     }
 
-    public override void ActivateAbility()
+    protected override void ActivateAbility()
     {
         throw new System.NotImplementedException();
     }

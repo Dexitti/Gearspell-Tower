@@ -3,16 +3,14 @@ using UnityEngine;
 
 public class EquipmentManager : MonoBehaviour
 {
-    [SerializeField] private EquipmentController[] activeEquipment = new EquipmentController[4]; // 4 слота
+    [SerializeField] private EquipmentController[] activeEquipment = new EquipmentController[3]; // 3 слота
     private List<EquipmentController> equippedItems = new List<EquipmentController>(); //?
-    [SerializeField] private Transform equipmentPivot;
 
     void Awake()
     {
         InitializeEquipment();
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -34,12 +32,6 @@ public class EquipmentManager : MonoBehaviour
     /// </summary>
     public bool EquipItem(EquipmentController newEquipment, int slotIndex)
     {
-        if (slotIndex < 0 || slotIndex >= activeEquipment.Length)
-        {
-            Debug.LogError($"Некорректный индекс слота: {slotIndex}");
-            return false;
-        }
-
         // Если в слоте уже есть снаряжение - снимаем его
         if (activeEquipment[slotIndex] != null)
         {
@@ -49,22 +41,15 @@ public class EquipmentManager : MonoBehaviour
         // Устанавливаем новое снаряжение
         activeEquipment[slotIndex] = newEquipment;
 
-        //// Инициализируем снаряжение
-        //if (newEquipment != null)
-        //{
-        //    newEquipment.Initialize(this, slotIndex);
-        //    equippedItems.Add(newEquipment);
+        // Инициализируем снаряжение
+        if (newEquipment != null)
+        {
+            //newEquipment.Initialize(this, slotIndex);
+            equippedItems.Add(newEquipment);
 
-        //    // Визуал: размещаем модельку на башне
-        //    if (equipmentPivot != null)
-        //    {
-        //        // TODO: Логика позиционирования разных типов снаряжения
-        //        // Можно использовать систему трансформов для разных слотов
-        //        Instantiate(newEquipment.EquipmentVisual, equipmentPivot);
-        //    }
 
-        //    Debug.Log($"Снаряжение {newEquipment.EquipmentName} экипировано в слот {slotIndex}");
-        //}
+            Debug.Log($"Снаряжение {newEquipment.data.equipmentName} экипировано в слот {slotIndex}");
+        }
 
         return true;
     }
@@ -74,12 +59,6 @@ public class EquipmentManager : MonoBehaviour
     /// </summary>
     public void UnequipItem(int slotIndex)
     {
-        if (slotIndex < 0 || slotIndex >= activeEquipment.Length)
-        {
-            Debug.LogError($"Некорректный индекс слота: {slotIndex}");
-            return;
-        }
-
         var equipment = activeEquipment[slotIndex];
         if (equipment != null)
         {

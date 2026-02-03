@@ -18,7 +18,7 @@ public class EquipmentData : ScriptableObject
     public float size; // Projectile
     public float attackCooldown; // Controller
     public float range; // Controller
-    public int projectileCount;
+    public int projectileCount; // Controller
 
     //[Header("Улучшения")]
     //public UpgradeTree upgradeTree;

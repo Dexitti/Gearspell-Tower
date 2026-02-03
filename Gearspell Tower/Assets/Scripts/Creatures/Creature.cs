@@ -39,18 +39,17 @@ public class Creature : MonoBehaviour
     {
         if (other.gameObject.tag == "Tower")
         {
-            StartCoroutine(AttackTower());
+            StartCoroutine(AttackTower(other));
         }
     }
 
-    IEnumerator AttackTower()
+    IEnumerator AttackTower(Collider2D other)
     {
         while (true)
         {
-            HealthComponent towerHealthComponent = GameObject.Find("Tower").GetComponent<HealthComponent>();
+            HealthComponent towerHealthComponent = other.GetComponent<HealthComponent>();
             if (towerHealthComponent == null || !towerHealthComponent.isAlive) yield break;
             towerHealthComponent.TakeDamage(damage);
-            Debug.Log($"Trigger: Tower take {damage} damage!");
 
             // Анимация атаки
 

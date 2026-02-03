@@ -6,11 +6,16 @@ using UnityEngine.UIElements;
 
 public abstract class EquipmentController : MonoBehaviour
 {
-    [SerializeField] protected EquipmentData data;
+    [SerializeField] public EquipmentData data;
     private GameObject decorationInstance;
-    private Transform towerTransform;
+    protected Transform towerTransform;
 
     protected int level = 0;
+    public int currentDamage;
+    public float currentSize;
+    public float currentAttackCooldown;
+    public float currentRange;
+    public int currentProjectileCount;
 
     protected virtual void OnEnable()
     {
@@ -23,19 +28,26 @@ public abstract class EquipmentController : MonoBehaviour
 
     private void Start()
     {
+        currentDamage = data.damage;
+        currentSize = data.size;
+        currentAttackCooldown = data.attackCooldown;
+        currentRange = data.range;
+        currentProjectileCount = data.projectileCount;
         StartCoroutine(AttackManager());
     }
 
     IEnumerator AttackManager()
     {
+        Debug.Log("Coroutine");
         while (true) {
-            Attack();
-            
+            yield return StartCoroutine(Attack());
+
+
             yield return new WaitForSeconds(data.attackCooldown);
         }
     }
 
-    public abstract void Attack();
-    public abstract void Upgrade(int upgradeIndex);
-    public abstract void ActivateAbility();
+    protected abstract IEnumerator Attack();
+    protected abstract void Upgrade(int upgradeIndex);
+    protected abstract void ActivateAbility();
 }
