@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 29f39fd2ddb454346b959605b7491f80
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - data: {fileID: 11400000, guid: 97f3f9a3cd3aca946a014e83304624a4, type: 2}
+  - freezeBeamRenderer: {instanceID: 0}
+  - freezeImpactEffect: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

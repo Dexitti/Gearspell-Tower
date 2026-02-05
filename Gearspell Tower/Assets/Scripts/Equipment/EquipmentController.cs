@@ -11,7 +11,7 @@ public abstract class EquipmentController : MonoBehaviour
     protected Transform towerTransform;
 
     protected int level = 0;
-    public int currentDamage;
+    public float currentDamage;
     public float currentSize;
     public float currentAttackCooldown;
     public float currentRange;
@@ -38,7 +38,6 @@ public abstract class EquipmentController : MonoBehaviour
 
     IEnumerator AttackManager()
     {
-        Debug.Log("Coroutine");
         while (true) {
             yield return StartCoroutine(Attack());
 

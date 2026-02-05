@@ -193,15 +193,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 543184684}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89d73b4b23abada44b9db15e22fca03e, type: 3}
+  m_Script: {fileID: 11500000, guid: 29f39fd2ddb454346b959605b7491f80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 72af7a7860e751948b469f775f33ab95, type: 2}
+  data: {fileID: 11400000, guid: 97f3f9a3cd3aca946a014e83304624a4, type: 2}
   currentDamage: 0
   currentSize: 0
   currentAttackCooldown: 0
   currentRange: 0
   currentProjectileCount: 0
+  freezeImpactEffect: {fileID: 0}
+  beamWidth: 0.3
+  freezeDuration: 3
+  slowEffect: 0.85
 --- !u!1 &603385169
 GameObject:
   m_ObjectHideFlags: 0

@@ -112,7 +112,7 @@ public class Spawner : MonoBehaviour
         float x = Mathf.Cos(angle * Mathf.Deg2Rad) * distance;
         float y = Mathf.Sin(angle * Mathf.Deg2Rad) * distance * 0.75f;
 
-        return towerPosition + new Vector3(x, y, 0);
+        return towerPosition + new Vector3(x, y);
     }
 
     void OnDrawGizmosSelected()

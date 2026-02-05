@@ -14,7 +14,7 @@ public class EquipmentData : ScriptableObject
     public GameObject[] projectilesPrefabs;      // Префабы снарядов
 
     [Header("Параметры")]
-    public int damage; // Projectile
+    public float damage; // Projectile
     public float size; // Projectile
     public float attackCooldown; // Controller
     public float range; // Controller

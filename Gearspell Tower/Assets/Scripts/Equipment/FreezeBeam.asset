@@ -10,16 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31e3455ba3b34c5439d6722bdfdc8514, type: 3}
-  m_Name: Windshear
+  m_Name: FreezeBeam
   m_EditorClassIdentifier: 
-  equipmentName: "\u0412\u0435\u0442\u0440\u044F\u043D\u043E\u0439 \u0440\u0430\u0437\u0440\u0435\u0437"
+  equipmentName: 
   description: 
   icon: {fileID: 0}
   decorationPrefab: {fileID: 0}
-  projectilesPrefabs:
-  - {fileID: 4505684284006643834, guid: 0c6ed05e3b86b8443895a817dba62b6d, type: 3}
-  damage: 3
+  projectilesPrefabs: []
+  damage: 0.75
   size: 1
-  attackCooldown: 0.33
-  range: 3
+  attackCooldown: 0.25
+  range: 2.5
   projectileCount: 1
