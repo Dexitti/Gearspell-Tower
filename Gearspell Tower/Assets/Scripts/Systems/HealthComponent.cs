@@ -14,27 +14,29 @@ public class HealthComponent : MonoBehaviour
     public Action OnDeath;
 
     public bool isAlive => !isDied;
-    public int MaxHealth => maxHealth;
+    public int CurrentHealth
+    {
+        get => currentHealth;
+        private set
+        {
+            currentHealth = value;
+            OnHealthChanged?.Invoke(currentHealth, maxHealth);
+        }
+    }
 
     private void OnEnable()
     {
-        currentHealth = maxHealth;
+        CurrentHealth = maxHealth;
     }
 
-    private void Update()
-    {
-        //hitDelay -= Time.fixedDeltaTime;
-    }
-
-    public float GetHealthPercentage() => Mathf.Clamp((float)currentHealth / maxHealth, 0, 1);
+    public float GetHealthPercentage() => Mathf.Clamp((float)CurrentHealth / maxHealth, 0, 1);
 
     public void TakeDamage(int damage)
     {
         if (isDied) return;
         Debug.Log($"{gameObject} получил {damage} урона");
-        currentHealth = Math.Max(0, currentHealth - damage);
-        OnHealthChanged?.Invoke(currentHealth, maxHealth);
-        if (currentHealth <= 0 && !isDied)
+        CurrentHealth = Math.Max(0, currentHealth - damage);
+        if (CurrentHealth <= 0 && !isDied)
         {
             Die();
         }
@@ -44,8 +46,7 @@ public class HealthComponent : MonoBehaviour
     {
         if (isDied) return;
         Debug.Log($"{gameObject} восстановил {hitpoints} hp");
-        currentHealth = Math.Min(currentHealth + hitpoints, maxHealth);
-        OnHealthChanged?.Invoke(currentHealth, maxHealth);
+        CurrentHealth = Math.Min(currentHealth + hitpoints, maxHealth);
     }
 
     private void Die()
@@ -64,7 +65,7 @@ public class HealthComponent : MonoBehaviour
         style.alignment = TextAnchor.MiddleCenter;
 
         Vector3 textPosition = transform.position + Vector3.up * 0.85f;
-        Handles.Label(textPosition, currentHealth.ToString(), style);
+        Handles.Label(textPosition, CurrentHealth.ToString(), style);
 
     }
 }

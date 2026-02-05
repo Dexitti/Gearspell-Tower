@@ -16,11 +16,11 @@ public class Tower : MonoBehaviour
     private List<Creature> detectedEnemies = new List<Creature>();
 
     // Модификаторы из систем
-    private float globalDamageMultiplier = 1f;
-    private float globalAttackSpeedMultiplier = 1f;
-    private float globalActiveCooldownReduction = 0f;
-    private float globalProjSize = 1f;
-    private float globalConstructCooldownReduction = 0f;
+    //private float globalDamageMultiplier = 1f;
+    //private float globalAttackSpeedMultiplier = 1f;
+    //private float globalActiveCooldownReduction = 0f;
+    //private float globalProjSize = 1f;
+    //private float globalConstructCooldownReduction = 0f;
 
     private void Awake()
     {
