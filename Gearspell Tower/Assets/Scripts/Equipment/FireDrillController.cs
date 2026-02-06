@@ -58,7 +58,6 @@ public class FireDrillController : EquipmentController
             if (Vector3.Distance(towerTransform.position, enemy.transform.position) <= currentRange)
             {
                 availableEnemies.Add(enemy.transform.position);
-                Debug.Log($"{enemy} by FireDrillController found");
             }
         }
 
@@ -73,7 +72,6 @@ public class FireDrillController : EquipmentController
                     positions.Add(randomInt);
                     Vector3 randomEnemy = availableEnemies[randomInt];
                     firePoints.Add(randomEnemy + Vector3.up * height);
-                    Debug.Log($"Fire point {randomEnemy + Vector3.up * height} was created");
                     break;
                 }
             }

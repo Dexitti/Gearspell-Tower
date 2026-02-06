@@ -11,9 +11,8 @@ public class Tower : MonoBehaviour
     [SerializeField] private int regeneration = 1;
 
     public Vector3 Position => transform.position;
-    [SerializeField] private Collider2D bodyCollider;     // Для физики и получения урона
     
-    private List<Creature> detectedEnemies = new List<Creature>();
+    private List<Creature> detectedEnemies = new List<Creature>(); // может быть обнаружение врагов вынести сюда и просто вызывать!
 
     // Модификаторы из систем
     //private float globalDamageMultiplier = 1f;
@@ -29,14 +28,11 @@ public class Tower : MonoBehaviour
         //uiManager = UIManager.Instance;
 
         healthComponent = GetComponent<HealthComponent>();
-        //InitializeEquipment();
     }
 
     private void Start()
     {
         StartCoroutine(Regenerate());
-        //StartCoroutine(EnemyDetectionRoutine());
-        //StartCoroutine(EquipmentActivationRoutine());
     }
 
     IEnumerator Regenerate()
@@ -53,12 +49,5 @@ public class Tower : MonoBehaviour
         // {
         //     UpgradeSystem.Instance.OnGlobalUpgradeChanged -= UpdateGlobalModifiers;
         // }
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        // Визуализация радиуса обнаружения в редакторе
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }
 }

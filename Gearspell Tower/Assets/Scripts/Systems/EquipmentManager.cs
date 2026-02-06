@@ -1,72 +1,59 @@
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EquipmentManager : MonoBehaviour
 {
-    [SerializeField] private EquipmentController[] activeEquipment = new EquipmentController[3]; // 3 слота
-    private List<EquipmentController> equippedItems = new List<EquipmentController>(); //?
+    [SerializeField] private GameObject[] activeEquipment = new GameObject[3]; // 3 слота
+    private Dictionary<string, GameObject> equipmentPrefabs  = new Dictionary<string, GameObject>();
 
     void Awake()
     {
-        InitializeEquipment();
+        LoadAllPrefabs();
+        var firedrill = equipmentPrefabs["FireDrillController"];
+        EquipItem(firedrill, 0);
     }
 
-    void Update()
+    private void LoadAllPrefabs()
     {
-        
-    }
+        GameObject[] prefabs = Resources.LoadAll<GameObject>("Prefabs/Controllers");
 
-    private void InitializeEquipment()
-    {
-        for (int i = 0; i < activeEquipment.Length; i++)
+        foreach (GameObject prefab in prefabs)
         {
-            if (activeEquipment[i] != null)
-            {
-                EquipItem(activeEquipment[i], i);
-            }
+            equipmentPrefabs[prefab.name] = prefab;
         }
+        Debug.Log($"Префабы снаряжения загружены");
     }
 
-    /// <summary>
-    /// Экипировать предмет в указанный слот
-    /// </summary>
-    public bool EquipItem(EquipmentController newEquipment, int slotIndex)
+    public bool EquipItem(GameObject newEquipment, int slotIndex)
     {
-        // Если в слоте уже есть снаряжение - снимаем его
         if (activeEquipment[slotIndex] != null)
         {
             UnequipItem(slotIndex);
         }
 
-        // Устанавливаем новое снаряжение
         activeEquipment[slotIndex] = newEquipment;
-
-        // Инициализируем снаряжение
         if (newEquipment != null)
         {
-            //newEquipment.Initialize(this, slotIndex);
-            equippedItems.Add(newEquipment);
+            GameObject controller = Instantiate(newEquipment, transform);
 
-
-            Debug.Log($"Снаряжение {newEquipment.data.equipmentName} экипировано в слот {slotIndex}");
+            Debug.Log($"Снаряжение {newEquipment.name} экипировано в слот {slotIndex}");
         }
 
         return true;
     }
 
-    /// <summary>
-    /// Снять снаряжение со слота
-    /// </summary>
     public void UnequipItem(int slotIndex)
     {
         var equipment = activeEquipment[slotIndex];
         if (equipment != null)
         {
-            equippedItems.Remove(equipment);
             activeEquipment[slotIndex] = null;
 
-            // TODO: Удаление визуала
-            //Debug.Log($"Снаряжение {equipment.EquipmentName} снято со слота {slotIndex}");
+            GameObject controller = GameObject.Find(equipment.name);
+            Destroy(controller);
+            Debug.Log($"Снаряжение {equipment.name} снято со слота {slotIndex}");
         }
     }
 }
