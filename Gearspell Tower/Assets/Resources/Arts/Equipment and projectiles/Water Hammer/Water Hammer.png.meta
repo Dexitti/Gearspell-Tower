@@ -1,0 +1,506 @@
+fileFormatVersion: 2
+guid: 33e851852008fff429d6473ff30b78da
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8279835598631905586
+    second: Water Hammer_0
+  - first:
+      213: 2147684206095805675
+    second: Water Hammer_1
+  - first:
+      213: -6309458494338934600
+    second: Water Hammer_2
+  - first:
+      213: -1409656614468660665
+    second: Water Hammer_3
+  - first:
+      213: 2861065713019933205
+    second: Water Hammer_4
+  - first:
+      213: 5089198293081191103
+    second: Water Hammer_5
+  - first:
+      213: 1778091858004366990
+    second: Water Hammer_6
+  - first:
+      213: 427572753369898651
+    second: Water Hammer_7
+  - first:
+      213: 4031871831256706141
+    second: Water Hammer_8
+  - first:
+      213: 4358668258719305861
+    second: Water Hammer_9
+  - first:
+      213: 4353011341777871149
+    second: Water Hammer_10
+  - first:
+      213: 3809068646487235677
+    second: Water Hammer_11
+  - first:
+      213: 3925854233976318492
+    second: Water Hammer_12
+  - first:
+      213: -4857767710935867217
+    second: Water Hammer_13
+  - first:
+      213: 6350892739027175696
+    second: Water Hammer_14
+  - first:
+      213: 470630264144167793
+    second: Water Hammer_15
+  - first:
+      213: -8106182510627819885
+    second: Water Hammer_16
+  - first:
+      213: 6477696966464482501
+    second: Water Hammer_17
+  - first:
+      213: 1903792416345371053
+    second: Water Hammer_18
+  - first:
+      213: 3686701138204950122
+    second: Water Hammer_19
+  - first:
+      213: 8604881456365644569
+    second: Water Hammer_20
+  - first:
+      213: -3769015681173165241
+    second: Water Hammer_21
+  - first:
+      213: -3805551057833087282
+    second: Water Hammer_22
+  - first:
+      213: -2674525898389356145
+    second: Water Hammer_23
+  - first:
+      213: 1806978784168718946
+    second: Water Hammer_24
+  - first:
+      213: -3565856644250251990
+    second: Water Hammer_25
+  - first:
+      213: -4901482272563513749
+    second: Water Hammer_26
+  - first:
+      213: 1371550788809129896
+    second: Water Hammer_27
+  - first:
+      213: -10274750675745947
+    second: Water Hammer_28
+  - first:
+      213: 6397818132336078272
+    second: Water Hammer_29
+  - first:
+      213: -8235464632743629819
+    second: Water Hammer_30
+  - first:
+      213: 6297299804024129316
+    second: Water Hammer_31
+  - first:
+      213: -631465390973400148
+    second: Water Hammer_32
+  - first:
+      213: -8241732228274957803
+    second: Water Hammer_33
+  - first:
+      213: 1983184015201128829
+    second: Water Hammer_34
+  - first:
+      213: 312627494902699550
+    second: Water Hammer_35
+  - first:
+      213: -1491841478216326727
+    second: Water Hammer_36
+  - first:
+      213: -2190495557638077119
+    second: Water Hammer_37
+  - first:
+      213: -6659002249591423225
+    second: Water Hammer_38
+  - first:
+      213: 9021932989563457684
+    second: Water Hammer_39
+  - first:
+      213: -7846104357551392417
+    second: Water Hammer_40
+  - first:
+      213: 7246103592496126287
+    second: Water Hammer_41
+  - first:
+      213: -5388077545982918475
+    second: Water Hammer_42
+  - first:
+      213: -4046404124499806038
+    second: Water Hammer_43
+  - first:
+      213: -8884179436174433061
+    second: Water Hammer_44
+  - first:
+      213: -2560966020690721850
+    second: Water Hammer_45
+  - first:
+      213: -3722810765555741312
+    second: Water Hammer_46
+  - first:
+      213: -3571915334376467351
+    second: Water Hammer_47
+  - first:
+      213: 6517786790698787040
+    second: Water Hammer_48
+  - first:
+      213: 1921079150985336009
+    second: Water Hammer_49
+  - first:
+      213: -6295389276820954707
+    second: Water Hammer_50
+  - first:
+      213: 4170286972548544669
+    second: Water Hammer_51
+  - first:
+      213: 4411711721791645920
+    second: Water Hammer_52
+  - first:
+      213: 65943070599552435
+    second: Water Hammer_53
+  - first:
+      213: 4354306706333544909
+    second: Water Hammer_54
+  - first:
+      213: -4897201800813556624
+    second: Water Hammer_55
+  - first:
+      213: 6651453886438259460
+    second: Water Hammer_56
+  - first:
+      213: 8276210074090558549
+    second: Water Hammer_57
+  - first:
+      213: 4588945545329807742
+    second: Water Hammer_58
+  - first:
+      213: 8458262139344847678
+    second: Water Hammer_59
+  - first:
+      213: 8726861530958064869
+    second: Water Hammer_60
+  - first:
+      213: -4318776495811179899
+    second: Water Hammer_61
+  - first:
+      213: 1937190839809026598
+    second: Water Hammer_62
+  - first:
+      213: 8431983277087877112
+    second: Water Hammer_63
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 300
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Water Hammer_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 512
+        width: 600
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec659e8346d181d80800000000000000
+      internalID: -8279835598631905586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Water Hammer_1
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 512
+        width: 600
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: becae02186b1ecd10800000000000000
+      internalID: 2147684206095805675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Water Hammer_2
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 512
+        width: 600
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b85bd7adec4078a0800000000000000
+      internalID: -6309458494338934600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Water Hammer_3
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 512
+        width: 600
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 742d05f17c4ef6ce0800000000000000
+      internalID: -1409656614468660665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Water Hammer_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 600
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5125a9f7b1c84b720800000000000000
+      internalID: 2861065713019933205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Water Hammer_5
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 0
+        width: 600
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb2f0a242e670a640800000000000000
+      internalID: 5089198293081191103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Water Hammer_6
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 0
+        width: 600
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e865d56cf1d0da810800000000000000
+      internalID: 1778091858004366990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Water Hammer_7
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 0
+        width: 600
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9e9f30672b0fe500800000000000000
+      internalID: 427572753369898651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: d763fcb8c5a02b341a6985587b0ce403
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Water Hammer_0: -8279835598631905586
+      Water Hammer_1: 2147684206095805675
+      Water Hammer_2: -6309458494338934600
+      Water Hammer_3: -1409656614468660665
+      Water Hammer_4: 2861065713019933205
+      Water Hammer_5: 5089198293081191103
+      Water Hammer_6: 1778091858004366990
+      Water Hammer_7: 427572753369898651
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

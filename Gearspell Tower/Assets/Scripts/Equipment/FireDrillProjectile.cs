@@ -10,6 +10,7 @@ public class FireDrillProjectile : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
+        Destroy(gameObject, 2f);
     }
 
     private void Update()
@@ -24,7 +25,7 @@ public class FireDrillProjectile : MonoBehaviour
             HealthComponent enemyHP = other.GetComponent<HealthComponent>();
             if (enemyHP != null)
             {
-                //
+                enemyHP.TakeDamage(6);
             }
 
             StartCoroutine(PlayHitAnimationAndDestroy());

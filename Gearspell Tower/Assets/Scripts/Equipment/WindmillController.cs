@@ -8,12 +8,17 @@ public class WindmillController : EquipmentController
 {
     Vector3 firePoint = Vector3.zero;
 
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        firePoint = towerTransform.position + new Vector3(0, 0.28f, 0);
+    }
+
     protected override IEnumerator Attack()
     {
         Vector3? target = GetNearestEnemy();
         if (target == null || Vector3.Distance(towerTransform.position, (Vector3)target) > currentRange) yield break;
 
-        firePoint = towerTransform.position + new Vector3(0, 0.55f, 0);
         Vector3 direction = ((Vector3)target - firePoint).normalized;
         firePoint += direction * 0.2f;
 

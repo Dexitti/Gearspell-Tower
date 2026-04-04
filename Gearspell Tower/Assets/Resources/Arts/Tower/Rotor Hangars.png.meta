@@ -1,0 +1,540 @@
+fileFormatVersion: 2
+guid: e505874ac76cd01499116688ade83cfc
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3450824364318902656
+    second: Rotor Hangars_0
+  - first:
+      213: 328759405820565001
+    second: Rotor Hangars_1
+  - first:
+      213: 2838577317546668853
+    second: Rotor Hangars_2
+  - first:
+      213: 1273512193408162601
+    second: Rotor Hangars_3
+  - first:
+      213: -8346149453248987328
+    second: Rotor Hangars_4
+  - first:
+      213: 2310047926410536498
+    second: Rotor Hangars_5
+  - first:
+      213: -977897631796783080
+    second: Rotor Hangars_6
+  - first:
+      213: -2268795317272373581
+    second: Rotor Hangars_7
+  - first:
+      213: 5837420773612913105
+    second: Rotor Hangars_8
+  - first:
+      213: -3963552881931003853
+    second: Rotor Hangars_9
+  - first:
+      213: 3326877679711495036
+    second: Rotor Hangars_10
+  - first:
+      213: -8956430561744862432
+    second: Rotor Hangars_11
+  - first:
+      213: 8224444341988868234
+    second: Rotor Hangars_12
+  - first:
+      213: -6649702685032146617
+    second: Rotor Hangars_13
+  - first:
+      213: 9088976581145609709
+    second: Rotor Hangars_14
+  - first:
+      213: -9130301600018958715
+    second: Rotor Hangars_15
+  - first:
+      213: 5993642814900792658
+    second: Rotor Hangars_16
+  - first:
+      213: 7160703339285193183
+    second: Rotor Hangars_17
+  - first:
+      213: 7554911331088276159
+    second: Rotor Hangars_18
+  - first:
+      213: -1049643531459110975
+    second: Rotor Hangars_19
+  - first:
+      213: -135004065443550362
+    second: Rotor Hangars_20
+  - first:
+      213: -3306143219524019964
+    second: Rotor Hangars_21
+  - first:
+      213: -3792422896842836440
+    second: Rotor Hangars_22
+  - first:
+      213: 4146815865064030182
+    second: Rotor Hangars_23
+  - first:
+      213: -4128047365948037624
+    second: Rotor Hangars_24
+  - first:
+      213: 1653653483825119250
+    second: Rotor Hangars_25
+  - first:
+      213: -19811681818554666
+    second: Rotor Hangars_26
+  - first:
+      213: 663791270564252707
+    second: Rotor Hangars_27
+  - first:
+      213: 1164647067740248670
+    second: Rotor Hangars_28
+  - first:
+      213: 1829970343827677782
+    second: Rotor Hangars_29
+  - first:
+      213: -3038006644513894505
+    second: Rotor Hangars_30
+  - first:
+      213: 1512134063502226433
+    second: Rotor Hangars_31
+  - first:
+      213: -4956647333756382072
+    second: Rotor Hangars_32
+  - first:
+      213: -3252975654003834894
+    second: Rotor Hangars_33
+  - first:
+      213: 48380416367761449
+    second: Rotor Hangars_34
+  - first:
+      213: 2180410825070002920
+    second: Rotor Hangars_35
+  - first:
+      213: 8002348930590167657
+    second: Rotor Hangars_36
+  - first:
+      213: -5039411367645200676
+    second: Rotor Hangars_37
+  - first:
+      213: -6285737366896431629
+    second: Rotor Hangars_38
+  - first:
+      213: 6880111322116022056
+    second: Rotor Hangars_39
+  - first:
+      213: -422940269076432694
+    second: Rotor Hangars_40
+  - first:
+      213: -5372669850697392821
+    second: Rotor Hangars_41
+  - first:
+      213: -7461267228033343738
+    second: Rotor Hangars_42
+  - first:
+      213: 5347246948155983979
+    second: Rotor Hangars_43
+  - first:
+      213: 6495929224787002309
+    second: Rotor Hangars_44
+  - first:
+      213: -4441026112727487016
+    second: Rotor Hangars_45
+  - first:
+      213: -3550425562030693086
+    second: Rotor Hangars_46
+  - first:
+      213: -5264488233908078580
+    second: Rotor Hangars_47
+  - first:
+      213: 6048149781344460497
+    second: Rotor Hangars_48
+  - first:
+      213: 8986543908177855762
+    second: Rotor Hangars_49
+  - first:
+      213: -2028895302523592753
+    second: Rotor Hangars_50
+  - first:
+      213: 6185397201759800915
+    second: Rotor Hangars_51
+  - first:
+      213: -59738972498852051
+    second: Rotor Hangars_52
+  - first:
+      213: 4890367780730071973
+    second: Rotor Hangars_53
+  - first:
+      213: 1367574308419842007
+    second: Rotor Hangars_54
+  - first:
+      213: -4706415593182562467
+    second: Rotor Hangars_55
+  - first:
+      213: 4324197079850985296
+    second: Rotor Hangars_56
+  - first:
+      213: 7967544430411525371
+    second: Rotor Hangars_57
+  - first:
+      213: 7515447797312877128
+    second: Rotor Hangars_58
+  - first:
+      213: -5004209436586866521
+    second: Rotor Hangars_59
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 300
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Rotor Hangars_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1024
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 089cd71e97ac3ef20800000000000000
+      internalID: 3450824364318902656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rotor Hangars_1
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1024
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 906d08010fcff8400800000000000000
+      internalID: 328759405820565001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rotor Hangars_2
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 1024
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 533b9d7e707a46720800000000000000
+      internalID: 2838577317546668853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rotor Hangars_3
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 1024
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92bd831b79c6ca110800000000000000
+      internalID: 1273512193408162601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rotor Hangars_4
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 1024
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04ff5c4ca458c2c80800000000000000
+      internalID: -8346149453248987328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rotor Hangars_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 236e3d39950fe0020800000000000000
+      internalID: 2310047926410536498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rotor Hangars_6
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8189e06f84fcd62f0800000000000000
+      internalID: -977897631796783080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rotor Hangars_7
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 0
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b619e5fdae9380e0800000000000000
+      internalID: -2268795317272373581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rotor Hangars_8
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 0
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d10faff34fa20150800000000000000
+      internalID: 5837420773612913105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rotor Hangars_9
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 0
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 338d60857a1aef8c0800000000000000
+      internalID: -3963552881931003853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 794235621cf73864ca5a4912e23a9cd4
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Rotor Hangars_0: 3450824364318902656
+      Rotor Hangars_1: 328759405820565001
+      Rotor Hangars_2: 2838577317546668853
+      Rotor Hangars_3: 1273512193408162601
+      Rotor Hangars_4: -8346149453248987328
+      Rotor Hangars_5: 2310047926410536498
+      Rotor Hangars_6: -977897631796783080
+      Rotor Hangars_7: -2268795317272373581
+      Rotor Hangars_8: 5837420773612913105
+      Rotor Hangars_9: -3963552881931003853
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

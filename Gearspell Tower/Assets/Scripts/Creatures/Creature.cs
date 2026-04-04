@@ -11,6 +11,7 @@ public class Creature : MonoBehaviour
     [SerializeField] private float attackCooldown = 1f;
 
     private Tower tower;
+    private HealthComponent healthComponent;
     private Vector3 _towerPosition;
 
     [Header("Коллайдеры")]
@@ -22,11 +23,20 @@ public class Creature : MonoBehaviour
     public void Awake()
     {
         tower = GameObject.Find("Tower").GetComponent<Tower>();
+        healthComponent = GetComponent<HealthComponent>();
     }
 
     private void OnEnable()
     {
         _towerPosition = tower.Position;
+        healthComponent.OnHealthChanged += PlayDamageReceivedAnimation;
+        healthComponent.OnDeath += PlayDeathAnimation;
+    }
+
+    private void OnDisable()
+    {
+        healthComponent.OnHealthChanged -= PlayDamageReceivedAnimation;
+        healthComponent.OnDeath -= PlayDeathAnimation;
     }
 
     private void Update()
@@ -57,5 +67,23 @@ public class Creature : MonoBehaviour
         }
     }
 
-    
+    private void PlayDamageReceivedAnimation(float currentHealth, float maxHealth)
+    {
+        
+    }
+
+    private void PlayDeathAnimation()
+    {
+        StartCoroutine(DeathCoroutine());
+    }
+
+    IEnumerator DeathCoroutine()
+    {
+        GetComponent<Collider2D>().enabled = false;
+        speed = 0;
+        //animator.Play("die");
+        //AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        yield return new WaitForSeconds(0.4f);
+        Destroy(gameObject);
+    }
 }

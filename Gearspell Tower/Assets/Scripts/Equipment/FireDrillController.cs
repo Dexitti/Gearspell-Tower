@@ -31,6 +31,19 @@ public class FireDrillController : EquipmentController
         }
     }
 
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+
+        Transform roof = towerTransform.Find("Roof");
+        if (roof != null)
+            roof.gameObject.SetActive(true);
+
+        Transform antennaColumn = towerTransform.Find("Antenna column(Clone)");
+        if (antennaColumn != null)
+            Destroy(antennaColumn.gameObject);
+    }
+
     protected override IEnumerator Attack()
     {
         availableEnemies.Clear();
@@ -51,7 +64,11 @@ public class FireDrillController : EquipmentController
     private void InitializeFirePoints()
     {
         GameObject[] enemyArray = GameObject.FindGameObjectsWithTag("Enemy");
-        if (enemyArray.Length == 0 ) return;
+        if (enemyArray.Length == 0)
+        {
+            Debug.LogWarning("Нет врагов на сцене");
+            return;
+        }
 
         foreach (var enemy in enemyArray)
         {
@@ -66,7 +83,7 @@ public class FireDrillController : EquipmentController
         {
             while (true)
             {
-                int randomInt = Random.Range(0, availableEnemies.Count - 1);
+                int randomInt = Random.Range(0, availableEnemies.Count);
                 if (!positions.Contains(randomInt))
                 {
                     positions.Add(randomInt);

@@ -1,0 +1,730 @@
+fileFormatVersion: 2
+guid: 3586aff9a9fe6cd4b8e65a65782acaa7
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5629372615036235299
+    second: Windmill_0
+  - first:
+      213: -4069263951439049202
+    second: Windmill_1
+  - first:
+      213: 6252172403252219202
+    second: Windmill_2
+  - first:
+      213: -1502636029107240409
+    second: Windmill_3
+  - first:
+      213: 9209892914191317093
+    second: Windmill_4
+  - first:
+      213: 7932924375118055827
+    second: Windmill_5
+  - first:
+      213: 834943552847733606
+    second: Windmill_6
+  - first:
+      213: 929762048806193661
+    second: Windmill_7
+  - first:
+      213: 7391253669551607540
+    second: Windmill_8
+  - first:
+      213: 7621002777505055792
+    second: Windmill_9
+  - first:
+      213: -8467878041651672250
+    second: Windmill_10
+  - first:
+      213: -7906181842088378731
+    second: Windmill_11
+  - first:
+      213: -6382467110988786375
+    second: Windmill_12
+  - first:
+      213: -401425602611137095
+    second: Windmill_13
+  - first:
+      213: 9062478187873228475
+    second: Windmill_14
+  - first:
+      213: 575463709944279339
+    second: Windmill_15
+  - first:
+      213: 9173379943864760688
+    second: Windmill_16
+  - first:
+      213: -1328612514597242854
+    second: Windmill_17
+  - first:
+      213: 7548849449050776391
+    second: Windmill_18
+  - first:
+      213: 2600464596811489243
+    second: Windmill_19
+  - first:
+      213: -8267618061683717665
+    second: Windmill_20
+  - first:
+      213: -1948036141721808155
+    second: Windmill_21
+  - first:
+      213: -1222267116262191878
+    second: Windmill_22
+  - first:
+      213: -3510860824914999694
+    second: Windmill_23
+  - first:
+      213: 8271910642859373956
+    second: Windmill_24
+  - first:
+      213: 5843292148306962434
+    second: Windmill_25
+  - first:
+      213: -9215239999882731245
+    second: Windmill_26
+  - first:
+      213: 1509011031312843120
+    second: Windmill_27
+  - first:
+      213: -1037907988548066081
+    second: Windmill_28
+  - first:
+      213: -7191387141421197379
+    second: Windmill_29
+  - first:
+      213: -2971260893665575897
+    second: Windmill_30
+  - first:
+      213: -9107846451043625020
+    second: Windmill_31
+  - first:
+      213: -3111456051532505580
+    second: Windmill_32
+  - first:
+      213: 5781206768613043471
+    second: Windmill_33
+  - first:
+      213: 3481342399897251988
+    second: Windmill_34
+  - first:
+      213: -272393978607333816
+    second: Windmill_35
+  - first:
+      213: 8797007662066730244
+    second: Windmill_36
+  - first:
+      213: 3917495717737581223
+    second: Windmill_37
+  - first:
+      213: -5813332868465528542
+    second: Windmill_38
+  - first:
+      213: 8702187432783982671
+    second: Windmill_39
+  - first:
+      213: 4570824033494313319
+    second: Windmill_40
+  - first:
+      213: 2680697429286056059
+    second: Windmill_41
+  - first:
+      213: 3250863197358467592
+    second: Windmill_42
+  - first:
+      213: 3250869785123264132
+    second: Windmill_43
+  - first:
+      213: 6839732441611791084
+    second: Windmill_44
+  - first:
+      213: -8249418825368531759
+    second: Windmill_45
+  - first:
+      213: 64555641300971010
+    second: Windmill_46
+  - first:
+      213: 8093298165309137420
+    second: Windmill_47
+  - first:
+      213: 1294848876350384708
+    second: Windmill_48
+  - first:
+      213: 3053437389403650467
+    second: Windmill_49
+  - first:
+      213: 1586857144841944899
+    second: Windmill_50
+  - first:
+      213: -5258812052496761724
+    second: Windmill_51
+  - first:
+      213: 5552151220803938399
+    second: Windmill_52
+  - first:
+      213: -5291664366250840840
+    second: Windmill_53
+  - first:
+      213: 1073685647471840449
+    second: Windmill_54
+  - first:
+      213: 5626944509530620474
+    second: Windmill_55
+  - first:
+      213: -4354321769734982176
+    second: Windmill_56
+  - first:
+      213: 8414354879861732198
+    second: Windmill_57
+  - first:
+      213: -2747857748905304147
+    second: Windmill_58
+  - first:
+      213: 840284486564784392
+    second: Windmill_59
+  - first:
+      213: 7352749519849857202
+    second: Windmill_60
+  - first:
+      213: -1540775385132521458
+    second: Windmill_61
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 300
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Windmill_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2048
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32eeb83519c8f1e40800000000000000
+      internalID: 5629372615036235299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Windmill_1
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 2048
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0e4c2dfef11787c0800000000000000
+      internalID: -4069263951439049202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Windmill_2
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 2048
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24d4952ecad24c650800000000000000
+      internalID: 6252172403252219202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Windmill_3
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 2048
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7220c5a2e70952be0800000000000000
+      internalID: -1502636029107240409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Windmill_4
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 2048
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 568b2c13fcc10df70800000000000000
+      internalID: 9209892914191317093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Windmill_5
+      rect:
+        serializedVersion: 2
+        x: 5120
+        y: 2048
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39903f050b8671e60800000000000000
+      internalID: 7932924375118055827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Windmill_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1024
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 663edf2dcb0569b00800000000000000
+      internalID: 834943552847733606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Windmill_7
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1024
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df98bb448ad27ec00800000000000000
+      internalID: 929762048806193661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Windmill_8
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 1024
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4fe0d6a4d02039660800000000000000
+      internalID: 7391253669551607540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Windmill_9
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 1024
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0344479f5ad33c960800000000000000
+      internalID: 7621002777505055792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Windmill_10
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 1024
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64b850e29cd0c7a80800000000000000
+      internalID: -8467878041651672250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Windmill_11
+      rect:
+        serializedVersion: 2
+        x: 5120
+        y: 1024
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59ebdacd089974290800000000000000
+      internalID: -7906181842088378731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Windmill_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93556e27afbec67a0800000000000000
+      internalID: -6382467110988786375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Windmill_13
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b5bd909a89dd6af0800000000000000
+      internalID: -401425602611137095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Windmill_14
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 0
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb6d8e495e364cd70800000000000000
+      internalID: 9062478187873228475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Windmill_15
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 0
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b217b5cf1357cf700800000000000000
+      internalID: 575463709944279339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Windmill_16
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 0
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07970cfc4746e4f70800000000000000
+      internalID: 9173379943864760688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Windmill_17
+      rect:
+        serializedVersion: 2
+        x: 5120
+        y: 0
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a18fa4f05f1df8de0800000000000000
+      internalID: -1328612514597242854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: a07a9aced821d2947978973d1cd6af5f
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Windmill_0: 5629372615036235299
+      Windmill_1: -4069263951439049202
+      Windmill_10: -8467878041651672250
+      Windmill_11: -7906181842088378731
+      Windmill_12: -6382467110988786375
+      Windmill_13: -401425602611137095
+      Windmill_14: 9062478187873228475
+      Windmill_15: 575463709944279339
+      Windmill_16: 9173379943864760688
+      Windmill_17: -1328612514597242854
+      Windmill_2: 6252172403252219202
+      Windmill_3: -1502636029107240409
+      Windmill_4: 9209892914191317093
+      Windmill_5: 7932924375118055827
+      Windmill_6: 834943552847733606
+      Windmill_7: 929762048806193661
+      Windmill_8: 7391253669551607540
+      Windmill_9: 7621002777505055792
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

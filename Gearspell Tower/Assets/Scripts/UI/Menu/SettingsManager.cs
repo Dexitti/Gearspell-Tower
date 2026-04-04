@@ -7,14 +7,17 @@ using UnityEngine.UI;
 public class SettingsManager : MonoBehaviour
 {
     [Header("UI Elements")]
-    [SerializeField] private Dropdown resolutionDropdown;
-    [SerializeField] private Dropdown displayModeDropdown;
+    [SerializeField] private TMP_Dropdown resolutionDropdown;
+    [SerializeField] private TMP_Dropdown displayModeDropdown;
     [SerializeField] private Toggle ruLanguageToggle;
     [SerializeField] private Toggle enLanguageToggle;
     [SerializeField] private Slider volumeSlider;
     [SerializeField] private Button backButton;
 
     [SerializeField] private AudioMixer audioMixer;
+
+    [SerializeField] private GameObject mainMenu;
+    [SerializeField] private GameObject settingsMenu;
 
     private void Start()
     {
@@ -81,6 +84,9 @@ public class SettingsManager : MonoBehaviour
 
     public void CloseSettings()
     {
-        gameObject.SetActive(false);
+        if (settingsMenu != null)
+            settingsMenu.SetActive(false);
+        if (mainMenu != null)
+            mainMenu.SetActive(true);
     }
 }

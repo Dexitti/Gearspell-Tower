@@ -11,7 +11,7 @@ public abstract class EquipmentController : MonoBehaviour
     protected Transform towerTransform;
 
     protected int level = 0;
-    public float currentDamage;
+    public int currentDamage;
     public float currentSize;
     public float currentAttackCooldown;
     public float currentRange;
@@ -20,15 +20,40 @@ public abstract class EquipmentController : MonoBehaviour
     protected virtual void OnEnable()
     {
         towerTransform = GameObject.Find("Tower").transform;
+        GameObject decoration = data.decorationPrefab;
 
-        if (data.decorationPrefab)
-            decorationInstance = Instantiate(data.decorationPrefab, towerTransform);
+        if (decoration)
+        {
+            if (decoration.name == "Mortars and Parapet")
+            {
+                Transform roof = towerTransform.Find("Roof");
+                if (roof != null)
+                    roof.gameObject.SetActive(false);
+            }
+            else if (decoration.name == "Antenna")
+            {
+                Transform mortarAndParapet = towerTransform.Find("Mortars and Parapet(Clone)");
+                if (mortarAndParapet != null)
+                {
+                    GameObject column = data.projectilesPrefabs[1];
+                    if (column != null && column.name == "Antenna column")
+                        Instantiate(column, towerTransform);
+                }
+            }
+            decorationInstance = Instantiate(decoration, towerTransform);
+        }
         // Instance equipment
+    }
+
+    protected virtual void OnDisable()
+    {
+        if (decorationInstance != null)
+            Destroy(decorationInstance);
     }
 
     private void Start()
     {
-        currentDamage = data.damage;
+        currentDamage = (int)Mathf.Round(data.damage);
         currentSize = data.size;
         currentAttackCooldown = data.attackCooldown;
         currentRange = data.range;
@@ -40,7 +65,6 @@ public abstract class EquipmentController : MonoBehaviour
     {
         while (true) {
             yield return StartCoroutine(Attack());
-
 
             yield return new WaitForSeconds(data.attackCooldown);
         }

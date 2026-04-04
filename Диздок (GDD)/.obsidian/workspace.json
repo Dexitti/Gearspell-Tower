@@ -1,0 +1,289 @@
+{
+  "main": {
+    "id": "3c39ec91d886b9a2",
+    "type": "split",
+    "children": [
+      {
+        "id": "b0fd9584be6ba854",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "5eab1d50c742ae90",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Концепция.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Концепция"
+            }
+          },
+          {
+            "id": "06a5e1678200ce95",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Основное (кратко).md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Основное (кратко)"
+            }
+          },
+          {
+            "id": "a484a43bf8ea9cb7",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Персонажи.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Персонажи"
+            }
+          },
+          {
+            "id": "74e82596842a123d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Сюжет и прогрессия.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Сюжет и прогрессия"
+            }
+          },
+          {
+            "id": "5be25509817bc8e7",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Игровые механики.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Игровые механики"
+            }
+          },
+          {
+            "id": "3daf36584a410ce6",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Система и прогрессия улучшений.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Система и прогрессия улучшений"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "b1e755310b091325",
+    "type": "split",
+    "children": [
+      {
+        "id": "ae6e8cd9ea61a98d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "6767a66d40331e0e",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Файловый менеджер"
+            }
+          },
+          {
+            "id": "a173fd5856b92222",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Поиск"
+            }
+          },
+          {
+            "id": "0f53403721bcd0ed",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Закладки"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "8235eca027664ad6",
+    "type": "split",
+    "children": [
+      {
+        "id": "3843da7d77b6eb3f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "e8e003b637ffa717",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Добро пожаловать.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Обратные ссылки для Добро пожаловать"
+            }
+          },
+          {
+            "id": "0db0ff58dfce7215",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Добро пожаловать.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Исходящие ссылки из Добро пожаловать"
+            }
+          },
+          {
+            "id": "5448b3d5252db112",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Теги"
+            }
+          },
+          {
+            "id": "5dd68528050aa3e3",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "Все свойства"
+            }
+          },
+          {
+            "id": "bf46d680f82c9d78",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Добро пожаловать.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Структура Добро пожаловать"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Меню быстрого перехода": false,
+      "graph:Граф": false,
+      "canvas:Создать новый холст": false,
+      "daily-notes:Сегодняшняя заметка": false,
+      "templates:Вставить шаблон": false,
+      "command-palette:Открыть палитру команд": false,
+      "bases:Создать новую базу": false
+    }
+  },
+  "active": "5eab1d50c742ae90",
+  "lastOpenFiles": [
+    "Ресурсы/Структурные/Снаряжение.png",
+    "Концепция.md",
+    "Основное (кратко).md",
+    "Персонажи.md",
+    "Сюжет и прогрессия.md",
+    "Лор и сеттинг.md",
+    "Система и прогрессия улучшений.md",
+    "~$Баланс.xlsx",
+    "Игровые механики.md",
+    "Планирование/Сроки.md",
+    "Ресурсы/Структурные/Макет HUD.png",
+    "Pasted image 20260219213221.png",
+    "Ресурсы/Материалы/Pasted image 20260210222542.png",
+    "Ресурсы/Структурные/соотношение типов врагов в kingdom rush.png",
+    "Ресурсы/Структурные/связи противодействия.png",
+    "Ресурсы/Структурные/Pasted image 20260210222710.png",
+    "Ресурсы/Структурные/Первые идеи.png",
+    "Планирование/Контент.md",
+    "8BD87B00",
+    "FAB07B00",
+    "C1F74B00",
+    "9D874B00",
+    "15944B00",
+    "C75D3B00",
+    "99733B00",
+    "C6313B00",
+    "D15D2B00",
+    "Планирование.md",
+    "Без названия.canvas",
+    "Аудиовизуал.md"
+  ]
+}

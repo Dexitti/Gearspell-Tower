@@ -12,7 +12,8 @@ public class EquipmentManager : MonoBehaviour
     {
         LoadAllPrefabs();
         var firedrill = equipmentPrefabs["FireDrillController"];
-        EquipItem(firedrill, 0);
+        //EquipItem(firedrill, 0);
+        EquipItem(equipmentPrefabs["WindmillController"], 0); // test
     }
 
     private void LoadAllPrefabs()

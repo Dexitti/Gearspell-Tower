@@ -34,7 +34,7 @@ public class HealthComponent : MonoBehaviour
     public void TakeDamage(int damage)
     {
         if (isDied) return;
-        Debug.Log($"{gameObject} получил {damage} урона");
+        Debug.Log($"{gameObject.name} получил {damage} урона");
         CurrentHealth = Math.Max(0, currentHealth - damage);
         if (CurrentHealth <= 0 && !isDied)
         {
@@ -45,7 +45,7 @@ public class HealthComponent : MonoBehaviour
     public void Heal(int hitpoints)
     {
         if (isDied) return;
-        Debug.Log($"{gameObject} восстановил {hitpoints} hp");
+        Debug.Log($"{gameObject.name} восстановил {hitpoints} hp");
         CurrentHealth = Math.Min(currentHealth + hitpoints, maxHealth);
     }
 
@@ -55,7 +55,7 @@ public class HealthComponent : MonoBehaviour
         isDied = true;
 
         OnDeath?.Invoke();
-        Debug.Log($"{gameObject} уничтожен!");
+        Debug.Log($"{gameObject.name} уничтожен!");
     }
 
     void OnDrawGizmos()

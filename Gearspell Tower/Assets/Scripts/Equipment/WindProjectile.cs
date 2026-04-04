@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class WindProjectile : MonoBehaviour
@@ -20,7 +21,14 @@ public class WindProjectile : MonoBehaviour
                 enemyHP.TakeDamage(Damage);
             }
 
-            Destroy(gameObject);
+            StartCoroutine(PlayHitAnimationAndDestroy());
         }
+    }
+
+    IEnumerator PlayHitAnimationAndDestroy()
+    {
+        GetComponent<Collider2D>().enabled = false;
+        yield return null;
+        Destroy(gameObject);
     }
 }

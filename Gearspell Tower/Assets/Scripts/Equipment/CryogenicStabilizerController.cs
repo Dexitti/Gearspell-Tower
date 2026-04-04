@@ -25,7 +25,7 @@ public class CryogenicStabilizerController : EquipmentController
     protected override void OnEnable()
     {
         base.OnEnable();
-        firePoint = towerTransform.position + new Vector3(0.1f, 0.75f);
+        firePoint = towerTransform.position + new Vector3(0.713f, 1.2165f);
 
         CreateBeams();
     }
@@ -44,14 +44,14 @@ public class CryogenicStabilizerController : EquipmentController
             beamObj.transform.localPosition = Vector3.zero;
 
             focusingBeams[i] = beamObj.AddComponent<LineRenderer>();
-            focusingBeams[i].startWidth = beamWidth * 0.3f;
+            focusingBeams[i].startWidth = beamWidth * 0.09f;
             focusingBeams[i].endWidth = beamWidth * 0.98f;
             focusingBeams[i].positionCount = 2;
             focusingBeams[i].material = beamMaterial;
             focusingBeams[i].startColor = new Color(0.98f, 0.99f, 1f, 1f); // Бледно-голубой
             focusingBeams[i].endColor = new Color(0f, 1f, 1f, 1f); // Циан
             focusingBeams[i].numCapVertices = 10;
-            focusingBeams[i].sortingOrder = 2;
+            focusingBeams[i].sortingLayerName = "Effects";
             focusingBeams[i].enabled = false;
         }
 
@@ -65,7 +65,7 @@ public class CryogenicStabilizerController : EquipmentController
             mainFreezeBeamRenderer.startColor = new Color(0f, 1f, 1f, 1f); // Циан
             mainFreezeBeamRenderer.endColor = new Color(0f, 0.5f, 1f, 0.8f); // Синий
             mainFreezeBeamRenderer.numCapVertices = 10;
-            mainFreezeBeamRenderer.sortingOrder = 2;
+            mainFreezeBeamRenderer.sortingLayerName = "Effects";
             mainFreezeBeamRenderer.enabled = false;
         }
 
@@ -117,7 +117,7 @@ public class CryogenicStabilizerController : EquipmentController
     private void StartBeam(Vector3 target)
     {
         isBeamActive = true;
-        float[,] pivots = new float[4, 2] {{ -0.1f, 0.05f }, { 0.1f, 0.05f }, { 0.1f, -0.05f }, { -0.1f, -0.05f } };
+        float[,] pivots = new float[4, 2] {{ -0.03f, 0.04f }, { 0.03f, 0.04f }, { 0.03f, -0.04f }, { -0.03f, -0.04f } };
         Vector3 direction = (target - firePoint).normalized;
         float distanceToTarget = Vector3.Distance(firePoint, target);
 

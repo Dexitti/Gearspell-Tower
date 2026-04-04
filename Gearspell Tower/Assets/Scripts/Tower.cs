@@ -37,8 +37,11 @@ public class Tower : MonoBehaviour
 
     IEnumerator Regenerate()
     {
-        healthComponent.Heal(regeneration);
-        yield return new WaitForSeconds(1f);
+        while (true)
+        {
+            healthComponent.Heal(regeneration);
+            yield return new WaitForSeconds(1f);
+        }
     }
 
 

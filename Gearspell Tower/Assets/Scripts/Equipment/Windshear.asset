@@ -15,9 +15,10 @@ MonoBehaviour:
   equipmentName: "\u0412\u0435\u0442\u0440\u044F\u043D\u043E\u0439 \u0440\u0430\u0437\u0440\u0435\u0437"
   description: 
   icon: {fileID: 0}
-  decorationPrefab: {fileID: 0}
+  decorationPrefab: {fileID: 2299851849574036346, guid: aa755e416728e234a865b94641495a2b, type: 3}
   projectilesPrefabs:
   - {fileID: 4505684284006643834, guid: 0c6ed05e3b86b8443895a817dba62b6d, type: 3}
+  - {fileID: 5322226756954970256, guid: fd81b305fa9197845927f127ad163825, type: 3}
   damage: 3
   size: 1
   attackCooldown: 0.33

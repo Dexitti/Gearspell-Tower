@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31e3455ba3b34c5439d6722bdfdc8514, type: 3}
+  m_Name: WaterHammer
+  m_EditorClassIdentifier: 
+  equipmentName: 
+  description: 
+  icon: {fileID: 0}
+  decorationPrefab: {fileID: 326767618567787862, guid: 0b54e4b2d99dc454ebaf43041e3ca9f1, type: 3}
+  projectilesPrefabs:
+  - {fileID: 7419661608313516578, guid: febd192a812d82649942b2ed7f1a89d2, type: 3}
+  damage: 15
+  size: 0
+  attackCooldown: 0
+  range: 0
+  projectileCount: 0

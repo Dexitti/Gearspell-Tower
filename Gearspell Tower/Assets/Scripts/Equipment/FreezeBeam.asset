@@ -16,7 +16,7 @@ MonoBehaviour:
     \u043B\u0443\u0447"
   description: 
   icon: {fileID: 0}
-  decorationPrefab: {fileID: 0}
+  decorationPrefab: {fileID: 4514677283930072942, guid: dfe14440d97fe3042a796bfc198a4fc6, type: 3}
   projectilesPrefabs: []
   damage: 0.75
   size: 1

@@ -18,6 +18,7 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private Button settingsBtn;
     [SerializeField] private Button exitBtn;
 
+    [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject settingsMenu;
 
     private void Start()
@@ -29,8 +30,8 @@ public class MainMenuManager : MonoBehaviour
         settingsBtn.onClick.AddListener(OpenSettings);
         exitBtn.onClick.AddListener(ExitGame);
 
-        if (settingsMenu != null)
-            settingsMenu.SetActive(false);
+        if (mainMenu != null) mainMenu.SetActive(true);
+        if (settingsMenu != null) settingsMenu.SetActive(false);
     }
 
     public void Continue()
@@ -45,8 +46,8 @@ public class MainMenuManager : MonoBehaviour
 
     public void OpenSettings()
     {
-        if (settingsMenu != null)
-            settingsMenu.SetActive(true);
+        if (mainMenu != null) mainMenu.SetActive(false);
+        if (settingsMenu != null) settingsMenu.SetActive(true);
     }
 
     public void ExitGame()
