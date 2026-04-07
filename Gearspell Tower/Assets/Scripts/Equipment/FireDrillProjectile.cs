@@ -4,8 +4,11 @@ using UnityEngine;
 public class FireDrillProjectile : MonoBehaviour
 {
     [SerializeField] private float fallSpeed = 15f;
+    int damage;
 
     [SerializeField] private Animator animator;
+
+    public int Damage { get => damage; set => damage = value; }
 
     private void Start()
     {
@@ -25,7 +28,7 @@ public class FireDrillProjectile : MonoBehaviour
             HealthComponent enemyHP = other.GetComponent<HealthComponent>();
             if (enemyHP != null)
             {
-                enemyHP.TakeDamage(6);
+                enemyHP.TakeDamage(Damage);
             }
 
             StartCoroutine(PlayHitAnimationAndDestroy());

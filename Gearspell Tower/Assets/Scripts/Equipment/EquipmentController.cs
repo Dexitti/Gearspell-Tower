@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 public abstract class EquipmentController : MonoBehaviour
 {
     [SerializeField] public EquipmentData data;
-    private GameObject decorationInstance;
+    protected GameObject decorationInstance;
     protected Transform towerTransform;
 
     protected int level = 0;
@@ -64,9 +64,13 @@ public abstract class EquipmentController : MonoBehaviour
     IEnumerator AttackManager()
     {
         while (true) {
-            yield return StartCoroutine(Attack());
-
-            yield return new WaitForSeconds(data.attackCooldown);
+            GameObject[] enemyArray = GameObject.FindGameObjectsWithTag("Enemy");
+            if (enemyArray.Length > 0)
+            {
+                yield return StartCoroutine(Attack());
+                yield return new WaitForSeconds(currentAttackCooldown);
+            }
+            else yield return new WaitForSeconds(0.1f);
         }
     }
 

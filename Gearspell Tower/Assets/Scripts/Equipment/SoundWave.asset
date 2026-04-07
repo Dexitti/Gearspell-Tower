@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31e3455ba3b34c5439d6722bdfdc8514, type: 3}
   m_Name: SoundWave
   m_EditorClassIdentifier: 
-  equipmentName: 
+  equipmentName: "\u041A\u0432\u0430\u0440\u0446\u0435\u0432\u044B\u0439 \u0440\u0435\u0437\u043E\u043D\u0430\u0442\u043E\u0440"
   description: 
   icon: {fileID: 0}
   decorationPrefab: {fileID: 7418652157673013559, guid: f6841dbd88b448841906f385c4fb2310, type: 3}
@@ -20,7 +20,7 @@ MonoBehaviour:
   - {fileID: 2690663417616464067, guid: 3c1584a24b23c18489067434e1c064cf, type: 3}
   - {fileID: 6494311240829851661, guid: 2ad1abdbd8f82fd44b5fa5a879a8a496, type: 3}
   damage: 0.8
-  size: 0
-  attackCooldown: 0
-  range: 0
-  projectileCount: 0
+  size: 1
+  attackCooldown: 0.1
+  range: 2
+  projectileCount: 5

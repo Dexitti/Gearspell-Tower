@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -2166915092392362084, guid: 22fbfc05653798f498fa3161ac6958d3, type: 3}
       propertyPath: speed
-      value: 1.2
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: -2166915092392362084, guid: 22fbfc05653798f498fa3161ac6958d3, type: 3}
       propertyPath: damage
@@ -70,7 +70,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8516407375225930908, guid: 22fbfc05653798f498fa3161ac6958d3, type: 3}
       propertyPath: m_Name
-      value: Test Enemy 3
+      value: Test Enemy 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

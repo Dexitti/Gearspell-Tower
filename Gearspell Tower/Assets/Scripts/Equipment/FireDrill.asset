@@ -19,7 +19,7 @@ MonoBehaviour:
   projectilesPrefabs:
   - {fileID: 4514352855775991252, guid: 67aced92cf41e5349a6fc27063936845, type: 3}
   - {fileID: 1735177912823878487, guid: a364ec7aac9f50e469f375d7ff7a2ca2, type: 3}
-  damage: 7
+  damage: 6
   size: 1
   attackCooldown: 3
   range: 4

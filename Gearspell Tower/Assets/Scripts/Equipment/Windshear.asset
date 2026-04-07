@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31e3455ba3b34c5439d6722bdfdc8514, type: 3}
   m_Name: Windshear
   m_EditorClassIdentifier: 
-  equipmentName: "\u0412\u0435\u0442\u0440\u044F\u043D\u043E\u0439 \u0440\u0430\u0437\u0440\u0435\u0437"
+  equipmentName: "\u0412\u0435\u0442\u0440\u044F\u043D\u0430\u044F \u043C\u0435\u043B\u044C\u043D\u0438\u0446\u0430"
   description: 
   icon: {fileID: 0}
   decorationPrefab: {fileID: 2299851849574036346, guid: aa755e416728e234a865b94641495a2b, type: 3}
@@ -22,5 +22,5 @@ MonoBehaviour:
   damage: 3
   size: 1
   attackCooldown: 0.33
-  range: 3
+  range: 5
   projectileCount: 1

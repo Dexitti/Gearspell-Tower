@@ -49,6 +49,7 @@ public class Creature : MonoBehaviour
     {
         if (other.gameObject.tag == "Tower")
         {
+            speed = 0;
             StartCoroutine(AttackTower(other));
         }
     }
@@ -83,7 +84,7 @@ public class Creature : MonoBehaviour
         speed = 0;
         //animator.Play("die");
         //AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.1f);
         Destroy(gameObject);
     }
 }

@@ -204,7 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77a8c8ed044ca3f42ac0cd507be48790, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 1
   damage: 5
   attackCooldown: 1
   bodyCollider: {fileID: 6551824263839173724}

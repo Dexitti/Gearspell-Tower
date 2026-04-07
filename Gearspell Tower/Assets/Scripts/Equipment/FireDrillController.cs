@@ -16,14 +16,14 @@ public class FireDrillController : EquipmentController
     protected override void OnEnable()
     {
         base.OnEnable();
-        for (int i = 0; i < data.projectileCount; i++)
+        for (int i = 0; i < currentProjectileCount; i++)
         {
             GameObject shot = Instantiate(data.projectilesPrefabs[0], transform);
             shot.SetActive(false);
             shotPool.Enqueue(shot);
         }
 
-        for (int i = 0; i < data.projectileCount; i++)
+        for (int i = 0; i < currentProjectileCount; i++)
         {
             GameObject proj = Instantiate(data.projectilesPrefabs[1], transform);
             proj.SetActive(false);
@@ -125,6 +125,8 @@ public class FireDrillController : EquipmentController
             }
             else drill = Instantiate(data.projectilesPrefabs[1], transform);
             drill.transform.position = firePoints[i];
+            FireDrillProjectile projScript = drill.GetComponent<FireDrillProjectile>();
+            projScript.Damage = currentDamage;
         }
     }
 
