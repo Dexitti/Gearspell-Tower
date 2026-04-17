@@ -176,6 +176,11 @@ namespace Assets.Scripts.Equipment
             return towerTransform.position + direction * (distance * 0.85f); // Опережение 15%
         }
 
+        protected override void ApplyEffect(string upgradeId)
+        {
+            throw new NotImplementedException();
+        }
+
         protected override void Upgrade(int upgradeIndex)
         {
             throw new NotImplementedException();

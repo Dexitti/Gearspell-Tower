@@ -1,2 +1,14 @@
 fileFormatVersion: 2
 guid: 8aece509de0d58e49b0d897810bbe1e6
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - data: {instanceID: 0}
+  - roofShieldSprite: {instanceID: 0}
+  - parapetShieldSprite: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

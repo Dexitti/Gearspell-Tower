@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.EditorTools;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public abstract class EquipmentController : MonoBehaviour
 {
@@ -10,39 +8,78 @@ public abstract class EquipmentController : MonoBehaviour
     protected GameObject decorationInstance;
     protected Transform towerTransform;
 
-    protected int level = 0;
-    public int currentDamage;
-    public float currentSize;
-    public float currentAttackCooldown;
-    public float currentRange;
-    public int currentProjectileCount;
+    private List<string> appliedUpgradeIds = new();
+
+    protected int currentDamage;
+    protected float currentSize;
+    protected float currentAttackCooldown;
+    protected float currentRange;
+    protected int currentProjectileCount;
+
+    public EquipmentData Data => data;
+    public int EquippedSlotIndex { get; set; } = -1;
+    public int Stage { get; set; } = 0;
+    public int ForkChoice { get; set; } = -1;
+    public bool HasActiveAbility { get; set; } = false;
+    public List<string> GetAppliedUpgradeIds() => appliedUpgradeIds;
+
+    protected virtual void Awake()
+    {
+        ResetToBase();
+    }
+
+    protected virtual void ResetToBase()
+    {
+        currentDamage = Mathf.RoundToInt(data.damage);
+        currentAttackCooldown = data.attackCooldown;
+        currentRange = data.range;
+        currentProjectileCount = data.projectileCount;
+        currentSize = data.size;
+    }
 
     protected virtual void OnEnable()
     {
-        towerTransform = GameObject.Find("Tower").transform;
+        towerTransform = G.Tower.transform;
         GameObject decoration = data.decorationPrefab;
+        if (decoration == null) return;
 
-        if (decoration)
+        decorationInstance = Instantiate(decoration, towerTransform);
+        
+        switch (decoration.name)
         {
-            if (decoration.name == "Mortars and Parapet")
-            {
+            case "Mortars and Parapet":
                 Transform roof = towerTransform.Find("Roof");
                 if (roof != null)
                     roof.gameObject.SetActive(false);
-            }
-            else if (decoration.name == "Antenna")
-            {
-                Transform mortarAndParapet = towerTransform.Find("Mortars and Parapet(Clone)");
-                if (mortarAndParapet != null)
+
+                Transform shield = towerTransform.Find("Shield(Clone)");
+                Transform shieldBorder = shield?.Find("ShieldBorder");
+                SpriteRenderer borderRenderer = shieldBorder?.GetComponent<SpriteRenderer>();
+                Sprite parapetSprite = Resources.Load<Sprite>($"Arts/Equipment and projectiles/Kinetic armor/Parapet_Shield");
+
+                if (borderRenderer != null && parapetSprite != null)
+                    borderRenderer.sprite = parapetSprite;
+                break;
+
+            case "Shield":
+                Transform shieldBorderTransform = decorationInstance.transform.Find("ShieldBorder");
+                SpriteRenderer shieldBorderSprite = shieldBorderTransform?.GetComponent<SpriteRenderer>();
+                string spriteName = towerTransform.Find("Mortars and Parapet(Clone)") != null ? "Parapet_Shield" : "Roof_Shield";
+                Sprite borderSprite = Resources.Load<Sprite>($"Arts/Equipment and projectiles/Kinetic armor/{spriteName}");
+
+                if (shieldBorderSprite != null && borderSprite != null)
+                    shieldBorderSprite.sprite = borderSprite;
+                break;
+
+            case "Antenna":
+                if (towerTransform.Find("Mortars and Parapet(Clone)") != null)
                 {
                     GameObject column = data.projectilesPrefabs[1];
                     if (column != null && column.name == "Antenna column")
                         Instantiate(column, towerTransform);
                 }
-            }
-            decorationInstance = Instantiate(decoration, towerTransform);
+                break;
         }
-        // Instance equipment
     }
 
     protected virtual void OnDisable()
@@ -53,11 +90,6 @@ public abstract class EquipmentController : MonoBehaviour
 
     private void Start()
     {
-        currentDamage = (int)Mathf.Round(data.damage);
-        currentSize = data.size;
-        currentAttackCooldown = data.attackCooldown;
-        currentRange = data.range;
-        currentProjectileCount = data.projectileCount;
         StartCoroutine(AttackManager());
     }
 
@@ -75,6 +107,32 @@ public abstract class EquipmentController : MonoBehaviour
     }
 
     protected abstract IEnumerator Attack();
-    protected abstract void Upgrade(int upgradeIndex);
-    protected abstract void ActivateAbility();
+
+    public void AddUpgradeId(string id)
+    {
+        if (!appliedUpgradeIds.Contains(id))
+            appliedUpgradeIds.Add(id);
+    }
+
+    /// <summary>
+    /// Паттерн расчета урона Modifiers
+    /// Сначала Reset - сбрасываем все параметры к базовым
+    /// Затем Apply каждый модификатор
+    /// </summary>
+    public void RefreshStats()
+    {
+        ResetToBase();
+
+        // Apply
+        foreach (var id in appliedUpgradeIds)
+        {
+            ApplyEffect(id);
+        }
+    }
+
+    // Можно switch-case улучшений по названиям
+    protected abstract void ApplyEffect(string upgradeId);
+
+    protected abstract void Upgrade(int upgradeIndex); // Надо ли?
+    protected abstract void ActivateAbility(); // Непонятно
 }

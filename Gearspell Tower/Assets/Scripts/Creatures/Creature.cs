@@ -1,39 +1,44 @@
 ﻿using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.EventSystems.EventTrigger;
 
-public class Creature : MonoBehaviour
+public abstract class Creature : MonoBehaviour
 {
-    [SerializeField] private float speed = 3f;
-    [SerializeField] private int damage = 5;
-    [SerializeField] private float attackCooldown = 1f;
+    public Action<Creature> OnReachedTower;
 
-    private Tower tower;
-    private HealthComponent healthComponent;
-    private Vector3 _towerPosition;
+    [SerializeField] protected CreatureData data;
 
     [Header("Коллайдеры")]
     [SerializeField] private Collider2D bodyCollider;     // Для физики и получения урона
-    [SerializeField] private Collider2D hitbox;     // Trigger для атаки башни
+    //[SerializeField] private Collider2D hitbox;     // -> Trigger для атаки башни
 
-    public Action<Creature> OnReachedTower;
+    protected int baseDamage;
+    protected float baseSpeed;
 
-    public void Awake()
+    protected HealthComponent healthComponent;
+    protected Vector3 towerPosition;
+
+    protected virtual void Awake()
     {
-        tower = GameObject.Find("Tower").GetComponent<Tower>();
+        baseDamage = data.damage;
+        baseSpeed = data.speed;
+
         healthComponent = GetComponent<HealthComponent>();
+        healthComponent.MaxHealth = data.health;
+
+        var drop = GetComponent<DropComponent>();
+        if (drop != null)
+            drop.SetDrop(data.minGearsDrop, data.maxGearsDrop);
     }
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
-        _towerPosition = tower.Position;
+        if (G.Tower != null) towerPosition = G.Tower.Position;
         healthComponent.OnHealthChanged += PlayDamageReceivedAnimation;
         healthComponent.OnDeath += PlayDeathAnimation;
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         healthComponent.OnHealthChanged -= PlayDamageReceivedAnimation;
         healthComponent.OnDeath -= PlayDeathAnimation;
@@ -41,15 +46,18 @@ public class Creature : MonoBehaviour
 
     private void Update()
     {
+        if (G.Tower == null) return;
         //Move
-        transform.position = Vector3.MoveTowards(transform.position, _towerPosition, speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, towerPosition, baseSpeed * Time.deltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Tower")
+        if (other.gameObject.CompareTag("Tower"))
         {
-            speed = 0;
+            baseSpeed = 0;
+            OnReachedTower?.Invoke(this);
+            G.EventManager?.TriggerEnemyReachedTower(this);
             StartCoroutine(AttackTower(other));
         }
     }
@@ -60,11 +68,11 @@ public class Creature : MonoBehaviour
         {
             HealthComponent towerHealthComponent = other.GetComponent<HealthComponent>();
             if (towerHealthComponent == null || !towerHealthComponent.isAlive) yield break;
-            towerHealthComponent.TakeDamage(damage);
+            towerHealthComponent.TakeDamage(baseDamage);
 
             // Анимация атаки
 
-            yield return new WaitForSeconds(attackCooldown);
+            yield return new WaitForSeconds(1f);
         }
     }
 
@@ -81,10 +89,11 @@ public class Creature : MonoBehaviour
     IEnumerator DeathCoroutine()
     {
         GetComponent<Collider2D>().enabled = false;
-        speed = 0;
+        baseSpeed = 0;
         //animator.Play("die");
         //AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         yield return new WaitForSeconds(0.1f);
+        G.EventManager?.TriggerEnemyKilled(this);
         Destroy(gameObject);
     }
 }

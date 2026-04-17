@@ -6,13 +6,10 @@ using UnityEngine;
 public class Tower : MonoBehaviour
 {
     [Header("Parameters")]
-    [SerializeField] private float detectionRadius = 5f; //?
-    private HealthComponent healthComponent;
     [SerializeField] private int regeneration = 1;
+    private HealthComponent healthComponent;
 
     public Vector3 Position => transform.position;
-    
-    private List<Creature> detectedEnemies = new List<Creature>(); // может быть обнаружение врагов вынести сюда и просто вызывать!
 
     // Модификаторы из систем
     //private float globalDamageMultiplier = 1f;
@@ -23,11 +20,13 @@ public class Tower : MonoBehaviour
 
     private void Awake()
     {
-        // Получаем ссылки на системные менеджеры-сингтоны
-        //gameManager = GameManager.Instance;
-        //uiManager = UIManager.Instance;
-
         healthComponent = GetComponent<HealthComponent>();
+        if (healthComponent != null)
+        {
+            healthComponent.MaxHealth = 1000;
+            healthComponent.OnHealthChanged += OnHealthChanged;
+            healthComponent.OnDeath += OnDeath;
+        }
     }
 
     private void Start()
@@ -35,11 +34,23 @@ public class Tower : MonoBehaviour
         StartCoroutine(Regenerate());
     }
 
+    private void OnHealthChanged(float current, float max)
+    {
+        G.EventManager?.TriggerTowerHealthChanged(current, max);
+    }
+
+    private void OnDeath()
+    {
+        G.EventManager?.TriggerTowerDestroyed();
+        G.GameManager?.GameOver();
+    }
+
     IEnumerator Regenerate()
     {
         while (true)
         {
-            healthComponent.Heal(regeneration);
+            if (healthComponent != null && healthComponent.isAlive)
+                healthComponent.Heal(regeneration);
             yield return new WaitForSeconds(1f);
         }
     }
@@ -47,10 +58,10 @@ public class Tower : MonoBehaviour
 
     private void OnDestroy()
     {
-        // Отписываемся от событий
-        // if (UpgradeSystem.Instance != null)
-        // {
-        //     UpgradeSystem.Instance.OnGlobalUpgradeChanged -= UpdateGlobalModifiers;
-        // }
+        if (healthComponent != null)
+        {
+            healthComponent.OnHealthChanged -= OnHealthChanged;
+            healthComponent.OnDeath -= OnDeath;
+        }
     }
 }

@@ -5,6 +5,9 @@ MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - data: {fileID: 11400000, guid: 097bf314740a771439271a76d8d43ad1, type: 2}
+  - roofShieldSprite: {fileID: 21300000, guid: 16f7b1d150bd6e24fb830da49df5b0f3, type: 3}
+  - parapetShieldSprite: {fileID: 21300000, guid: f1dacea2ddf75c14590f366d86b2c9e6, type: 3}
+  - reflectEffect: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

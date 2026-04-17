@@ -1,8 +1,7 @@
-using System.Collections;
-using Unity.VisualScripting;
+using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public enum MenuState
 {
@@ -18,41 +17,121 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private Button settingsBtn;
     [SerializeField] private Button exitBtn;
 
+    [Header("Localized Texts")]
+    [SerializeField] private TextMeshProUGUI continueText;
+    [SerializeField] private TextMeshProUGUI newGameText;
+    [SerializeField] private TextMeshProUGUI settingsText;
+    [SerializeField] private TextMeshProUGUI exitText;
+
+    [Header("Menus")]
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject settingsMenu;
 
+    [Header("Language Toggle")]
+    [SerializeField] private Button languageToggleBtn;
+    [SerializeField] private TextMeshProUGUI languageBtnText;
+
     private void Start()
     {
-        continueBtn.interactable = false;
+        bool hasSave = G.SaveManager != null && G.SaveManager.HasSave;
+        continueBtn.interactable = hasSave;
 
-        continueBtn.onClick.AddListener(Continue);
-        newGameBtn.onClick.AddListener(PlayNew);
+        continueBtn.onClick.AddListener(ContinueGame);
+        newGameBtn.onClick.AddListener(StartNewGame);
         settingsBtn.onClick.AddListener(OpenSettings);
         exitBtn.onClick.AddListener(ExitGame);
 
-        if (mainMenu != null) mainMenu.SetActive(true);
-        if (settingsMenu != null) settingsMenu.SetActive(false);
+        if (languageToggleBtn != null)
+        {
+            languageToggleBtn.onClick.AddListener(ToggleLanguage);
+            UpdateLanguageButtonText();
+        }
+
+        if (G.LocalizationManager != null)
+        {
+            G.LocalizationManager.OnLanguageChanged += OnLanguageChanged;
+        }
+
+        ShowMainMenu();
+        UpdateAllTexts();
     }
 
-    public void Continue()
+    private void OnDestroy()
     {
-        SceneManager.LoadScene("Game");
+        if (G.LocalizationManager != null)
+        {
+            G.LocalizationManager.OnLanguageChanged -= OnLanguageChanged;
+        }
     }
 
-    public void PlayNew()
+    private void OnLanguageChanged(LocalizationManager.Language lang)
     {
-        SceneManager.LoadScene("Game");
+        UpdateAllTexts();
+        UpdateLanguageButtonText();
+    }
+
+    private void UpdateAllTexts()
+    {
+        var loc = G.LocalizationManager;
+        if (loc == null) return;
+
+        if (continueText != null) continueText.text = loc.GetText("Continue");
+        if (newGameText != null) newGameText.text = loc.GetText("NewGame");
+        if (settingsText != null) settingsText.text = loc.GetText("Settings");
+        if (exitText != null) exitText.text = loc.GetText("Exit");
+    }
+
+    private void UpdateLanguageButtonText()
+    {
+        if (languageBtnText != null && G.LocalizationManager != null)
+        {
+            languageBtnText.text = G.LocalizationManager.CurrentLanguage == LocalizationManager.Language.Russian ? "EN" : "RU";
+        }
+    }
+
+    private void ToggleLanguage()
+    {
+        G.LocalizationManager?.ToggleLanguage();
+    }
+
+    public void ContinueGame()
+    {
+        Debug.Log("[MainMenu] Continue game");
+        G.GameManager?.StartNewGame();
+
+        // TODO: Загрузить сохранения игры
+    }
+
+    public void StartNewGame()
+    {
+        Debug.Log("[MainMenu] New game");
+        G.SaveManager?.ClearSave();
+        G.GameManager?.StartNewGame();
     }
 
     public void OpenSettings()
     {
-        if (mainMenu != null) mainMenu.SetActive(false);
-        if (settingsMenu != null) settingsMenu.SetActive(true);
+        mainMenu.SetActive(false);
+        settingsMenu.SetActive(true);
+    }
+
+    public void ShowMainMenu()
+    {
+        mainMenu.SetActive(true);
+        if (settingsMenu != null) settingsMenu.SetActive(false);
+
+        // Обновляем ContinueBtn
+        if (continueBtn != null && G.SaveManager != null)
+            continueBtn.interactable = G.SaveManager.HasSave;
     }
 
     public void ExitGame()
     {
+        Debug.Log("[MainMenu] Exit game");
         Application.Quit();
-        Debug.Log("Exit pressed!");
+
+    #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+    #endif
     }
 }

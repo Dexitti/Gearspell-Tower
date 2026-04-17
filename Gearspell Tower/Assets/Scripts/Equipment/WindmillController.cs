@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
@@ -71,6 +72,11 @@ public class WindmillController : EquipmentController
     {
         Gizmos.color = Color.red;
         Gizmos.DrawSphere(spawnPosition, 0.05f);
+    }
+
+    protected override void ApplyEffect(string upgradeId)
+    {
+        throw new NotImplementedException();
     }
 
     protected override void Upgrade(int upgradeIndex)

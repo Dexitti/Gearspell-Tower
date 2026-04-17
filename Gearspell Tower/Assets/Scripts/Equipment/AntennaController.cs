@@ -35,7 +35,7 @@ namespace Assets.Scripts.Equipment
         private void SetupVisualParameters()
         {
             Transform rangeBoundary = transform.Find("RangeBoundary");
-            rangeBoundary.position = firePoint * 0.75f;
+            rangeBoundary.position = towerTransform.position;
             rangeBoundary.localScale = new Vector3(currentRange, currentRange);
 
             shapeModule.radius = currentRange * 0.5f;
@@ -92,6 +92,11 @@ namespace Assets.Scripts.Equipment
                 }
                 else hasEnemies = false;
             }
+        }
+
+        protected override void ApplyEffect(string upgradeId)
+        {
+            throw new NotImplementedException();
         }
 
         protected override void Upgrade(int upgradeIndex)

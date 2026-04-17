@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.EditorTools;
@@ -83,7 +84,7 @@ public class FireDrillController : EquipmentController
         {
             while (true)
             {
-                int randomInt = Random.Range(0, availableEnemies.Count);
+                int randomInt = UnityEngine.Random.Range(0, availableEnemies.Count);
                 if (!positions.Contains(randomInt))
                 {
                     positions.Add(randomInt);
@@ -109,8 +110,8 @@ public class FireDrillController : EquipmentController
             else shot = Instantiate(data.projectilesPrefabs[0], transform);
             shot.transform.position = towerTransform.position + Vector3.up * 0.65f;
             if (firePoints[i].x <= towerTransform.position.x)
-                shot.transform.Rotate(0f, 0f, Random.Range(2f, 25f));
-            else shot.transform.Rotate(0f, 0f, Random.Range(-25f, -2f));
+                shot.transform.Rotate(0f, 0f, UnityEngine.Random.Range(2f, 25f));
+            else shot.transform.Rotate(0f, 0f, UnityEngine.Random.Range(-25f, -2f));
         }
     }
 
@@ -130,7 +131,10 @@ public class FireDrillController : EquipmentController
         }
     }
 
-
+    protected override void ApplyEffect(string upgradeId)
+    {
+        throw new NotImplementedException();
+    }
 
     protected override void Upgrade(int upgradeIndex)
     {

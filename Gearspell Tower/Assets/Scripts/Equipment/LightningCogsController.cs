@@ -409,6 +409,11 @@ namespace Assets.Scripts.Equipment
             }
         }
 
+        protected override void ApplyEffect(string upgradeId)
+        {
+            throw new NotImplementedException();
+        }
+
         protected override void Upgrade(int upgradeIndex)
         {
             throw new NotImplementedException();

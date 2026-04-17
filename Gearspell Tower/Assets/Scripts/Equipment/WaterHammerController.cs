@@ -61,6 +61,11 @@ namespace Assets.Scripts.Equipment
             return target.position + spawnOffset;
         }
 
+        protected override void ApplyEffect(string upgradeId)
+        {
+            throw new NotImplementedException();
+        }
+
         protected override void Upgrade(int upgradeIndex)
         {
             throw new NotImplementedException();

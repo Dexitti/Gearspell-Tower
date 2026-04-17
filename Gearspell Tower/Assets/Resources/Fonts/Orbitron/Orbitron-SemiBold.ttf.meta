@@ -10,7 +10,12 @@ TrueTypeFontImporter:
   includeFontData: 1
   fontNames:
   - Orbitron
-  fallbackFontReferences: []
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 5156e266e9ca83c488bea15fb79f2f9d, type: 3}
+  - {fileID: 12800000, guid: 84fca0a13eb3dbf4595ddab807f431b9, type: 3}
+  - {fileID: 12800000, guid: 6fd394b4c78a9c541ac5a2877e36d69f, type: 3}
+  - {fileID: 12800000, guid: 021e36b4ef906ed4ba23ee5df17a632f, type: 3}
+  - {fileID: 12800000, guid: cdf5ee2a543f823438f63b2571d8128b, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1
