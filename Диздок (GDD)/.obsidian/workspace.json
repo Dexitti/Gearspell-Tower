@@ -8,20 +8,6 @@
         "type": "tabs",
         "children": [
           {
-            "id": "5eab1d50c742ae90",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Концепция.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Концепция"
-            }
-          },
-          {
             "id": "06a5e1678200ce95",
             "type": "leaf",
             "state": {
@@ -36,17 +22,87 @@
             }
           },
           {
-            "id": "a484a43bf8ea9cb7",
+            "id": "5eab1d50c742ae90",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Персонажи.md",
+                "file": "Концепция.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Персонажи"
+              "title": "Концепция"
+            }
+          },
+          {
+            "id": "c3aad4df073b9a4d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Стиль игры.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Стиль игры"
+            }
+          },
+          {
+            "id": "0e26f33e7aa7e3f1",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Системы и механики (логика).md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Системы и механики (логика)"
+            }
+          },
+          {
+            "id": "22719a9764322768",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Программирование.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Программирование"
+            }
+          },
+          {
+            "id": "948d2ab480555459",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Параметры.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Параметры"
+            }
+          },
+          {
+            "id": "7d3a334ddd7a90c7",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Аудиовизуал.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Аудиовизуал"
             }
           },
           {
@@ -55,54 +111,54 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Сюжет и прогрессия.md",
+                "file": "Прогрессия.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Сюжет и прогрессия"
+              "title": "Прогрессия"
             }
           },
           {
-            "id": "5be25509817bc8e7",
+            "id": "53a00f467c8938c0",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Игровые механики.md",
+                "file": "Интерфейс (описание + макеты).md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Игровые механики"
+              "title": "Интерфейс (описание + макеты)"
             }
           },
           {
-            "id": "3daf36584a410ce6",
+            "id": "2e070a79d7196978",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Планирование/Контент.md",
+                "file": "Управление.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Контент"
+              "title": "Управление"
             }
           },
           {
-            "id": "7cd6fefebad9cccf",
+            "id": "cc54a085f5d55c44",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Система и прогрессия улучшений.md",
+                "file": "Программирование.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Система и прогрессия улучшений"
+              "title": "Программирование"
             }
           },
           {
@@ -120,7 +176,7 @@
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -282,27 +338,33 @@
       "bases:Создать новую базу": false
     }
   },
-  "active": "7cd6fefebad9cccf",
+  "active": "0e26f33e7aa7e3f1",
   "lastOpenFiles": [
+    "Программирование.md",
+    "Системы и механики (логика).md",
+    "Ресурсы/Структурные/Снаряжение.png",
     "Программно-архитектурные фичи.md",
-    "Система и прогрессия улучшений.md",
+    "Параметры.md",
+    "Прогрессия.md",
+    "Интерфейс (описание + макеты).md",
+    "Управление.md",
+    "Концепция.md",
+    "Стиль игры.md",
+    "Аудиовизуал.md",
+    "Ресурсы/Структурные/Макет HUD.png",
+    "Ресурсы/Структурные/Первые идеи.png",
+    "Ресурсы/Структурные/связи противодействия.png",
+    "Ресурсы/Структурные/соотношение типов врагов в kingdom rush.png",
+    "Ресурсы/Структурные/Pasted image 20260210222710.png",
+    "Персонажи.md",
+    "Основное (кратко).md",
+    "Игровые механики.md",
     "Планирование/Контент.md",
     "Планирование/Сроки.md",
     "~$Баланс.xlsx",
-    "Концепция.md",
-    "Ресурсы/Структурные/Снаряжение.png",
-    "Основное (кратко).md",
-    "Персонажи.md",
-    "Сюжет и прогрессия.md",
     "Лор и сеттинг.md",
-    "Игровые механики.md",
-    "Ресурсы/Структурные/Макет HUD.png",
     "Pasted image 20260219213221.png",
     "Ресурсы/Материалы/Pasted image 20260210222542.png",
-    "Ресурсы/Структурные/соотношение типов врагов в kingdom rush.png",
-    "Ресурсы/Структурные/связи противодействия.png",
-    "Ресурсы/Структурные/Pasted image 20260210222710.png",
-    "Ресурсы/Структурные/Первые идеи.png",
     "8BD87B00",
     "FAB07B00",
     "C1F74B00",
@@ -313,7 +375,6 @@
     "C6313B00",
     "D15D2B00",
     "Планирование.md",
-    "Без названия.canvas",
-    "Аудиовизуал.md"
+    "Без названия.canvas"
   ]
 }
