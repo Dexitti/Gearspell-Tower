@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3322419360828498038}
   - component: {fileID: 6551824263839173724}
   - component: {fileID: 8928703514903301295}
-  - component: {fileID: -2166915092392362084}
+  - component: {fileID: 8934240025686673645}
   - component: {fileID: 1681072530772491802}
   m_Layer: 0
   m_Name: Test Enemy 1
@@ -192,7 +192,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 2, y: 3.39}
   m_Direction: 0
---- !u!114 &-2166915092392362084
+--- !u!114 &8934240025686673645
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -201,14 +201,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8516407375225930908}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77a8c8ed044ca3f42ac0cd507be48790, type: 3}
+  m_Script: {fileID: 11500000, guid: da0bce41571540e439bebb5319e5a70e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
-  damage: 5
-  attackCooldown: 1
+  data: {fileID: 11400000, guid: 30602715fff452942a4ebd9e2c2cb16e, type: 2}
   bodyCollider: {fileID: 6551824263839173724}
-  hitbox: {fileID: 8928703514903301295}
 --- !u!114 &1681072530772491802
 MonoBehaviour:
   m_ObjectHideFlags: 0

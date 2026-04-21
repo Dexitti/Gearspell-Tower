@@ -1,0 +1,252 @@
+{
+  "equipments": [
+    {
+      "name": "Windmill",
+      "stages": [
+        {
+          "isFork": false,
+          "upgrades": [
+            { "cardType": "Equipment", "upgradeName": "Ветряная мельница", "description": "Выпускает частые потоки ветра в ближайшего врага" }
+          ]
+        },
+        {
+          "isFork": false,
+          "upgrades": [
+            { "cardType": "Common", "upgradeName": "Острый поток", "description": "Увеличевает наносимый урон ()" },
+            { "cardType": "Common", "upgradeName": "Пронзающий ветер", "description": "Снаряды пробивают врагов () и броню" }
+          ]
+        },
+        {
+          "isFork": true,
+          "upgrades": [
+            { "cardType": "Fork", "upgradeName": "Шквал", "description": "Увеличивает ширену потока () и частоту выстрелов (), но немного снижает урон ()" },
+            { "cardType": "Fork", "upgradeName": "Бронебойный вихрь", "description": "Снаряды пробивают больше целей () и наносят больше урона (), но выпускаются реже ()" }
+          ]
+        },
+        {
+          "isFork": false,
+          "upgrades": [
+            { "cardType": "ActiveAbility", "upgradeName": "Ураган", "description": "Открывает активную способность. Стремительно выпускает множество выстрелов широким сектором" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "FireDrill",
+      "stages": [
+        {
+          "isFork": false,
+          "upgrades": [
+            { "cardType": "Equipment", "upgradeName": "Огненный бур", "description": "Запускает в небо раскаленные буры, которые обрушиваются на врагов" }
+          ]
+        },
+        {
+          "isFork": false,
+          "upgrades": [
+            { "cardType": "Common", "upgradeName": "Модернизация", "description": "Увеличивает количество запускаемых буров ()" },
+            { "cardType": "Common", "upgradeName": "Разогрев", "description": "Увеличивает урон () и размер буров ()" }
+          ]
+        },
+        {
+          "isFork": true,
+          "upgrades": [
+            { "cardType": "Fork", "upgradeName": "Мелкие буры", "description": "Мортиры теперь выпускают в () раз больше буров, но они меньше и слабее ()" },
+            { "cardType": "Fork", "upgradeName": "Пламенные буры", "description": "Немного уменьшает количество буров (), но теперь они поджигают замлю и имеют шанс застанить ()" }
+          ]
+        },
+        {
+          "isFork": false,
+          "upgrades": [
+            { "cardType": "ActiveAbility", "upgradeName": "Огненный смерч", "description": "Открывает активную способность. Упавшие буры остаются и соединяются в сеть, жгущую врагов () секунд" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "LightningCogs",
+      "stages": [
+        {
+          "isFork": false,
+          "upgrades": [
+            { "cardType": "Equipment", "upgradeName": "Молниеносные шестерни", "description": "Выстреливает цепью шестеренок, между которыми пробивает молния. Бж-Зап!" }
+          ]
+        },
+        {
+          "isFork": false,
+          "upgrades": [
+            { "cardType": "Common", "upgradeName": "Батарея", "description": "Больше шестеренок в цепи ()" },
+            { "cardType": "Common", "upgradeName": "Короткое замыкание", "description": "Молниеносная дуга может прыгнуть на () дополнительные цели от цепи" }
+          ]
+        },
+        {
+          "isFork": true,
+          "upgrades": [
+            { "cardType": "Fork", "upgradeName": "Каскадный разряд", "description": "Количество проскоков увеличивается до ()" },
+            { "cardType": "Fork", "upgradeName": "Грозовой столб", "description": "После молнии над шестеренками возникает грозовой столб" }
+          ]
+        },
+        {
+          "isFork": false,
+          "upgrades": [
+            { "cardType": "ActiveAbility", "upgradeName": "Магнитный резонанс", "description": "Открывает активную способность. Перед молнией шестерни притягивают ближайших врагов" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "PoisonRotors",
+      "stages": [
+        {
+          "isFork": false,
+          "upgrades": [
+            { "cardType": "Equipment", "upgradeName": "Ядовитые роторы", "description": "Скрытно прорываются к скоплениям врагов. Затем резко вырастают и начинают травить ничего не подозревающие жертвы" }
+          ]
+        },
+        {
+          "isFork": false,
+          "upgrades": [
+            { "cardType": "Common", "upgradeName": "Перегрузка", "description": "Роторы движутся быстрее () и наносят урон чаще ()" },
+            { "cardType": "Common", "upgradeName": "Мутаген", "description": "Увеличивает количество стаков яда () и урон за стак ()" }
+          ]
+        },
+        {
+          "isFork": true,
+          "upgrades": [
+            { "cardType": "Fork", "upgradeName": "Токсичное облако", "description": "Увеличивает область ядовитого облака () и время жизни ротора ()" },
+            { "cardType": "Fork", "upgradeName": "Шипастый залп", "description": "Роторы стреляют ядовитыми шипами ()" }
+          ]
+        },
+        {
+          "isFork": false,
+          "upgrades": [
+            { "cardType": "ActiveAbility", "upgradeName": "Чума", "description": "Открывает активную способность. Отравленные враги взрываются при смерти ()" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "CryogenicStabilizer",
+      "stages": [
+        {
+          "isFork": false,
+          "upgrades": [
+            { "cardType": "Equipment", "upgradeName": "Криогенный стабилизатор", "description": "Извергает луч на среднюю дистанцию, замедляющий врагов" }
+          ]
+        },
+        {
+          "isFork": false,
+          "upgrades": [
+            { "cardType": "Common", "upgradeName": "Глубокая заморозка", "description": "Усиливает эффект замедления ()" },
+            { "cardType": "Common", "upgradeName": "Ледяная поступь", "description": "После луча остаётся холодная земля ()" }
+          ]
+        },
+        {
+          "isFork": true,
+          "upgrades": [
+            { "cardType": "Fork", "upgradeName": "Хрупкость", "description": "Замороженные враги получают повышенный урон () от всех источников" },
+            { "cardType": "Fork", "upgradeName": "Снежная лавина", "description": "Луч становится короткий широкий конус, замедляющий врагов тем сильнее, чем они ближе к башне ()" }
+          ]
+        },
+        {
+          "isFork": false,
+          "upgrades": [
+            { "cardType": "ActiveAbility", "upgradeName": "Абсолютный ноль", "description": "Открывает активную способность. Превращает врагов в ледяные статуи" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "WaterHammer",
+      "stages": [
+        {
+          "isFork": false,
+          "upgrades": [
+            { "cardType": "Equipment", "upgradeName": "Водяной молот", "description": "Из-под земли появляется кувалда, способная раздробить скелет сильнейшему врагу" }
+          ]
+        },
+        {
+          "isFork": false,
+          "upgrades": [
+            { "cardType": "Common", "upgradeName": "Тяжёлый удар", "description": "Повышает урон ()" },
+            { "cardType": "Common", "upgradeName": "Гидроускорение", "description": "Атаки происходят чаще ()" }
+          ]
+        },
+        {
+          "isFork": true,
+          "upgrades": [
+            { "cardType": "Fork", "upgradeName": "Воронка", "description": "Удары станят () врагов в небольшой области ()" },
+            { "cardType": "Fork", "upgradeName": "Повторный прилив", "description": "Атаки снимают броню () и наносят дополнительный урон ()" }
+          ]
+        },
+        {
+          "isFork": false,
+          "upgrades": [
+            { "cardType": "ActiveAbility", "upgradeName": "Лавина", "description": "Открывает активную способность. Молот наносит () усиливающихся удара по области" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "KineticArmor",
+      "stages": [
+        {
+          "isFork": false,
+          "upgrades": [
+            { "cardType": "Equipment", "upgradeName": "Кинетическая броня", "description": "Окутывает башню магическим щитом, отражающим урон в обидчика ()" }
+          ]
+        },
+        {
+          "isFork": false,
+          "upgrades": [
+            { "cardType": "Common", "upgradeName": "Рефлекс", "description": "Уменьшает перезарядку щита ()" },
+            { "cardType": "Common", "upgradeName": "Шипасный щит", "description": "Увеличивается отраженный урон () и отбрасывает врагов" }
+          ]
+        },
+        {
+          "isFork": true,
+          "upgrades": [
+            { "cardType": "Fork", "upgradeName": "Конвертор", "description": "Преобразует заблокированный урон во временный щит ()" },
+            { "cardType": "Fork", "upgradeName": "Кинетический барьер", "description": "Рефлектует по кругу. Чем дольше не атакован, тем дальше будет атака ()" }
+          ]
+        },
+        {
+          "isFork": false,
+          "upgrades": [
+            { "cardType": "ActiveAbility", "upgradeName": "Резонанс", "description": "Открывает активную способность. Отражение провоцирует атаку других снаряжений" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Antenna",
+      "stages": [
+        {
+          "isFork": false,
+          "upgrades": [
+            { "cardType": "Equipment", "upgradeName": "Кварцевый резонатор", "description": "Испускает радиальные волны с большой частотой. С расстоянием урон рассеивается ()" }
+          ]
+        },
+        {
+          "isFork": false,
+          "upgrades": [
+            { "cardType": "Common", "upgradeName": "Усилитель", "description": "Увеличивает наносимый урон ()" },
+            { "cardType": "Common", "upgradeName": "Оглушающая волна", "description": "Враги в области имеют шанс стана ()" }
+          ]
+        },
+        {
+          "isFork": true,
+          "upgrades": [
+            { "cardType": "Fork", "upgradeName": "Импульсор", "description": "Атаки становятся импульсными с небольшим отталкиванием" },
+            { "cardType": "Fork", "upgradeName": "Ретрансляторы", "description": "Урон не падает с дистанцией ()" }
+          ]
+        },
+        {
+          "isFork": false,
+          "upgrades": [
+            { "cardType": "ActiveAbility", "upgradeName": "Коллективный психоз", "description": "Открывает активную способность. У врагов появляются ауры (), наносящие урон вокруг ()" }
+          ]
+        }
+      ]
+    }
+  ]
+}

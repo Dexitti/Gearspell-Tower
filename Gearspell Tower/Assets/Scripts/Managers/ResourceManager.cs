@@ -20,6 +20,7 @@ public class ResourceManager : MonoBehaviour
     private void Start()
     {
         ResetResources();
+        G.EventManager?.TriggerGearsChanged(_gears);
         if (G.EventManager != null)
         {
             G.EventManager.OnEnemyKilled += OnEnemyKilled;

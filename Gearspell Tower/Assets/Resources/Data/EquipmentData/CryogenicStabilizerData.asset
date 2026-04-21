@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31e3455ba3b34c5439d6722bdfdc8514, type: 3}
+  m_Name: CryogenicStabilizerData
+  m_EditorClassIdentifier: 
+  equipmentName: "\u0417\u0430\u043C\u043E\u0440\u0430\u0436\u0438\u0432\u0430\u044E\u0449\u0438\u0439
+    \u043B\u0443\u0447"
+  isUnlocked: 0
+  decorationPrefab: {fileID: 4514677283930072942, guid: dfe14440d97fe3042a796bfc198a4fc6, type: 3}
+  projectilesPrefabs: []
+  damage: 0.75
+  size: 1
+  attackCooldown: 0.25
+  range: 3.5
+  projectileCount: 1
+  stages:
+  - upgradeData:
+    - {fileID: 11400000, guid: 444d13ee4935b2e4ba65e4d936d4ea3d, type: 2}
+    isFork: 0
+  - upgradeData:
+    - {fileID: 11400000, guid: 507204b14863d1842a621e0dc3d744ea, type: 2}
+    - {fileID: 11400000, guid: 3d01a6e54c0be7040b87eea220db9354, type: 2}
+    isFork: 0
+  - upgradeData:
+    - {fileID: 11400000, guid: b0d1a299b34f0974086cbf53689013e7, type: 2}
+    - {fileID: 11400000, guid: e48775b0167c70c488ad58d98e9eda9a, type: 2}
+    isFork: 1
+  - upgradeData:
+    - {fileID: 11400000, guid: e03fc188b68552e42a4ba299634fed00, type: 2}
+    isFork: 0

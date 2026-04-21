@@ -10,11 +10,10 @@ public class GameLoopManager : MonoBehaviour
     public Action<int> OnWaveCompleted;
     public Action<DialogData> OnDialogShow;
 
-    [SerializeField] private WaveData[] waves;
     [SerializeField] private EquipmentManager equipmentManager;
     [SerializeField] private UpgradeSystem upgradeSystem;
-
     [SerializeField] private float timeBetweenWaves = 3f;
+    [SerializeField] private WaveData[] waves;
 
     private int currentWaveIndex = 0;
     private Coroutine gameLoopCoroutine;
@@ -26,6 +25,7 @@ public class GameLoopManager : MonoBehaviour
     private void Awake()
     {
         G.GameLoopManager = this;
+        waves = Resources.LoadAll<WaveData>("Data/WavesData");
     }
 
     private void Start()

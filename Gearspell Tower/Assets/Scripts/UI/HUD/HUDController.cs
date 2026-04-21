@@ -37,31 +37,36 @@ public class HUDController : MonoBehaviour
 
     private void Start()
     {
-        if (G.EventManager == null) return;
+        // Начальные значения
+        waveNumberText.text = "1";
+        gearsText.text = "0";
+        speedButtonImage.sprite = speedSprite[0];
+        upgradeIndicator.SetActive(false);
 
+        if (G.EventManager == null) return;
         G.EventManager.OnGameStateChanged += OnGameStateChanged;
         G.EventManager.OnTowerHealthChanged += UpdateHealthBar;
         G.EventManager.OnWaveStarted += UpdateWaveNumber;
         G.EventManager.OnGearsChanged += UpdateGears;
 
         SetupButtons();
-
-        // Начальные значения
-        waveNumberText.text = "1";
-        gearsText.text = "0";
-        upgradeIndicator.SetActive(false);
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) && upgradeIndicator.activeSelf)
             OpenUpgradeMenu();
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (isPaused)
+                ResumeGame();
+        }
     }
 
     private void OnDestroy()
     {
         if (G.EventManager == null) return;
-
         G.EventManager.OnGameStateChanged -= OnGameStateChanged;
         G.EventManager.OnTowerHealthChanged -= UpdateHealthBar;
         G.EventManager.OnWaveStarted -= UpdateWaveNumber;
@@ -119,19 +124,11 @@ public class HUDController : MonoBehaviour
     {
         if (upgradeIndicator == null) return;
 
-        // TODO: Получить стоимость самого дешёвого доступного апгрейда
-        int cheapestUpgradeCost = GetCheapestAvailableUpgradeCost();
+        int cheapestCost = G.UpgradeSystem.GetCheapestUpgradeCost();
         int currentGears = G.ResourceManager?.Gears ?? 0;
 
-        bool isAvailable = currentGears >= cheapestUpgradeCost;
+        bool isAvailable = cheapestCost > 0 && currentGears >= cheapestCost;
         upgradeIndicator.SetActive(isAvailable);
-    }
-
-    private int GetCheapestAvailableUpgradeCost()
-    {
-        // TODO: Запросить у UpgradeManager минимальную стоимость
-        // Пока заглушка
-        return -1;
     }
 
     private void OpenUpgradeMenu()

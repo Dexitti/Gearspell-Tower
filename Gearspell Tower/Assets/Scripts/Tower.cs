@@ -18,7 +18,7 @@ public class Tower : MonoBehaviour
     //private float globalProjSize = 1f;
     //private float globalConstructCooldownReduction = 0f;
 
-    private void Awake()
+    private void Start()
     {
         healthComponent = GetComponent<HealthComponent>();
         if (healthComponent != null)
@@ -27,10 +27,7 @@ public class Tower : MonoBehaviour
             healthComponent.OnHealthChanged += OnHealthChanged;
             healthComponent.OnDeath += OnDeath;
         }
-    }
 
-    private void Start()
-    {
         StartCoroutine(Regenerate());
     }
 

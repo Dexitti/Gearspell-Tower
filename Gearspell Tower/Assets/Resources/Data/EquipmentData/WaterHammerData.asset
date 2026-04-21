@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31e3455ba3b34c5439d6722bdfdc8514, type: 3}
+  m_Name: WaterHammerData
+  m_EditorClassIdentifier: 
+  equipmentName: "\u0412\u043E\u0434\u044F\u043D\u043E\u0439 \u043C\u043E\u043B\u043E\u0442"
+  isUnlocked: 0
+  decorationPrefab: {fileID: 326767618567787862, guid: 0b54e4b2d99dc454ebaf43041e3ca9f1, type: 3}
+  projectilesPrefabs:
+  - {fileID: 7419661608313516578, guid: febd192a812d82649942b2ed7f1a89d2, type: 3}
+  damage: 15
+  size: 1
+  attackCooldown: 4
+  range: 6
+  projectileCount: 1
+  stages:
+  - upgradeData:
+    - {fileID: 11400000, guid: 02e2b389736261e41bf3073299c8370e, type: 2}
+    isFork: 0
+  - upgradeData:
+    - {fileID: 11400000, guid: fec715917615cc745a90ef9a0e4d4fe3, type: 2}
+    - {fileID: 11400000, guid: b4d7a93a22455df4094894d1e8c779f1, type: 2}
+    isFork: 0
+  - upgradeData:
+    - {fileID: 11400000, guid: 207c0a97873d6ac48aaaa6d44dc795a6, type: 2}
+    - {fileID: 11400000, guid: 220c4a62dda3d854eaa06fd8200a6809, type: 2}
+    isFork: 1
+  - upgradeData:
+    - {fileID: 11400000, guid: ef5676cc5d319aa46a113b6f447923ee, type: 2}
+    isFork: 0

@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31e3455ba3b34c5439d6722bdfdc8514, type: 3}
+  m_Name: AntennaData
+  m_EditorClassIdentifier: 
+  equipmentName: "\u041A\u0432\u0430\u0440\u0446\u0435\u0432\u044B\u0439 \u0440\u0435\u0437\u043E\u043D\u0430\u0442\u043E\u0440"
+  isUnlocked: 0
+  decorationPrefab: {fileID: 7418652157673013559, guid: f6841dbd88b448841906f385c4fb2310, type: 3}
+  projectilesPrefabs:
+  - {fileID: 2690663417616464067, guid: 3c1584a24b23c18489067434e1c064cf, type: 3}
+  - {fileID: 6494311240829851661, guid: 2ad1abdbd8f82fd44b5fa5a879a8a496, type: 3}
+  damage: 0.8
+  size: 1
+  attackCooldown: 0.1
+  range: 2
+  projectileCount: 5
+  stages:
+  - upgradeData:
+    - {fileID: 11400000, guid: 56852d0f00df87742ae575d79bf9f9c3, type: 2}
+    isFork: 0
+  - upgradeData:
+    - {fileID: 11400000, guid: 88a0a108b3491da43aaf05c4a3a1e79e, type: 2}
+    - {fileID: 11400000, guid: 0b9ef51680756364b9502ea5b57a6e3a, type: 2}
+    isFork: 0
+  - upgradeData:
+    - {fileID: 11400000, guid: 1148596e9ffa98349b18ae933f69f9a5, type: 2}
+    - {fileID: 11400000, guid: 9f24a34097ba7e04e9bbb78bcb19e9e0, type: 2}
+    isFork: 1
+  - upgradeData:
+    - {fileID: 11400000, guid: 1622c2158f01de74daf4ffbe0657cc39, type: 2}
+    isFork: 0

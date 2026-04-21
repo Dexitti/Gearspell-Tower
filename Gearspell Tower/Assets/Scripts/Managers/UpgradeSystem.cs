@@ -34,6 +34,7 @@ public class UpgradeSystem : MonoBehaviour
     private void Awake()
     {
         G.UpgradeSystem = this;
+        allEquipmentUpgrades = Resources.LoadAll<EquipmentData>("Data/EquipmentData");
     }
 
     private void Start()

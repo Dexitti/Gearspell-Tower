@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
@@ -39,7 +40,13 @@ public class EquipmentManager : MonoBehaviour
         unlockedSlots = G.ProgressManager?.GetUnlockedSlots() ?? 1;
         isBackpackUnlocked = G.ProgressManager?.IsBackpackUnlocked() ?? false;
 
-        EquipToSlot(allEquipmentPrefabs["CryogenicStabilizerController"], 0);
+        //StartCoroutine(EquipDefaultAfterInit());
+    }
+
+    private IEnumerator EquipDefaultAfterInit() // Костыль стартовой загрузки снаряжения
+    {
+        yield return new WaitForSeconds(0.1f);
+        EquipToSlot(allEquipmentPrefabs["FireDrillController"], 0);
     }
 
     private void LoadAllPrefabs()
@@ -88,13 +95,20 @@ public class EquipmentManager : MonoBehaviour
 
     public void UnequipSlot(int slotIndex)
     {
-        Debug.Log($"Снаряжение {slotControllers[slotIndex].gameObject.name} снято со слота {slotIndex}");
-        if (slotControllers[slotIndex] != null)
+        if (slotIndex < 0 || slotIndex >= maxSlots) return;
+
+        var eq = slotControllers[slotIndex];
+        if (eq != null)
         {
-            Destroy(slotControllers[slotIndex].gameObject);
-            slotControllers[slotIndex] = null;
+            eq = null;
+
+            if (slotControllers[slotIndex] != null)
+            {
+                Destroy(slotControllers[slotIndex].gameObject);
+                slotControllers[slotIndex] = null;
+            }
         }
-        activeEquipment[slotIndex] = null;
+        Debug.Log($"Снаряжение {slotControllers[slotIndex].name} снято со слота {slotIndex}");  
     }
 
     // === Для UpgradeSystem ===

@@ -92,11 +92,6 @@ public class UpgradeScreen : MonoBehaviour
         UpdateGearsText();
         UpdateSlotBuyBtn();
 
-        for (int i = 0; i < currentOffers.Count; i++)
-        {
-            activeCards[i].Initialize(currentOffers[i], OnCardClicked);
-        }
-
         //UpdateGlobalButtons();
     }
 

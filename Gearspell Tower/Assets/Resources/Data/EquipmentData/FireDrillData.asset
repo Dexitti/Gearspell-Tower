@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31e3455ba3b34c5439d6722bdfdc8514, type: 3}
+  m_Name: FireDrillData
+  m_EditorClassIdentifier: 
+  equipmentName: "\u041E\u0433\u043D\u0435\u043D\u043D\u044B\u0439 \u0431\u0443\u0440"
+  isUnlocked: 1
+  decorationPrefab: {fileID: 4046091921722235949, guid: 1dd5cbe976d0c0643b5106f7a46ca0cd, type: 3}
+  projectilesPrefabs:
+  - {fileID: 4514352855775991252, guid: 67aced92cf41e5349a6fc27063936845, type: 3}
+  - {fileID: 1735177912823878487, guid: a364ec7aac9f50e469f375d7ff7a2ca2, type: 3}
+  damage: 6
+  size: 1
+  attackCooldown: 3
+  range: 4
+  projectileCount: 5
+  stages:
+  - upgradeData:
+    - {fileID: 11400000, guid: bc26078821d374c46a360908b5fe70e7, type: 2}
+    isFork: 0
+  - upgradeData:
+    - {fileID: 11400000, guid: 7889eb0f2d3504c44bf724842aa7fd07, type: 2}
+    - {fileID: 11400000, guid: 2bab9cb36b597974a863f27c5459005b, type: 2}
+    isFork: 0
+  - upgradeData:
+    - {fileID: 11400000, guid: 0acb3c6717a6317448c4a30e660b90df, type: 2}
+    - {fileID: 11400000, guid: ec4bbd485f2516a4589982aaeddd8aa3, type: 2}
+    isFork: 1
+  - upgradeData:
+    - {fileID: 11400000, guid: c95a7d474ace2704e8f9d551b662a955, type: 2}
+    isFork: 0

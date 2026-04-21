@@ -28,7 +28,7 @@ public abstract class EquipmentController : MonoBehaviour
         ResetToBase();
     }
 
-    protected virtual void ResetToBase()
+    private void ResetToBase()
     {
         currentDamage = Mathf.RoundToInt(data.damage);
         currentAttackCooldown = data.attackCooldown;

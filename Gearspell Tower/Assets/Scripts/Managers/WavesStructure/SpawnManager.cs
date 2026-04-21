@@ -62,12 +62,13 @@ public class SpawnManager : MonoBehaviour
 
                 yield return new WaitForSeconds(enemiesConfig.spawnInterval);
             }
-
-            yield return new WaitWhile(() => activeEnemies.Count > 0);
-
-            OnAllEnemiesDefeated?.Invoke();
-            waveCoroutine = null;
         }
+
+        // ∆дЄм пока все враги будут убиты
+        yield return new WaitWhile(() => activeEnemies.Count > 0);
+
+        OnAllEnemiesDefeated?.Invoke();
+        waveCoroutine = null;
     }
 
     private Vector3 GetSpawnPosition()
@@ -88,7 +89,8 @@ public class SpawnManager : MonoBehaviour
         GameObject enemy = GetFromPool(config.enemyPrefab);
         enemy.transform.position = position;
         enemy.SetActive(true);
-
+        
+        var creature = enemy.GetComponent<Creature>();
         var health = enemy.GetComponent<HealthComponent>();
         if (health != null)
             health.OnDeath += () => OnEnemyDeath(enemy);
