@@ -13,9 +13,7 @@ MonoBehaviour:
   m_Name: Wave_12
   m_EditorClassIdentifier: 
   waveName: "\u0412\u043E\u043B\u043D\u0430 12 - \u041F\u043B\u0430\u043C\u044F \u0418\u0433\u043D\u0438\u0441\u0430"
-  enemySpawns:
-  - enemyPrefab: {fileID: 8516407375225930908, guid: 22fbfc05653798f498fa3161ac6958d3, type: 3}
-    count: 6
-    spawnInterval: 0.5
+  enemySpawns: []
   waveDialogs: []
   gearsReward: 190
+  equipmentUnlocks: []

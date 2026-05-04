@@ -28,6 +28,7 @@ public class WaveDataGenerator : EditorWindow
     {
         string waveFolder = "Assets/Resources/Data/WavesData";
         string creatureFolder = "Assets/Resources/Data/CreaturesData";
+        string equipmentFolder = "Assets/Resources/Data/EquipmentData";
         EnsureDirectory(waveFolder);
 
         var creatureAssets = AssetDatabase.FindAssets("t:GameObject", new[] { creatureFolder });
@@ -40,6 +41,18 @@ public class WaveDataGenerator : EditorWindow
             if (enemy != null && enemy.GetComponent<Creature>() != null)
             {
                 creaturePrefabs[enemy.name] = enemy;
+            }
+        }
+
+        var equipmentAssets = AssetDatabase.FindAssets("t:EquipmentData", new[] { equipmentFolder });
+        Dictionary<string, EquipmentData> equipmentData = new();
+        foreach (var guid in equipmentAssets)
+        {
+            string path = AssetDatabase.GUIDToAssetPath(guid);
+            EquipmentData eq = AssetDatabase.LoadAssetAtPath<EquipmentData>(path);
+            if (eq != null)
+            {
+                equipmentData[eq.equipmentName] = eq;
             }
         }
 
@@ -79,6 +92,24 @@ public class WaveDataGenerator : EditorWindow
             }
 
             so.enemySpawns = spawnConfigs.ToArray();
+
+            var unlocks = new List<EquipmentData>();
+            if (jsonWave.equipmentUnlocks != null)
+            {
+                foreach (string eqName in jsonWave.equipmentUnlocks)
+                {
+                    if (equipmentData.TryGetValue(eqName, out EquipmentData eq))
+                    {
+                        unlocks.Add(eq);
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"[Generator] Equipment not found: {eqName}");
+                    }
+                }
+            }
+            so.equipmentUnlocks = unlocks.ToArray();
+
             so.waveDialogs = new DialogData[0]; // Пустой массив для диалогов (потом)
 
             EditorUtility.SetDirty(so);
@@ -109,6 +140,7 @@ public class JsonWave
     public string waveName;
     public List<JsonWaveEnemy> enemies;
     public int gearsReward;
+    public string[] equipmentUnlocks;
 }
 
 [Serializable]

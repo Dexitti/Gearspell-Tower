@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   equipmentName: "\u041A\u0438\u043D\u0435\u0442\u0438\u0447\u0435\u0441\u043A\u0430\u044F
     \u0431\u0440\u043E\u043D\u044F"
-  isUnlocked: 0
+  isUnlocked: 1
   decorationPrefab: {fileID: 1297927676693700791, guid: 7c1dad5bae518634aafc539712e61996, type: 3}
   projectilesPrefabs:
   - {fileID: 3255858088114773115, guid: 96fb228c153bb224d8af3087c4c91c53, type: 3}

@@ -19,11 +19,12 @@ public class HUDController : MonoBehaviour
     [SerializeField] private Image speedButtonImage;
     [SerializeField] private Sprite[] speedSprite = new Sprite[2];
     [SerializeField] private Button pauseButton;
-    [SerializeField] private Button settingsButton;
 
     [Header("Pause Panel")]
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private Button resumeButton;
+    [SerializeField] private Button settingsButton;
+    [SerializeField] private SettingsManager settingsManager;
     [SerializeField] private Button mainMenuButton;
 
     private bool isSpeedX2 = false;
@@ -48,8 +49,12 @@ public class HUDController : MonoBehaviour
         G.EventManager.OnTowerHealthChanged += UpdateHealthBar;
         G.EventManager.OnWaveStarted += UpdateWaveNumber;
         G.EventManager.OnGearsChanged += UpdateGears;
+        G.EventManager.OnEquipmentUpgraded += OnEquipmentUpgraded;
 
         SetupButtons();
+
+        if (G.GameManager != null)
+            OnGameStateChanged(G.GameManager.CurrentState);  // Для работы UI при отладке
     }
 
     private void Update()
@@ -71,6 +76,7 @@ public class HUDController : MonoBehaviour
         G.EventManager.OnTowerHealthChanged -= UpdateHealthBar;
         G.EventManager.OnWaveStarted -= UpdateWaveNumber;
         G.EventManager.OnGearsChanged -= UpdateGears;
+        G.EventManager.OnEquipmentUpgraded -= OnEquipmentUpgraded;
     }
 
     private void SetupButtons()
@@ -84,11 +90,11 @@ public class HUDController : MonoBehaviour
         if (pauseButton != null)
             pauseButton.onClick.AddListener(TogglePause);
 
-        if (settingsButton != null)
-            settingsButton.onClick.AddListener(OpenSettings);
-
         if (resumeButton != null)
             resumeButton.onClick.AddListener(ResumeGame);
+        
+        if (settingsButton != null)
+            settingsButton.onClick.AddListener(OpenSettings);
 
         if (mainMenuButton != null)
             mainMenuButton.onClick.AddListener(ReturnToMainMenu);
@@ -115,7 +121,7 @@ public class HUDController : MonoBehaviour
         CheckUpgradeAvailability();
     }
 
-    private void OnEquipmentUpgraded(int amount)
+    private void OnEquipmentUpgraded(EquipmentData data, int newLevel)
     {
         CheckUpgradeAvailability();
     }
@@ -149,7 +155,7 @@ public class HUDController : MonoBehaviour
     {
         if (G.GameManager == null) return;
 
-        if (isPaused)
+        if (G.GameManager.CurrentState == GameState.Paused)
             G.GameManager.ResumeGame();
         else
             G.GameManager.PauseGame();
@@ -157,9 +163,7 @@ public class HUDController : MonoBehaviour
 
     private void OpenSettings()
     {
-        // TODO: Открыть панель настроек поверх игры
-        Debug.Log("[HUD] Open Settings");
-        G.GameManager?.PauseGame();
+        settingsManager.Open(pausePanel);
     }
 
     private void OnGameStateChanged(GameState state)

@@ -17,6 +17,9 @@ public class WaveData : ScriptableObject
     [Header("Rewards")]
     public int gearsReward = 0;
 
+    [Header("Unlocks")]
+    public EquipmentData[] equipmentUnlocks;
+
     public int GetTotalEnemyCount() => enemySpawns.Sum(e => e.count);
 }
 

@@ -2,9 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem.XR.Haptics;
 
 public class EquipmentManager : MonoBehaviour
 {
@@ -14,6 +12,7 @@ public class EquipmentManager : MonoBehaviour
     [SerializeField] private int backpackUnlockCost = 100;
 
     [Header("Equipment")]
+    [SerializeField] private EquipmentData[] startUnlockedEquipment;
     [SerializeField] private GameObject[] activeEquipment = new GameObject[3]; // 3 слота
     [SerializeField] private GameObject backpack;
 
@@ -40,13 +39,18 @@ public class EquipmentManager : MonoBehaviour
         unlockedSlots = G.ProgressManager?.GetUnlockedSlots() ?? 1;
         isBackpackUnlocked = G.ProgressManager?.IsBackpackUnlocked() ?? false;
 
-        //StartCoroutine(EquipDefaultAfterInit());
-    }
-
-    private IEnumerator EquipDefaultAfterInit() // Костыль стартовой загрузки снаряжения
-    {
-        yield return new WaitForSeconds(0.1f);
-        EquipToSlot(allEquipmentPrefabs["FireDrillController"], 0);
+        // Загрузка стартового снаряжения
+        startUnlockedEquipment = Resources.LoadAll<EquipmentData>("Data/EquipmentData")
+            .Where(eqData => eqData.name == "WindmillData" || eqData.name == "FireDrillData" || eqData.name == "LightningCogsData").ToArray();
+        if (!G.ProgressManager.HasSession)
+        {
+            foreach (var eq in startUnlockedEquipment)
+            {
+                if (!G.SaveManager.IsEquipmentUnlocked(eq.equipmentName))
+                    G.SaveManager.UnlockEquipment(eq.equipmentName);
+            }
+            EquipStartEquipment();
+        }
     }
 
     private void LoadAllPrefabs()
@@ -59,19 +63,43 @@ public class EquipmentManager : MonoBehaviour
         Debug.Log($"Префабы снаряжения загружены");
     }
 
+    private void EquipStartEquipment()
+    {
+        var allEquipment = Resources.LoadAll<EquipmentData>("Data/EquipmentData");
+        var unlockedEquipment = allEquipment.Where(eq => G.SaveManager.IsEquipmentUnlocked(eq.equipmentName)).ToList();
+
+        if (unlockedEquipment.Count == 0)
+        {
+            Debug.LogWarning("[EquipmentManager] No unlocked equipment to equip!");
+            return;
+        }
+
+        if (!G.ProgressManager.HasSession)
+            EquipToSlot(allEquipmentPrefabs["WindmillController"], 0);
+        else
+        {
+            var randomEq = unlockedEquipment[UnityEngine.Random.Range(0, unlockedEquipment.Count)];
+            string prefabName = randomEq.equipmentName.Replace(" ", "") + "Controller";
+            EquipToSlot(allEquipmentPrefabs[prefabName], 0);
+        }
+    }
+
     public bool EquipToSlot(GameObject newEquipment, int slotIndex)
     {
         if (slotIndex < 0 || slotIndex >= maxSlots || slotIndex >= unlockedSlots)
             return false;
 
-        UnequipSlot(slotIndex);
+        if (activeEquipment[slotIndex] != null || slotControllers[slotIndex] != null)
+            UnequipSlot(slotIndex);
 
         activeEquipment[slotIndex] = newEquipment;
         if (newEquipment != null)
         {
             GameObject controllerObj = Instantiate(newEquipment, transform);
             slotControllers[slotIndex] = controllerObj.GetComponent<EquipmentController>();
-            slotControllers[slotIndex].EquippedSlotIndex = slotIndex;
+            if (slotControllers[slotIndex] != null)
+                slotControllers[slotIndex].EquippedSlotIndex = slotIndex;
+
             Debug.Log($"Снаряжение {newEquipment.name} экипировано в слот {slotIndex}");
         }
 
@@ -100,15 +128,11 @@ public class EquipmentManager : MonoBehaviour
         var eq = slotControllers[slotIndex];
         if (eq != null)
         {
+            Destroy(eq.gameObject);
             eq = null;
-
-            if (slotControllers[slotIndex] != null)
-            {
-                Destroy(slotControllers[slotIndex].gameObject);
-                slotControllers[slotIndex] = null;
-            }
         }
-        Debug.Log($"Снаряжение {slotControllers[slotIndex].name} снято со слота {slotIndex}");  
+        activeEquipment[slotIndex] = null;
+        Debug.Log($"Снаряжение {eq.name} снято со слота {slotIndex}");  
     }
 
     // === Для UpgradeSystem ===
@@ -121,13 +145,13 @@ public class EquipmentManager : MonoBehaviour
         {
             isBackpackUnlocked = true;
             G.ProgressManager?.SetBackpackUnlocked(true);
-            Debug.Log("[EquipmentManager] Backpack unlocked");
+            Debug.Log("[EquipmentManager] Рюкзак разблокирован");
         }
         else if (unlockedSlots < maxSlots)
         {
             unlockedSlots++;
             G.ProgressManager?.SetUnlockedSlots(unlockedSlots);
-            Debug.Log($"[EquipmentManager] Unlocked slot {unlockedSlots}");
+            Debug.Log($"[EquipmentManager] Слот {unlockedSlots} разблокирован");
         }
 
         return true;
@@ -158,8 +182,8 @@ public class EquipmentManager : MonoBehaviour
         var list = new List<EquipmentController>();
         foreach (var contr in slotControllers)
         {
-            if (contr != null) list.Add(contr);
-            return list.ToArray();
+            if (contr != null)
+                list.Add(contr);
         }
         return list.ToArray();
     }

@@ -15,6 +15,13 @@ public class EventManager : MonoBehaviour
     public event Action OnTowerDestroyed;
     public void TriggerTowerDestroyed() => OnTowerDestroyed?.Invoke();
 
+    // === Снаряжение ===
+    public event Action<EquipmentData[]> OnEquipmentUnlocked;
+    public void TriggerEquipmentUnlocked(EquipmentData[] equipment) => OnEquipmentUnlocked?.Invoke(equipment);
+
+    public event Action<EquipmentData, int> OnEquipmentUpgraded;
+    public void TriggerEquipmentUpgraded(EquipmentData data, int newLevel) => OnEquipmentUpgraded?.Invoke(data, newLevel);
+
     // === Волны ===
     public event Action<int> OnWaveStarted;
     public void TriggerWaveStarted(int waveNumber) => OnWaveStarted?.Invoke(waveNumber);
@@ -32,8 +39,4 @@ public class EventManager : MonoBehaviour
     // === Ресурсы ===
     public event Action<int> OnGearsChanged;
     public void TriggerGearsChanged(int newAmount) => OnGearsChanged?.Invoke(newAmount);
-
-    // === Снаряжение ===
-    public event Action<EquipmentData, int> OnEquipmentUpgraded;
-    public void TriggerEquipmentUpgraded(EquipmentData data, int newLevel) => OnEquipmentUpgraded?.Invoke(data, newLevel);
 }

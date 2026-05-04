@@ -10,6 +10,8 @@ public class UILocalizedText : MonoBehaviour
     private void Awake()
     {
         textComponent = GetComponent<TextMeshProUGUI>();
+        if (string.IsNullOrEmpty(localizationKey))
+            localizationKey = gameObject.name;
     }
 
     private void Start()
@@ -37,10 +39,15 @@ public class UILocalizedText : MonoBehaviour
         }
     }
 
-    // Для обновления в редакторе
+#if UNITY_EDITOR
     private void OnValidate()
     {
         if (textComponent == null)
             textComponent = GetComponent<TextMeshProUGUI>();
+
+        // Автоматически подставляем имя объекта
+        if (string.IsNullOrEmpty(localizationKey))
+            localizationKey = gameObject.name;
     }
+#endif
 }

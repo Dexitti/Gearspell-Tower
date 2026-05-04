@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 
 //Singleton
@@ -68,6 +67,22 @@ public class SaveManager : MonoBehaviour
     }
 
     public List<string> GetUnlockedEquipment() => new(data.unlockedEquipment);
+
+    public void ResetGlobalProgress()
+    {
+        var settings = PlayerPrefs.GetString("GameSettings", "");
+
+        ClearSave();
+
+        data = new GlobalSaveData();
+        Save();
+
+        // Восстанавливаем настройки
+        if (!string.IsNullOrEmpty(settings))
+            PlayerPrefs.SetString("GameSettings", settings);
+
+        Debug.Log("[SaveManager] Global progress reset to default");
+    }
 
     // === Настройки игры ===
     //public GameSettings Settings => data.gameSettings;

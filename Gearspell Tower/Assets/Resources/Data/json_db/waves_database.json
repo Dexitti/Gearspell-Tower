@@ -38,7 +38,8 @@
         { "creatureName": "Акробат", "count": 3, "spawnInterval": 0.7 },
         { "creatureName": "Автоматон", "count": 3, "spawnInterval": 1.0 }
       ],
-      "gearsReward": 55
+      "gearsReward": 55,
+      "equipmentUnlocks": ["Cryogenic Stabilizer"]
     },
     {
       "waveName": "Волна 6 - Небесные охотники",
@@ -56,7 +57,8 @@
         { "creatureName": "Пауко-голем", "count": 2, "spawnInterval": 2.0 },
         { "creatureName": "Рунный элементаль", "count": 4, "spawnInterval": 1.2 }
       ],
-      "gearsReward": 80
+      "gearsReward": 80,
+      "equipmentUnlocks": ["Poison Rotors"]
     },
     {
       "waveName": "Волна 8 - Ярость и магия",
@@ -65,7 +67,8 @@
         { "creatureName": "Охотник в мантии", "count": 1, "spawnInterval": 3.0 },
         { "creatureName": "Ассасин", "count": 3, "spawnInterval": 0.8 }
       ],
-      "gearsReward": 95
+      "gearsReward": 95,
+      "equipmentUnlocks": ["Water Hammer"]
     },
     {
       "waveName": "Волна 9 - Ледяной исполин",
@@ -83,7 +86,8 @@
         { "creatureName": "Охотник в мантии", "count": 2, "spawnInterval": 2.5 },
         { "creatureName": "Акробат", "count": 4, "spawnInterval": 0.6 }
       ],
-      "gearsReward": 135
+      "gearsReward": 135,
+      "equipmentUnlocks": ["Kinetic Armor"]
     },
     {
       "waveName": "Волна 11 - Теневой протокол",
@@ -92,7 +96,8 @@
         { "creatureName": "Танк", "count": 1, "spawnInterval": 3.0 },
         { "creatureName": "Спрут-техник", "count": 3, "spawnInterval": 1.5 }
       ],
-      "gearsReward": 160
+      "gearsReward": 160,
+      "equipmentUnlocks": ["Antenna"]
     },
     {
       "waveName": "Волна 12 - Пламя Игниса",

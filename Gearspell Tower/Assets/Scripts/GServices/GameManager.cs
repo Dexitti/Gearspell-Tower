@@ -10,7 +10,6 @@ public enum GameState
     GameOver
 }
 
-
 /// <summary>
 /// Singleton.
 /// ”правл€ет основным игровым циклом
@@ -39,6 +38,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+        G.EventManager?.TriggerGameStateChanged(_currentState); // ƒл€ работы UI при отладке
     }
 
     private void OnDestroy()
@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
         switch (scene.name)
         {
             case "MainMenu":
-                CurrentState = GameState.Playing;
+                CurrentState = GameState.MainMenu;
                 break;
             case "Game":
                 CurrentState = GameState.Playing;

@@ -17,3 +17,4 @@ MonoBehaviour:
   enemySpawns: []
   waveDialogs: []
   gearsReward: 35
+  equipmentUnlocks: []

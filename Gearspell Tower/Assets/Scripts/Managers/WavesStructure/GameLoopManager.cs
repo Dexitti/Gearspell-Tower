@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Linq;
-using UnityEditor.Overlays;
 using UnityEngine;
 
 public class GameLoopManager : MonoBehaviour
@@ -64,9 +63,20 @@ public class GameLoopManager : MonoBehaviour
 
             // Волна завершена
             G.EventManager?.TriggerWaveCompleted(currentWaveIndex + 1);
-
-            // Награда за волну
             G.ResourceManager?.AddGears(wave.gearsReward);
+
+            // Разблокировка снаряжения
+            if (wave.equipmentUnlocks != null && wave.equipmentUnlocks.Length > 0)
+            {
+                foreach (var eq in wave.equipmentUnlocks)
+                {
+                    G.SaveManager?.UnlockEquipment(eq.equipmentName);
+                    Debug.Log($"[GameLoop] Unlocked: {eq.equipmentName}");
+                }
+
+                // Оповещаем UI (можно показать уведомление)
+                G.EventManager?.TriggerEquipmentUnlocked(wave.equipmentUnlocks);
+            }
 
             // Диалог после волны
             var dialogsAfterWave = wave.waveDialogs.Where(d => d.appearance == 1);

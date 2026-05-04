@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GearsDrop : MonoBehaviour
 {
+    [SerializeField] private Sprite[] gearsSprite = new Sprite[3];
     private SpriteRenderer spriteRenderer;
     int gearsNumber = 1;
     float lifetime = 0.5f;
@@ -17,6 +18,10 @@ public class GearsDrop : MonoBehaviour
 
     private void Start()
     {
+        if (gearsNumber < 10) spriteRenderer.sprite = gearsSprite[0];
+        else if (gearsNumber < 25) spriteRenderer.sprite = gearsSprite[1];
+        else spriteRenderer.sprite = gearsSprite[2];
+
         StartCoroutine(LifetimeRoutine());
     }
 

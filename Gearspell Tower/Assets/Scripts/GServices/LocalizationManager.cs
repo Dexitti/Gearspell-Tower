@@ -30,6 +30,11 @@ public class LocalizationManager : MonoBehaviour
         LoadLocalizationFile();
     }
 
+    private void Start()
+    {
+        OnLanguageChanged?.Invoke(_currentLanguage);
+    }
+
     private void LoadLanguage()
     {
         _currentLanguage = (Language)PlayerPrefs.GetInt("Language", 0);

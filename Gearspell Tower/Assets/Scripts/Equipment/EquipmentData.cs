@@ -8,7 +8,7 @@ public class EquipmentData : ScriptableObject
     [Header("Базовая информация")]
     public string equipmentName; // Для карточки UI
     //public ElementType element; // tag для улучшений
-    public bool isUnlocked = true;
+    public bool isUnlocked = true; // Для баланса в editor (для прогресса используется из SaveManager'а)
 
     [Header("Объекты")]
     public GameObject decorationPrefab; // Префаб декорации башни

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class SettingsManager : MonoBehaviour
 {
     [Header("UI Elements")]
+    [SerializeField] private GameObject settingsPanel;
     [SerializeField] private TMP_Dropdown resolutionDropdown;
     [SerializeField] private TMP_Dropdown displayModeDropdown;
     [SerializeField] private Slider volumeSlider;
@@ -24,18 +25,27 @@ public class SettingsManager : MonoBehaviour
     [Header("Audio")]
     [SerializeField] private AudioMixer audioMixer;
 
-    [Header("Menus")]
-    [SerializeField] private GameObject mainMenu;
-    [SerializeField] private GameObject settingsMenu;
-
     [Header("Language Toggles")]
     [SerializeField] private Toggle ruLanguageToggle;
     [SerializeField] private Toggle enLanguageToggle;
 
+    [Header("Reset Progress")]
+    [SerializeField] private Button resetProgressButton;
+    [SerializeField] private GameObject confirmResetPanel;
+
+    private GameObject previousPanel;
+
+    private void Awake()
+    {
+        settingsPanel.SetActive(false);
+    }
+
     private void Start()
     {
         backButton.onClick.AddListener(CloseSettings);
+        resetProgressButton.onClick.AddListener(ShowResetConfirm);
         LoadSettings();
+        SetupLanguageToggles();
 
         if (G.LocalizationManager != null)
         {
@@ -43,7 +53,6 @@ public class SettingsManager : MonoBehaviour
         }
 
         UpdateAllTexts();
-        SetupLanguageToggles();
     }
 
     private void OnDestroy()
@@ -54,24 +63,36 @@ public class SettingsManager : MonoBehaviour
         }
     }
 
+    public void Open(GameObject previousPanel)
+    {
+        this.previousPanel = previousPanel;
+        settingsPanel.SetActive(true);
+    }
+
+    public void CloseSettings()
+    {
+        settingsPanel.SetActive(false);
+        if (previousPanel != null)
+            previousPanel.SetActive(true);
+        else
+            Debug.LogWarning("[SettingsManager] No previous panel to return to");
+
+        SaveSettings();
+    }
+
     private void LoadSettings()
     {
-        //var settings = G.SaveManager?.Settings;
-        //if (settings == null) return;
+        float savedVolume = PlayerPrefs.GetFloat("MasterVolume", 1f);
+        volumeSlider.value = savedVolume;
+        SetVolume(savedVolume);
 
-        //// Разрешение и режим экрана загружаются автоматически при старте Unity
-        //volumeSlider.value = settings.masterVolume;
-
-
-        //volumeSlider.onValueChanged.AddListener(SetVolume);
+        volumeSlider.onValueChanged.AddListener(SetVolume);
     }
 
     public void SaveSettings()
     {
-        //var settings = new GameSettings
-        //{
-        //    masterVolume = volumeSlider.value,
-        //};
+        PlayerPrefs.SetFloat("MasterVolume", volumeSlider.value);
+        PlayerPrefs.Save();
         //G.SaveManager?.SaveSettings(settings);
     }
 
@@ -79,11 +100,11 @@ public class SettingsManager : MonoBehaviour
     {
         switch (resolutionDropdown.value)
         {
-            case 0: Screen.SetResolution(800, 600, Screen.fullScreenMode); break;
-            case 1: Screen.SetResolution(1280, 720, Screen.fullScreenMode); break;
+            case 0: Screen.SetResolution(2560, 1440, Screen.fullScreenMode); break;
+            case 1: Screen.SetResolution(1920, 1080, Screen.fullScreenMode); break;
             case 2: Screen.SetResolution(1440, 900, Screen.fullScreenMode); break;
-            case 3: Screen.SetResolution(1920, 1080, Screen.fullScreenMode); break;
-            case 4: Screen.SetResolution(2560, 1440, Screen.fullScreenMode); break;
+            case 3: Screen.SetResolution(1280, 720, Screen.fullScreenMode); break;
+            case 4: Screen.SetResolution(800, 600, Screen.fullScreenMode); break;
         }
     }
 
@@ -112,6 +133,14 @@ public class SettingsManager : MonoBehaviour
         if (volumeLabel != null) volumeLabel.text = loc.GetText("Volume");
         if (resolutionLabel != null) resolutionLabel.text = loc.GetText("Resolution");
         if (displayModeLabel != null) displayModeLabel.text = loc.GetText("DisplayMode");
+        if (displayModeDropdown != null && displayModeDropdown.options.Count >= 3)
+        {
+            var label = displayModeDropdown.captionText;
+            if (label != null) label.text = loc.GetText("DisplayMode");
+            displayModeDropdown.options[0].text = loc.GetText("Fullscreen");
+            displayModeDropdown.options[1].text = loc.GetText("Borderless");
+            displayModeDropdown.options[2].text = loc.GetText("Windowed");
+        }
         if (backButtonText != null) backButtonText.text = loc.GetText("Back");
         if (russianText != null) russianText.text = loc.GetText("Russian");
         if (englishText != null) englishText.text = loc.GetText("English");
@@ -126,26 +155,51 @@ public class SettingsManager : MonoBehaviour
 
         ruLanguageToggle.onValueChanged.AddListener((value) =>
         {
-            if (value) G.LocalizationManager?.SetLanguage(LocalizationManager.Language.Russian);
+            if (value)
+            {
+                enLanguageToggle.SetIsOnWithoutNotify(false);
+                G.LocalizationManager?.SetLanguage(LocalizationManager.Language.Russian);
+            }
         });
 
         enLanguageToggle.onValueChanged.AddListener((value) =>
         {
-            if (value) G.LocalizationManager?.SetLanguage(LocalizationManager.Language.English);
+            if (value)
+            {
+                ruLanguageToggle.SetIsOnWithoutNotify(false);
+                G.LocalizationManager?.SetLanguage(LocalizationManager.Language.English);
+            }
         });
     }
 
     private void SetVolume(float volume)
     {
-        float volumeDB = Mathf.Log10(Mathf.Max(volume, 0.001f)) * 20;
-        audioMixer?.SetFloat("MasterVolume", volumeDB);
-        PlayerPrefs.SetFloat("MasterVolume", volume);
-        PlayerPrefs.Save();
+        //float volumeDB = Mathf.Log10(Mathf.Max(volume, 0.001f)) * 20;
+        //audioMixer?.SetFloat("MasterVolume", volumeDB);
+        //PlayerPrefs.SetFloat("MasterVolume", volume);
+        //PlayerPrefs.Save();
     }
 
-    public void CloseSettings()
+    private void ShowResetConfirm()
     {
-        settingsMenu.SetActive(false);
-        if (mainMenu != null) mainMenu.SetActive(true);
+        confirmResetPanel.SetActive(true);
+    }
+
+    public void ConfirmResetProgress()
+    {
+        G.SaveManager?.ResetGlobalProgress();
+        G.ProgressManager?.ClearSession();
+
+        confirmResetPanel.SetActive(false);
+
+        // Возвращаем в главное меню
+        G.GameManager?.ReturnToMainMenu();
+
+        Debug.Log("[Settings] Progress reset, returning to main menu");
+    }
+
+    public void CancelResetProgress()
+    {
+        confirmResetPanel.SetActive(false);
     }
 }

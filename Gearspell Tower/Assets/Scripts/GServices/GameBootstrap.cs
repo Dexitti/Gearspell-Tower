@@ -48,6 +48,14 @@ public class GameBootstrap : MonoBehaviour
 
     private void Awake()
     {
+#if UNITY_EDITOR
+        // В редакторе EditorAutoInit уже всё создал, выходим
+        if (_coreInitialized)
+        {
+            CacheSceneReferences();
+            return;
+        }
+#endif
         if (!_coreInitialized)
         {
             InitCoreManagers();
@@ -55,7 +63,6 @@ public class GameBootstrap : MonoBehaviour
         }
 
         CacheSceneReferences();
-
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -118,4 +125,38 @@ public class GameBootstrap : MonoBehaviour
     {
         Invoke(nameof(CacheSceneReferences), 0.01f);
     }
+
+#if UNITY_EDITOR
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void EditorAutoInit()
+    {
+        _coreInitialized = false;
+        // Всегда создаём менеджеры в редакторе при запуске ЛЮБОЙ сцены
+        if (_coreInstance != null)
+        {
+            DestroyImmediate(_coreInstance);
+            _coreInstance = null;
+        }
+
+        _coreInstance = new GameObject("Core (Editor Auto)");
+        _coreInstance.AddComponent<GameManager>();
+        _coreInstance.AddComponent<EventManager>();
+        _coreInstance.AddComponent<ResourceManager>();
+        _coreInstance.AddComponent<SaveManager>();
+        _coreInstance.AddComponent<LocalizationManager>();
+        _coreInstance.AddComponent<ProgressManager>();
+
+        DontDestroyOnLoad(_coreInstance);
+
+        G.EventManager = _coreInstance.GetComponent<EventManager>();
+        G.GameManager = _coreInstance.GetComponent<GameManager>();
+        G.ResourceManager = _coreInstance.GetComponent<ResourceManager>();
+        G.SaveManager = _coreInstance.GetComponent<SaveManager>();
+        G.LocalizationManager = _coreInstance.GetComponent<LocalizationManager>();
+        G.ProgressManager = _coreInstance.GetComponent<ProgressManager>();
+
+        _coreInitialized = true;
+        Debug.Log("[GameBootstrap] Editor auto-init: All Core managers created for testing");
+    }
+#endif
 }

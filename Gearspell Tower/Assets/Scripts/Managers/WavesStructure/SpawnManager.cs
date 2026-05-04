@@ -90,10 +90,12 @@ public class SpawnManager : MonoBehaviour
         enemy.transform.position = position;
         enemy.SetActive(true);
         
-        var creature = enemy.GetComponent<Creature>();
         var health = enemy.GetComponent<HealthComponent>();
         if (health != null)
+        {
+            health.OnDeath -= () => OnEnemyDeath(enemy);
             health.OnDeath += () => OnEnemyDeath(enemy);
+        }
 
         OnEnemySpawned?.Invoke(enemy);
         return enemy;
