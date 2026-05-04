@@ -27,7 +27,7 @@ public class WaveDataGenerator : EditorWindow
     private static void GenerateWaves(JsonWaveDatabase db)
     {
         string waveFolder = "Assets/Resources/Data/WavesData";
-        string creatureFolder = "Assets/Resources/Data/CreaturesData";
+        string creatureFolder = "Assets/Resources/Prefabs/Creatures";
         string equipmentFolder = "Assets/Resources/Data/EquipmentData";
         EnsureDirectory(waveFolder);
 

@@ -1,128 +1,128 @@
 {
   "waves": [
     {
-      "waveName": "Волна 1 - Искры",
+      "waveName": "Wave 1 - Sparks",
       "enemies": [
-        { "creatureName": "Элементаль огня", "count": 4, "spawnInterval": 1.0 }
+        { "creatureName": "Fire_Elemental", "count": 4, "spawnInterval": 1.0 }
       ],
       "gearsReward": 0
     },
     {
-      "waveName": "Волна 2 - Каменная стена",
+      "waveName": "Wave 2 - Stone Wall",
       "enemies": [
-        { "creatureName": "Элементаль огня", "count": 10, "spawnInterval": 0.8 },
-        { "creatureName": "Рунный элементаль", "count": 4, "spawnInterval": 1.5 }
+        { "creatureName": "Fire_Elemental", "count": 10, "spawnInterval": 0.8 },
+        { "creatureName": "Runic_Elemental", "count": 4, "spawnInterval": 1.5 }
       ],
       "gearsReward": 25
     },
     {
-      "waveName": "Волна 3 - Конвейер врагов",
+      "waveName": "Wave 3 - Enemy Conveyor",
       "enemies": [
-        { "creatureName": "Автоматон", "count": 20, "spawnInterval": 1.0 },
-        { "creatureName": "Дрон", "count": 5, "spawnInterval": 0.6 }
+        { "creatureName": "Automaton", "count": 20, "spawnInterval": 1.0 },
+        { "creatureName": "Drone", "count": 5, "spawnInterval": 0.6 }
       ],
       "gearsReward": 35
     },
     {
-      "waveName": "Волна 4 - Засада",
+      "waveName": "Wave 4 - Ambush",
       "enemies": [
-        { "creatureName": "Ассасин", "count": 3, "spawnInterval": 0.8 },
-        { "creatureName": "Дрон", "count": 4, "spawnInterval": 0.5 }
+        { "creatureName": "Assassin", "count": 3, "spawnInterval": 0.8 },
+        { "creatureName": "Drone", "count": 4, "spawnInterval": 0.5 }
       ],
       "gearsReward": 45
     },
     {
-      "waveName": "Волна 5 - Механический страж",
+      "waveName": "Wave 5 - Mechanical Guardian",
       "enemies": [
-        { "creatureName": "Пауко-голем", "count": 1, "spawnInterval": 3.0 },
-        { "creatureName": "Акробат", "count": 3, "spawnInterval": 0.7 },
-        { "creatureName": "Автоматон", "count": 3, "spawnInterval": 1.0 }
+        { "creatureName": "Spider_Golem", "count": 1, "spawnInterval": 3.0 },
+        { "creatureName": "Acrobat", "count": 3, "spawnInterval": 0.7 },
+        { "creatureName": "Automaton", "count": 3, "spawnInterval": 1.0 }
       ],
       "gearsReward": 55,
       "equipmentUnlocks": ["Cryogenic Stabilizer"]
     },
     {
-      "waveName": "Волна 6 - Небесные охотники",
+      "waveName": "Wave 6 - Sky Hunters",
       "enemies": [
-        { "creatureName": "Драконоид", "count": 2, "spawnInterval": 2.0 },
-        { "creatureName": "Спрут-техник", "count": 1, "spawnInterval": 2.5 },
-        { "creatureName": "Дрон", "count": 5, "spawnInterval": 0.4 }
+        { "creatureName": "Dragonoid", "count": 2, "spawnInterval": 2.0 },
+        { "creatureName": "Squid_Technic", "count": 1, "spawnInterval": 2.5 },
+        { "creatureName": "Drone", "count": 5, "spawnInterval": 0.4 }
       ],
       "gearsReward": 65
     },
     {
-      "waveName": "Волна 7 - Бронированный кулак",
+      "waveName": "Wave 7 - Armored Fist",
       "enemies": [
-        { "creatureName": "Танк", "count": 1, "spawnInterval": 3.5 },
-        { "creatureName": "Пауко-голем", "count": 2, "spawnInterval": 2.0 },
-        { "creatureName": "Рунный элементаль", "count": 4, "spawnInterval": 1.2 }
+        { "creatureName": "Tank", "count": 1, "spawnInterval": 3.5 },
+        { "creatureName": "Spider_Golem", "count": 2, "spawnInterval": 2.0 },
+        { "creatureName": "Runic_Elemental", "count": 4, "spawnInterval": 1.2 }
       ],
       "gearsReward": 80,
       "equipmentUnlocks": ["Poison Rotors"]
     },
     {
-      "waveName": "Волна 8 - Ярость и магия",
+      "waveName": "Wave 8 - Fury and Magic",
       "enemies": [
-        { "creatureName": "Робот-берсерк", "count": 2, "spawnInterval": 2.5 },
-        { "creatureName": "Охотник в мантии", "count": 1, "spawnInterval": 3.0 },
-        { "creatureName": "Ассасин", "count": 3, "spawnInterval": 0.8 }
+        { "creatureName": "Berserk_Robot", "count": 2, "spawnInterval": 2.5 },
+        { "creatureName": "Hunter_In_Robe", "count": 1, "spawnInterval": 3.0 },
+        { "creatureName": "Assassin", "count": 3, "spawnInterval": 0.8 }
       ],
       "gearsReward": 95,
       "equipmentUnlocks": ["Water Hammer"]
     },
     {
-      "waveName": "Волна 9 - Ледяной исполин",
+      "waveName": "Wave 9 - Ice Colossus",
       "enemies": [
-        { "creatureName": "Ледяной голем", "count": 1, "spawnInterval": 5.0 },
-        { "creatureName": "Рунный элементаль", "count": 4, "spawnInterval": 1.0 },
-        { "creatureName": "Драконоид", "count": 2, "spawnInterval": 2.0 }
+        { "creatureName": "Ice_Golem", "count": 1, "spawnInterval": 5.0 },
+        { "creatureName": "Runic_Elemental", "count": 4, "spawnInterval": 1.0 },
+        { "creatureName": "Dragonoid", "count": 2, "spawnInterval": 2.0 }
       ],
       "gearsReward": 115
     },
     {
-      "waveName": "Волна 10 - Тёмные силы",
+      "waveName": "Wave 10 - Dark Forces",
       "enemies": [
-        { "creatureName": "Бехолдер", "count": 1, "spawnInterval": 3.0 },
-        { "creatureName": "Охотник в мантии", "count": 2, "spawnInterval": 2.5 },
-        { "creatureName": "Акробат", "count": 4, "spawnInterval": 0.6 }
+        { "creatureName": "Beholder", "count": 1, "spawnInterval": 3.0 },
+        { "creatureName": "Hunter_In_Robe", "count": 2, "spawnInterval": 2.5 },
+        { "creatureName": "Acrobat", "count": 4, "spawnInterval": 0.6 }
       ],
       "gearsReward": 135,
       "equipmentUnlocks": ["Kinetic Armor"]
     },
     {
-      "waveName": "Волна 11 - Теневой протокол",
+      "waveName": "Wave 11 - Shadow Protocol",
       "enemies": [
-        { "creatureName": "Протокол", "count": 1, "spawnInterval": 5.0 },
-        { "creatureName": "Танк", "count": 1, "spawnInterval": 3.0 },
-        { "creatureName": "Спрут-техник", "count": 3, "spawnInterval": 1.5 }
+        { "creatureName": "Protocol", "count": 1, "spawnInterval": 5.0 },
+        { "creatureName": "Tank", "count": 1, "spawnInterval": 3.0 },
+        { "creatureName": "Squid_Technic", "count": 3, "spawnInterval": 1.5 }
       ],
       "gearsReward": 160,
       "equipmentUnlocks": ["Antenna"]
     },
     {
-      "waveName": "Волна 12 - Пламя Игниса",
+      "waveName": "Wave 12 - Ignis Flame",
       "enemies": [
-        { "creatureName": "Игнис", "count": 1, "spawnInterval": 5.0 },
-        { "creatureName": "Элементаль огня", "count": 6, "spawnInterval": 0.5 },
-        { "creatureName": "Робот-берсерк", "count": 2, "spawnInterval": 2.0 }
+        { "creatureName": "Ignis", "count": 1, "spawnInterval": 5.0 },
+        { "creatureName": "Fire_Elemental", "count": 6, "spawnInterval": 0.5 },
+        { "creatureName": "Berserk_Robot", "count": 2, "spawnInterval": 2.0 }
       ],
       "gearsReward": 190
     },
     {
-      "waveName": "Волна 13 - Армия Примы",
+      "waveName": "Wave 13 - Prima's Army",
       "enemies": [
-        { "creatureName": "Гир-Прима", "count": 1, "spawnInterval": 5.0 },
-        { "creatureName": "Автоматон", "count": 6, "spawnInterval": 0.7 },
-        { "creatureName": "Пауко-голем", "count": 2, "spawnInterval": 2.0 }
+        { "creatureName": "Gear_Prima", "count": 1, "spawnInterval": 5.0 },
+        { "creatureName": "Automaton", "count": 6, "spawnInterval": 0.7 },
+        { "creatureName": "Spider_Golem", "count": 2, "spawnInterval": 2.0 }
       ],
       "gearsReward": 220
     },
     {
-      "waveName": "Волна 14 - Астральный финал",
+      "waveName": "Wave 14 - Astral Finale",
       "enemies": [
-        { "creatureName": "Астра", "count": 1, "spawnInterval": 5.0 },
-        { "creatureName": "Бехолдер", "count": 2, "spawnInterval": 2.5 },
-        { "creatureName": "Драконоид", "count": 3, "spawnInterval": 1.5 }
+        { "creatureName": "Astra", "count": 1, "spawnInterval": 5.0 },
+        { "creatureName": "Beholder", "count": 2, "spawnInterval": 2.5 },
+        { "creatureName": "Dragonoid", "count": 3, "spawnInterval": 1.5 }
       ],
       "gearsReward": 260
     }

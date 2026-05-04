@@ -12,9 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb16b8a316b66784fb826de89b0a4882, type: 3}
   m_Name: Wave_14
   m_EditorClassIdentifier: 
-  waveName: "\u0412\u043E\u043B\u043D\u0430 14 - \u0410\u0441\u0442\u0440\u0430\u043B\u044C\u043D\u044B\u0439
-    \u0444\u0438\u043D\u0430\u043B"
-  enemySpawns: []
+  waveName: Wave 14 - Astral Finale
+  enemySpawns:
+  - enemyPrefab: {fileID: 8516407375225930908, guid: cb6183a57e40e2c4cb9d46294a4d57c2, type: 3}
+    count: 1
+    spawnInterval: 5
+  - enemyPrefab: {fileID: 8516407375225930908, guid: a1e3131ccbecaf04080a6d16fb42298b, type: 3}
+    count: 2
+    spawnInterval: 2.5
+  - enemyPrefab: {fileID: 8516407375225930908, guid: b9f252a3c6d80b54db31a1403d96dc91, type: 3}
+    count: 3
+    spawnInterval: 1.5
   waveDialogs: []
   gearsReward: 260
   equipmentUnlocks: []

@@ -12,9 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb16b8a316b66784fb826de89b0a4882, type: 3}
   m_Name: Wave_10
   m_EditorClassIdentifier: 
-  waveName: "\u0412\u043E\u043B\u043D\u0430 10 - \u0422\u0451\u043C\u043D\u044B\u0435
-    \u0441\u0438\u043B\u044B"
-  enemySpawns: []
+  waveName: Wave 10 - Dark Forces
+  enemySpawns:
+  - enemyPrefab: {fileID: 8516407375225930908, guid: a1e3131ccbecaf04080a6d16fb42298b, type: 3}
+    count: 1
+    spawnInterval: 3
+  - enemyPrefab: {fileID: 8516407375225930908, guid: dfbb4bd654f1c72418597c02b8447fed, type: 3}
+    count: 2
+    spawnInterval: 2.5
+  - enemyPrefab: {fileID: 8516407375225930908, guid: 46b5a6de416366344928da5ff752fa08, type: 3}
+    count: 4
+    spawnInterval: 0.6
   waveDialogs: []
   gearsReward: 135
   equipmentUnlocks: []

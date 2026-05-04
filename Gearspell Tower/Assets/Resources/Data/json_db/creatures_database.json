@@ -1,7 +1,7 @@
 {
   "creatures": [
     {
-      "name": "Элементаль огня",
+      "name": "Fire_Elemental",
       "type": "Easy",
       "description": "Эфемерное создание из пламени",
       "health": 6,
@@ -10,7 +10,7 @@
       "wave": 1
     },
     {
-      "name": "Рунный элементаль",
+      "name": "Runic_Elemental",
       "type": "Regular",
       "description": "Прочный магический конструкт",
       "health": 10,
@@ -19,7 +19,7 @@
       "wave": 2
     },
     {
-      "name": "Автоматон",
+      "name": "Automaton",
       "type": "Regular",
       "description": "Обычный рабочий. Невосприимчив к звуковым атакам",
       "health": 12,
@@ -28,7 +28,7 @@
       "wave": 3
     },
     {
-      "name": "Дрон",
+      "name": "Drone",
       "type": "Easy",
       "description": "Легкий летающий бот",
       "health": 8,
@@ -37,7 +37,7 @@
       "wave": 3
     },
     {
-      "name": "Пауко-голем",
+      "name": "Spider_Golem",
       "type": "Medium",
       "description": "Периодически становится невосприимчивым",
       "health": 40,
@@ -46,7 +46,7 @@
       "wave": 5
     },
     {
-      "name": "Ассасин",
+      "name": "Assassin",
       "type": "Medium",
       "description": "Стремительный убийца ближнего боя",
       "health": 20,
@@ -55,7 +55,7 @@
       "wave": 4
     },
     {
-      "name": "Спрут-техник",
+      "name": "Squid_Technic",
       "type": "Medium",
       "description": "Заводской страж. Летает и чинит машины",
       "health": 32,
@@ -64,16 +64,16 @@
       "wave": 6
     },
     {
-      "name": "Драконоид",
+      "name": "Dragonoid",
       "type": "Medium",
-      "description": "Летающее существо, извергабщее энергтические сгустки",
+      "description": "Летающее существо, извергающее энергетические сгустки",
       "health": 60,
       "damage": 12,
       "speed": 1.9,
       "wave": 6
     },
     {
-      "name": "Акробат",
+      "name": "Acrobat",
       "type": "Medium",
       "description": "Дрон-разведчик, перемещающийся рывками",
       "health": 22,
@@ -82,7 +82,7 @@
       "wave": 5
     },
     {
-      "name": "Охотник в мантии",
+      "name": "Hunter_In_Robe",
       "type": "Medium",
       "description": "Маг чистой природы. Призывает элементалей и бафает союзников вокруг",
       "health": 68,
@@ -91,7 +91,7 @@
       "wave": 8
     },
     {
-      "name": "Робот-берсерк",
+      "name": "Berserk_Robot",
       "type": "Medium",
       "description": "Инженерный мастер. Получая урон, впадает в ярость. А если дойдет, атаками чинит себя",
       "health": 60,
@@ -100,7 +100,7 @@
       "wave": 8
     },
     {
-      "name": "Танк",
+      "name": "Tank",
       "type": "Heavy",
       "description": "Промышленный транспортер. Имеет пушку и может вызывать подкрепление",
       "health": 75,
@@ -109,7 +109,7 @@
       "wave": 7
     },
     {
-      "name": "Бехолдер",
+      "name": "Beholder",
       "type": "Heavy",
       "description": "Древнее магическое существо. Ломает снаряды и генерирует из них энергетические лучи",
       "health": 50,
@@ -118,7 +118,7 @@
       "wave": 10
     },
     {
-      "name": "Ледяной голем",
+      "name": "Ice_Golem",
       "type": "Boss",
       "description": "Очень толстый, медленный, невосприимчив к замедлению",
       "health": 150,
@@ -127,7 +127,7 @@
       "wave": 10
     },
     {
-      "name": "Протокол",
+      "name": "Protocol",
       "type": "Boss",
       "description": "Умный и проворный механизм - технократ данных. Периодически уходит в тень",
       "health": 120,
@@ -136,7 +136,7 @@
       "wave": 12
     },
     {
-      "name": "Гир-Прима",
+      "name": "Gear_Prima",
       "type": "Boss",
       "description": "Призывает союзников и бафает их",
       "health": 135,
@@ -145,7 +145,7 @@
       "wave": 13
     },
     {
-      "name": "Игнис",
+      "name": "Ignis",
       "type": "Boss",
       "description": "Коварный архимаг. Телепортируется и атакует башню",
       "health": 130,
@@ -154,7 +154,7 @@
       "wave": 12
     },
     {
-      "name": "Астра",
+      "name": "Astra",
       "type": "Boss",
       "description": "Архимаг-ученый. Предпочитает держаться и атаковать издалека. Неведомым образом блокирует снаряжение",
       "health": 100,

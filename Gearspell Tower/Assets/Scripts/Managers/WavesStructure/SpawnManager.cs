@@ -13,7 +13,8 @@ public class SpawnManager : MonoBehaviour
     public Action<GameObject> OnEnemyDespawned;
     public Action OnAllEnemiesDefeated;
 
-    [SerializeField] private float spawnDistance = 5.5f;
+    [SerializeField] private float spawnDistance = 10.3f;
+    [SerializeField] private float isoRatio = 0.5f;
     [SerializeField] private Transform poolContainer;
 
     private Dictionary<GameObject, Queue<GameObject>> enemyPools = new();
@@ -30,8 +31,7 @@ public class SpawnManager : MonoBehaviour
         G.SpawnManager = this;
         if (poolContainer == null)
         {
-            poolContainer = new GameObject("EnemyPool").transform;
-            poolContainer.SetParent(transform);
+            poolContainer = gameObject.transform;
         }
     }
 
@@ -76,12 +76,11 @@ public class SpawnManager : MonoBehaviour
         if (G.Tower == null) return Vector3.zero;
         // tower angle*distance
         float angle = UnityEngine.Random.Range(0f, 360f) * Mathf.Deg2Rad;
-        float distance = spawnDistance;
 
-        float x = Mathf.Cos(angle) * distance;
-        float y = Mathf.Sin(angle) * distance * 0.75f;
+        float x = Mathf.Cos(angle) * spawnDistance;
+        float y = Mathf.Sin(angle) * spawnDistance * isoRatio;
 
-        return G.Tower.Position + new Vector3(x, y);
+        return transform.position + new Vector3(x, y);
     }
 
     private GameObject SpawnEnemy(EnemySpawnConfig config, Vector3 position)
@@ -167,7 +166,19 @@ public class SpawnManager : MonoBehaviour
         {
             // Рисуем кольцо спавна
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(G.Tower.Position, spawnDistance);
+            Vector3 center = transform.position;
+            int segments = 32;
+            Vector3 prevPoint = center + new Vector3(spawnDistance, 0, 0);
+
+            for (int i = 1; i <= segments; i++)
+            {
+                float angle = i * Mathf.PI * 2 / segments;
+                float x = Mathf.Cos(angle) * spawnDistance;
+                float y = Mathf.Sin(angle) * spawnDistance * isoRatio;
+                Vector3 point = center + new Vector3(x, y, 0);
+                Gizmos.DrawLine(prevPoint, point);
+                prevPoint = point;
+            }
         }
     }
 }

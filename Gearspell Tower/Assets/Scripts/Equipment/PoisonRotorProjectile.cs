@@ -69,7 +69,7 @@ namespace Assets.Scripts.Equipment
             float journeyLength = Vector3.Distance(startPos, targetPosition);
             float startTime = Time.time;
 
-            while (isMoving && Vector3.Distance(transform.position, targetPosition) > 0.2f)
+            while (isMoving && IsometricExtension.IsoDistance(transform.position, targetPosition) > 0.2f)
             {
                 float fraction = (Time.time - startTime) * rotorSpeed / journeyLength;
                 Vector3 basePos = Vector3.Lerp(startPos, targetPosition, fraction);
@@ -159,7 +159,7 @@ namespace Assets.Scripts.Equipment
 
                     foreach (var enemy in enemies)
                     {
-                        if (enemy.CompareTag("Enemy"))
+                        if (enemy.CompareTag("Enemy") && IsometricExtension.IsoDistance(transform.position, enemy.transform.position) <= cloudRadius)
                         {
                             var health = enemy.GetComponent<HealthComponent>();
                             health.TakeDamage(damage);

@@ -17,7 +17,7 @@ public class WindProjectile : MonoBehaviour
 
     void Update()
     {
-        transform.position += direction * speed * Time.deltaTime;
+        transform.position += IsometricExtension.IsoMovement(direction, speed);
     }
 
     void OnTriggerEnter2D(Collider2D other)

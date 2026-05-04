@@ -72,6 +72,6 @@ public abstract class Creature : MonoBehaviour
         //AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         yield return new WaitForSeconds(0.1f);
         G.EventManager?.TriggerEnemyKilled(this);
-        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 }

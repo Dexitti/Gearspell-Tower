@@ -12,8 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb16b8a316b66784fb826de89b0a4882, type: 3}
   m_Name: Wave_12
   m_EditorClassIdentifier: 
-  waveName: "\u0412\u043E\u043B\u043D\u0430 12 - \u041F\u043B\u0430\u043C\u044F \u0418\u0433\u043D\u0438\u0441\u0430"
-  enemySpawns: []
+  waveName: Wave 12 - Ignis Flame
+  enemySpawns:
+  - enemyPrefab: {fileID: 8516407375225930908, guid: 5b6429fcae59dd946be5cb4fe61a89c2, type: 3}
+    count: 1
+    spawnInterval: 5
+  - enemyPrefab: {fileID: 8516407375225930908, guid: 22fbfc05653798f498fa3161ac6958d3, type: 3}
+    count: 6
+    spawnInterval: 0.5
+  - enemyPrefab: {fileID: 8516407375225930908, guid: 7110f013d1c14ba45813526181bda1c1, type: 3}
+    count: 2
+    spawnInterval: 2
   waveDialogs: []
   gearsReward: 190
   equipmentUnlocks: []

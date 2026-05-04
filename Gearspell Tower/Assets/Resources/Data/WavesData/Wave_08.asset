@@ -12,9 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb16b8a316b66784fb826de89b0a4882, type: 3}
   m_Name: Wave_08
   m_EditorClassIdentifier: 
-  waveName: "\u0412\u043E\u043B\u043D\u0430 8 - \u042F\u0440\u043E\u0441\u0442\u044C
-    \u0438 \u043C\u0430\u0433\u0438\u044F"
-  enemySpawns: []
+  waveName: Wave 8 - Fury and Magic
+  enemySpawns:
+  - enemyPrefab: {fileID: 8516407375225930908, guid: 7110f013d1c14ba45813526181bda1c1, type: 3}
+    count: 2
+    spawnInterval: 2.5
+  - enemyPrefab: {fileID: 8516407375225930908, guid: dfbb4bd654f1c72418597c02b8447fed, type: 3}
+    count: 1
+    spawnInterval: 3
+  - enemyPrefab: {fileID: 8516407375225930908, guid: 0c861b5478d8dcc46942ec5b8af0a3bd, type: 3}
+    count: 3
+    spawnInterval: 0.8
   waveDialogs: []
   gearsReward: 95
   equipmentUnlocks: []

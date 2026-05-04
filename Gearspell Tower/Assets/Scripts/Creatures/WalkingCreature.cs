@@ -10,7 +10,10 @@ public class WalkingCreature : Creature
 {
     protected override void Move()
     {
-        transform.position = Vector3.MoveTowards(transform.position, towerPosition, baseSpeed * Time.deltaTime);
+        // Прямо к башне
+        Vector3 isoDirection = IsometricExtension.IsoDirection(transform.position, towerPosition);
+        Vector3 movement = IsometricExtension.IsoMovement(isoDirection, baseSpeed);
+        transform.position += movement;
     }
 
     private void OnTriggerEnter2D(Collider2D other)

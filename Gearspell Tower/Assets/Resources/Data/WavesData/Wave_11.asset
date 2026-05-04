@@ -12,9 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb16b8a316b66784fb826de89b0a4882, type: 3}
   m_Name: Wave_11
   m_EditorClassIdentifier: 
-  waveName: "\u0412\u043E\u043B\u043D\u0430 11 - \u0422\u0435\u043D\u0435\u0432\u043E\u0439
-    \u043F\u0440\u043E\u0442\u043E\u043A\u043E\u043B"
-  enemySpawns: []
+  waveName: Wave 11 - Shadow Protocol
+  enemySpawns:
+  - enemyPrefab: {fileID: 8516407375225930908, guid: 48fba25d2177f6940bc0d8679a8de91c, type: 3}
+    count: 1
+    spawnInterval: 5
+  - enemyPrefab: {fileID: 8516407375225930908, guid: d9b8449a79723a94f9fb29c0cc6ffa44, type: 3}
+    count: 1
+    spawnInterval: 3
+  - enemyPrefab: {fileID: 8516407375225930908, guid: 6885c6682914d9243984bfaa8ceb8b07, type: 3}
+    count: 3
+    spawnInterval: 1.5
   waveDialogs: []
   gearsReward: 160
   equipmentUnlocks: []

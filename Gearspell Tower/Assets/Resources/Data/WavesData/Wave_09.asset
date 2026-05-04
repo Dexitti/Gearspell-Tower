@@ -12,9 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb16b8a316b66784fb826de89b0a4882, type: 3}
   m_Name: Wave_09
   m_EditorClassIdentifier: 
-  waveName: "\u0412\u043E\u043B\u043D\u0430 9 - \u041B\u0435\u0434\u044F\u043D\u043E\u0439
-    \u0438\u0441\u043F\u043E\u043B\u0438\u043D"
-  enemySpawns: []
+  waveName: Wave 9 - Ice Colossus
+  enemySpawns:
+  - enemyPrefab: {fileID: 8516407375225930908, guid: bc187c6b327f0dd4baa0705a021cb554, type: 3}
+    count: 1
+    spawnInterval: 5
+  - enemyPrefab: {fileID: 8516407375225930908, guid: 6c204ad43a41e1f4b8fde9093435a656, type: 3}
+    count: 4
+    spawnInterval: 1
+  - enemyPrefab: {fileID: 8516407375225930908, guid: b9f252a3c6d80b54db31a1403d96dc91, type: 3}
+    count: 2
+    spawnInterval: 2
   waveDialogs: []
   gearsReward: 115
   equipmentUnlocks: []
