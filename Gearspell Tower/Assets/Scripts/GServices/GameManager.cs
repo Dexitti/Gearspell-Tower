@@ -35,6 +35,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        G.GameManager = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
     private void Start()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;

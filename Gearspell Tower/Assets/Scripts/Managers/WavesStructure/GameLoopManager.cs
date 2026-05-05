@@ -55,6 +55,7 @@ public class GameLoopManager : MonoBehaviour
             G.EventManager?.TriggerWaveStarted(currentWaveIndex + 1);
 
             G.SpawnManager?.StartWave(wave);
+            Debug.Log($"{wave.waveName} началась");
 
             // Ждём пока все враги будут побеждены
             yield return new WaitWhile(() => G.SpawnManager != null && G.SpawnManager.HasActiveEnemies);

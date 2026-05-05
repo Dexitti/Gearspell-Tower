@@ -30,12 +30,7 @@ public static class G
 
     // Scene Objects
     public static Tower Tower;
-    public static Camera MainCamera;
-
-    // UI
-    public static MainMenuManager MainMenu;
-    public static HUDController HUD;
-    public static SettingsManager Settings;
+    //public static Camera MainCamera;
 }
 
 [DefaultExecutionOrder(-9999)]
@@ -91,8 +86,8 @@ public class GameBootstrap : MonoBehaviour
 
         DontDestroyOnLoad(_coreInstance);
 
-        G.EventManager = _coreInstance.GetComponent<EventManager>();
         G.GameManager = _coreInstance.GetComponent<GameManager>();
+        G.EventManager = _coreInstance.GetComponent<EventManager>();
         G.ResourceManager = _coreInstance.GetComponent<ResourceManager>();
         G.ProgressManager = _coreInstance.GetComponent<ProgressManager>();
         G.SaveManager = _coreInstance.GetComponent<SaveManager>();
@@ -111,12 +106,7 @@ public class GameBootstrap : MonoBehaviour
 
         // Scene Objects
         G.Tower = FindFirstObjectByType<Tower>();
-        G.MainCamera = Camera.main;
-
-        // UI
-        G.MainMenu = FindFirstObjectByType<MainMenuManager>();
-        G.HUD = FindFirstObjectByType<HUDController>();
-        G.Settings = FindFirstObjectByType<SettingsManager>();
+        //G.MainCamera = Camera.main;
 
         Debug.Log($"[GameBootstrap] Scene '{SceneManager.GetActiveScene().name}' references cached");
     }

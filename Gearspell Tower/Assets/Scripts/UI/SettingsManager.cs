@@ -35,6 +35,8 @@ public class SettingsManager : MonoBehaviour
 
     private GameObject previousPanel;
 
+    public bool IsOpen => settingsPanel != null && settingsPanel.activeSelf;
+
     private void Awake()
     {
         settingsPanel.SetActive(false);
@@ -74,8 +76,6 @@ public class SettingsManager : MonoBehaviour
         settingsPanel.SetActive(false);
         if (previousPanel != null)
             previousPanel.SetActive(true);
-        else
-            Debug.LogWarning("[SettingsManager] No previous panel to return to");
 
         SaveSettings();
     }

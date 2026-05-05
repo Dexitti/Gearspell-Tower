@@ -31,6 +31,16 @@ public static class IsometricExtension
         dir.y /= ratio;
         return dir.normalized;
     }
+    /// <summary>
+    /// Возвращает изометрический вектор перемещения по углу (в градусах) и расстоянию.
+    /// </summary>
+    public static Vector3 IsoVector(float angleDeg, float distance, float ratio = isoRatio)
+    {
+        float angleRad = angleDeg * Mathf.Deg2Rad;
+        float x = Mathf.Cos(angleRad) * distance;
+        float y = Mathf.Sin(angleRad) * distance * ratio;
+        return new Vector3(x, y, 0);
+    }
 
     /// <summary>
     /// Изометрический Movement (уже с учётом сжатия Y)

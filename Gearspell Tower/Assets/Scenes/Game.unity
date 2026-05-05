@@ -1501,6 +1501,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2252419379238344516, guid: 2f75a134428a01f478bc731f7db30d84, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2802431342308863934, guid: 2f75a134428a01f478bc731f7db30d84, type: 3}
       propertyPath: m_Name
       value: UpgradeScreen
@@ -1713,6 +1717,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6593463235946227039, guid: 2f75a134428a01f478bc731f7db30d84, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6904569538672620389, guid: 2f75a134428a01f478bc731f7db30d84, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1758,6 +1766,10 @@ PrefabInstance:
       value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 8096819237652754760, guid: 2f75a134428a01f478bc731f7db30d84, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8583691173809971268, guid: 2f75a134428a01f478bc731f7db30d84, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}

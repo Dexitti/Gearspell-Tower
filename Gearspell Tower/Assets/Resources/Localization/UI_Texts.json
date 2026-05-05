@@ -31,7 +31,7 @@
     { "key": "UnlockSlot", "ru": "Открыть слот", "en": "Unlock slot" },
     { "key": "Heal", "ru": "Восстановить", "en": "Heal" },
     { "key": "Regen", "ru": "Усилить регенерацию", "en": "Boost regen" },
-    { "key": "Mines", "ru": "Мины", "en": "Mines" },
+    { "key": "PlaceMines", "ru": "Разместить мины", "en": "Place mines" },
 
     { "key": "Creature_Fire_Elemental", "ru": "Элементаль огня", "en": "Fire Elemental" },
     { "key": "Creature_Runic_Elemental", "ru": "Рунный элементаль", "en": "Runic Elemental" },

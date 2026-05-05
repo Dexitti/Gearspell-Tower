@@ -45,8 +45,6 @@ public class UpgradeSystem : MonoBehaviour
 
     public void OpenUpgradeMenu()
     {
-        if (G.GameManager.CurrentState != GameState.Playing) return;
-
         List<UpgradeData> availableUpgrades = GetAvailableUpgrades();
         upgradeScreen.Open(availableUpgrades, OnUpgradeSelected);
     }

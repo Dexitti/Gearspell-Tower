@@ -13,6 +13,7 @@ public class HUDController : MonoBehaviour
     [Header("Upgrade Available Indicator")]
     [SerializeField] private GameObject upgradeIndicator;
     [SerializeField] private Button upgradeButton;
+    [SerializeField] private UpgradeScreen upgradeScreen;
 
     [Header("Control Buttons")]
     [SerializeField] private Button speedToggleButton;
@@ -20,7 +21,7 @@ public class HUDController : MonoBehaviour
     [SerializeField] private Sprite[] speedSprite = new Sprite[2];
     [SerializeField] private Button pauseButton;
 
-    [Header("Pause Panel")]
+    [Header("Pause Screen")]
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private Button resumeButton;
     [SerializeField] private Button settingsButton;
@@ -28,7 +29,6 @@ public class HUDController : MonoBehaviour
     [SerializeField] private Button mainMenuButton;
 
     private bool isSpeedX2 = false;
-    private bool isPaused = false;
 
     private void Awake()
     {
@@ -43,6 +43,7 @@ public class HUDController : MonoBehaviour
         gearsText.text = "0";
         speedButtonImage.sprite = speedSprite[0];
         upgradeIndicator.SetActive(false);
+        pausePanel.SetActive(false);
 
         if (G.EventManager == null) return;
         G.EventManager.OnGameStateChanged += OnGameStateChanged;
@@ -54,7 +55,7 @@ public class HUDController : MonoBehaviour
         SetupButtons();
 
         if (G.GameManager != null)
-            OnGameStateChanged(G.GameManager.CurrentState);  // Для работы UI при отладке
+            OnGameStateChanged(G.GameManager.CurrentState);
     }
 
     private void Update()
@@ -64,8 +65,19 @@ public class HUDController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (isPaused)
-                ResumeGame();
+            if (upgradeScreen != null && upgradeScreen.IsOpen)
+            {
+                upgradeScreen.Close();
+                return;
+            }
+
+            if (settingsManager != null && settingsManager.IsOpen)
+            {
+                settingsManager.CloseSettings();
+                return;
+            }
+
+            TogglePause();
         }
     }
 
@@ -139,10 +151,9 @@ public class HUDController : MonoBehaviour
 
     private void OpenUpgradeMenu()
     {
-        G.UpgradeSystem?.OpenUpgradeMenu();
-        G.GameManager?.PauseGame();
+        if (G.GameManager != null && G.GameManager.CurrentState == GameState.Playing)
+            G.UpgradeSystem?.OpenUpgradeMenu();
     }
-
 
     private void ToggleSpeed()
     {
@@ -151,32 +162,33 @@ public class HUDController : MonoBehaviour
         speedButtonImage.sprite = isSpeedX2 ? speedSprite[1] : speedSprite[0];
     }
 
+    private void OnGameStateChanged(GameState state)
+    {
+        if (pausePanel != null)
+            pausePanel.SetActive(state == GameState.Paused);
+
+        if (pauseButton != null)
+            pauseButton.interactable = (state == GameState.Playing || state == GameState.Paused);
+    }
+
     private void TogglePause()
     {
         if (G.GameManager == null) return;
 
         if (G.GameManager.CurrentState == GameState.Paused)
             G.GameManager.ResumeGame();
-        else
+        else if (G.GameManager.CurrentState == GameState.Playing)
             G.GameManager.PauseGame();
-    }
-
-    private void OpenSettings()
-    {
-        settingsManager.Open(pausePanel);
-    }
-
-    private void OnGameStateChanged(GameState state)
-    {
-        isPaused = (state == GameState.Paused);
-
-        if (pausePanel != null)
-            pausePanel.SetActive(isPaused);
     }
 
     private void ResumeGame()
     {
         G.GameManager?.ResumeGame();
+    }
+
+    private void OpenSettings()
+    {
+        settingsManager.Open(pausePanel);
     }
 
     private void ReturnToMainMenu()

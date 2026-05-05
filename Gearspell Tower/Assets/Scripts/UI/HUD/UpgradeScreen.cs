@@ -29,6 +29,7 @@ public class UpgradeScreen : MonoBehaviour
     [SerializeField] private Button mineButton;
     [SerializeField] private TextMeshProUGUI mineCostText;
 
+    public bool IsOpen => panel != null && panel.activeSelf;
 
     private void Awake()
     {
@@ -62,6 +63,8 @@ public class UpgradeScreen : MonoBehaviour
 
     public void Open(List<UpgradeData> offers, Action<UpgradeData> callback)
     {
+        if (IsOpen) return;
+
         foreach (var card in activeCards)
             Destroy(card.gameObject);
         activeCards.Clear();
