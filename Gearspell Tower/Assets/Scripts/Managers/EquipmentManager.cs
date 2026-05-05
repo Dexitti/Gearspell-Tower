@@ -35,6 +35,9 @@ public class EquipmentManager : MonoBehaviour
 
     private void Start()
     {
+        if (G.EquipmentManager == null)
+            G.EquipmentManager = this; // Для отладки (запуска Game)
+
         // Загрузка сохранения
         unlockedSlots = G.ProgressManager?.GetUnlockedSlots() ?? 1;
         isBackpackUnlocked = G.ProgressManager?.IsBackpackUnlocked() ?? false;
@@ -50,6 +53,13 @@ public class EquipmentManager : MonoBehaviour
                     G.SaveManager.UnlockEquipment(eq.equipmentName);
             }
             EquipStartEquipment();
+        }
+        else
+        {
+            // Применяем сохраненную сессию
+            var session = G.ProgressManager.LoadSession();
+            if (session != null)
+                G.ProgressManager.ApplySession(session);
         }
     }
 

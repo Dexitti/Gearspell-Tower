@@ -104,7 +104,6 @@ public class GameBootstrap : MonoBehaviour
         G.EquipmentManager = FindFirstObjectByType<EquipmentManager>();
         G.UpgradeSystem = FindFirstObjectByType<UpgradeSystem>();
 
-        // Scene Objects
         G.Tower = FindFirstObjectByType<Tower>();
         //G.MainCamera = Camera.main;
 

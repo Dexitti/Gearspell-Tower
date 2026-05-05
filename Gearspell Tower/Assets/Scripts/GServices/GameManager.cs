@@ -6,6 +6,7 @@ public enum GameState
     MainMenu,
     Playing,
     Paused,
+    Upgrade,
     Victory,
     GameOver
 }
@@ -44,6 +45,15 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+
+        // Авто-определение сцены при запуске из редактора
+        string currentScene = SceneManager.GetActiveScene().name;
+        if (currentScene == "Game" && _currentState == GameState.MainMenu)
+        {
+            _currentState = GameState.Playing;
+            OnStateChanged(_currentState);
+        }
+
         G.EventManager?.TriggerGameStateChanged(_currentState); // Для работы UI при отладке
     }
 
@@ -69,10 +79,19 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log($"[GameManager] State changed to: {newState}");
 
-        if (newState == GameState.Playing || newState == GameState.MainMenu)
-            Time.timeScale = normalTimeScale;
-        else
-            Time.timeScale = pausedTimeScale;
+        switch (newState)
+        {
+            case GameState.Playing:
+            case GameState.MainMenu:
+                Time.timeScale = normalTimeScale;
+                break;
+            case GameState.Paused:
+            case GameState.Upgrade:
+            case GameState.Victory:
+            case GameState.GameOver:
+                Time.timeScale = pausedTimeScale;
+                break;
+        }
     }
 
     public void PauseGame()
@@ -83,7 +102,19 @@ public class GameManager : MonoBehaviour
 
     public void ResumeGame()
     {
-        if (CurrentState == GameState.Paused)
+        if (CurrentState == GameState.Paused || _currentState == GameState.Upgrade)
+            CurrentState = GameState.Playing;
+    }
+
+    public void OpenUpgrade()
+    {
+        if (_currentState == GameState.Playing)
+            CurrentState = GameState.Upgrade;
+    }
+
+    public void CloseUpgrade()
+    {
+        if (_currentState == GameState.Upgrade)
             CurrentState = GameState.Playing;
     }
 

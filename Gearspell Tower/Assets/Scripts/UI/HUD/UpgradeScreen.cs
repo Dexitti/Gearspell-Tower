@@ -33,7 +33,8 @@ public class UpgradeScreen : MonoBehaviour
 
     private void Awake()
     {
-        panel.SetActive(false);
+        if (panel != null)
+            panel.SetActive(false);
     }
 
     private void Start()
@@ -80,14 +81,14 @@ public class UpgradeScreen : MonoBehaviour
         onCardSelected = callback;
 
         UpdateUI();
+        G.GameManager?.OpenUpgrade();
         panel.SetActive(true);
-        G.GameManager?.PauseGame();
     }
 
     public void Close()
     {
         panel.SetActive(false);
-        G.GameManager?.ResumeGame();
+        G.GameManager?.CloseUpgrade();
     }
 
     private void UpdateUI()
