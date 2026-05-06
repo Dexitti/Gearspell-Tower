@@ -80,6 +80,7 @@ public class MainMenuManager : MonoBehaviour
     {
         Debug.Log("[MainMenu] New game");
         G.SaveManager?.ClearSave();
+        G.ProgressManager?.ClearSession();
         G.ResourceManager?.ResetResources();
         G.GameManager?.StartNewGame();
     }
