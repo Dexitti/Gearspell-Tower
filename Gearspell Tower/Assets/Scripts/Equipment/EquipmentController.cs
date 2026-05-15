@@ -122,17 +122,10 @@ public abstract class EquipmentController : MonoBehaviour
     public void RefreshStats()
     {
         ResetToBase();
-
-        // Apply
         foreach (var id in appliedUpgradeIds)
-        {
             ApplyEffect(id);
-        }
     }
 
-    // Можно switch-case улучшений по названиям
     protected abstract void ApplyEffect(string upgradeId);
-
-    protected abstract void Upgrade(int upgradeIndex); // Надо ли?
     protected abstract void ActivateAbility(); // Непонятно
 }

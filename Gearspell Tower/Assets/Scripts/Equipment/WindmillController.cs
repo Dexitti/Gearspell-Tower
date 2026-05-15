@@ -13,6 +13,13 @@ public class WindmillController : EquipmentController
     Vector3 firePoint = Vector3.zero;
     Vector3 spawnPosition;
 
+    private float spreadAngle = 2f;
+    private bool hasPiercing;
+    private int pierceCount;
+    private float armorPenetration;
+    private bool forkATaken = false;
+    private bool forkBTaken = false;
+
     protected override void OnEnable()
     {
         base.OnEnable();
@@ -23,21 +30,17 @@ public class WindmillController : EquipmentController
     protected override IEnumerator Attack()
     {
         Vector3? target = GetNearestEnemy();
-        if (target == null || Vector3.Distance(towerTransform.position, (Vector3)target) > currentRange) yield break;
+        if (target == null || IsometricExtension.IsoDistance(towerTransform.position, (Vector3)target) > currentRange) yield break;
 
         Vector3 direction = ((Vector3)target - firePoint).normalized;
         UpdateWindmillDecorationDirection(direction);
+        float randomAngle = UnityEngine.Random.Range(-spreadAngle, spreadAngle);
+
+        // Разброс
+        direction = Quaternion.Euler(0, 0, randomAngle) * direction;
         spawnPosition = firePoint + direction * 0.4f;
 
-        GameObject proj = Instantiate(
-            data.projectilesPrefabs[0],
-            spawnPosition,
-            Quaternion.identity,
-            transform
-        );
-        WindProjectile projScript = proj.GetComponent<WindProjectile>();
-        projScript.Direction = direction;
-        projScript.Damage = currentDamage;
+        SpawnProjectile(direction);
 
         yield break;
     }
@@ -47,7 +50,7 @@ public class WindmillController : EquipmentController
         GameObject[] enemyArray = GameObject.FindGameObjectsWithTag("Enemy");
         if (enemyArray.Length == 0) return null;
         return enemyArray
-            .OrderBy(enemy => Vector3.Distance(towerTransform.position, enemy.transform.position))
+            .OrderBy(enemy => IsometricExtension.IsoDistance(towerTransform.position, enemy.transform.position))
             .FirstOrDefault().transform.position;
     }
 
@@ -68,24 +71,100 @@ public class WindmillController : EquipmentController
         }
     }
 
-    private void OnDrawGizmos()
+    private void SpawnProjectile(Vector3 direction)
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawSphere(spawnPosition, 0.05f);
+        GameObject prefab = forkBTaken ? data.projectilesPrefabs[1] : data.projectilesPrefabs[0];
+
+        GameObject proj = Instantiate(prefab, spawnPosition, Quaternion.identity, transform);
+
+        if (forkATaken)
+        {
+            Vector3 scale = proj.transform.localScale;
+            scale.x *= 1.33f;
+            proj.transform.localScale = scale;
+        }
+
+        WindProjectile projScript = proj.GetComponent<WindProjectile>();
+        projScript.Direction = direction;
+        projScript.Damage = currentDamage;
+        projScript.Range = currentRange;
+
+        if (hasPiercing)
+            projScript.SetPiercing(pierceCount);
+        projScript.SetArmorPenetration(armorPenetration);
     }
 
     protected override void ApplyEffect(string upgradeId)
     {
-        throw new NotImplementedException();
-    }
+        switch (upgradeId)
+        {
+            case "Windmill_1":
+                currentDamage = Mathf.RoundToInt(currentDamage * 1.5f);
+                break;
 
-    protected override void Upgrade(int upgradeIndex)
-    {
-        throw new System.NotImplementedException();
+            case "Windmill_2":
+                hasPiercing = true;
+                pierceCount = 2;
+                armorPenetration = 1f;
+                break;
+
+            case "Windmill_3": // fork A
+                forkATaken = true;
+                spreadAngle = 25f;
+                currentAttackCooldown *= 0.65f;
+                currentDamage = Mathf.RoundToInt(currentDamage * 0.7f);
+                break;
+
+            case "Windmill_4": // fork B
+                forkBTaken = true;
+                hasPiercing = true;
+                pierceCount = 4;
+                currentDamage = Mathf.RoundToInt(currentDamage * 1.3f);
+                currentAttackCooldown *= 1.2f;
+                armorPenetration = 1.15f;
+                break;
+
+            case "Windmill_5": // Active
+                HasActiveAbility = true;
+                break;
+
+            default:
+                Debug.LogWarning($"[Windmill] Unknown upgradeId: {upgradeId}");
+                break;
+        }
     }
 
     protected override void ActivateAbility()
     {
-        throw new System.NotImplementedException();
+        if (!HasActiveAbility) return;
+        StartCoroutine(Hurricane());
+    }
+
+    private IEnumerator Hurricane()
+    {
+        int totalProjectiles = 20;
+        float angleStep = 90f / totalProjectiles;
+        Vector3 baseDirection = GetNearestEnemy() != null
+            ? ((Vector3)GetNearestEnemy() - firePoint).normalized
+            : Vector3.right;
+        float baseAngle = Mathf.Atan2(baseDirection.y, baseDirection.x) * Mathf.Rad2Deg;
+
+        for (int i = 0; i < totalProjectiles; i++)
+        {
+            float angle = baseAngle - 45f + angleStep * i;
+            Vector3 dir = new Vector3(
+                Mathf.Cos(angle * Mathf.Deg2Rad),
+                Mathf.Sin(angle * Mathf.Deg2Rad),
+                0
+            );
+            SpawnProjectile(dir);
+            yield return new WaitForSeconds(0.05f);
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(spawnPosition, 0.05f);
     }
 }

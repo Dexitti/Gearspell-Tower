@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Analytics;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -13,9 +14,28 @@ public class FireDrillController : EquipmentController
 
     private float height = 6f;
 
+    private float drillSizeMultiplier = 1f;
+    private bool fireGround = false;
+    private float fireGroundDuration = 3f;
+    private bool hasStun = false;
+    private float stunChance = 0f;
+    private float stunDuration = 0f;
+
     protected override void OnEnable()
     {
         base.OnEnable();
+        RebuildPools();
+    }
+
+    private void RebuildPools()
+    {
+        foreach (var shot in shotPool)
+            if (shot != null) Destroy(shot);
+        foreach (var drill in projPool)
+            if (drill != null) Destroy(drill);
+        shotPool.Clear();
+        projPool.Clear();
+
         for (int i = 0; i < currentProjectileCount; i++)
         {
             GameObject shot = Instantiate(data.projectilesPrefabs[0], transform);
@@ -56,9 +76,6 @@ public class FireDrillController : EquipmentController
         yield return new WaitForSeconds(0.75f);
 
         FireDrills();
-        //yield return new WaitWhile(() => IsSecondActionRunning());
-
-        //OnInteractionComplete?.Invoke();
     }
 
     private void InitializeFirePoints()
@@ -72,8 +89,11 @@ public class FireDrillController : EquipmentController
 
         foreach (var enemy in enemyArray)
         {
-            if (Vector3.Distance(towerTransform.position, enemy.transform.position) <= currentRange)
+            if (IsometricExtension.IsoDistance(towerTransform.position, enemy.transform.position) <= currentRange)
             {
+                //Vector3 toTower = (towerTransform.position - enemy.transform.position).normalized;
+                //Vector3 predictPos = enemy.transform.position + toTower * 0.5f;
+                //availableEnemies.Add(predictPos);
                 availableEnemies.Add(enemy.transform.position);
             }
         }
@@ -119,29 +139,69 @@ public class FireDrillController : EquipmentController
         for (int i = 0; i < Mathf.Min(currentProjectileCount, availableEnemies.Count); i++)
         {
             GameObject drill;
-            if (projPool.Count > 0) {
+            if (projPool.Count > 0)
+            {
                 drill = projPool.Dequeue();
                 drill.SetActive(true);
             }
             else drill = Instantiate(data.projectilesPrefabs[1], transform);
             drill.transform.position = firePoints[i];
+            drill.transform.localScale *= drillSizeMultiplier;
+
             FireDrillProjectile projScript = drill.GetComponent<FireDrillProjectile>();
             projScript.Damage = currentDamage;
+            projScript.SetStun(hasStun, stunChance, stunDuration);
         }
     }
 
     protected override void ApplyEffect(string upgradeId)
     {
-        throw new NotImplementedException();
-    }
+        switch (upgradeId)
+        {
+            case "FireDrill_1":
+                currentProjectileCount = Mathf.RoundToInt(currentProjectileCount * 1.7f);
+                break;
 
-    protected override void Upgrade(int upgradeIndex)
-    {
-        throw new System.NotImplementedException();
+            case "FireDrill_2":
+                currentDamage = Mathf.RoundToInt(currentDamage * 1.5f);
+                drillSizeMultiplier = 1.4f;
+                break;
+
+            case "FireDrill_3": // fork A
+                currentProjectileCount = Mathf.RoundToInt(currentProjectileCount * 2f);
+                drillSizeMultiplier = 0.55f;
+                currentDamage = Mathf.RoundToInt(currentDamage * 0.55f);
+                break;
+
+            case "FireDrill_4": // fork B
+                currentProjectileCount = Mathf.RoundToInt(currentProjectileCount * 0.8f);
+                fireGround = true;
+                hasStun = true;
+                stunChance = 0.15f;
+                stunDuration = 1f;
+                break;
+
+            case "FireDrill_5":
+                HasActiveAbility = true;
+                break;
+
+            default:
+                Debug.LogWarning($"[FireDrill] Unknown upgradeId: {upgradeId}");
+                break;
+        }
+
+        RebuildPools();
     }
 
     protected override void ActivateAbility()
     {
-        throw new System.NotImplementedException();
+        if (!HasActiveAbility) return;
+        StartCoroutine(FireStorm());
+    }
+
+    private IEnumerator FireStorm()
+    {
+        // TODO
+        yield return null;
     }
 }

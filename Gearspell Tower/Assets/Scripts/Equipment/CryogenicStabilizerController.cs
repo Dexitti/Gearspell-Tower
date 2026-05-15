@@ -18,8 +18,7 @@ public class CryogenicStabilizerController : EquipmentController
 
     [Header("Луч")]
     [SerializeField] private float beamWidth = 0.12f;
-    [SerializeField] private float freezeDuration = 3f;
-    [SerializeField] private float slowEffect = 0.85f;
+    private float slowMultiplier = 0.85f;
 
     private List<GameObject> nearestEnemies = new List<GameObject>();
     private HashSet<GameObject> enemiesInBeam = new HashSet<GameObject>();
@@ -27,6 +26,15 @@ public class CryogenicStabilizerController : EquipmentController
     GameObject attackArea;
     private BoxCollider2D hitCollider;
     private bool isBeamActive = false;
+
+    private bool сoldGround = false;
+    private float coldGroundDuration = 3f;
+    private Vector3 lastBeamDirection;
+    private bool increasedDamageToSlowed = false;
+    private float damageMultiplierToSlowed = 1.5f;
+    private bool isConeBeam = false;
+    private float coneAngle = 33f;
+    private float freezeDuration = 3f;
 
     protected override void OnEnable()
     {
@@ -131,7 +139,7 @@ public class CryogenicStabilizerController : EquipmentController
         GameObject[] enemyArray = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (GameObject enemy in enemyArray)
         {
-            if (Vector3.Distance(enemy.transform.position, towerTransform.position) <= currentRange)
+            if (IsometricExtension.IsoDistance(enemy.transform.position, towerTransform.position) <= currentRange)
                 return true;
         }
         return false;
@@ -143,15 +151,15 @@ public class CryogenicStabilizerController : EquipmentController
         if (enemyArray.Length == 0) return Vector3.zero;
 
         Array.Sort(enemyArray, (enemy1, enemy2) =>
-            Vector3.Distance(enemy1.transform.position, towerTransform.position)
-            .CompareTo(Vector3.Distance(enemy2.transform.position, towerTransform.position))
+            IsometricExtension.IsoDistance(enemy1.transform.position, towerTransform.position)
+            .CompareTo(IsometricExtension.IsoDistance(enemy2.transform.position, towerTransform.position))
         );
 
         nearestEnemies.Clear();
 
         foreach (GameObject enemy in enemyArray)
         {
-            if (enemy != null && Vector3.Distance(enemy.transform.position, towerTransform.position) <= currentRange)
+            if (enemy != null && IsometricExtension.IsoDistance(enemy.transform.position, towerTransform.position) <= currentRange)
             {
                 if (!nearestEnemies.Contains(enemy))
                     nearestEnemies.Add(enemy);
@@ -179,41 +187,79 @@ public class CryogenicStabilizerController : EquipmentController
 
     private void UpdateBeamDirection(Vector3 target)
     {
-        float[,] pivots = new float[4, 2] {{ -0.03f, 0.04f }, { 0.03f, 0.04f }, { 0.03f, -0.04f }, { -0.03f, -0.04f } };
         Vector3 direction = (target - firePoint).normalized;
-        float distanceToTarget = Vector3.Distance(firePoint, target);
+        lastBeamDirection = direction; // Для холодной земли
+        float distanceToTarget = IsometricExtension.IsoDistance(firePoint, target);
 
-        float mergeDistance = Mathf.Lerp(0.1f, distanceToTarget * 0.25f, Mathf.Clamp01(distanceToTarget / currentRange));
-        Vector3 mergePoint = firePoint + direction * mergeDistance;
-        Vector3 beamEnd = firePoint + direction * currentRange;
-
-        for (int i = 0; i < 4; i++)
+        if (isConeBeam)
         {
-            focusingBeams[i].enabled = true;
-            focusingBeams[i].SetPosition(0, firePoint + new Vector3(pivots[i, 0], pivots[i, 1]));
-            focusingBeams[i].SetPosition(1, mergePoint);
+            // Конус вместо луча
+            float coneHalf = coneAngle * 0.5f * Mathf.Deg2Rad;
+            float coneLength = currentRange;
+            Vector3 coneEnd = firePoint + direction * coneLength;
+            float coneWidth = Mathf.Tan(coneHalf) * coneLength;
+
+            // Настройка коллайдера как сектора
+            if (hitCollider != null)
+            {
+                hitCollider.transform.position = firePoint + direction * coneLength * 0.5f;
+                hitCollider.size = new Vector2(coneLength, coneWidth * 2f);
+                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                hitCollider.transform.rotation = Quaternion.Euler(0, 0, angle);
+                hitCollider.enabled = true;
+            }
+
+            // Визуал: широкий луч
+            mainFreezeBeamRenderer.enabled = true;
+            mainFreezeBeamRenderer.startWidth = coneWidth;
+            mainFreezeBeamRenderer.endWidth = coneWidth * 2.5f;
+            mainFreezeBeamRenderer.SetPosition(0, firePoint);
+            mainFreezeBeamRenderer.SetPosition(1, coneEnd);
+
+            for (int i = 0; i < 4; i++)
+                focusingBeams[i].enabled = false;
         }
+        else
+        {
+            float[,] pivots = new float[4, 2] { { -0.03f, 0.04f }, { 0.03f, 0.04f }, { 0.03f, -0.04f }, { -0.03f, -0.04f } };
+            float mergeDistance = Mathf.Lerp(0.1f, distanceToTarget * 0.25f, Mathf.Clamp01(distanceToTarget / currentRange));
+            Vector3 mergePoint = firePoint + direction * mergeDistance;
+            Vector3 beamEnd = firePoint + direction * currentRange;
 
-        mainFreezeBeamRenderer.enabled = true;
-        mainFreezeBeamRenderer.SetPosition(0, mergePoint);
-        mainFreezeBeamRenderer.SetPosition(1, beamEnd);
+            for (int i = 0; i < 4; i++)
+            {
+                focusingBeams[i].enabled = true;
+                focusingBeams[i].SetPosition(0, firePoint + new Vector3(pivots[i, 0], pivots[i, 1]));
+                focusingBeams[i].SetPosition(1, mergePoint);
+            }
 
-        // Настройка коллайдера
-        if (hitCollider == null) return;
+            mainFreezeBeamRenderer.enabled = true;
+            mainFreezeBeamRenderer.SetPosition(0, mergePoint);
+            mainFreezeBeamRenderer.SetPosition(1, beamEnd);
 
-        Vector3 center = (mergePoint + beamEnd) / 2;
-        float length = Vector3.Distance(mergePoint, beamEnd * 1.1f);
-        float angle = Mathf.Atan2(beamEnd.y - mergePoint.y, beamEnd.x - mergePoint.x) * Mathf.Rad2Deg;
+            // Настройка коллайдера
+            if (hitCollider == null) return;
 
-        hitCollider.transform.position = center;
-        hitCollider.size = new Vector2(length, 0.5f);
-        hitCollider.transform.rotation = Quaternion.Euler(0, 0, angle);
-        hitCollider.enabled = true;
+            Vector3 center = (mergePoint + beamEnd) / 2;
+            float length = IsometricExtension.IsoDistance(mergePoint, beamEnd * 1.1f);
+            float angle = Mathf.Atan2(beamEnd.y - mergePoint.y, beamEnd.x - mergePoint.x) * Mathf.Rad2Deg;
+
+            hitCollider.transform.position = center;
+            hitCollider.size = new Vector2(length, 0.5f);
+            hitCollider.transform.rotation = Quaternion.Euler(0, 0, angle);
+            hitCollider.enabled = true;
+        }
     }
 
     private void StopBeam()
     {
         if (!isBeamActive) return;
+
+        if (сoldGround && enemiesInBeam.Count > 0)
+        {
+            Vector3 groundCenter = firePoint + lastBeamDirection * currentRange * 0.7f;
+            CreateColdGround(groundCenter);
+        }
 
         isBeamActive = false;
 
@@ -234,17 +280,24 @@ public class CryogenicStabilizerController : EquipmentController
 
         foreach (GameObject enemy in enemies)
         {
-            if (enemy != null)
-            {
-                HealthComponent health = enemy.GetComponent<HealthComponent>();
-                if (health != null)
-                {
-                    health.TakeDamage(currentDamage);
+            if (enemy == null) continue;
 
-                    if (freezeImpactEffect != null)
-                        Instantiate(freezeImpactEffect, enemy.transform.position, Quaternion.identity);
-                }
+            HealthComponent health = enemy.GetComponent<HealthComponent>();
+            if (health != null)
+            {
+                int finalDamage = currentDamage;
+                if (increasedDamageToSlowed)
+                    finalDamage = Mathf.RoundToInt(finalDamage * damageMultiplierToSlowed);
+
+                health.TakeDamage(finalDamage);
+
+                if (freezeImpactEffect != null)
+                    Instantiate(freezeImpactEffect, enemy.transform.position, Quaternion.identity);
             }
+
+            Creature creature = enemy.GetComponent<Creature>();
+            if (creature != null)
+                creature.ApplySlow(slowMultiplier, 0.5f);
         }
     }
 
@@ -270,16 +323,107 @@ public class CryogenicStabilizerController : EquipmentController
 
     protected override void ApplyEffect(string upgradeId)
     {
-        throw new NotImplementedException();
+        switch (upgradeId)
+        {
+            case "Cryogenic_1":
+                slowMultiplier = 0.5f;
+                break;
+
+            case "Cryogenic_2":
+                сoldGround = true;
+                coldGroundDuration = 4f;
+                break;
+
+            case "Cryogenic_3": // fork A
+                increasedDamageToSlowed = true;
+                damageMultiplierToSlowed = 2f;
+                break;
+
+            case "Cryogenic_4": // fork B
+                isConeBeam = true;
+                coneAngle = 40f;
+                currentRange *= 0.45f;
+                break;
+
+            case "Cryogenic_5":
+                HasActiveAbility = true;
+                break;
+
+            default:
+                Debug.LogWarning($"[Cryogenic] Unknown upgradeId: {upgradeId}");
+                break;
+        }
     }
 
-    protected override void Upgrade(int upgradeIndex)
+    private void CreateColdGround(Vector3 position)
     {
-        throw new System.NotImplementedException();
+        // Спрайт земли из prefabs
+        GameObject ground = null;
+        if (data.projectilesPrefabs[1] != null)
+        {
+            ground = Instantiate(data.projectilesPrefabs[1], position, Quaternion.identity);
+            ground.transform.localScale = Vector3.one * currentRange * 0.75f;
+        }
+        else
+        {
+            // Fallback: пустой объект с коллайдером
+            ground = new GameObject("ColdGround");
+            ground.transform.position = position;
+            CircleCollider2D col = ground.AddComponent<CircleCollider2D>();
+            col.radius = currentRange * 0.5f;
+            col.isTrigger = true;
+            SpriteRenderer sr = ground.AddComponent<SpriteRenderer>();
+            sr.sprite = null;
+            sr.color = new Color(0.5f, 0.8f, 1f, 0.3f);
+        }
+
+        Destroy(ground, coldGroundDuration);
+        StartCoroutine(SlowEnemiesOnGround(position, coldGroundDuration));
+    }
+
+    private IEnumerator SlowEnemiesOnGround(Vector3 center, float duration)
+    {
+        float elapsed = 0f;
+        float tickRate = 0.3f;
+        float radius = currentRange * 0.5f;
+
+        while (elapsed < duration)
+        {
+            Collider2D[] enemies = Physics2D.OverlapCircleAll(center, radius);
+            foreach (var col in enemies)
+            {
+                if (col.CompareTag("Enemy"))
+                {
+                    Creature creature = col.GetComponent<Creature>();
+                    if (creature != null)
+                        creature.ApplySlow(slowMultiplier * 1.3f, tickRate + 0.1f);
+                }
+            }
+            elapsed += tickRate;
+            yield return new WaitForSeconds(tickRate);
+        }
     }
 
     protected override void ActivateAbility()
     {
-        throw new System.NotImplementedException();
+        if (!HasActiveAbility) return;
+        StartCoroutine(AbsoluteZero());
+    }
+
+    private IEnumerator AbsoluteZero()
+    {
+        // Эффект льда и лед на каждого врага
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (var enemy in enemies)
+        {
+            if (IsometricExtension.IsoDistance(towerTransform.position, enemy.transform.position) <= currentRange)
+            {
+                Creature creature = enemy.GetComponent<Creature>();
+                if (creature != null)
+                    creature.ApplyStun(freezeDuration);
+            }
+        }
+
+        yield return new WaitForSeconds(0.1f);
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 
 public class UpgradeScreen : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class UpgradeScreen : MonoBehaviour
 
     [SerializeField] private GameObject cardPrefab;
     [SerializeField] private Transform cardsContainer;
-    private List<UpgradeData> currentOffers;
+    private List<UpgradeData> currentOffers = new();
     private List<UpgradeCard> activeCards = new();
 
     [Header("Global Abilities")]
@@ -35,6 +36,10 @@ public class UpgradeScreen : MonoBehaviour
     {
         if (panel != null)
             panel.SetActive(false);
+        foreach (Transform child in cardsContainer)
+        {
+            Destroy(child.gameObject);
+        }
     }
 
     private void Start()
@@ -66,19 +71,11 @@ public class UpgradeScreen : MonoBehaviour
     {
         if (IsOpen) return;
 
-        foreach (var card in activeCards)
-            Destroy(card.gameObject);
-        activeCards.Clear();
-
-        foreach (var offer in offers)
-        {
-            var cardObj = Instantiate(cardPrefab, cardsContainer);
-            var card = cardObj.GetComponent<UpgradeCard>();
-            card.Initialize(offer, OnCardClicked);
-            activeCards.Add(card);
-        }
+        if (currentOffers == null || currentOffers.Count == 0)
+            currentOffers = new List<UpgradeData>(offers);
 
         onCardSelected = callback;
+        RefreshCards();
 
         UpdateUI();
         G.GameManager?.OpenUpgrade();
@@ -89,6 +86,24 @@ public class UpgradeScreen : MonoBehaviour
     {
         panel.SetActive(false);
         G.GameManager?.CloseUpgrade();
+    }
+
+    private void RefreshCards()
+    {
+        foreach (var card in activeCards)
+            Destroy(card.gameObject);
+        activeCards.Clear();
+
+        foreach (var offer in currentOffers)
+        {
+            if (offer == null) continue;
+            var cardObj = Instantiate(cardPrefab, cardsContainer);
+            var card = cardObj.GetComponent<UpgradeCard>();
+            card.Initialize(offer, OnCardClicked);
+            activeCards.Add(card);
+        }
+
+        LayoutRebuilder.ForceRebuildLayoutImmediate(cardsContainer as RectTransform); // Выравнивает карты
     }
 
     private void UpdateUI()
@@ -167,10 +182,34 @@ public class UpgradeScreen : MonoBehaviour
     private void OnCardClicked(UpgradeCard card)
     {
         if (G.ResourceManager.Gears >= card.Data.cost)
+        {
             onCardSelected?.Invoke(card.Data);
-            // Заблокировать выбор карт
+
+            int index = currentOffers.IndexOf(card.Data);
+            if (index >= 0)
+                currentOffers.RemoveAt(index);
+
+            UpgradeData newCard = GenerateReplacementCard();
+            if (newCard != null)
+                currentOffers.Add(newCard);
+
+            RefreshCards();
+            UpdateUI();
+        }
         else
             card.Shake();
+    }
+
+    private UpgradeData GenerateReplacementCard()
+    {
+        var availablePool = G.UpgradeSystem.GetAvailableUpgrades();
+        if (availablePool == null) return null;
+
+        // Исключаем уже показанные карты
+        var remaining = availablePool.Where(u => !currentOffers.Contains(u)).ToList();
+        if (remaining.Count == 0) return null;
+
+        return remaining[UnityEngine.Random.Range(0, remaining.Count)];
     }
 
     //private void TryHeal()

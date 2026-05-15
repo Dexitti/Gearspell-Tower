@@ -81,7 +81,7 @@ namespace Assets.Scripts.Equipment
 
             foreach (GameObject enemy in enemies)
             {
-                float distance = Vector3.Distance(transform.position, enemy.transform.position);
+                float distance = IsometricExtension.IsoDistance(transform.position, enemy.transform.position);
                 if (distance < closestDistance)
                 {
                     closestDistance = distance;
@@ -140,11 +140,6 @@ namespace Assets.Scripts.Equipment
         }
 
         protected override void ApplyEffect(string upgradeId)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override void Upgrade(int upgradeIndex)
         {
             throw new NotImplementedException();
         }

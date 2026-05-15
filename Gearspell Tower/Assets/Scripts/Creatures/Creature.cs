@@ -17,6 +17,9 @@ public abstract class Creature : MonoBehaviour
 
     protected HealthComponent healthComponent;
     protected Vector3 towerPosition;
+    protected bool isStunned = false;
+    protected float slowMultiplier = 1f;
+    private Coroutine slowCoroutine;
 
     public CreatureData Data => data;
 
@@ -53,6 +56,41 @@ public abstract class Creature : MonoBehaviour
     }
 
     protected abstract void Move();
+
+    public void ApplyStun(float duration)
+    {
+        if (!isStunned)
+            StartCoroutine(StunCoroutine(duration));
+    }
+
+    private IEnumerator StunCoroutine(float duration)
+    {
+        isStunned = true;
+        baseSpeed = 0;
+
+        // Визуальный эффект стана
+        yield return new WaitForSeconds(duration);
+
+        isStunned = false;
+        baseSpeed = data.speed;
+    }
+
+    public void ApplySlow(float multiplier, float duration)
+    {
+        if (slowCoroutine != null) StopCoroutine(slowCoroutine);
+        slowCoroutine = StartCoroutine(SlowCoroutine(multiplier, duration));
+    }
+
+    private IEnumerator SlowCoroutine(float multiplier, float duration)
+    {
+        slowMultiplier = multiplier;
+        baseSpeed *= slowMultiplier;
+
+        // Визуальный эффект замедления
+        yield return new WaitForSeconds(duration);
+        slowMultiplier = 1f;
+        baseSpeed = data.speed;
+    }
 
     private void PlayDamageReceivedAnimation(float currentHealth, float maxHealth)
     {

@@ -18,6 +18,8 @@ MonoBehaviour:
   decorationPrefab: {fileID: 3357113623954044729, guid: e7f2952cc56ed87409dc7ff4dc4987ec, type: 3}
   projectilesPrefabs:
   - {fileID: 2690663417616464067, guid: fc28adbfea0f80e42a7700f9f52d7934, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
   damage: 4
   size: 1
   attackCooldown: 4.3

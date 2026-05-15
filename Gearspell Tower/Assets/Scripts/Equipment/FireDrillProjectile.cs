@@ -4,11 +4,21 @@ using UnityEngine;
 public class FireDrillProjectile : MonoBehaviour
 {
     [SerializeField] private float fallSpeed = 15f;
-    int damage;
-
     [SerializeField] private Animator animator;
 
+    int damage;
+    private bool hasStun = false;
+    private float stunChance = 0f;
+    private float stunDuration = 1f;
+
     public int Damage { get => damage; set => damage = value; }
+
+    public void SetStun(bool isStun, float chance, float duration)
+    {
+        hasStun = isStun;
+        stunChance = chance;
+        stunDuration = duration;
+    }
 
     private void Start()
     {
@@ -29,6 +39,13 @@ public class FireDrillProjectile : MonoBehaviour
             if (enemyHP != null)
             {
                 enemyHP.TakeDamage(Damage);
+
+                if (hasStun && Random.value < stunChance)
+                {
+                    Creature creature = other.GetComponent<Creature>();
+                    if (creature != null)
+                        creature.ApplyStun(stunDuration);
+                }
             }
 
             StartCoroutine(PlayHitAnimationAndDestroy());

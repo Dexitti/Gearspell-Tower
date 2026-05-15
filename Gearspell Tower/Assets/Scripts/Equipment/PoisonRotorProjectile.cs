@@ -17,26 +17,37 @@ namespace Assets.Scripts.Equipment
         [SerializeField] private ParticleSystem poisonCloud;
         [SerializeField] private SpriteMask spriteMask;
 
-        [Header("Poison Rotors Settings")]
+        [Header("Move Settings")]
         [SerializeField] private float rotorSpeed = 2f;
         [SerializeField] private float wobbleAmount = 0.5f; // Сила петляние
         [SerializeField] private float wobbleFrequency = 2f; // Частота петляние
 
-        [Header("Cloud Settings")]
-        [SerializeField] private float damageTickInterval = 1f;
-        [SerializeField] private float cloudDuration = 3f;
-        [SerializeField] private float cloudRadius = 1f;
-
         private Vector3 targetPosition;
         private bool isMoving = true;
+        private float cloudDuration = 3f;
+        private float cloudRadius = 1f;
         private int damage;
-        private Coroutine damageCoroutine;
-        private Coroutine moveCoroutine;
+        private int tickCount = 3;
+        private float tickInterval = 1f;
 
-        public void Initialize(Vector3 spawnPoint, int damage)
+        private Coroutine moveCoroutine;
+        private Coroutine damageCoroutine;
+
+        private bool shootsSpikes;
+        private int spikeCount;
+        private GameObject spikePrefab;
+        private Queue<GameObject> spikesPool;
+        private Coroutine spikeCoroutine;
+
+        private bool poisonExplodes;
+        private float explosionRadius;
+
+        public void Initialize(Vector3 spawnPoint, int damage, int tickCount, float tickInterval)
         {
             targetPosition = spawnPoint;
             this.damage = damage;
+            this.tickCount = tickCount;
+            this.tickInterval = tickInterval;
 
             // Настройка начального состояния
             SetUndergroundState(true);
@@ -44,6 +55,22 @@ namespace Assets.Scripts.Equipment
             // Запуск движения
             if (moveCoroutine != null) StopCoroutine(moveCoroutine);
             moveCoroutine = StartCoroutine(MoveToTarget());
+        }
+
+        public void SetParameters(
+            float cloudRadius, float cloudDuration,
+            bool shootsSpikes, int spikeCount,
+            GameObject spikePrefab, Queue<GameObject> spikesPool,
+            bool poisonExplodes, float explosionRadius)
+        {
+            this.cloudRadius = cloudRadius;
+            this.cloudDuration = Mathf.Max(cloudDuration, tickCount * tickInterval);
+            this.shootsSpikes = shootsSpikes;
+            this.spikeCount = spikeCount;
+            this.spikePrefab = spikePrefab;
+            this.spikesPool = spikesPool;
+            this.poisonExplodes = poisonExplodes;
+            this.explosionRadius = explosionRadius;
         }
 
         private void SetUndergroundState(bool isUnderground)
@@ -66,7 +93,7 @@ namespace Assets.Scripts.Equipment
         private IEnumerator MoveToTarget()
         {
             Vector3 startPos = transform.position;
-            float journeyLength = Vector3.Distance(startPos, targetPosition);
+            float journeyLength = IsometricExtension.IsoDistance(startPos, targetPosition);
             float startTime = Time.time;
 
             while (isMoving && IsometricExtension.IsoDistance(transform.position, targetPosition) > 0.2f)
@@ -140,33 +167,59 @@ namespace Assets.Scripts.Equipment
                 attackCollider.enabled = true;
             }
 
-            damageCoroutine = StartCoroutine(DealDamageOverTime());
+            damageCoroutine = StartCoroutine(MultiTickDamage());
+            if (shootsSpikes)
+                spikeCoroutine = StartCoroutine(ShootSpikesRoutine());
             StartCoroutine(DeactivateAfterDelay());
         }
 
-        private IEnumerator DealDamageOverTime()
+        private IEnumerator MultiTickDamage()
         {
-            float timer = 0f;
-
-            while (timer < cloudDuration)
+            for (int tick = 0; tick < tickCount; tick++)
             {
-                timer += Time.deltaTime;
-
-                if (timer >= damageTickInterval)
+                Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, cloudRadius);
+                foreach (var collider in enemies)
                 {
-                    timer = 0f;
-                    Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, cloudRadius);
-
-                    foreach (var enemy in enemies)
+                    if (collider.CompareTag("Enemy") &&
+                        IsometricExtension.IsoDistance(transform.position, collider.transform.position) <= cloudRadius)
                     {
-                        if (enemy.CompareTag("Enemy") && IsometricExtension.IsoDistance(transform.position, enemy.transform.position) <= cloudRadius)
-                        {
-                            var health = enemy.GetComponent<HealthComponent>();
-                            health.TakeDamage(damage);
-                        }
+                        collider.GetComponent<HealthComponent>()?.TakeDamage(damage);
                     }
                 }
-                yield return null;
+                yield return new WaitForSeconds(tickInterval);
+            }
+        }
+
+        private IEnumerator ShootSpikesRoutine()
+        {
+            yield return new WaitForSeconds(0.1f);
+            ShootSpikes();
+        }
+
+        private void ShootSpikes()
+        {
+            float randomAngle = UnityEngine.Random.Range(0f, 360f);
+
+            for (int i = 0; i < spikeCount; i++)
+            {
+                float angle = randomAngle + (360f / spikeCount) * i * Mathf.Deg2Rad;
+                Vector3 dir = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle));
+
+                GameObject spike;
+                if (spikesPool != null && spikesPool.Count > 0)
+                {
+                    spike = spikesPool.Dequeue();
+                    spike.transform.position = transform.position;
+                    spike.transform.rotation = Quaternion.LookRotation(Vector3.forward, dir);
+                    spike.SetActive(true);
+                }
+                else spike = Instantiate(spikePrefab, transform.position, Quaternion.LookRotation(Vector3.forward, dir));
+
+                PoisonSpike spikeScript = spike.GetComponent<PoisonSpike>();
+                spikeScript.Direction = dir;
+                spikeScript.Damage = damage;
+                spikeScript.Range = cloudRadius * 3f;
+                spikeScript.Pool = spikesPool;
             }
         }
 

@@ -14,7 +14,7 @@ namespace Assets.Scripts.Equipment
         protected override IEnumerator Attack()
         {
             Transform target = GetStrongestEnemy();
-            if (target == null || Vector3.Distance(towerTransform.position, target.position) > currentRange) yield break;
+            if (target == null || IsometricExtension.IsoDistance(towerTransform.position, target.position) > currentRange) yield break;
 
             bool flipX = UnityEngine.Random.value > 0.5f;
 
@@ -60,11 +60,6 @@ namespace Assets.Scripts.Equipment
         }
 
         protected override void ApplyEffect(string upgradeId)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override void Upgrade(int upgradeIndex)
         {
             throw new NotImplementedException();
         }

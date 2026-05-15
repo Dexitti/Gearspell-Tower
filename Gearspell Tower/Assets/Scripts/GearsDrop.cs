@@ -36,7 +36,7 @@ public class GearsDrop : MonoBehaviour
         float angle = UnityEngine.Random.Range(0f, 360f) * Mathf.Deg2Rad;
         float distance = UnityEngine.Random.Range(0.3f, throwDistance);
         Vector3 flyStart = transform.position;
-        Vector3 flyTarget = transform.position + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)) * distance;
+        Vector3 flyTarget = transform.position + IsometricExtension.IsoVector(Mathf.Cos(angle), Mathf.Sin(angle)) * distance;
 
         while (elapsed < flyDuration)
         {

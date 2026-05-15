@@ -26,6 +26,10 @@ namespace Assets.Scripts.Equipment
         private float cogSpacing;
         private Queue<GameObject> cogsPool = new Queue<GameObject>();
 
+        private int extraBranches = 0;
+        private bool hasLightningPillar = false;
+        private List<GameObject> activePillars = new List<GameObject>();
+
         private class CogChain
         {
             public List<GameObject> cogs = new List<GameObject>();
@@ -70,7 +74,7 @@ namespace Assets.Scripts.Equipment
             if (enemyArray.Length == 0) return null;
 
             List<Transform> enemiesInRange = enemyArray
-                .Where(e => Vector3.Distance(towerTransform.position, e.transform.position) <= currentRange)
+                .Where(e => IsometricExtension.IsoDistance(towerTransform.position, e.transform.position) <= currentRange)
                 .Select(e => e.transform)
                 .ToList();
             if (enemiesInRange.Count == 0) return null;
@@ -119,17 +123,19 @@ namespace Assets.Scripts.Equipment
                 CogChain chain = new CogChain();
                 chain.direction = direction;
 
+                Vector3 xOffset = direction.x < 0 ? new Vector3(1, 0) : Vector3.zero; // Из-за расположения декорации на башне
+
                 for (int i = 1; i <= cogsAmount; i++)
                 {
                     // Нормализованное расстояние (%)
                     float t = (float)i / cogsAmount;
                     float distanceFromTower = Mathf.Lerp(currentRange * 0.2f, currentRange, t);
 
-                    Vector3 targetPos = firePoint + direction * distanceFromTower;
+                    Vector3 targetPos = firePoint + direction * distanceFromTower + xOffset;
 
                     // Разброс
                     float randomAngle = UnityEngine.Random.Range(0f, 360f) * Mathf.Deg2Rad;
-                    Vector3 randomOffset = new Vector3(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle), 0) * cogsSpread;
+                    Vector3 randomOffset = IsometricExtension.IsoVector(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle), 0) * cogsSpread;
                     targetPos += randomOffset;
 
                     chain.positions.Add(targetPos);
@@ -222,7 +228,14 @@ namespace Assets.Scripts.Equipment
                     if (chain.lightningLine != null)
                     {
                         DrawLightningForChain(chain);
+                        DrawBranchesForChain(chain);
                     }
+                }
+
+                if (tick == 0 && hasLightningPillar)
+                {
+                    foreach (var chain in activeChains)
+                        CreatePillarsForChain(chain);
                 }
 
                 DealDamageAlongLightning();
@@ -278,6 +291,104 @@ namespace Assets.Scripts.Equipment
             }
         }
 
+        private void DrawBranchesForChain(CogChain chain)
+        {
+            if (extraBranches <= 0 || chain.positions.Count == 0) return;
+
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+            var nearbyEnemies = enemies
+                .Where(e => IsometricExtension.IsoDistance(towerTransform.position, e.transform.position) <= currentRange)
+                .OrderBy(e => IsometricExtension.IsoDistance(towerTransform.position, e.transform.position))
+                .Take(extraBranches * activeChains.Count) // всего ответвлений = цепей × extraBranches
+                .ToList();
+
+            HashSet<GameObject> usedEnemies = new HashSet<GameObject>();
+
+            foreach (var enemy in nearbyEnemies)
+            {
+                if (usedEnemies.Contains(enemy)) continue;
+
+                // Находим ближайшую шестерню к этому врагу
+                Vector3 enemyPos = enemy.transform.position;
+                Vector3 closestCog = chain.positions[0];
+                float closestDist = IsometricExtension.IsoDistance(enemyPos, closestCog);
+
+                foreach (var cogPos in chain.positions)
+                {
+                    float dist = IsometricExtension.IsoDistance(enemyPos, cogPos);
+                    if (dist < closestDist)
+                    {
+                        closestDist = dist;
+                        closestCog = cogPos;
+                    }
+                }
+
+                // Только если враг достаточно близко к шестерне
+                if (closestDist > cogSpacing) continue;
+
+                // Создаём ответвление
+                GameObject branchObj = new GameObject($"Branch_{chain.positions.IndexOf(closestCog)}_{usedEnemies.Count}");
+                branchObj.transform.SetParent(transform);
+                LineRenderer branchLine = branchObj.AddComponent<LineRenderer>();
+                branchLine.startWidth = lightningWidth * 0.6f;
+                branchLine.endWidth = lightningWidth * 0.2f;
+                branchLine.positionCount = 2;
+                branchLine.SetPosition(0, closestCog);
+                branchLine.SetPosition(1, enemyPos);
+                branchLine.startColor = lightningColor;
+                branchLine.endColor = new Color(lightningColor.r, lightningColor.g, lightningColor.b, 0.3f);
+                branchLine.sortingLayerName = "Effects";
+                branchLine.sortingOrder = 1;
+                branchLine.useWorldSpace = true;
+
+                HealthComponent hp = enemy.GetComponent<HealthComponent>();
+                if (hp != null)
+                    hp.TakeDamage(Mathf.RoundToInt(currentDamage * 0.75f));
+
+                usedEnemies.Add(enemy);
+                Destroy(branchObj, attackDuration);
+
+                if (usedEnemies.Count >= extraBranches) break;
+            }
+        }
+
+        private void CreatePillarsForChain(CogChain chain)
+        {
+            if (!hasLightningPillar) return;
+
+            foreach (var cogPos in chain.positions)
+            {
+                GameObject pillar = null;
+
+                if (data.projectilesPrefabs[2] != null)
+                {
+                    pillar = Instantiate(data.projectilesPrefabs[2], cogPos, Quaternion.identity, transform);
+                }
+                // Fallback: LineRenderer
+                else
+                {
+                    pillar = new GameObject($"Pillar_{chain.positions.IndexOf(cogPos)}");
+                    pillar.transform.SetParent(transform);
+                    pillar.transform.position = cogPos;
+                    LineRenderer lr = pillar.AddComponent<LineRenderer>();
+                    lr.startWidth = lightningWidth * 1.5f;
+                    lr.endWidth = lightningWidth * 0.8f;
+                    lr.positionCount = 2;
+                    lr.SetPosition(0, cogPos);
+                    lr.SetPosition(1, cogPos + Vector3.up * 3f);
+                    lr.startColor = lightningColor;
+                    lr.endColor = new Color(lightningColor.r, lightningColor.g, lightningColor.b, 0.5f);
+                    lr.sortingLayerName = "Effects";
+                    lr.sortingOrder = 2;
+                    lr.useWorldSpace = true;
+                }
+
+                if (pillar != null)
+                    activePillars.Add(pillar);
+            }
+        }
+
         private void DealDamageAlongLightning()
         {
             Collider2D[] allEnemies = Physics2D.OverlapCircleAll(towerTransform.position, currentRange);
@@ -297,7 +408,7 @@ namespace Assets.Scripts.Equipment
                     // Проверяем урон вокруг каждой шестерни
                     foreach (var cogPos in chain.positions)
                     {
-                        if (Vector3.Distance(enemyPos, cogPos) <= 1.5f)
+                        if (IsometricExtension.IsoDistance(enemyPos, cogPos) <= 1.5f)
                         {
                             HealthComponent health = enemyCollider.GetComponent<HealthComponent>();
                             if (health != null && !damagedEnemies.Contains(health))
@@ -339,6 +450,28 @@ namespace Assets.Scripts.Equipment
                     }
                 }
             }
+
+            if (hasLightningPillar)
+            {
+                foreach (var chain in activeChains)
+                {
+                    foreach (var cogPos in chain.positions)
+                    {
+                        // Урон по вертикали над каждой шестернёй
+                        Collider2D[] pillarTargets = Physics2D.OverlapCircleAll(cogPos, lightningDamageWidth * 1.5f);
+                        foreach (var col in pillarTargets)
+                        {
+                            if (!col.CompareTag("Enemy")) continue;
+                            HealthComponent health = col.GetComponent<HealthComponent>();
+                            if (health != null && !damagedEnemies.Contains(health))
+                            {
+                                health.TakeDamage(Mathf.RoundToInt(currentDamage * 0.5f));
+                                damagedEnemies.Add(health);
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         private float PointToSegmentDistance(Vector3 point, Vector3 a, Vector3 b)
@@ -354,7 +487,7 @@ namespace Assets.Scripts.Equipment
             t = Mathf.Clamp01(t);
 
             Vector2 closestPoint = a2 + t * ab;
-            return Vector2.Distance(p, closestPoint);
+            return Vector3.Distance(p, closestPoint);
         }
 
         private IEnumerator ReturnCogsToPool()
@@ -389,6 +522,10 @@ namespace Assets.Scripts.Equipment
                 }
             }
 
+            foreach (var pillar in activePillars)
+                if (pillar != null) Destroy(pillar);
+            activePillars.Clear();
+
             activeChains.Clear();
         }
 
@@ -411,17 +548,89 @@ namespace Assets.Scripts.Equipment
 
         protected override void ApplyEffect(string upgradeId)
         {
-            throw new NotImplementedException();
-        }
+            switch (upgradeId)
+            {
+                case "LightningCogs_1":
+                    currentRange += 1.5f;
+                    cogsAmount += 2;
+                    cogSpacing = currentRange / cogsAmount;
+                    break;
 
-        protected override void Upgrade(int upgradeIndex)
-        {
-            throw new NotImplementedException();
+                case "LightningCogs_2":
+                    currentRange += 1.5f;
+                    extraBranches = 2;
+                    lightningDamageWidth *= 1.15f;
+                    break;
+
+                case "LightningCogs_3": // fork A
+                    lightningTickTimes = 2;
+                    lightningDamageWidth *= 1.2f;
+                    break;
+
+                case "LightningCogs_4": // fork B
+                    // Будет обрабатываться в DrawLightningForChain + отдельный урон
+                    hasLightningPillar = true;
+                    currentDamage = Mathf.RoundToInt(currentDamage * 1.5f);
+                    lightningTickTimes = Mathf.Max(1, lightningTickTimes - 1);
+                    break;
+
+                case "LightningCogs_5": // Магнитный резонанс (Active)
+                    HasActiveAbility = true;
+                    break;
+
+                default:
+                    Debug.LogWarning($"[LightningCogs] Unknown upgradeId: {upgradeId}");
+                    break;
+            }
+
+            // Перестройка пула
+            foreach (var cog in cogsPool)
+                if (cog != null) Destroy(cog);
+            cogsPool.Clear();
+
+            for (int i = 0; i < currentProjectileCount * cogsAmount * 2; i++)
+            {
+                GameObject cog = Instantiate(data.projectilesPrefabs[0], transform);
+                cog.SetActive(false);
+                cogsPool.Enqueue(cog);
+            }
         }
 
         protected override void ActivateAbility()
         {
-            throw new NotImplementedException();
+            if (!HasActiveAbility) return;
+            StartCoroutine(MagneticResonance());
+        }
+
+        private IEnumerator MagneticResonance()
+        {
+            // Притягиваем врагов к шестерням перед ударом молнии
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+            float pullDuration = 0.5f;
+            float elapsed = 0f;
+
+            while (elapsed < pullDuration)
+            {
+                foreach (var chain in activeChains)
+                {
+                    foreach (var cogPos in chain.positions)
+                    {
+                        foreach (var enemy in enemies)
+                        {
+                            if (enemy == null) continue;
+                            float dist = IsometricExtension.IsoDistance(enemy.transform.position, cogPos);
+                            if (dist <= currentRange * 0.5f)
+                            {
+                                Vector3 pullDir = (cogPos - enemy.transform.position).normalized;
+                                enemy.transform.position += pullDir * 3f * Time.deltaTime;
+                            }
+                        }
+                    }
+                }
+                elapsed += Time.deltaTime;
+                yield return null;
+            }
         }
     }
 }

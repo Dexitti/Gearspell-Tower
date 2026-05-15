@@ -81,7 +81,7 @@ namespace Assets.Scripts.Equipment
             GameObject[] enemyArray = GameObject.FindGameObjectsWithTag("Enemy");
             foreach (var enemy in enemyArray)
             {
-                if (Vector3.Distance(towerTransform.position, enemy.transform.position) <= currentRange)
+                if (IsometricExtension.IsoDistance(towerTransform.position, enemy.transform.position) <= currentRange)
                 {
                     hasEnemies = true;
                     HealthComponent enemyHP = enemy.GetComponent<HealthComponent>();
@@ -95,11 +95,6 @@ namespace Assets.Scripts.Equipment
         }
 
         protected override void ApplyEffect(string upgradeId)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override void Upgrade(int upgradeIndex)
         {
             throw new NotImplementedException();
         }

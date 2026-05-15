@@ -21,6 +21,8 @@ public class UpgradeSystem : MonoBehaviour
     //[SerializeField] private GameObject minePrefab;
 
     private Dictionary<EquipmentData, int> equipmentStageTracker = new();
+    private List<UpgradeData> cachedAvailableUpgrades;
+    private bool isCacheValid = false;
 
     //private float regenBoostTimer = 0f;
     //private List<GameObject> activeMines = new();
@@ -46,15 +48,20 @@ public class UpgradeSystem : MonoBehaviour
     public void OpenUpgradeMenu()
     {
         List<UpgradeData> availableUpgrades = GetAvailableUpgrades();
-        upgradeScreen.Open(availableUpgrades, OnUpgradeSelected);
+        int count = Mathf.Min(numberInSelection, availableUpgrades.Count);
+        var initialOffers = availableUpgrades.Take(count).ToList();
+        upgradeScreen.Open(initialOffers, OnUpgradeSelected);
     }
 
-    private List<UpgradeData> GetAvailableUpgrades()
+    public List<UpgradeData> GetAvailableUpgrades()
     {
+        if (isCacheValid && cachedAvailableUpgrades != null)
+            return cachedAvailableUpgrades;
+
         List<UpgradeData> available = new();
 
         // Если есть свободные слоты, добавляем новое снаряжение из открытых
-        if (G.EquipmentManager.HasFreeSlot())
+        if (G.EquipmentManager != null && G.EquipmentManager.HasFreeSlot())
         {
             foreach (var eq in allEquipmentUpgrades)
             {
@@ -62,7 +69,9 @@ public class UpgradeSystem : MonoBehaviour
 
                 if (eq.stages.Count > 0 && eq.stages[0].upgradeData.Count > 0)
                 {
-                    available.Add(eq.stages[0].upgradeData[0]);
+                    var upgrade = eq.stages[0].upgradeData[0];
+                    if (!available.Contains(upgrade))
+                        available.Add(upgrade);
                 }
             }
         }
@@ -81,13 +90,15 @@ public class UpgradeSystem : MonoBehaviour
                     // Проверяем, не взято ли уже (для обычных стадий)
                     if (!stageData.isFork && contr.GetAppliedUpgradeIds().Contains(upgrade.id))
                         continue;
-                    available.Add(upgrade);
+                    if (!available.Contains(upgrade))
+                        available.Add(upgrade);
                 }
             }
         }
 
-        // Перемешиваем и берём 3 случайных
-        return available.OrderBy(x => UnityEngine.Random.Range(0, int.MaxValue)).Take(numberInSelection).ToList();
+        cachedAvailableUpgrades = available.OrderBy(x => UnityEngine.Random.Range(0, int.MaxValue)).ToList();
+        isCacheValid = true;
+        return cachedAvailableUpgrades;
     }
 
     private void OnUpgradeSelected(UpgradeData upgrade)
@@ -106,35 +117,44 @@ public class UpgradeSystem : MonoBehaviour
             {
                 G.EquipmentManager.EquipToSlot(prefab, slot);
                 equipmentStageTracker[targetEq] = 1;
+
+                G.ProgressManager?.SetEquipmentStage(targetEq.equipmentName, 1);
             }
             return;
         }
-
-        // Находим контроллер
-        var controller = G.EquipmentManager.GetControllerForData(targetEq);
-        if (controller == null) return;
-
-        // Применяем улучшение
-        controller.AddUpgradeId(upgrade.id);
-        controller.RefreshStats();
-
-        // Обновляем стадию
-        int currentStage = equipmentStageTracker[targetEq];
-        UpgradeStages stageData = targetEq.stages[currentStage];
-
-        if (stageData.isFork)
+        else
         {
-            // Развилка — сохраняем выбор
-            int choiceIndex = stageData.upgradeData.IndexOf(upgrade);
-            G.ProgressManager?.SetForkChoice(targetEq.equipmentName, choiceIndex);
+
+            // Находим контроллер
+            var controller = G.EquipmentManager.GetControllerForData(targetEq);
+            if (controller == null) return;
+
+            // Применяем улучшение
+            controller.AddUpgradeId(upgrade.id);
+            controller.RefreshStats();
+
+            // Обновляем стадию
+            int currentStage = equipmentStageTracker[targetEq];
+            UpgradeStages stageData = targetEq.stages[currentStage];
+
+            if (stageData.isFork)
+            {
+                // Развилка — сохраняем выбор
+                int choiceIndex = stageData.upgradeData.IndexOf(upgrade);
+                G.ProgressManager?.SetForkChoice(targetEq.equipmentName, choiceIndex);
+                controller.ForkChoice = choiceIndex;
+            }
+
+            equipmentStageTracker[targetEq] = currentStage + 1;
+
+            // Сохраняем
+            G.ProgressManager?.SetEquipmentStage(targetEq.equipmentName, currentStage + 1);
+            G.ProgressManager?.AddAppliedUpgrade(targetEq.equipmentName, upgrade.id);
+            Debug.Log($"[UpgradeSystem] Applied {upgrade.upgradeName} to {targetEq.equipmentName}, stage now {currentStage + 1}");
         }
 
-        equipmentStageTracker[targetEq] = currentStage + 1;
-
-        // Сохраняем
-        G.ProgressManager?.SetEquipmentStage(targetEq.equipmentName, currentStage + 1);
-        G.ProgressManager?.AddAppliedUpgrade(targetEq.equipmentName, upgrade.id);
-        Debug.Log($"[UpgradeSystem] Applied {upgrade.upgradeName} to {targetEq.equipmentName}, stage now {currentStage + 1}");
+        InvalidateCache();
+        G.EventManager?.TriggerEquipmentUpgraded(targetEq, equipmentStageTracker[targetEq]);
     }
 
     private EquipmentData FindEquipmentForUpgrade(UpgradeData upgrade)
@@ -148,6 +168,12 @@ public class UpgradeSystem : MonoBehaviour
             }
         }
         return null;
+    }
+
+    private void InvalidateCache()
+    {
+        isCacheValid = false;
+        cachedAvailableUpgrades = null;
     }
 
     public int GetCheapestUpgradeCost()
