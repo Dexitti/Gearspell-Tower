@@ -7,46 +7,72 @@ using System.Threading.Tasks;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
-namespace Assets.Scripts.Equipment
+public class WaterHammerProjectile : MonoBehaviour
 {
-    public class WaterHammerProjectile : MonoBehaviour
+    private int damage;
+    private bool hasHit = false;
+
+    private bool hasStun;
+    private float stunRadius;
+    private float stunDuration;
+    private bool hasArmorBreak;
+    private int bonusDamage;
+
+    public int Damage { get => damage; set => damage = value; }
+    public Transform Target { get; set; }
+    public bool HasArmorBreak { get => hasArmorBreak; set => hasArmorBreak = value; }
+    public int BonusDamage { get => bonusDamage; set => bonusDamage = value; }
+
+    public void SetStunParameters(bool hasStun, float stunRadius, float stunDuration)
     {
-        private int damage;
-        private bool hasHit = false;
+        this.hasStun = hasStun;
+        this.stunRadius = stunRadius;
+        this.stunDuration = stunDuration;
+    }
 
-        public int Damage { get => damage; set => damage = value; }
-        public Transform Target {  get; set; }
+    public void ColliderOn()
+    {
+        GetComponent<CircleCollider2D>().enabled = true;
+    }
 
-        public void ColliderOn()
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (hasHit) return;
+
+        if (other.transform == Target)
         {
-            GetComponent<CircleCollider2D>().enabled = true;
-        }
-
-        private void OnTriggerEnter2D(Collider2D other)
-        {
-            if (hasHit) return;
-
-            if (other.transform == Target)
+            hasHit = true;
+            HealthComponent enemyHP = Target.GetComponent<HealthComponent>();
+            if (enemyHP != null)
             {
-                hasHit = true;
-                HealthComponent enemyHP = Target.GetComponent<HealthComponent>();
-                if (enemyHP != null)
-                {
-                    enemyHP.TakeDamage(Damage);
-                }
+                enemyHP.TakeDamage(Damage);
             }
 
-            StartCoroutine(PlayHitAnimationAndDestroy());
+            if (hasStun)
+            {
+                Collider2D[] nearby = Physics2D.OverlapCircleAll(Target.position, stunRadius);
+                foreach (var col in nearby)
+                {
+                    if (col.CompareTag("Enemy"))
+                    {
+                        Creature creature = col.GetComponent<Creature>();
+                        if (creature != null)
+                            creature.ApplyStun(stunDuration);
+                    }
+                }
+            }
         }
 
-        IEnumerator PlayHitAnimationAndDestroy()
-        {
-            GetComponent<CircleCollider2D>().enabled = false;
+        StartCoroutine(PlayHitAnimationAndDestroy());
+    }
 
-            Animator animator = GetComponent<Animator>();
-            AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-            yield return new WaitForSeconds(stateInfo.length);
-            Destroy(gameObject);
-        }
+    IEnumerator PlayHitAnimationAndDestroy()
+    {
+        GetComponent<CircleCollider2D>().enabled = false;
+
+        Animator animator = GetComponent<Animator>();
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        yield return new WaitForSeconds(stateInfo.length);
+        Destroy(gameObject);
     }
 }

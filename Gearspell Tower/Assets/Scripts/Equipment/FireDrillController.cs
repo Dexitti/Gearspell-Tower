@@ -178,7 +178,7 @@ public class FireDrillController : EquipmentController
                 fireGround = true;
                 hasStun = true;
                 stunChance = 0.15f;
-                stunDuration = 1f;
+                stunDuration = 0.75f;
                 break;
 
             case "FireDrill_5":

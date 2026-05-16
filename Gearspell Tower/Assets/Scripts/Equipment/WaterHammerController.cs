@@ -10,6 +10,12 @@ namespace Assets.Scripts.Equipment
 {
     public class WaterHammerController : EquipmentController
     {
+        private bool hasStun = false;
+        private float stunRadius = 1f;
+        private float stunDuration = 1f;
+        private bool hasArmorBreak = false;
+        private int bonusDamage = 0;
+        private int abilityHitCount = 3;
 
         protected override IEnumerator Attack()
         {
@@ -61,12 +67,74 @@ namespace Assets.Scripts.Equipment
 
         protected override void ApplyEffect(string upgradeId)
         {
-            throw new NotImplementedException();
+            switch (upgradeId)
+            {
+                case "WaterHammer_1":
+                    currentDamage = Mathf.RoundToInt(currentDamage * 1.6f);
+                    break;
+
+                case "WaterHammer_2":
+                    currentAttackCooldown *= 0.65f;
+                    currentProjectileCount += 1;
+                    break;
+
+                case "WaterHammer_3": // fork A
+                    hasStun = true;
+                    stunRadius = 1f;
+                    stunDuration = 1f;
+                    break;
+
+                case "WaterHammer_4": // fork B
+                    hasArmorBreak = true;
+                    bonusDamage = Mathf.RoundToInt(currentDamage * 0.33f);
+                    break;
+
+                case "WaterHammer_5":
+                    HasActiveAbility = true;
+                    abilityHitCount = 3;
+                    break;
+
+                default:
+                    Debug.LogWarning($"[WaterHammer] Unknown upgradeId: {upgradeId}");
+                    break;
+            }
         }
 
         protected override void ActivateAbility()
         {
-            throw new NotImplementedException();
+            if (!HasActiveAbility) return;
+            StartCoroutine(Avalanche());
+        }
+
+        private IEnumerator Avalanche()
+        {
+            Transform target = GetStrongestEnemy();
+            if (target == null) yield break;
+
+            float stunDurMult = 0.5f;
+            for (int hit = 0; hit < abilityHitCount; hit++)
+            {
+                // Каждый следующий удар сильнее
+                int hitDamage = Mathf.RoundToInt(currentDamage * (1f + hit * 0.5f));
+                float hitRadius = 1.5f + hit * 0.5f;
+
+                bool flipX = hit % 2 == 0;
+                Vector3 spawnPos = GetSpawnPosition(target, flipX) + Vector3.up * 1.5f;
+
+                GameObject hammer = Instantiate(data.projectilesPrefabs[0], spawnPos, Quaternion.identity, transform);
+
+                SpriteRenderer sprite = hammer.GetComponent<SpriteRenderer>();
+                sprite.flipX = flipX;
+
+                WaterHammerProjectile projScript = hammer.GetComponent<WaterHammerProjectile>();
+                projScript.Target = target;
+                projScript.Damage = hitDamage;
+                projScript.SetStunParameters(true, hitRadius, 0.1f + hit * stunDurMult);
+                projScript.HasArmorBreak = hasArmorBreak;
+                projScript.BonusDamage = bonusDamage;
+
+                yield return new WaitForSeconds(0.4f);
+            }
         }
     }
 }

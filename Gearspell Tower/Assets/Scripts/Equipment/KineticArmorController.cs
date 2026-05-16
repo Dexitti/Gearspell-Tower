@@ -19,6 +19,15 @@ namespace Assets.Scripts.Equipment
         private bool isShieldActive = false;
         private Coroutine rechargeCoroutine;
 
+        private float reflectDamageMultiplier = 0.5f;
+        private bool hasKnockback = false;
+        private float knockbackForce;
+        private bool convertToShield = false;
+        private bool isFullCircle = false;
+        private float noHitTimer = 0f;
+        private float maxBonusRange = 2f;
+        private bool provokeOtherEquipment = false;
+
         protected override void OnEnable()
         {
             base.OnEnable();
@@ -49,6 +58,14 @@ namespace Assets.Scripts.Equipment
             }
         }
 
+        private void Update()
+        {
+            if (isFullCircle && isShieldActive)
+            {
+                noHitTimer += Time.deltaTime;
+            }
+        }
+
         private void IsEnemyHit(int damage, Action<int> setDamage)
         {
             Debug.Log($"IsEnemyHit ВЫЗВАН! damage={damage}, isShieldActive={isShieldActive}, charges={currentShieldCharges}");
@@ -57,6 +74,7 @@ namespace Assets.Scripts.Equipment
                 currentShieldCharges--;
                 ReflectAttack(damage);
                 setDamage(0);
+                noHitTimer = 0f;
                 Debug.Log($"Урон ОТМЕНЕН! Осталось зарядов: {currentShieldCharges}");
 
                 if (currentShieldCharges <= 0)
@@ -75,31 +93,16 @@ namespace Assets.Scripts.Equipment
 
         private void ReflectAttack(int damage)
         {
-            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            GameObject closestEnemy = null;
-            float closestDistance = currentRange;
+            float bonusRange = isFullCircle ? Mathf.Min(noHitTimer * 0.5f, maxBonusRange) : 0f;
+            float effectiveRange = currentRange + bonusRange;
 
-            foreach (GameObject enemy in enemies)
+            int reflectDamage = Mathf.RoundToInt(damage * reflectDamageMultiplier);
+
+            if (isFullCircle)
             {
-                float distance = IsometricExtension.IsoDistance(transform.position, enemy.transform.position);
-                if (distance < closestDistance)
-                {
-                    closestDistance = distance;
-                    closestEnemy = enemy;
-                }
-            }
-
-            if (closestEnemy != null)
-            {
-                Vector3 direction = (closestEnemy.transform.position - towerTransform.position).normalized;
-                Vector3 spawnPosition = towerTransform.position + direction * 0.25f;
-
-                GameObject reflect = Instantiate(data.projectilesPrefabs[0], spawnPosition, Quaternion.LookRotation(Vector3.forward, direction));
-
-                int reflectDamage = Mathf.RoundToInt(damage * 0.5f); // 50% от полученного урона
-
-                Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(closestEnemy.transform.position, currentSize);
-                foreach (Collider2D hit in hitEnemies)
+                // Атака по всем врагам вокруг
+                Collider2D[] allEnemies = Physics2D.OverlapCircleAll(towerTransform.position, effectiveRange);
+                foreach (var hit in allEnemies)
                 {
                     if (hit.CompareTag("Enemy"))
                     {
@@ -107,6 +110,66 @@ namespace Assets.Scripts.Equipment
                         if (enemyHealth != null)
                         {
                             enemyHealth.TakeDamage(reflectDamage);
+                            if (hasKnockback)
+                                ApplyKnockback(hit.gameObject);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+                GameObject closestEnemy = null;
+                float closestDistance = effectiveRange;
+
+                foreach (GameObject enemy in enemies)
+                {
+                    float distance = IsometricExtension.IsoDistance(transform.position, enemy.transform.position);
+                    if (distance < closestDistance)
+                    {
+                        Vector3 toEnemy = (enemy.transform.position - towerTransform.position).normalized;
+                        float angle = Vector3.Angle(towerTransform.right, toEnemy);
+                        if (angle <= reflectAngleWidth * 0.5f)
+                        {
+                            closestDistance = distance;
+                            closestEnemy = enemy;
+                        }
+                    }
+                }
+
+                if (closestEnemy != null)
+                {
+                    HealthComponent enemyHealth = closestEnemy.GetComponent<HealthComponent>();
+                    if (enemyHealth != null)
+                    {
+                        enemyHealth.TakeDamage(reflectDamage);
+                        if (hasKnockback)
+                            ApplyKnockback(closestEnemy);
+                    }
+                }
+
+                // Конвертор: прибавляем заряд щита
+                if (convertToShield)
+                {
+                    currentShieldCharges = Mathf.Min(currentShieldCharges + 1, currentProjectileCount);
+                    if (!isShieldActive && currentShieldCharges > 0)
+                    {
+                        isShieldActive = true;
+                        if (decorationInstance != null)
+                            decorationInstance.SetActive(true);
+                    }
+                }
+
+                // Резонанс: провоцируем атаку других снаряжений
+                if (provokeOtherEquipment)
+                {
+                    var controllers = G.EquipmentManager?.GetAllActiveControllers();
+                    if (controllers != null)
+                    {
+                        foreach (var ctrl in controllers)
+                        {
+                            //if (ctrl != this)
+                            //    ctrl.ActivateAttack();
                         }
                     }
                 }
@@ -117,6 +180,16 @@ namespace Assets.Scripts.Equipment
                     reflectEffect.Play();
                 }
             }
+        }
+
+        private void ApplyKnockback(GameObject enemy)
+        {
+            Vector3 knockDir = (enemy.transform.position - towerTransform.position).normalized;
+            enemy.transform.position += knockDir * knockbackForce * 0.5f;
+
+            Creature creature = enemy.GetComponent<Creature>();
+            if (creature != null)
+                creature.ApplyStun(0.1f);
         }
 
         private IEnumerator ReloadCharge()
@@ -141,12 +214,55 @@ namespace Assets.Scripts.Equipment
 
         protected override void ApplyEffect(string upgradeId)
         {
-            throw new NotImplementedException();
+            switch (upgradeId)
+            {
+                case "KineticArmor_1":
+                    currentAttackCooldown *= 0.66f;
+                    break;
+
+                case "KineticArmor_2":
+                    reflectDamageMultiplier = 1.5f;
+                    hasKnockback = true;
+                    knockbackForce = 5f;
+                    break;
+
+                case "KineticArmor_3": // fork A
+                    currentProjectileCount += 1;
+                    convertToShield = true;
+                    break;
+
+                case "KineticArmor_4": // fork B
+                    currentProjectileCount += 1;
+                    isFullCircle = true;
+                    currentRange *= 0.8f;
+                    break;
+
+                case "KineticArmor_5":
+                    currentProjectileCount += 1;
+                    provokeOtherEquipment = true;
+                    HasActiveAbility = true;
+                    break;
+
+                default:
+                    Debug.LogWarning($"[KineticArmor] Unknown upgradeId: {upgradeId}");
+                    break;
+            }
         }
         
         protected override void ActivateAbility()
         {
-            throw new NotImplementedException();
+            if (!HasActiveAbility) return;
+
+            // Мгновенно провоцируем все снаряжения
+            var controllers = G.EquipmentManager?.GetAllActiveControllers();
+            if (controllers != null)
+            {
+                foreach (var ctrl in controllers)
+                {
+                    //if (ctrl != this)
+                    //    ctrl.ActivateAttack();
+                }
+            }
         }
     }
 }

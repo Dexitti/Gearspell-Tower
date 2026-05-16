@@ -22,7 +22,7 @@ MonoBehaviour:
   - {fileID: 0}
   damage: 4
   size: 1
-  attackCooldown: 4.3
+  attackCooldown: 3.5
   range: 4
   projectileCount: 1
   stages:
