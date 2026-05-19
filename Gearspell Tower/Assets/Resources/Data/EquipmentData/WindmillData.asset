@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: WindmillData
   m_EditorClassIdentifier: 
   equipmentName: "\u0412\u0435\u0442\u0440\u044F\u043D\u0430\u044F \u043C\u0435\u043B\u044C\u043D\u0438\u0446\u0430"
+  icon: {fileID: 21300000, guid: 5a177e112b4336b41adcc90e2cd253d3, type: 3}
   isUnlocked: 1
   decorationPrefab: {fileID: 2299851849574036346, guid: aa755e416728e234a865b94641495a2b, type: 3}
   projectilesPrefabs:

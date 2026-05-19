@@ -28,7 +28,7 @@
     { "key": "Pause", "ru": "Пауза", "en": "Pause" },
     { "key": "Gears", "ru": "Шестеренки", "en": "Gears" },
     { "key": "Upgrade", "ru": "Улучшить", "en": "Upgrade" },
-    { "key": "UnlockSlot", "ru": "Открыть слот", "en": "Unlock slot" },
+    { "key": "Buy", "ru": "Открыть", "en": "Buy" },
     { "key": "Heal", "ru": "Восстановить", "en": "Heal" },
     { "key": "Regen", "ru": "Усилить регенерацию", "en": "Boost regen" },
     { "key": "PlaceMines", "ru": "Разместить мины", "en": "Place mines" },

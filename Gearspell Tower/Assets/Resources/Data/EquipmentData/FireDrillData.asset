@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: FireDrillData
   m_EditorClassIdentifier: 
   equipmentName: "\u041E\u0433\u043D\u0435\u043D\u043D\u044B\u0439 \u0431\u0443\u0440"
+  icon: {fileID: 21300000, guid: 118b91b44f0a930409e2f7a3f03baf8c, type: 3}
   isUnlocked: 1
   decorationPrefab: {fileID: 4046091921722235949, guid: 1dd5cbe976d0c0643b5106f7a46ca0cd, type: 3}
   projectilesPrefabs:

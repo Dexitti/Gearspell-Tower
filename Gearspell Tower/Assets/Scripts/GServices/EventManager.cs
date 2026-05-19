@@ -16,8 +16,14 @@ public class EventManager : MonoBehaviour
     public void TriggerTowerDestroyed() => OnTowerDestroyed?.Invoke();
 
     // === Снаряжение ===
+    public event Action<int> OnSlotUnlocked;
+    public void TriggerSlotUnlocked(int slotIndex) => OnSlotUnlocked?.Invoke(slotIndex);
+
     public event Action<EquipmentData[]> OnEquipmentUnlocked;
     public void TriggerEquipmentUnlocked(EquipmentData[] equipment) => OnEquipmentUnlocked?.Invoke(equipment);
+
+    public event Action<EquipmentData, int> OnEquipmentEquipped;
+    public void TriggerEquipmentEquipped(EquipmentData data, int slotIndex) => OnEquipmentEquipped?.Invoke(data, slotIndex);
 
     public event Action<EquipmentData, int> OnEquipmentUpgraded;
     public void TriggerEquipmentUpgraded(EquipmentData data, int newLevel) => OnEquipmentUpgraded?.Invoke(data, newLevel);

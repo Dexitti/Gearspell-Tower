@@ -117,7 +117,7 @@ public class UpgradeSystem : MonoBehaviour
             {
                 G.EquipmentManager.EquipToSlot(prefab, slot);
                 equipmentStageTracker[targetEq] = 1;
-
+                G.EventManager?.TriggerEquipmentUpgraded(targetEq, 1);
                 G.ProgressManager?.SetEquipmentStage(targetEq.equipmentName, 1);
             }
             return;

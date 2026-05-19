@@ -212,7 +212,7 @@
         {
           "isFork": false,
           "upgrades": [
-            { "cardType": "ActiveAbility", "upgradeName": "Резонанс", "description": "Открывает активную способность. Отражение провоцирует атаку других снаряжений" }
+            { "cardType": "ActiveAbility", "upgradeName": "Ускоритель", "description": "Открывает активную способность. Каждое отражение провоцирует атаку других снаряжений" }
           ]
         }
       ]

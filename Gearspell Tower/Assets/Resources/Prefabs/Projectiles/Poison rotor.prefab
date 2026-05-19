@@ -152,9 +152,6 @@ MonoBehaviour:
   rotorSpeed: 2
   wobbleAmount: 0.5
   wobbleFrequency: 2
-  damageTickInterval: 1
-  cloudDuration: 3
-  cloudRadius: 1
 --- !u!1 &3124101552199634196
 GameObject:
   m_ObjectHideFlags: 0
@@ -5367,7 +5364,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.8396226, g: 0.6015455, b: 0.32872015, a: 0.98039216}
+      maxColor: {r: 1, g: 1, b: 1, a: 0.6509804}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -6512,8 +6509,8 @@ ParticleSystem:
         m_NumAlphaKeys: 2
   UVModule:
     serializedVersion: 2
-    enabled: 0
-    mode: 0
+    enabled: 1
+    mode: 1
     timeMode: 0
     fps: 30
     frameOverTime:
@@ -6631,7 +6628,7 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 0}
+    - sprite: {fileID: 21300000, guid: 48494550ea9164b4b98639406314c958, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:

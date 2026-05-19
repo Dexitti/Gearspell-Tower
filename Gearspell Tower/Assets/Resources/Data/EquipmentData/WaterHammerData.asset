@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: WaterHammerData
   m_EditorClassIdentifier: 
   equipmentName: "\u0412\u043E\u0434\u044F\u043D\u043E\u0439 \u043C\u043E\u043B\u043E\u0442"
+  icon: {fileID: 21300000, guid: af1fc705e16152f40a536e470a7b4615, type: 3}
   isUnlocked: 1
   decorationPrefab: {fileID: 326767618567787862, guid: 0b54e4b2d99dc454ebaf43041e3ca9f1, type: 3}
   projectilesPrefabs:

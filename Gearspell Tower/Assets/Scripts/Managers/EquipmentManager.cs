@@ -45,6 +45,10 @@ public class EquipmentManager : MonoBehaviour
         // Загрузка стартового снаряжения
         startUnlockedEquipment = Resources.LoadAll<EquipmentData>("Data/EquipmentData")
             .Where(eqData => eqData.name == "WindmillData" || eqData.name == "FireDrillData" || eqData.name == "LightningCogsData").ToArray();
+
+        //if (!G.SaveManager.IsEquipmentUnlocked("CryogenicStabilizer"))
+        //    G.SaveManager.UnlockEquipment("CryogenicStabilizer"); // Отладка
+
         if (!G.ProgressManager.HasSession)
         {
             foreach (var eq in startUnlockedEquipment)
@@ -113,6 +117,13 @@ public class EquipmentManager : MonoBehaviour
             Debug.Log($"Снаряжение {newEquipment.name} экипировано в слот {slotIndex}");
         }
 
+        if (slotControllers[slotIndex] != null)
+            slotControllers[slotIndex].EquippedSlotIndex = slotIndex;
+
+        var controller = slotControllers[slotIndex];
+        if (controller != null && controller.Data != null)
+            G.EventManager?.TriggerEquipmentEquipped(controller.Data, slotIndex);
+
         return true;
     }
 
@@ -155,12 +166,14 @@ public class EquipmentManager : MonoBehaviour
         {
             isBackpackUnlocked = true;
             G.ProgressManager?.SetBackpackUnlocked(true);
+            G.EventManager?.TriggerSlotUnlocked(-1);
             Debug.Log("[EquipmentManager] Рюкзак разблокирован");
         }
         else if (unlockedSlots < maxSlots)
         {
             unlockedSlots++;
             G.ProgressManager?.SetUnlockedSlots(unlockedSlots);
+            G.EventManager?.TriggerSlotUnlocked(unlockedSlots - 1);
             Debug.Log($"[EquipmentManager] Слот {unlockedSlots} разблокирован");
         }
 
@@ -181,6 +194,19 @@ public class EquipmentManager : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    public int GetSlotUnlockCost(int slotIndex)
+    {
+        if (!isBackpackUnlocked && slotIndex == 0)
+            return backpackUnlockCost; // Только для первого раза
+
+        if (slotIndex < unlockedSlots) return 0;
+
+        if (slotIndex - 1 < slotUnlockCosts.Length)
+            return slotUnlockCosts[slotIndex - 1];
+
+        return 999;
     }
 
     public bool HasFreeSlot() => Array.FindIndex(activeEquipment, 0, unlockedSlots, s => s == null) >= 0;

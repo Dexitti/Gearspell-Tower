@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 
 public class HUDController : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class HUDController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private TextMeshProUGUI waveNumberText;
     [SerializeField] private TextMeshProUGUI gearsText;
+
+    [SerializeField] private EquipmentInventoryPanel inventoryPanel;
 
     [Header("Upgrade Available Indicator")]
     [SerializeField] private GameObject upgradeIndicator;
@@ -50,12 +53,22 @@ public class HUDController : MonoBehaviour
         G.EventManager.OnTowerHealthChanged += UpdateHealthBar;
         G.EventManager.OnWaveStarted += UpdateWaveNumber;
         G.EventManager.OnGearsChanged += UpdateGears;
+        G.EventManager.OnEquipmentUnlocked += OnEquipmentUnlocked;
+        G.EventManager.OnSlotUnlocked += (int slot) => inventoryPanel?.Refresh();
+        G.EventManager.OnEquipmentEquipped += (data, slot) => inventoryPanel?.Refresh();
         G.EventManager.OnEquipmentUpgraded += OnEquipmentUpgraded;
 
         SetupButtons();
+        StartCoroutine(DelayedInventoryRefresh());
 
         if (G.GameManager != null)
             OnGameStateChanged(G.GameManager.CurrentState);
+    }
+
+    private IEnumerator DelayedInventoryRefresh()
+    {
+        yield return null; // Ждём один кадр
+        inventoryPanel?.Refresh();
     }
 
     private void Update()
@@ -89,6 +102,7 @@ public class HUDController : MonoBehaviour
         G.EventManager.OnWaveStarted -= UpdateWaveNumber;
         G.EventManager.OnGearsChanged -= UpdateGears;
         G.EventManager.OnEquipmentUpgraded -= OnEquipmentUpgraded;
+        G.EventManager.OnEquipmentUnlocked -= OnEquipmentUnlocked;
     }
 
     private void SetupButtons()
@@ -133,8 +147,21 @@ public class HUDController : MonoBehaviour
         CheckUpgradeAvailability();
     }
 
+    private void OnEquipmentChanged(EquipmentData data, int level)
+    {
+        inventoryPanel?.Refresh();
+        CheckUpgradeAvailability();
+    }
+
+    private void OnEquipmentUnlocked(EquipmentData[] equipment)
+    {
+        inventoryPanel?.Refresh();
+        CheckUpgradeAvailability();
+    }
+
     private void OnEquipmentUpgraded(EquipmentData data, int newLevel)
     {
+        inventoryPanel?.Refresh();
         CheckUpgradeAvailability();
     }
 

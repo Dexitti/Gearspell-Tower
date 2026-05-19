@@ -11,13 +11,6 @@ public class Tower : MonoBehaviour
 
     public Vector3 Position => transform.position;
 
-    // Модификаторы из систем
-    //private float globalDamageMultiplier = 1f;
-    //private float globalAttackSpeedMultiplier = 1f;
-    //private float globalActiveCooldownReduction = 0f;
-    //private float globalProjSize = 1f;
-    //private float globalConstructCooldownReduction = 0f;
-
     private void Start()
     {
         healthComponent = GetComponent<HealthComponent>();
