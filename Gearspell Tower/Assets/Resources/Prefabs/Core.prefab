@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4670047907084535829}
   - component: {fileID: 7106782249820688565}
   - component: {fileID: 3627235557601392122}
+  - component: {fileID: 164736450093097259}
   - component: {fileID: 8023539785150884618}
   m_Layer: 0
   m_Name: Core
@@ -88,6 +89,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da199c113e0d12643a042108a5c64b3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &164736450093097259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7906946107129256441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bb591a7b2a9a6644a1d5457f9c19adc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SaveManager
 --- !u!114 &8023539785150884618
 MonoBehaviour:
   m_ObjectHideFlags: 0

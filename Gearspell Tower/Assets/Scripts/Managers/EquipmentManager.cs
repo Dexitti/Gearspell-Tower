@@ -62,10 +62,11 @@ public class EquipmentManager : MonoBehaviour
 
     private void LoadAllPrefabs()
     {
-        EquipmentController[] prefabs = Resources.LoadAll<EquipmentController>("Prefabs/Controllers");
-        foreach (EquipmentController prefab in prefabs)
+        GameObject[] prefabs = Resources.LoadAll<GameObject>("Prefabs/Controllers");
+        foreach (GameObject prefab in prefabs)
         {
-            allEquipmentPrefabs[prefab.Data.equipmentName] = prefab;
+            EquipmentController contr = prefab.GetComponent<EquipmentController>();
+            allEquipmentPrefabs[contr.Data.equipmentName] = contr;
         }
         Debug.Log($"Префабы снаряжения загружены");
     }

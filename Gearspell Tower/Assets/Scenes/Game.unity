@@ -213,7 +213,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSlots: 3
   slotUnlockCosts: 00000000320000002c010000
-  startUnlockedEquipment: []
+  startUnlockedEquipment:
+  - {fileID: 11400000, guid: 0dba1a61a04d0e9498e2e615ced8b552, type: 2}
+  - {fileID: 11400000, guid: 72af7a7860e751948b469f775f33ab95, type: 2}
+  - {fileID: 11400000, guid: 28e40734e90bd9d43ba7abe3b7ba99e3, type: 2}
   activeEquipment:
   - {fileID: 0}
   - {fileID: 0}

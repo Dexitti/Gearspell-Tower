@@ -14,15 +14,10 @@ public class SaveManager : MonoBehaviour
         //public GameSettings gameSettings = new();
     }
 
-    private GlobalSaveData data;
+    private GlobalSaveData data = new GlobalSaveData();
 
     private void Awake()
     {
-        if (G.SaveManager != null && G.SaveManager != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
         G.SaveManager = this;
         DontDestroyOnLoad(gameObject);
         Load();
