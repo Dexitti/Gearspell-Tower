@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 849491150465568769}
   - component: {fileID: 2101242121722666400}
   - component: {fileID: 7507038779834304611}
-  - component: {fileID: 7702957154145354759}
   m_Layer: 5
   m_Name: Buy (TMP)
   m_TagString: Untagged
@@ -138,19 +137,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &7702957154145354759
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1543586556888241234}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f1329005fd119e4aa822e0a9bfa3b6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UILocalizedText
-  localizationKey: Buy
 --- !u!1 &1717739883665975485
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,17 +206,17 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 0
+  m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 0}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: f66811780439d3349a8103674a4163b5, type: 3}
     m_PressedSprite: {fileID: 0}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
@@ -241,7 +227,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 6496039399436079068}
+  m_TargetGraphic: {fileID: 7716029511122335890}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -261,7 +247,6 @@ MonoBehaviour:
   slotButton: {fileID: 40910912172668110}
   buyText: {fileID: 7507038779834304611}
   costText: {fileID: 5595981196105259997}
-  selectionBorder: {fileID: 3094442291450978431}
   emptySlotSprite: {fileID: 21300000, guid: 4e8c0cdb5264b7741830e961b23d0f97, type: 3}
   lockedSlotSprite: {fileID: 21300000, guid: 48aff9ddeda9d9e44951d2e51fe181c0, type: 3}
 --- !u!1 &2610579963090246611
@@ -356,7 +341,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8473314727878101886
 RectTransform:
   m_ObjectHideFlags: 0

@@ -9,23 +9,17 @@ public class EquipmentManager : MonoBehaviour
     [Header("Slots")]
     [SerializeField] private int maxSlots = 3;
     [SerializeField] private int[] slotUnlockCosts = { 0, 50, 300 };
-    [SerializeField] private int backpackUnlockCost = 100;
-
+    
     [Header("Equipment")]
     [SerializeField] private EquipmentData[] startUnlockedEquipment;
-    [SerializeField] private GameObject[] activeEquipment = new GameObject[3]; // 3 слота
-    [SerializeField] private GameObject backpack;
-
-    private Dictionary<string, GameObject> allEquipmentPrefabs  = new Dictionary<string, GameObject>();
-    private EquipmentController[] slotControllers = new EquipmentController[3];
-    private EquipmentController backpackController;
-
+    [SerializeField] private EquipmentController[] activeEquipment = new EquipmentController[3];
+    
+    private Dictionary<string, EquipmentController> allEquipmentPrefabs  = new Dictionary<string, EquipmentController>();
     private int unlockedSlots = 1;
-    private bool isBackpackUnlocked = false;
-
+    
     public int MaxSlots => maxSlots;
     public int UnlockedSlots => unlockedSlots;
-    public bool IsBackpackUnlocked => isBackpackUnlocked;
+    public IReadOnlyList<EquipmentController> EquipmentSlots => activeEquipment;
 
     private void Awake()
     {
@@ -40,7 +34,6 @@ public class EquipmentManager : MonoBehaviour
 
         // Загрузка сохранения
         unlockedSlots = G.ProgressManager?.GetUnlockedSlots() ?? 1;
-        isBackpackUnlocked = G.ProgressManager?.IsBackpackUnlocked() ?? false;
 
         // Загрузка стартового снаряжения
         startUnlockedEquipment = Resources.LoadAll<EquipmentData>("Data/EquipmentData")
@@ -69,10 +62,10 @@ public class EquipmentManager : MonoBehaviour
 
     private void LoadAllPrefabs()
     {
-        GameObject[] prefabs = Resources.LoadAll<GameObject>("Prefabs/Controllers");
-        foreach (GameObject prefab in prefabs)
+        EquipmentController[] prefabs = Resources.LoadAll<EquipmentController>("Prefabs/Controllers");
+        foreach (EquipmentController prefab in prefabs)
         {
-            allEquipmentPrefabs[prefab.name] = prefab;
+            allEquipmentPrefabs[prefab.Data.equipmentName] = prefab;
         }
         Debug.Log($"Префабы снаряжения загружены");
     }
@@ -89,55 +82,30 @@ public class EquipmentManager : MonoBehaviour
         }
 
         if (!G.ProgressManager.HasSession)
-            EquipToSlot(allEquipmentPrefabs["WindmillController"], 0); // Изменить на WindmillController
+            EquipToSlot(allEquipmentPrefabs["Windmill"], 0); // Изменить на WindmillController
         else
         {
             var randomEq = unlockedEquipment[UnityEngine.Random.Range(0, unlockedEquipment.Count)];
-            string prefabName = randomEq.equipmentName.Replace(" ", "") + "Controller";
+            string prefabName = randomEq.equipmentName;
             EquipToSlot(allEquipmentPrefabs[prefabName], 0);
         }
     }
 
-    public bool EquipToSlot(GameObject newEquipment, int slotIndex)
+    public bool EquipToSlot(EquipmentController newEquipment, int slotIndex)
     {
         if (slotIndex < 0 || slotIndex >= maxSlots || slotIndex >= unlockedSlots)
             return false;
 
-        if (activeEquipment[slotIndex] != null || slotControllers[slotIndex] != null)
+        if (activeEquipment[slotIndex] != null)
             UnequipSlot(slotIndex);
 
-        activeEquipment[slotIndex] = newEquipment;
-        if (newEquipment != null)
-        {
-            GameObject controllerObj = Instantiate(newEquipment, transform);
-            slotControllers[slotIndex] = controllerObj.GetComponent<EquipmentController>();
-            if (slotControllers[slotIndex] != null)
-                slotControllers[slotIndex].EquippedSlotIndex = slotIndex;
+        EquipmentController contr = Instantiate(newEquipment, transform);
+        Debug.Log($"Снаряжение {newEquipment.name} экипировано в слот {slotIndex}");
 
-            Debug.Log($"Снаряжение {newEquipment.name} экипировано в слот {slotIndex}");
-        }
-
-        if (slotControllers[slotIndex] != null)
-            slotControllers[slotIndex].EquippedSlotIndex = slotIndex;
-
-        var controller = slotControllers[slotIndex];
-        if (controller != null && controller.Data != null)
-            G.EventManager?.TriggerEquipmentEquipped(controller.Data, slotIndex);
-
-        return true;
-    }
-
-    public bool EquipItemInBackpack(GameObject newEquipment)
-    {
-        if (!isBackpackUnlocked) return false;
-
-        if (backpack == null) backpack = newEquipment;
-        else
-        {
-            // Дать игроку возможность выбрать слот
-            //TrySwapSlots(newEquipment, slotIndex); // Заменить снаряжение в слоте снаряжением из рюкзака
-            // Поместить newEquipment в рюкзак
-        }
+        activeEquipment[slotIndex] = contr;
+        
+        if (contr.Data != null)
+            G.EventManager?.TriggerEquipmentEquipped(contr.Data, slotIndex);
 
         return true;
     }
@@ -146,14 +114,13 @@ public class EquipmentManager : MonoBehaviour
     {
         if (slotIndex < 0 || slotIndex >= maxSlots) return;
 
-        var eq = slotControllers[slotIndex];
+        var eq = activeEquipment[slotIndex];
         if (eq != null)
         {
+            Debug.Log($"Снаряжение {eq.name} снято со слота {slotIndex}");
             Destroy(eq.gameObject);
-            eq = null;
         }
         activeEquipment[slotIndex] = null;
-        Debug.Log($"Снаряжение {eq.name} снято со слота {slotIndex}");  
     }
 
     // === Для UpgradeSystem ===
@@ -162,14 +129,7 @@ public class EquipmentManager : MonoBehaviour
         if (!CanUnlockNextSlot(out int cost)) return false;
         if (!G.ResourceManager.SpendGears(cost)) return false;
 
-        if (!isBackpackUnlocked)
-        {
-            isBackpackUnlocked = true;
-            G.ProgressManager?.SetBackpackUnlocked(true);
-            G.EventManager?.TriggerSlotUnlocked(-1);
-            Debug.Log("[EquipmentManager] Рюкзак разблокирован");
-        }
-        else if (unlockedSlots < maxSlots)
+        if (unlockedSlots < maxSlots)
         {
             unlockedSlots++;
             G.ProgressManager?.SetUnlockedSlots(unlockedSlots);
@@ -183,11 +143,6 @@ public class EquipmentManager : MonoBehaviour
     public bool CanUnlockNextSlot(out int cost)
     {
         cost = 0;
-        if (!isBackpackUnlocked)
-        {
-            cost = backpackUnlockCost;
-            return true;
-        }
         if (unlockedSlots < maxSlots)
         {
             cost = slotUnlockCosts[unlockedSlots];
@@ -198,35 +153,23 @@ public class EquipmentManager : MonoBehaviour
 
     public int GetSlotUnlockCost(int slotIndex)
     {
-        if (!isBackpackUnlocked && slotIndex == 0)
-            return backpackUnlockCost; // Только для первого раза
-
         if (slotIndex < unlockedSlots) return 0;
 
-        if (slotIndex - 1 < slotUnlockCosts.Length)
-            return slotUnlockCosts[slotIndex - 1];
+        if (slotIndex >= 0 && slotIndex < slotUnlockCosts.Length)
+            return slotUnlockCosts[slotIndex];
 
-        return 999;
+        return 0;
     }
 
     public bool HasFreeSlot() => Array.FindIndex(activeEquipment, 0, unlockedSlots, s => s == null) >= 0;
 
     public int GetFirstFreeSlot() => Array.FindIndex(activeEquipment, 0, unlockedSlots, s => s == null);
 
-    public EquipmentController[] GetAllActiveControllers()
-    {
-        var list = new List<EquipmentController>();
-        foreach (var contr in slotControllers)
-        {
-            if (contr != null)
-                list.Add(contr);
-        }
-        return list.ToArray();
-    }
+    public EquipmentController[] GetActiveControllers() => activeEquipment.Where(eq => eq != null).ToArray();
 
     public EquipmentController GetControllerForData(string equipmentName)
     {
-        foreach (var contr in slotControllers)
+        foreach (var contr in activeEquipment)
             if (contr != null && contr.Data.equipmentName == equipmentName)
                 return contr;
         return null;
@@ -240,8 +183,7 @@ public class EquipmentManager : MonoBehaviour
     public bool IsEquipped(EquipmentData data) => GetControllerForData(data) != null;
 
     public void SetUnlockedSlots(int slots) => unlockedSlots = Mathf.Clamp(slots, 1, maxSlots);
-    public void SetBackpackUnlocked(bool unlocked) => isBackpackUnlocked = unlocked;
-    public GameObject GetPrefabByName(string name) => allEquipmentPrefabs.GetValueOrDefault(name);
+    public EquipmentController GetPrefabByName(string name) => allEquipmentPrefabs.GetValueOrDefault(name);
 
     private void OnApplicationQuit()
     {

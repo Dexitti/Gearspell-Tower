@@ -16,31 +16,28 @@ public class EquipmentSlotUI : MonoBehaviour
     [SerializeField] private Button slotButton;
     [SerializeField] private TextMeshProUGUI buyText;
     [SerializeField] private TextMeshProUGUI costText;
-    [SerializeField] private GameObject selectionBorder;
 
     [Header("Sprites")]
     [SerializeField] private Sprite emptySlotSprite;
     [SerializeField] private Sprite lockedSlotSprite;
 
     private int slotIndex;
-    private Action<int> onClick;
     private bool isInteractive;
-
+    
     public int SlotIndex => slotIndex;
+    public event Action<int> OnClick;
 
-    public void Initialize(int index, Action<int> callback, bool interactive)
+    public void Initialize(int index, bool interactive)
     {
+        buyText.text = "";
+        costText.text = "";
         slotIndex = index;
-        onClick = callback;
         isInteractive = interactive;
 
-        if (slotButton != null)
-        {
-            slotButton.onClick.RemoveAllListeners();
-            slotButton.interactable = interactive;
-            if (interactive)
-                slotButton.onClick.AddListener(() => onClick?.Invoke(slotIndex));
-        }
+        slotButton.onClick.RemoveAllListeners();
+        slotButton.interactable = interactive;
+        if (interactive)
+            slotButton.onClick.AddListener(() => OnClick?.Invoke(slotIndex));
     }
 
     public void SetState(EquipmentSlotState state, Sprite eqIcon = null, int unlockCost = -1)
@@ -65,14 +62,5 @@ public class EquipmentSlotUI : MonoBehaviour
                 costText.text = "";
                 break;
         }
-
-        if (slotButton != null)
-            slotButton.interactable = isInteractive;
-    }
-
-    public void SetSelected(bool selected)
-    {
-        if (selectionBorder != null)
-            selectionBorder.SetActive(selected);
     }
 }

@@ -54,13 +54,12 @@ public class ProgressManager : MonoBehaviour
         session.gears = G.ResourceManager?.Gears ?? 0;
         session.towerHealth = G.Tower?.GetComponent<HealthComponent>().CurrentHealth ?? 1;
         session.unlockedSlots = G.EquipmentManager?.UnlockedSlots ?? 1;
-        session.isBackpackUnlocked = G.EquipmentManager?.IsBackpackUnlocked ?? false;
+        //session.isBackpackUnlocked = G.EquipmentManager?.IsBackpackUnlocked ?? false;
 
-        foreach (var eq in G.EquipmentManager.GetAllActiveControllers())
+        foreach (var eq in G.EquipmentManager.GetActiveControllers())
         {
             session.equipmentProgress.Add(new EquipmentSaveData
             {
-                slotIndex = eq.EquippedSlotIndex,
                 stage = eq.Stage,
                 forkChoice = eq.ForkChoice,
                 hasActiveAbility = eq.HasActiveAbility,
@@ -81,7 +80,7 @@ public class ProgressManager : MonoBehaviour
         G.ResourceManager?.SetGears(session.gears);
         G.Tower?.GetComponent<HealthComponent>()?.SetHealth(session.towerHealth);
         G.EquipmentManager?.SetUnlockedSlots(session.unlockedSlots);
-        G.EquipmentManager?.SetBackpackUnlocked(session.isBackpackUnlocked);
+        //G.EquipmentManager?.SetBackpackUnlocked(session.isBackpackUnlocked);
 
         // Экипируем сохранённое снаряжение
         foreach (var data in session.equipmentProgress)

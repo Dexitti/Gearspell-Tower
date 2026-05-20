@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.Rendering.HableCurve;
 
 public abstract class EquipmentController : MonoBehaviour
 {
@@ -17,8 +18,8 @@ public abstract class EquipmentController : MonoBehaviour
     protected int currentProjectileCount;
 
     public EquipmentData Data => data;
-    public int EquippedSlotIndex { get; set; } = -1;
     public int Stage { get; set; } = 0;
+    public bool HasAnyUpgrade => appliedUpgradeIds.Count > 0;
     public int ForkChoice { get; set; } = -1;
     public bool HasActiveAbility { get; set; } = false;
     public List<string> GetAppliedUpgradeIds() => appliedUpgradeIds;
@@ -127,5 +128,19 @@ public abstract class EquipmentController : MonoBehaviour
     }
 
     protected abstract void ApplyEffect(string upgradeId);
-    protected abstract void ActivateAbility(); // Непонятно
+    protected abstract void ActivateAbility();
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellowNice;
+        Vector3 prevPoint = transform.position + new Vector3(currentRange, 0, 0);
+        int segments = 32;
+        for (int i = 1; i <= segments; i++)
+        {
+            float angle = i * 360f / segments;
+            Vector3 point = transform.position + IsometricExtension.IsoVector(angle, currentRange);
+            Gizmos.DrawLine(prevPoint, point);
+            prevPoint = point;
+        }
+    }
 }

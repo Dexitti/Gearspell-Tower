@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31e3455ba3b34c5439d6722bdfdc8514, type: 3}
   m_Name: PoisonRotorsData
   m_EditorClassIdentifier: 
-  equipmentName: "\u042F\u0434\u043E\u0432\u0438\u0442\u044B\u0435 \u0440\u043E\u0442\u043E\u0440\u044B"
+  equipmentName: PoisonRotors
   icon: {fileID: 21300000, guid: f0b58adcf80de984d911e9d33e549577, type: 3}
   isUnlocked: 1
   decorationPrefab: {fileID: 5420373815498005117, guid: a9b21f66f43bced4f8efef0bcf77925a, type: 3}

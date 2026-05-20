@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEditor;
 using UnityEngine;
 
 public class HealthComponent : MonoBehaviour
@@ -84,7 +83,6 @@ public class HealthComponent : MonoBehaviour
         style.alignment = TextAnchor.MiddleCenter;
 
         Vector3 textPosition = transform.position + Vector3.up * 0.85f;
-        Handles.Label(textPosition, CurrentHealth.ToString(), style);
-
+        //Handles.Label(textPosition, CurrentHealth.ToString(), style);
     }
 }

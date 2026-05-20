@@ -7,8 +7,6 @@ using System.Linq;
 
 public class UpgradeScreen : MonoBehaviour
 {
-    private Action<UpgradeData> onCardSelected;
-
     [SerializeField] private GameObject panel;
     [SerializeField] private Button backButton;
     [SerializeField] private TextMeshProUGUI gearsText;
@@ -30,6 +28,7 @@ public class UpgradeScreen : MonoBehaviour
     [SerializeField] private TextMeshProUGUI mineCostText;
 
     public bool IsOpen => panel != null && panel.activeSelf;
+    public event Action<UpgradeData> CardClicked;
 
     private void Awake()
     {
@@ -52,7 +51,9 @@ public class UpgradeScreen : MonoBehaviour
         if (G.EventManager == null) return;
         G.EventManager.OnGearsChanged += OnGearsChanged;
         G.EventManager.OnSlotUnlocked += _ => upgradeInventoryPanel?.Refresh();
-        
+        upgradeInventoryPanel.OnClick += OnUpgradeSlotClicked;
+
+
     }
 
     private void Update()
@@ -67,18 +68,15 @@ public class UpgradeScreen : MonoBehaviour
             G.EventManager.OnGearsChanged -= OnGearsChanged;
     }
 
-    public void Open(List<UpgradeData> offers, Action<UpgradeData> callback)
+    public void Open(List<UpgradeData> offers)
     {
         if (IsOpen) return;
 
         currentOffers = new List<UpgradeData>(offers);
-        onCardSelected = callback;
         RefreshCards();
 
+        upgradeInventoryPanel.Initialize(true);
         UpdateUI();
-
-        upgradeInventoryPanel.Initialize(OnUpgradeSlotClicked, true);
-        upgradeInventoryPanel.Refresh();
         G.GameManager?.OpenUpgrade();
         panel.SetActive(true);
     }
@@ -123,14 +121,6 @@ public class UpgradeScreen : MonoBehaviour
         gearsText.text = gears.ToString();
     }
 
-    private void OnUpgradeSlotClicked(int slotIndex)
-    {
-        int unlockedSlots = G.EquipmentManager?.UnlockedSlots ?? 1;
-        if (slotIndex >= unlockedSlots)
-            TryUnlockSlot();
-        upgradeInventoryPanel?.Refresh();
-    }
-
     //private void UpdateGlobalButtons()
     //{
     //    var sys = G.UpgradeSystem;
@@ -164,20 +154,17 @@ public class UpgradeScreen : MonoBehaviour
         }
     }
 
-    private void TryUnlockSlot()
+    private void OnUpgradeSlotClicked(int slotIndex)
     {
-        if (G.EquipmentManager != null && G.EquipmentManager.TryUnlockNextSlot())
-        {
-            UpdateGearsText();
-            upgradeInventoryPanel.Refresh();
-        }
+        if (slotIndex >= G.EquipmentManager.UnlockedSlots && G.EquipmentManager.TryUnlockNextSlot())
+            UpdateUI();
     }
 
     private void OnCardClicked(UpgradeCard card)
     {
         if (G.ResourceManager.Gears >= card.Data.cost)
         {
-            onCardSelected?.Invoke(card.Data);
+            CardClicked?.Invoke(card.Data);
 
             int index = currentOffers.IndexOf(card.Data);
             if (index >= 0)

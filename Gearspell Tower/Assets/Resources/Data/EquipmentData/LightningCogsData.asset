@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31e3455ba3b34c5439d6722bdfdc8514, type: 3}
   m_Name: LightningCogsData
   m_EditorClassIdentifier: 
-  equipmentName: "\u041C\u043E\u043B\u043D\u0438\u0435\u043D\u043E\u0441\u043D\u044B\u0435
-    \u0448\u0435\u0441\u0442\u0435\u0440\u043D\u0438"
+  equipmentName: LightningCogs
   icon: {fileID: 21300000, guid: f02ba2ed74ef3be439ad15649260db87, type: 3}
   isUnlocked: 1
   decorationPrefab: {fileID: 3357113623954044729, guid: e7f2952cc56ed87409dc7ff4dc4987ec, type: 3}

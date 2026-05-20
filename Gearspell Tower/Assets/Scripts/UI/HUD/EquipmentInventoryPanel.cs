@@ -6,30 +6,36 @@ public class EquipmentInventoryPanel : MonoBehaviour
 {
     [SerializeField] private EquipmentSlotUI[] UISlots;
 
-    public void Initialize(Action<int> slotClickCallback, bool interactive)
+    public event Action<int> OnClick;
+
+    public void Initialize(bool interactive)
     {
         for (int i = 0; i < UISlots.Length; i++)
         {
             if (UISlots[i] != null)
-                UISlots[i].Initialize(i, slotClickCallback, interactive);
+            {
+                UISlots[i].Initialize(i, interactive);
+                UISlots[i].OnClick += (int index) => OnClick?.Invoke(index);
+            }
         }
     }
 
     public void Refresh()
     {
-        Debug.Log($"[InventoryPanel] Refresh on {(gameObject.scene.name == "Game" ? "HUD" : "UpgradeScreen")}");
         var equipManager = G.EquipmentManager;
         if (equipManager == null) return;
 
         int unlockedSlots = equipManager.UnlockedSlots;
-        var controllers = equipManager.GetAllActiveControllers();
+        var controllers = equipManager.EquipmentSlots;
+        Debug.Log($"Refresh Inventory: unlockedSlots={unlockedSlots}, controllers count={controllers.Count}");
 
-        for (int i = 0; i < UISlots.Length && i < equipManager.MaxSlots; i++)
+        for (int i = 0; i < controllers.Count; i++)
         {
             if (UISlots[i] == null) continue;
 
             bool isUnlocked = i < unlockedSlots;
-            var controller = controllers.FirstOrDefault(c => c.EquippedSlotIndex == i);
+            var controller = controllers[i];
+            Debug.Log($"Slot {i}: isUnlocked={isUnlocked}, controller={(controller != null ? controller.name : "null")}");
 
             if (!isUnlocked)
             {

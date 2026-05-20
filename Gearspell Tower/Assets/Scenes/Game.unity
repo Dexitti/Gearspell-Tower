@@ -213,13 +213,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSlots: 3
   slotUnlockCosts: 00000000320000002c010000
-  backpackUnlockCost: 100
   startUnlockedEquipment: []
   activeEquipment:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  backpack: {fileID: 0}
 --- !u!1 &623140116
 GameObject:
   m_ObjectHideFlags: 0
@@ -1696,10 +1694,6 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 108
       objectReference: {fileID: 0}
-    - target: {fileID: 2584674552949120365, guid: 2f75a134428a01f478bc731f7db30d84, type: 3}
-      propertyPath: m_Transition
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2604207809982492413, guid: 2f75a134428a01f478bc731f7db30d84, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1756,6 +1750,10 @@ PrefabInstance:
       propertyPath: cardPrefab
       value: 
       objectReference: {fileID: 2443926831143405, guid: 49dc8bd614f6c754590e91cf684a1ac1, type: 3}
+    - target: {fileID: 2967777555906249479, guid: 2f75a134428a01f478bc731f7db30d84, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3052318472532996536, guid: 2f75a134428a01f478bc731f7db30d84, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

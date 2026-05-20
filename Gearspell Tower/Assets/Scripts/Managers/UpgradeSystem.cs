@@ -40,6 +40,7 @@ public class UpgradeSystem : MonoBehaviour
     private void Start()
     {
         // Загрузка улучшений из сохранения
+        upgradeScreen.CardClicked += OnUpgradeSelected;
         equipmentStageTracker.Clear();
         foreach (var eq in allEquipmentUpgrades)
             equipmentStageTracker[eq] = G.EquipmentManager.IsEquipped(eq) ? 1 : 0;
@@ -50,7 +51,7 @@ public class UpgradeSystem : MonoBehaviour
         List<UpgradeData> availableUpgrades = GetAvailableUpgrades();
         int count = Mathf.Min(numberInSelection, availableUpgrades.Count);
         var initialOffers = availableUpgrades.Take(count).ToList();
-        upgradeScreen.Open(initialOffers, OnUpgradeSelected);
+        upgradeScreen.Open(initialOffers);
     }
 
     public List<UpgradeData> GetAvailableUpgrades()
@@ -77,21 +78,52 @@ public class UpgradeSystem : MonoBehaviour
         }
 
         // Добавляем апгрейды для экипированного снаряжения
-        var activeEquipment = G.EquipmentManager?.GetAllActiveControllers();
+        var activeEquipment = G.EquipmentManager?.GetActiveControllers();
         foreach (var contr in activeEquipment)
         {
             EquipmentData eq = contr.Data;
             int currentStage = equipmentStageTracker[eq];
+
+            // 1. Обычные апгрейды (всегда, пока есть что улучшать)
             if (currentStage < eq.stages.Count)
             {
                 UpgradeStages stageData = eq.stages[currentStage];
-                foreach (var upgrade in stageData.upgradeData)
+                if (!stageData.isFork)
                 {
-                    // Проверяем, не взято ли уже (для обычных стадий)
-                    if (!stageData.isFork && contr.GetAppliedUpgradeIds().Contains(upgrade.id))
-                        continue;
-                    if (!available.Contains(upgrade))
-                        available.Add(upgrade);
+                    foreach (var upgrade in stageData.upgradeData)
+                    {
+                        if (contr.GetAppliedUpgradeIds().Contains(upgrade.id)) continue;
+                        if (!available.Contains(upgrade))
+                            available.Add(upgrade);
+                    }
+                }
+            }
+
+            // 2. Fork-апгрейды (если куплен хотя бы один обычный апгрейд)
+            if (contr.HasAnyUpgrade && contr.ForkChoice == -1)
+            {
+                var forkStage = eq.stages.FirstOrDefault(s => s.isFork);
+                if (forkStage != null)
+                {
+                    foreach (var upgrade in forkStage.upgradeData)
+                    {
+                        if (!available.Contains(upgrade))
+                            available.Add(upgrade);
+                    }
+                }
+            }
+
+            // 3. Активная способность (если fork выбран)
+            if (contr.ForkChoice != -1)
+            {
+                var activeStage = eq.stages.FirstOrDefault(s => !s.isFork && s.upgradeData[0]?.cardType == UpgradeCardType.ActiveAbility);
+                if (activeStage != null)
+                {
+                    foreach (var upgrade in activeStage.upgradeData)
+                    {
+                        if (!available.Contains(upgrade))
+                            available.Add(upgrade);
+                    }
                 }
             }
         }
@@ -111,12 +143,13 @@ public class UpgradeSystem : MonoBehaviour
         // Если не экипировано, это новое снаряжение — нужно экипировать
         if (!G.EquipmentManager.IsEquipped(targetEq))
         {
-            var prefab = G.EquipmentManager.GetPrefabByName(targetEq.equipmentName.Replace(" ", "") + "Controller");
+            var prefab = G.EquipmentManager.GetPrefabByName(targetEq.equipmentName);
             int slot = G.EquipmentManager.GetFirstFreeSlot();
-            if (prefab != null && slot >= 0)
+            if (slot >= 0)
             {
                 G.EquipmentManager.EquipToSlot(prefab, slot);
                 equipmentStageTracker[targetEq] = 1;
+                G.EventManager?.TriggerEquipmentEquipped(targetEq, slot);
                 G.EventManager?.TriggerEquipmentUpgraded(targetEq, 1);
                 G.ProgressManager?.SetEquipmentStage(targetEq.equipmentName, 1);
             }
@@ -124,7 +157,6 @@ public class UpgradeSystem : MonoBehaviour
         }
         else
         {
-
             // Находим контроллер
             var controller = G.EquipmentManager.GetControllerForData(targetEq);
             if (controller == null) return;

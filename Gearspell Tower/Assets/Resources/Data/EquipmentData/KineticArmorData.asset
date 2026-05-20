@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31e3455ba3b34c5439d6722bdfdc8514, type: 3}
   m_Name: KineticArmorData
   m_EditorClassIdentifier: 
-  equipmentName: "\u041A\u0438\u043D\u0435\u0442\u0438\u0447\u0435\u0441\u043A\u0430\u044F
-    \u0431\u0440\u043E\u043D\u044F"
+  equipmentName: KineticArmor
   icon: {fileID: 21300000, guid: d64a6d53051ea6a4f90cd3673c17df7e, type: 3}
   isUnlocked: 1
   decorationPrefab: {fileID: 1297927676693700791, guid: 7c1dad5bae518634aafc539712e61996, type: 3}

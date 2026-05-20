@@ -163,7 +163,7 @@ namespace Assets.Scripts.Equipment
                 // Резонанс: провоцируем атаку других снаряжений
                 if (provokeOtherEquipment)
                 {
-                    var controllers = G.EquipmentManager?.GetAllActiveControllers();
+                    var controllers = G.EquipmentManager?.GetActiveControllers();
                     if (controllers != null)
                     {
                         foreach (var ctrl in controllers)
@@ -254,7 +254,7 @@ namespace Assets.Scripts.Equipment
             if (!HasActiveAbility) return;
 
             // Мгновенно провоцируем все снаряжения
-            var controllers = G.EquipmentManager?.GetAllActiveControllers();
+            var controllers = G.EquipmentManager?.GetActiveControllers();
             if (controllers != null)
             {
                 foreach (var ctrl in controllers)
