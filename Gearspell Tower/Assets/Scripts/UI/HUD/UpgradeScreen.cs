@@ -76,6 +76,30 @@ public class UpgradeScreen : MonoBehaviour
         panel.SetActive(true);
     }
 
+    public bool HasSavedOffers() => currentOffers.Count > 0;
+
+    public void OpenWithSavedOffers()
+    {
+        if (IsOpen) return;
+
+        var availablePool = G.UpgradeSystem.GetAvailableUpgrades();
+        currentOffers = currentOffers.Where(o => availablePool.Contains(o)).ToList();
+
+        if (currentOffers.Count < 3)
+        {
+            var additionalCards = availablePool
+                .Where(u => !currentOffers.Contains(u))
+                .Take(3 - currentOffers.Count)
+                .ToList();
+            currentOffers.AddRange(additionalCards);
+        }
+
+        upgradeInventoryPanel.Initialize(true);
+        UpdateUI();
+        G.GameManager?.OpenUpgrade();
+        panel.SetActive(true);
+    }
+
     public void Close()
     {
         panel.SetActive(false);
@@ -132,7 +156,6 @@ public class UpgradeScreen : MonoBehaviour
     {
         if (slotIndex >= G.EquipmentManager.UnlockedSlots && G.EquipmentManager.TryUnlockNextSlot())
         {
-            G.UpgradeSystem.InvalidateCache();
             AddOffers();
         }
     }
@@ -140,18 +163,19 @@ public class UpgradeScreen : MonoBehaviour
     private void AddOffers()
     {
         if (currentOffers.Count == 3) return;
-        var availablePool = G.UpgradeSystem.GetAvailableUpgrades();
+        var availablePool = G.UpgradeSystem.GetAvailableUpgrades(forceRefresh: true);
         if (availablePool == null) return;
+
         var additionalCards = availablePool
             .Where(u => !currentOffers.Contains(u))
             .Take(3 - currentOffers.Count)
             .ToList();
+
         if (additionalCards.Count > 0)
         {
             currentOffers.AddRange(additionalCards);
             UpdateUI();
         }
-
     }
 
     private void OnCardClicked(UpgradeCard card)
@@ -159,7 +183,6 @@ public class UpgradeScreen : MonoBehaviour
         if (G.ResourceManager.Gears >= card.Data.cost)
         {
             CardClicked?.Invoke(card.Data);
-            G.UpgradeSystem.InvalidateCache();
             //int index = currentOffers.IndexOf(card.Data);
             //if (index >= 0)
             //    currentOffers.RemoveAt(index);
@@ -171,7 +194,8 @@ public class UpgradeScreen : MonoBehaviour
 
     private void RefreshAllOffers()
     {
-        var availablePool = G.UpgradeSystem.GetAvailableUpgrades();
+        G.UpgradeSystem.InvalidateCache();
+        var availablePool = G.UpgradeSystem.GetAvailableUpgrades(forceRefresh: true);
         if (availablePool == null) return;
         currentOffers = availablePool.Take(Mathf.Min(3, availablePool.Count)).ToList();
         UpdateUI();

@@ -49,15 +49,21 @@ public class UpgradeSystem : MonoBehaviour
 
     public void OpenUpgradeMenu()
     {
+        if (upgradeScreen.HasSavedOffers())
+        {
+            upgradeScreen.OpenWithSavedOffers();
+            return;
+        }
+
         List<UpgradeData> availableUpgrades = GetAvailableUpgrades();
         int count = Mathf.Min(3, availableUpgrades.Count);
         var initialOffers = availableUpgrades.Take(count).ToList();
         upgradeScreen.Open(initialOffers);
     }
 
-    public List<UpgradeData> GetAvailableUpgrades()
+    public List<UpgradeData> GetAvailableUpgrades(bool forceRefresh = false)
     {
-        if (isCacheValid && cachedAvailableUpgrades != null)
+        if (!forceRefresh && isCacheValid && cachedAvailableUpgrades != null)
             return cachedAvailableUpgrades;
 
         List<UpgradeData> available = new();
