@@ -42,37 +42,9 @@ public class LocalizationManager : MonoBehaviour
 
     private void LoadLocalizationFile()
     {
-        // Загружаем JSON из Resources
         TextAsset jsonFile = Resources.Load<TextAsset>("Localization/UI_Texts");
-
-        if (jsonFile == null)
-        {
-            Debug.LogError("Localization file not found in Resources/Localization/UI_Texts.json");
-            CreateDefaultLocalizationFile();
-            return;
-        }
-
         LocalizationWrapper wrapper = JsonUtility.FromJson<LocalizationWrapper>(jsonFile.text);
         localizationData = wrapper.ToDictionary();
-    }
-
-    // Создает дефолтный файл, если его нет
-    private void CreateDefaultLocalizationFile()
-    {
-        localizationData = new Dictionary<string, Dictionary<string, string>>
-        {
-            ["Continue"] = new Dictionary<string, string> { ["ru"] = "Продолжить", ["en"] = "Continue" },
-            ["NewGame"] = new Dictionary<string, string> { ["ru"] = "Новая игра", ["en"] = "New Game" },
-            ["Settings"] = new Dictionary<string, string> { ["ru"] = "Настройки", ["en"] = "Settings" },
-            ["Exit"] = new Dictionary<string, string> { ["ru"] = "Выйти", ["en"] = "Exit" },
-            ["Back"] = new Dictionary<string, string> { ["ru"] = "Назад", ["en"] = "Back" },
-            ["Resume"] = new Dictionary<string, string> { ["ru"] = "Продолжить", ["en"] = "Resume" },
-            ["MainMenu"] = new Dictionary<string, string> { ["ru"] = "Главное меню", ["en"] = "Main Menu" },
-            ["GameOver"] = new Dictionary<string, string> { ["ru"] = "Игра окончена", ["en"] = "Game Over" },
-            ["Victory"] = new Dictionary<string, string> { ["ru"] = "Победа!", ["en"] = "Victory!" },
-            ["Restart"] = new Dictionary<string, string> { ["ru"] = "Заново", ["en"] = "Restart" },
-            ["Wave"] = new Dictionary<string, string> { ["ru"] = "Волна", ["en"] = "Wave" }
-        };
     }
 
     public string GetText(string key)
@@ -87,6 +59,26 @@ public class LocalizationManager : MonoBehaviour
 
         Debug.LogWarning($"[Localization] Missing translation for key: {key}");
         return key;
+    }
+
+    public string GetText(string key, params object[] args)
+    {
+        string template = GetText(key);
+
+        if (args != null && args.Length > 0)
+        {
+            try
+            {
+                return string.Format(template, args);
+            }
+            catch (FormatException)
+            {
+                Debug.LogError($"[Localization] Invalid format for key '{key}': {template}");
+                return template;
+            }
+        }
+
+        return template;
     }
 
     public void SetLanguage(Language language)

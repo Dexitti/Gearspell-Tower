@@ -23,7 +23,7 @@ public class SettingsManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI englishText;
 
     [Header("Audio")]
-    [SerializeField] private AudioMixer audioMixer;
+    [SerializeField] private AudioMixer audioMixer; 
 
     [Header("Language Toggles")]
     [SerializeField] private Toggle ruLanguageToggle;
@@ -46,6 +46,10 @@ public class SettingsManager : MonoBehaviour
     {
         backButton.onClick.AddListener(CloseSettings);
         resetProgressButton.onClick.AddListener(ShowResetConfirm);
+
+        volumeSlider.value = G.AudioManager.MasterVolume;
+        volumeSlider.onValueChanged.AddListener(OnMasterVolumeChanged);
+
         LoadSettings();
         SetupLanguageToggles();
 
@@ -84,9 +88,6 @@ public class SettingsManager : MonoBehaviour
     {
         float savedVolume = PlayerPrefs.GetFloat("MasterVolume", 1f);
         volumeSlider.value = savedVolume;
-        SetVolume(savedVolume);
-
-        volumeSlider.onValueChanged.AddListener(SetVolume);
     }
 
     public void SaveSettings()
@@ -121,6 +122,11 @@ public class SettingsManager : MonoBehaviour
     private void OnLanguageChanged(LocalizationManager.Language lang)
     {
         UpdateAllTexts();
+    }
+
+    private void OnMasterVolumeChanged(float value)
+    {
+        G.AudioManager.MasterVolume = value;
     }
 
     private void UpdateAllTexts()
@@ -170,14 +176,6 @@ public class SettingsManager : MonoBehaviour
                 G.LocalizationManager?.SetLanguage(LocalizationManager.Language.English);
             }
         });
-    }
-
-    private void SetVolume(float volume)
-    {
-        //float volumeDB = Mathf.Log10(Mathf.Max(volume, 0.001f)) * 20;
-        //audioMixer?.SetFloat("MasterVolume", volumeDB);
-        //PlayerPrefs.SetFloat("MasterVolume", volume);
-        //PlayerPrefs.Save();
     }
 
     private void ShowResetConfirm()

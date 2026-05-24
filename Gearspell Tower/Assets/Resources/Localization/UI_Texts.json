@@ -29,9 +29,9 @@
     { "key": "Gears", "ru": "Шестеренки", "en": "Gears" },
     { "key": "Upgrade", "ru": "Улучшить", "en": "Upgrade" },
     { "key": "Buy", "ru": "Открыть", "en": "Buy" },
-    { "key": "Heal", "ru": "Восстановить", "en": "Heal" },
-    { "key": "Regen", "ru": "Усилить регенерацию", "en": "Boost regen" },
-    { "key": "PlaceMines", "ru": "Разместить мины", "en": "Place mines" },
+    { "key": "Heal", "ru": "Восстановить {0}% прочности", "en": "Restore {0}% strength" },
+    { "key": "Regen", "ru": "Усилить регенерацию на {0} с.", "en": "Boost regeneration by {0} s." },
+    { "key": "PlaceMines", "ru": "Разместить мины ({0} шт.)", "en": "Place mines ({0} pcs.)" },
 
     { "key": "Creature_Fire_Elemental", "ru": "Элементаль огня", "en": "Fire Elemental" },
     { "key": "Creature_Runic_Elemental", "ru": "Рунный элементаль", "en": "Runic Elemental" },

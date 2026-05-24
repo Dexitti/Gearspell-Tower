@@ -27,7 +27,6 @@ public class EquipmentInventoryPanel : MonoBehaviour
 
         int unlockedSlots = equipManager.UnlockedSlots;
         var controllers = equipManager.EquipmentSlots;
-        Debug.Log($"Refresh Inventory: unlockedSlots={unlockedSlots}, controllers count={controllers.Count}");
 
         for (int i = 0; i < controllers.Count; i++)
         {
@@ -35,7 +34,6 @@ public class EquipmentInventoryPanel : MonoBehaviour
 
             bool isUnlocked = i < unlockedSlots;
             var controller = controllers[i];
-            Debug.Log($"Slot {i}: isUnlocked={isUnlocked}, controller={(controller != null ? controller.name : "null")}");
 
             if (!isUnlocked)
             {

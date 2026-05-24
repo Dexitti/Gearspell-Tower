@@ -68,7 +68,7 @@ public class EquipmentManager : MonoBehaviour
             EquipmentController contr = prefab.GetComponent<EquipmentController>();
             allEquipmentPrefabs[contr.Data.equipmentName] = contr;
         }
-        Debug.Log($"Префабы снаряжения загружены");
+        Debug.Log($"[EquipmentManager] Префабы снаряжения загружены");
     }
 
     private void EquipStartEquipment()
@@ -143,7 +143,7 @@ public class EquipmentManager : MonoBehaviour
 
     public bool CanUnlockNextSlot(out int cost)
     {
-        cost = 0;
+        cost = 9999;
         if (unlockedSlots < maxSlots)
         {
             cost = slotUnlockCosts[unlockedSlots];

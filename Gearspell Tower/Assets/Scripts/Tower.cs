@@ -10,6 +10,7 @@ public class Tower : MonoBehaviour
     private HealthComponent healthComponent;
 
     public Vector3 Position => transform.position;
+    public void SetRegeneration(int value) => regeneration = value;
 
     private void Start()
     {

@@ -17,7 +17,7 @@ public static class G
     public static GameManager GameManager;
     public static EventManager EventManager;
     public static ResourceManager ResourceManager;
-    //public static AudioManager AudioManager;
+    public static AudioManager AudioManager;
     public static ProgressManager ProgressManager;
     public static SaveManager SaveManager;
     public static LocalizationManager LocalizationManager;
@@ -82,6 +82,7 @@ public class GameBootstrap : MonoBehaviour
             _coreInstance.AddComponent<ProgressManager>();
             _coreInstance.AddComponent<SaveManager>();
             _coreInstance.AddComponent<LocalizationManager>();
+            _coreInstance.AddComponent<AudioManager>();
         }
 
         DontDestroyOnLoad(_coreInstance);
@@ -92,6 +93,7 @@ public class GameBootstrap : MonoBehaviour
         G.ProgressManager = _coreInstance.GetComponent<ProgressManager>();
         G.SaveManager = _coreInstance.GetComponent<SaveManager>();
         G.LocalizationManager = _coreInstance.GetComponent<LocalizationManager>();
+        G.AudioManager = _coreInstance.GetComponent<AudioManager>();
 
         Debug.Log("[GameBootstrap] Core managers initialized");
     }
@@ -134,6 +136,7 @@ public class GameBootstrap : MonoBehaviour
         _coreInstance.AddComponent<SaveManager>();
         _coreInstance.AddComponent<LocalizationManager>();
         _coreInstance.AddComponent<ProgressManager>();
+        _coreInstance.AddComponent<AudioManager>();
 
         DontDestroyOnLoad(_coreInstance);
 
@@ -143,6 +146,7 @@ public class GameBootstrap : MonoBehaviour
         G.SaveManager = _coreInstance.GetComponent<SaveManager>();
         G.LocalizationManager = _coreInstance.GetComponent<LocalizationManager>();
         G.ProgressManager = _coreInstance.GetComponent<ProgressManager>();
+        G.AudioManager = _coreInstance.GetComponent<AudioManager>();
 
         _coreInitialized = true;
         Debug.Log("[GameBootstrap] Editor auto-init: All Core managers created for testing");

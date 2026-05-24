@@ -22,6 +22,6 @@ MonoBehaviour:
   attackPrefabs: []
   health: 75
   damage: 15
-  speed: 1
+  speed: 0.4
   minGearsDrop: 15
-  maxGearsDrop: 35
+  maxGearsDrop: 40

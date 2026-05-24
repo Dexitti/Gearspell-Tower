@@ -8,28 +8,29 @@ public class UpgradeSystem : MonoBehaviour
 {
     [SerializeField] private UpgradeScreen upgradeScreen;
     [SerializeField] private EquipmentData[] allEquipmentUpgrades;
-    [SerializeField] private int numberInSelection = 3;
 
-    //[Header("Global Abilities")]
-    //[SerializeField] private int healCost = 30;
-    //[SerializeField] private float healPercent = 0.25f;
-    //[SerializeField] private int regenBoostCost = 20;
-    //[SerializeField] private float regenBoostDuration = 10f;
-    //[SerializeField] private float regenBoostMultiplier = 3f;
-    //[SerializeField] private int mineCost = 40;
-    //[SerializeField] private int mineCount = 3;
-    //[SerializeField] private GameObject minePrefab;
+    [Header("Global Abilities")]
+    [SerializeField] private int healCost = 200;
+    [SerializeField] private float healPercent = 0.25f;
+    [SerializeField] private int regenBoostCost = 200;
+    [SerializeField] private int regenBoostMultiplier = 12;
+    [SerializeField] private float regenBoostDuration = 30f;
+    [SerializeField] private int minesCost = 200;
+    [SerializeField] private int minesCount = 11;
+    [SerializeField] private GameObject minePrefab;
 
     private Dictionary<EquipmentData, int> equipmentStageTracker = new();
     private List<UpgradeData> cachedAvailableUpgrades;
     private bool isCacheValid = false;
 
-    //private float regenBoostTimer = 0f;
-    //private List<GameObject> activeMines = new();
+    private List<GameObject> activeMines = new();
 
-    //public int HealCost => healCost;
-    //public int RegenBoostCost => regenBoostCost;
-    //public int MineCost => mineCost;
+    public int HealCost => healCost;
+    public float HealPercent => healPercent;
+    public int RegenBoostCost => regenBoostCost;
+    public float RegenBoostDuration => regenBoostDuration;
+    public int MinesCost => minesCost;
+    public int MinesCount => minesCount;
 
     private void Awake()
     {
@@ -49,7 +50,7 @@ public class UpgradeSystem : MonoBehaviour
     public void OpenUpgradeMenu()
     {
         List<UpgradeData> availableUpgrades = GetAvailableUpgrades();
-        int count = Mathf.Min(numberInSelection, availableUpgrades.Count);
+        int count = Mathf.Min(3, availableUpgrades.Count);
         var initialOffers = availableUpgrades.Take(count).ToList();
         upgradeScreen.Open(initialOffers);
     }
@@ -153,6 +154,7 @@ public class UpgradeSystem : MonoBehaviour
                 G.EventManager?.TriggerEquipmentUpgraded(targetEq, 1);
                 G.ProgressManager?.SetEquipmentStage(targetEq.equipmentName, 1);
             }
+            InvalidateCache();
             return;
         }
         else
@@ -175,6 +177,12 @@ public class UpgradeSystem : MonoBehaviour
                 int choiceIndex = stageData.upgradeData.IndexOf(upgrade);
                 G.ProgressManager?.SetForkChoice(targetEq.equipmentName, choiceIndex);
                 controller.ForkChoice = choiceIndex;
+            }
+
+            if (upgrade.cardType == UpgradeCardType.ActiveAbility)
+            {
+                controller.HasActiveAbility = true;
+                Debug.Log($"[UpgradeSystem] Active ability purchased for {targetEq.equipmentName}");
             }
 
             equipmentStageTracker[targetEq] = currentStage + 1;
@@ -202,51 +210,51 @@ public class UpgradeSystem : MonoBehaviour
         return null;
     }
 
-    private void InvalidateCache()
+    public void InvalidateCache()
     {
         isCacheValid = false;
         cachedAvailableUpgrades = null;
     }
 
-    public int GetCheapestUpgradeCost()
+    public int GetCheapestUpgradeCost() //!
     {
-        var available = GetAvailableUpgrades();
-        if (available.Count == 0) return int.MaxValue;
-        return available.Min(u => u.cost);
+        var availableUpgrades = GetAvailableUpgrades();
+        if (availableUpgrades.Count == 0) return int.MaxValue;
+        G.EquipmentManager.CanUnlockNextSlot(out int slotCost);
+        return Mathf.Min(availableUpgrades.Min(u => u.cost), slotCost);
     }
 
     // === Глобальные способности (для кнопок в UI) ===
-    //public bool TryHealTower()
-    //{
-    //    if (!CanAfford(healCost)) return false;
+    public bool TryHealTower()
+    {
+        if (G.ResourceManager.SpendGears(healCost)) return false;
+        var health = G.Tower?.GetComponent<HealthComponent>();
+        if (health != null)
+        {
+            health.Heal(Mathf.CeilToInt(health.MaxHealth * healPercent));
+        }
 
-    //    G.ResourceManager.SpendGears(healCost);
+        return true;
+    }
 
-    //    var health = G.Tower?.GetComponent<HealthComponent>();
-    //    if (health != null)
-    //    {
-    //        int healAmount = Mathf.CeilToInt(health.CurrentHealth * healPercent);
-    //        health.Heal(healAmount);
-    //    }
+    public bool TryBoostRegen()
+    {
+        if (!G.ResourceManager.SpendGears(regenBoostCost)) return false;
+        G.Tower.SetRegeneration(regenBoostMultiplier);
+        StartCoroutine(ResetRegen());
+        return true;
+    }
 
-    //    return true;
-    //}
+    private IEnumerator ResetRegen()
+    {
+        yield return new WaitForSeconds(regenBoostDuration);
+        G.Tower.SetRegeneration(1);
+    }
 
-    //public bool TryBoostRegen()
-    //{
-    //    if (!CanAfford(regenBoostCost)) return false;
-
-    //    G.ResourceManager.SpendGears(regenBoostCost);
-    //    // TODO: Применить бафф регенерации
-    //    return true;
-    //}
-
-    //public bool TryPlaceTraps()
-    //{
-    //    if (!CanAfford(trapCost)) return false;
-
-    //    G.ResourceManager.SpendGears(trapCost);
-    //    // TODO: Разместить ловушку
-    //    return true;
-    //}
+    public bool TryPlaceTraps()
+    {
+        if (G.ResourceManager.SpendGears(minesCost)) return false;
+        // TODO: Разместить ловушки
+        return true;
+    }
 }
