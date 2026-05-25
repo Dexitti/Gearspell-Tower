@@ -26,6 +26,7 @@
     { "key": "Yes", "ru": "Да", "en": "Yes" },
     { "key": "No", "ru": "Нет", "en": "No" },
     { "key": "Pause", "ru": "Пауза", "en": "Pause" },
+    { "key": "ChooseUpgrades", "ru": "Выберите улучшения", "en": "Choose Upgrades" },
     { "key": "Gears", "ru": "Шестеренки", "en": "Gears" },
     { "key": "Upgrade", "ru": "Улучшить", "en": "Upgrade" },
     { "key": "Buy", "ru": "Открыть", "en": "Buy" },

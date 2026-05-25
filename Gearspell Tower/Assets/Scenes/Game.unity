@@ -653,7 +653,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeScreen: {fileID: 1973794168}
   allEquipmentUpgrades: []
-  numberInSelection: 3
+  healCost: 200
+  healPercent: 0.25
+  regenBoostCost: 200
+  regenBoostMultiplier: 12
+  regenBoostDuration: 30
+  minesCost: 200
+  minesCount: 11
+  minePrefab: {fileID: 0}
 --- !u!4 &1204740547
 Transform:
   m_ObjectHideFlags: 0
