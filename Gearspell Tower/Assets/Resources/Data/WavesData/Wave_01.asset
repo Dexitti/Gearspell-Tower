@@ -11,11 +11,17 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bb16b8a316b66784fb826de89b0a4882, type: 3}
   m_Name: Wave_01
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::WaveData
   waveName: Wave 1 - Sparks
   enemySpawns:
   - enemyPrefab: {fileID: 8516407375225930908, guid: 22fbfc05653798f498fa3161ac6958d3, type: 3}
-    count: 4
+    count: 2
+    spawnInterval: 1
+  - enemyPrefab: {fileID: 8516407375225930908, guid: 22fbfc05653798f498fa3161ac6958d3, type: 3}
+    count: 5
+    spawnInterval: 1
+  - enemyPrefab: {fileID: 8516407375225930908, guid: 22fbfc05653798f498fa3161ac6958d3, type: 3}
+    count: 5
     spawnInterval: 1
   waveDialogs: []
   gearsReward: 0

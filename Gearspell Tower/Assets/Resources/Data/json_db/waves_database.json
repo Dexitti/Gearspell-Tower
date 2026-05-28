@@ -3,40 +3,44 @@
     {
       "waveName": "Wave 1 - Sparks",
       "enemies": [
-        { "creatureName": "Fire_Elemental", "count": 4, "spawnInterval": 1.0 }
+        { "creatureName": "Fire_Elemental", "count": 2, "spawnInterval": 1.0 },
+        { "creatureName": "Fire_Elemental", "count": 5, "spawnInterval": 1.0 },
+        { "creatureName": "Fire_Elemental", "count": 5, "spawnInterval": 1.0 }
       ],
       "gearsReward": 0
     },
     {
-      "waveName": "Wave 2 - Stone Wall",
+      "waveName": "Wave 2 - Steam",
       "enemies": [
         { "creatureName": "Fire_Elemental", "count": 10, "spawnInterval": 0.8 },
-        { "creatureName": "Runic_Elemental", "count": 4, "spawnInterval": 1.5 }
+        { "creatureName": "Drone", "count": 4, "spawnInterval": 3 }
       ],
-      "gearsReward": 25
+      "gearsReward": 20
     },
     {
-      "waveName": "Wave 3 - Enemy Conveyor",
+      "waveName": "Wave 3 - ",
       "enemies": [
-        { "creatureName": "Automaton", "count": 20, "spawnInterval": 1.0 },
-        { "creatureName": "Drone", "count": 5, "spawnInterval": 0.6 }
+        { "creatureName": "Fire_Elemental", "count": 20, "spawnInterval": 1.0 },
+        { "creatureName": "Drone", "count": 2, "spawnInterval": 3 },
+        { "creatureName": "Mage", "count": 2, "spawnInterval": 5 }
       ],
       "gearsReward": 35
     },
     {
-      "waveName": "Wave 4 - Ambush",
+      "waveName": "Wave 4 - Inferno",
       "enemies": [
-        { "creatureName": "Assassin", "count": 3, "spawnInterval": 0.8 },
-        { "creatureName": "Drone", "count": 4, "spawnInterval": 0.5 }
+        { "creatureName": "Fire_Elemental", "count": 6, "spawnInterval": 0.8 },
+        { "creatureName": "Drone", "count": 4, "spawnInterval": 3 },
+        { "creatureName": "Mage", "count": 4, "spawnInterval": 1.8 }
       ],
-      "gearsReward": 45
+      "gearsReward": 50
     },
     {
       "waveName": "Wave 5 - Mechanical Guardian",
       "enemies": [
-        { "creatureName": "Spider_Golem", "count": 1, "spawnInterval": 3.0 },
         { "creatureName": "Acrobat", "count": 3, "spawnInterval": 0.7 },
-        { "creatureName": "Automaton", "count": 3, "spawnInterval": 1.0 }
+        { "creatureName": "Automaton", "count": 3, "spawnInterval": 1.0 },
+        { "creatureName": "Spider_Golem", "count": 1, "spawnInterval": 3.0 }
       ],
       "gearsReward": 55,
       "equipmentUnlocks": ["Cryogenic Stabilizer"]
@@ -49,82 +53,6 @@
         { "creatureName": "Drone", "count": 5, "spawnInterval": 0.4 }
       ],
       "gearsReward": 65
-    },
-    {
-      "waveName": "Wave 7 - Armored Fist",
-      "enemies": [
-        { "creatureName": "Tank", "count": 1, "spawnInterval": 3.5 },
-        { "creatureName": "Spider_Golem", "count": 2, "spawnInterval": 2.0 },
-        { "creatureName": "Runic_Elemental", "count": 4, "spawnInterval": 1.2 }
-      ],
-      "gearsReward": 80,
-      "equipmentUnlocks": ["Poison Rotors"]
-    },
-    {
-      "waveName": "Wave 8 - Fury and Magic",
-      "enemies": [
-        { "creatureName": "Berserk_Robot", "count": 2, "spawnInterval": 2.5 },
-        { "creatureName": "Hunter_In_Robe", "count": 1, "spawnInterval": 3.0 },
-        { "creatureName": "Assassin", "count": 3, "spawnInterval": 0.8 }
-      ],
-      "gearsReward": 95,
-      "equipmentUnlocks": ["Water Hammer"]
-    },
-    {
-      "waveName": "Wave 9 - Ice Colossus",
-      "enemies": [
-        { "creatureName": "Ice_Golem", "count": 1, "spawnInterval": 5.0 },
-        { "creatureName": "Runic_Elemental", "count": 4, "spawnInterval": 1.0 },
-        { "creatureName": "Dragonoid", "count": 2, "spawnInterval": 2.0 }
-      ],
-      "gearsReward": 115
-    },
-    {
-      "waveName": "Wave 10 - Dark Forces",
-      "enemies": [
-        { "creatureName": "Beholder", "count": 1, "spawnInterval": 3.0 },
-        { "creatureName": "Hunter_In_Robe", "count": 2, "spawnInterval": 2.5 },
-        { "creatureName": "Acrobat", "count": 4, "spawnInterval": 0.6 }
-      ],
-      "gearsReward": 135,
-      "equipmentUnlocks": ["Kinetic Armor"]
-    },
-    {
-      "waveName": "Wave 11 - Shadow Protocol",
-      "enemies": [
-        { "creatureName": "Protocol", "count": 1, "spawnInterval": 5.0 },
-        { "creatureName": "Tank", "count": 1, "spawnInterval": 3.0 },
-        { "creatureName": "Squid_Technic", "count": 3, "spawnInterval": 1.5 }
-      ],
-      "gearsReward": 160,
-      "equipmentUnlocks": ["Antenna"]
-    },
-    {
-      "waveName": "Wave 12 - Ignis Flame",
-      "enemies": [
-        { "creatureName": "Ignis", "count": 1, "spawnInterval": 5.0 },
-        { "creatureName": "Fire_Elemental", "count": 6, "spawnInterval": 0.5 },
-        { "creatureName": "Berserk_Robot", "count": 2, "spawnInterval": 2.0 }
-      ],
-      "gearsReward": 190
-    },
-    {
-      "waveName": "Wave 13 - Prima's Army",
-      "enemies": [
-        { "creatureName": "Gear_Prima", "count": 1, "spawnInterval": 5.0 },
-        { "creatureName": "Automaton", "count": 6, "spawnInterval": 0.7 },
-        { "creatureName": "Spider_Golem", "count": 2, "spawnInterval": 2.0 }
-      ],
-      "gearsReward": 220
-    },
-    {
-      "waveName": "Wave 14 - Astral Finale",
-      "enemies": [
-        { "creatureName": "Astra", "count": 1, "spawnInterval": 5.0 },
-        { "creatureName": "Beholder", "count": 2, "spawnInterval": 2.5 },
-        { "creatureName": "Dragonoid", "count": 3, "spawnInterval": 1.5 }
-      ],
-      "gearsReward": 260
     }
   ]
 }

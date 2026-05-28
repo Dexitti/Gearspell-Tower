@@ -46,7 +46,7 @@ public class WindProjectile : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("Enemy") || other.CompareTag("FlyingEnemy"))
         {
             GameObject enemy = other.gameObject;
 

@@ -36,13 +36,28 @@ public class EventManager : MonoBehaviour
     public void TriggerWaveCompleted(int waveNumber) => OnWaveCompleted?.Invoke(waveNumber);
 
     // === Враги ===
-    public event Action<Creature> OnEnemyKilled;
-    public void TriggerEnemyKilled(Creature enemy) => OnEnemyKilled?.Invoke(enemy);
+    public event Action<CreatureController> OnEnemyKilled;
+    public void TriggerEnemyKilled(CreatureController enemy) => OnEnemyKilled?.Invoke(enemy);
 
-    public event Action<Creature> OnEnemyReachedTower;
-    public void TriggerEnemyReachedTower(Creature enemy) => OnEnemyReachedTower?.Invoke(enemy);
+    public event Action<CreatureController> OnEnemyReachedTower;
+    public void TriggerEnemyReachedTower(CreatureController enemy) => OnEnemyReachedTower?.Invoke(enemy);
 
     // === Ресурсы ===
     public event Action<int> OnGearsChanged;
     public void TriggerGearsChanged(int newAmount) => OnGearsChanged?.Invoke(newAmount);
+
+    // === Инициализация сцены Game (сейв/новая игра) ===
+    public event Action OnGameplayInitialized;
+    public bool IsGameplayInitialized { get; private set; }
+
+    public void TriggerGameplayInitialized()
+    {
+        IsGameplayInitialized = true;
+        OnGameplayInitialized?.Invoke();
+    }
+
+    public void ResetGameplayInitialized()
+    {
+        IsGameplayInitialized = false;
+    }
 }

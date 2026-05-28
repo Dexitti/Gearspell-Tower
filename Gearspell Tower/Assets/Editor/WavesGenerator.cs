@@ -38,7 +38,7 @@ public class WaveDataGenerator : EditorWindow
         {
             string path = AssetDatabase.GUIDToAssetPath(guid);
             GameObject enemy = AssetDatabase.LoadAssetAtPath<GameObject>(path);
-            if (enemy != null && enemy.GetComponent<Creature>() != null)
+            if (enemy != null && enemy.GetComponent<CreatureController>() != null)
             {
                 creaturePrefabs[enemy.name] = enemy;
             }

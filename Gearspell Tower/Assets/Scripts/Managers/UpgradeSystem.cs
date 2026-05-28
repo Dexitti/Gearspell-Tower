@@ -32,6 +32,10 @@ public class UpgradeSystem : MonoBehaviour
     public int MinesCost => minesCost;
     public int MinesCount => minesCount;
 
+    public bool IsHealAvailable => !(G.ProgressManager?.IsHealUsed() ?? false);
+    public bool IsRegenBoostAvailable => !(G.ProgressManager?.IsRegenBoostUsed() ?? false);
+    public bool IsTrapsAvailable => !(G.ProgressManager?.IsTrapsUsed() ?? false);
+
     private void Awake()
     {
         G.UpgradeSystem = this;
@@ -233,21 +237,25 @@ public class UpgradeSystem : MonoBehaviour
     // === Глобальные способности (для кнопок в UI) ===
     public bool TryHealTower()
     {
-        if (G.ResourceManager.SpendGears(healCost)) return false;
+        if (G.ProgressManager?.IsHealUsed() == true) return false;
+        if (!G.ResourceManager.SpendGears(healCost)) return false;
         var health = G.Tower?.GetComponent<HealthComponent>();
         if (health != null)
         {
             health.Heal(Mathf.CeilToInt(health.MaxHealth * healPercent));
+            G.ProgressManager?.SetHealUsed(true);
+            return true;
         }
-
-        return true;
+        return false;
     }
 
     public bool TryBoostRegen()
     {
+        if (G.ProgressManager?.IsRegenBoostUsed() == true) return false;
         if (!G.ResourceManager.SpendGears(regenBoostCost)) return false;
         G.Tower.SetRegeneration(regenBoostMultiplier);
         StartCoroutine(ResetRegen());
+        G.ProgressManager?.SetRegenBoostUsed(true);
         return true;
     }
 
@@ -259,8 +267,18 @@ public class UpgradeSystem : MonoBehaviour
 
     public bool TryPlaceTraps()
     {
-        if (G.ResourceManager.SpendGears(minesCost)) return false;
-        // TODO: Разместить ловушки
+        if (G.ProgressManager?.IsTrapsUsed() == true) return false;
+        if (!G.ResourceManager.SpendGears(minesCost)) return false;
+        PlaceMines();
+        G.ProgressManager?.SetTrapsUsed(true);
         return true;
+    }
+
+    private void PlaceMines()
+    {
+        for (int i = 0; i < minesCount; i++)
+        {
+            // TODO: Логика размещения мин
+        }
     }
 }

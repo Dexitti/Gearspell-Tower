@@ -53,9 +53,9 @@ public class WaterHammerProjectile : MonoBehaviour
                 Collider2D[] nearby = Physics2D.OverlapCircleAll(Target.position, stunRadius);
                 foreach (var col in nearby)
                 {
-                    if (col.CompareTag("Enemy"))
+                    if (col.CompareTag("Enemy") || col.CompareTag("FlyingEnemy"))
                     {
-                        Creature creature = col.GetComponent<Creature>();
+                        CreatureController creature = col.GetComponent<CreatureController>();
                         if (creature != null)
                             creature.ApplyStun(stunDuration);
                     }

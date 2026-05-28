@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System.Collections;
 
 public class HUDController : MonoBehaviour
 {
@@ -51,6 +50,7 @@ public class HUDController : MonoBehaviour
         if (G.EventManager == null) return;
         G.EventManager.OnGameStateChanged += OnGameStateChanged;
         G.EventManager.OnTowerHealthChanged += UpdateHealthBar;
+        G.EventManager.OnGameplayInitialized += OnGameplayInitialized;
         G.EventManager.OnWaveStarted += UpdateWaveNumber;
         G.EventManager.OnGearsChanged += UpdateGears;
         G.EventManager.OnEquipmentUnlocked += OnEquipmentUnlocked;
@@ -59,16 +59,46 @@ public class HUDController : MonoBehaviour
         G.EventManager.OnEquipmentUpgraded += OnEquipmentUpgraded;
 
         SetupButtons();
-        StartCoroutine(DelayedInventoryRefresh());
+
+        if (G.EventManager.IsGameplayInitialized)
+            OnGameplayInitialized();
 
         if (G.GameManager != null)
             OnGameStateChanged(G.GameManager.CurrentState);
     }
 
-    private IEnumerator DelayedInventoryRefresh()
+    private void OnGameplayInitialized()
     {
-        yield return null; // Ждём один кадр
+        RefreshHealthBar();
+
+        if (G.ResourceManager != null)
+            UpdateGears(G.ResourceManager.Gears);
+
+        if (G.GameLoopManager != null)
+            UpdateWaveNumber(G.GameLoopManager.GetCurrentWaveNumber());
+
         inventoryPanel?.Refresh();
+    }
+
+    private void SetupButtons()
+    {
+        if (upgradeButton != null)
+            upgradeButton.onClick.AddListener(OpenUpgradeMenu);
+
+        if (speedToggleButton != null)
+            speedToggleButton.onClick.AddListener(ToggleSpeed);
+
+        if (pauseButton != null)
+            pauseButton.onClick.AddListener(TogglePause);
+
+        if (resumeButton != null)
+            resumeButton.onClick.AddListener(ResumeGame);
+
+        if (settingsButton != null)
+            settingsButton.onClick.AddListener(OpenSettings);
+
+        if (mainMenuButton != null)
+            mainMenuButton.onClick.AddListener(ReturnToMainMenu);
     }
 
     private void Update()
@@ -99,41 +129,29 @@ public class HUDController : MonoBehaviour
         if (G.EventManager == null) return;
         G.EventManager.OnGameStateChanged -= OnGameStateChanged;
         G.EventManager.OnTowerHealthChanged -= UpdateHealthBar;
+        G.EventManager.OnGameplayInitialized -= OnGameplayInitialized;
         G.EventManager.OnWaveStarted -= UpdateWaveNumber;
         G.EventManager.OnGearsChanged -= UpdateGears;
         G.EventManager.OnEquipmentUpgraded -= OnEquipmentUpgraded;
         G.EventManager.OnEquipmentUnlocked -= OnEquipmentUnlocked;
     }
 
-    private void SetupButtons()
+    private void RefreshHealthBar()
     {
-        if (upgradeButton != null)
-            upgradeButton.onClick.AddListener(OpenUpgradeMenu);
-
-        if (speedToggleButton != null)
-            speedToggleButton.onClick.AddListener(ToggleSpeed);
-
-        if (pauseButton != null)
-            pauseButton.onClick.AddListener(TogglePause);
-
-        if (resumeButton != null)
-            resumeButton.onClick.AddListener(ResumeGame);
-        
-        if (settingsButton != null)
-            settingsButton.onClick.AddListener(OpenSettings);
-
-        if (mainMenuButton != null)
-            mainMenuButton.onClick.AddListener(ReturnToMainMenu);
+        var health = G.Tower?.GetComponent<HealthComponent>();
+        if (health == null) return;
+        UpdateHealthBar(health.CurrentHealth, health.MaxHealth);
     }
 
     private void UpdateHealthBar(float currentHealth, float maxHealth)
     {
+        if (healthBar == null || maxHealth <= 0f) return;
+
         healthBar.size = currentHealth / maxHealth;
         healthBar.value = 1f;
 
         if (healthText != null)
             healthText.text = $"{Mathf.CeilToInt(currentHealth)}";
-            //healthText.text = $"{Mathf.CeilToInt(currentHealth)}/{maxHealth}";
     }
 
     private void UpdateWaveNumber(int waveNumber)
@@ -167,8 +185,6 @@ public class HUDController : MonoBehaviour
 
     private void CheckUpgradeAvailability()
     {
-        if (upgradeIndicator == null) return;
-
         int cheapestCost = G.UpgradeSystem.GetCheapestUpgradeCost();
         int currentGears = G.ResourceManager?.Gears ?? 0;
 
@@ -178,12 +194,16 @@ public class HUDController : MonoBehaviour
 
     private void OpenUpgradeMenu()
     {
-        if (G.GameManager != null && G.GameManager.CurrentState == GameState.Playing)
+        if (G.GameManager.CurrentState == GameState.Playing)
+        {
+            G.AudioManager?.PlayButtonClick();
             G.UpgradeSystem?.OpenUpgradeMenu();
+        }
     }
 
     private void ToggleSpeed()
     {
+        G.AudioManager?.PlayHUDClick();
         isSpeedX2 = !isSpeedX2;
         Time.timeScale = isSpeedX2 ? 2f : 1f;
         speedButtonImage.sprite = isSpeedX2 ? speedSprite[1] : speedSprite[0];
@@ -191,17 +211,13 @@ public class HUDController : MonoBehaviour
 
     private void OnGameStateChanged(GameState state)
     {
-        if (pausePanel != null)
-            pausePanel.SetActive(state == GameState.Paused);
-
-        if (pauseButton != null)
-            pauseButton.interactable = (state == GameState.Playing || state == GameState.Paused);
+        pausePanel.SetActive(state == GameState.Paused);
+        pauseButton.interactable = (state == GameState.Playing || state == GameState.Paused);
     }
 
     private void TogglePause()
     {
-        if (G.GameManager == null) return;
-
+        G.AudioManager?.PlayHUDClick();
         if (G.GameManager.CurrentState == GameState.Paused)
             G.GameManager.ResumeGame();
         else if (G.GameManager.CurrentState == GameState.Playing)
@@ -210,16 +226,19 @@ public class HUDController : MonoBehaviour
 
     private void ResumeGame()
     {
+        G.AudioManager?.PlayButtonClick();
         G.GameManager?.ResumeGame();
     }
 
     private void OpenSettings()
     {
+        G.AudioManager?.PlayButtonClick();
         settingsManager.Open(pausePanel);
     }
 
     private void ReturnToMainMenu()
     {
+        G.AudioManager?.PlayButtonClick();
         Time.timeScale = 1f;
         G.GameManager?.ReturnToMainMenu();
     }

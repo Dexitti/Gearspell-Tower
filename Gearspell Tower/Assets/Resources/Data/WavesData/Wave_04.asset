@@ -11,15 +11,18 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bb16b8a316b66784fb826de89b0a4882, type: 3}
   m_Name: Wave_04
-  m_EditorClassIdentifier: 
-  waveName: Wave 4 - Ambush
+  m_EditorClassIdentifier: Assembly-CSharp::WaveData
+  waveName: Wave 4 - Inferno
   enemySpawns:
-  - enemyPrefab: {fileID: 8516407375225930908, guid: 0c861b5478d8dcc46942ec5b8af0a3bd, type: 3}
-    count: 3
+  - enemyPrefab: {fileID: 8516407375225930908, guid: 22fbfc05653798f498fa3161ac6958d3, type: 3}
+    count: 6
     spawnInterval: 0.8
   - enemyPrefab: {fileID: 8516407375225930908, guid: 7ac6612df4dde6346ac550cdeb3ab66b, type: 3}
     count: 4
-    spawnInterval: 0.5
+    spawnInterval: 3
+  - enemyPrefab: {fileID: 8516407375225930908, guid: 3088c44d505a2234c9f90c565fea33bf, type: 3}
+    count: 4
+    spawnInterval: 1.8
   waveDialogs: []
-  gearsReward: 45
+  gearsReward: 50
   equipmentUnlocks: []

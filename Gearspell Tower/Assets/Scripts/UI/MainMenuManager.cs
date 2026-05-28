@@ -71,6 +71,7 @@ public class MainMenuManager : MonoBehaviour
     public void ContinueGame()
     {
         Debug.Log("[MainMenu] Continue game");
+        G.AudioManager?.PlayButtonClick();
         G.GameManager?.StartNewGame();
 
         // TODO: Загрузить сохранения игры
@@ -79,6 +80,7 @@ public class MainMenuManager : MonoBehaviour
     public void StartNewGame()
     {
         Debug.Log("[MainMenu] New game");
+        G.AudioManager?.PlayButtonClick();
         G.SaveManager?.ClearSave();
         G.ProgressManager?.ClearSession();
         G.ResourceManager?.ResetResources();
@@ -87,6 +89,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void OpenSettings()
     {
+        G.AudioManager?.PlayButtonClick();
         settingsManager.Open(mainMenuPanel);
     }
 
@@ -99,6 +102,7 @@ public class MainMenuManager : MonoBehaviour
     public void ExitGame()
     {
         Debug.Log("[MainMenu] Exit game");
+        G.AudioManager?.PlayButtonClick();
         Application.Quit();
 
     #if UNITY_EDITOR

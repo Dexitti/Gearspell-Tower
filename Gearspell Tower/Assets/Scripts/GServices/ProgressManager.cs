@@ -22,6 +22,9 @@ public class SessionData
     public int unlockedSlots = 1;
     public bool isBackpackUnlocked = false;
     public List<EquipmentSaveData> equipmentProgress = new();
+    public bool healUsed = false;
+    public bool regenBoostUsed = false;
+    public bool trapsUsed = false;
 }
 
 //Singleton
@@ -49,17 +52,24 @@ public class ProgressManager : MonoBehaviour
 
     public void SaveSession()
     {
+        if (currentSession == null)
+            currentSession = new SessionData();
+
         var session = new SessionData();
         session.currentWave = G.GameLoopManager?.GetCurrentWaveNumber() ?? 1;
         session.gears = G.ResourceManager?.Gears ?? 0;
         session.towerHealth = G.Tower?.GetComponent<HealthComponent>().CurrentHealth ?? 1;
         session.unlockedSlots = G.EquipmentManager?.UnlockedSlots ?? 1;
         //session.isBackpackUnlocked = G.EquipmentManager?.IsBackpackUnlocked ?? false;
+        session.healUsed = currentSession.healUsed;
+        session.regenBoostUsed = currentSession.regenBoostUsed;
+        session.trapsUsed = currentSession.trapsUsed;
 
         foreach (var eq in G.EquipmentManager.GetActiveControllers())
         {
             session.equipmentProgress.Add(new EquipmentSaveData
             {
+                equipmentName = eq.Data.equipmentName,
                 stage = eq.Stage,
                 forkChoice = eq.ForkChoice,
                 hasActiveAbility = eq.HasActiveAbility,
@@ -78,7 +88,13 @@ public class ProgressManager : MonoBehaviour
     {
         if (session == null) return;
         G.ResourceManager?.SetGears(session.gears);
-        G.Tower?.GetComponent<HealthComponent>()?.SetHealth(session.towerHealth);
+        var towerHealth = G.Tower?.GetComponent<HealthComponent>();
+        if (towerHealth != null)
+        {
+            towerHealth.SetHealth(session.towerHealth);
+            G.EventManager?.TriggerTowerHealthChanged(towerHealth.CurrentHealth, towerHealth.MaxHealth);
+        }
+
         G.EquipmentManager?.SetUnlockedSlots(session.unlockedSlots);
         //G.EquipmentManager?.SetBackpackUnlocked(session.isBackpackUnlocked);
 
@@ -124,7 +140,7 @@ public class ProgressManager : MonoBehaviour
     {
         if (currentSession != null)
             currentSession.isBackpackUnlocked = unlocked;
-        SaveSession(); 
+        SaveSession();
     }
 
     public int GetUnlockedSlots() => currentSession?.unlockedSlots ?? 1;
@@ -156,4 +172,40 @@ public class ProgressManager : MonoBehaviour
             currentSession?.equipmentProgress.Add(new EquipmentSaveData { equipmentName = equipmentName, appliedUpgradeIds = new List<string> { upgradeId } });
         SaveSession();
     }
+
+    private void EnsureCurrentSession()
+    {
+        if (currentSession != null) return;
+        if (HasSession)
+            LoadSession();
+        else
+            currentSession = new SessionData();
+    }
+
+    public void SetHealUsed(bool used)
+    {
+        EnsureCurrentSession();
+        currentSession.healUsed = used;
+        SaveSession();
+    }
+
+    public bool IsHealUsed() => currentSession?.healUsed ?? false;
+
+    public void SetRegenBoostUsed(bool used)
+    {
+        EnsureCurrentSession();
+        currentSession.regenBoostUsed = used;
+        SaveSession();
+    }
+
+    public bool IsRegenBoostUsed() => currentSession?.regenBoostUsed ?? false;
+
+    public void SetTrapsUsed(bool used)
+    {
+        EnsureCurrentSession();
+        currentSession.trapsUsed = used;
+        SaveSession();
+    }
+
+    public bool IsTrapsUsed() => currentSession?.trapsUsed ?? false;
 }

@@ -6,28 +6,36 @@ using UnityEngine;
 public class SaveManager : MonoBehaviour
 {
     private const string GLOBAL_SAVE_KEY = "GlobalSave";
+    private const string SETTINGS_KEY = "PlayerSettings";
 
     [Serializable]
     private class GlobalSaveData
     {
         public List<string> unlockedEquipment = new();
-        //public GameSettings gameSettings = new();
     }
 
     private GlobalSaveData data = new GlobalSaveData();
+
+    public PlayerSettings Settings { get; private set; } = new PlayerSettings();
 
     private void Awake()
     {
         G.SaveManager = this;
         DontDestroyOnLoad(gameObject);
         Load();
+        LoadGameSettings();
+    }
+
+    private void Start()
+    {
+        ApplySettings();
     }
 
     public void Load()
     {
         string json = PlayerPrefs.GetString(GLOBAL_SAVE_KEY, "");
         data = string.IsNullOrEmpty(json) ? new GlobalSaveData() : JsonUtility.FromJson<GlobalSaveData>(json);
-        Debug.Log($"[SaveManager] Loaded: {data.unlockedEquipment.Count} equipment, settings loaded");
+        Debug.Log($"[SaveManager] Loaded: {data.unlockedEquipment.Count} unlocked equipment");
     }
 
     public void Save()
@@ -65,67 +73,84 @@ public class SaveManager : MonoBehaviour
 
     public void ResetGlobalProgress()
     {
-        var settings = PlayerPrefs.GetString("GameSettings", "");
+        var settingsJson = PlayerPrefs.GetString(SETTINGS_KEY, "");
 
         ClearSave();
 
         data = new GlobalSaveData();
         Save();
 
-        // Восстанавливаем настройки
-        if (!string.IsNullOrEmpty(settings))
-            PlayerPrefs.SetString("GameSettings", settings);
+        if (!string.IsNullOrEmpty(settingsJson))
+            PlayerPrefs.SetString(SETTINGS_KEY, settingsJson);
 
-        Debug.Log("[SaveManager] Global progress reset to default");
+        LoadGameSettings();
+        ApplySettings();
+
+        Debug.Log("[SaveManager] Global progress reset (settings kept)");
     }
 
     // === Настройки игры ===
-    //public GameSettings Settings => data.gameSettings;
+    public void LoadGameSettings()
+    {
+        if (!PlayerPrefs.HasKey(SETTINGS_KEY))
+        {
+            Settings = new PlayerSettings();
+            return;
+        }
 
-    //public void SaveSettings(GameSettings settings)
-    //{
-    //    data.gameSettings = settings;
-    //    Save();
-    //    ApplySettings();
-    //}
+        string json = PlayerPrefs.GetString(SETTINGS_KEY);
+        Settings = JsonUtility.FromJson<PlayerSettings>(json) ?? new PlayerSettings();
+    }
 
-    //private void ApplySettings()
-    //{
-    //    // Применяем настройки
-    //    AudioListener.volume = data.gameSettings.masterVolume;
-    //    QualitySettings.SetQualityLevel(data.gameSettings.qualityLevel);
-    //    // Язык применяется через LocalizationManager
-    //    G.LocalizationManager?.SetLanguage(data.gameSettings.language);
-    //}
+    public void SaveGameSettings(PlayerSettings settings)
+    {
+        Settings = settings ?? new PlayerSettings();
+        PlayerPrefs.SetString(SETTINGS_KEY, JsonUtility.ToJson(Settings));
+        PlayerPrefs.Save();
+        ApplySettings();
+    }
 
-    //public void ResetGlobalProgress()
-    //{
-    //    var settings = data.gameSettings; // Сохраняем настройки
-    //    data = new GlobalSaveData { gameSettings = settings };
-    //    Save();
-    //    Debug.Log("[SaveManager] Global progress reset (settings kept)");
-    //}
+    public void ApplySettings()
+    {
+        if (G.AudioManager != null)
+            G.AudioManager.MasterVolume = Settings.masterVolume;
+
+        G.LocalizationManager?.SetLanguage(Settings.language);
+
+        ApplyDisplayMode(Settings.displayModeIndex);
+        ApplyResolution(Settings.resolutionIndex);
+    }
+
+    public static void ApplyResolution(int index)
+    {
+        switch (index)
+        {
+            case 0: Screen.SetResolution(2560, 1440, Screen.fullScreenMode); break;
+            case 1: Screen.SetResolution(1920, 1080, Screen.fullScreenMode); break;
+            case 2: Screen.SetResolution(1440, 900, Screen.fullScreenMode); break;
+            case 3: Screen.SetResolution(1280, 720, Screen.fullScreenMode); break;
+            case 4: Screen.SetResolution(800, 600, Screen.fullScreenMode); break;
+            default: Screen.SetResolution(1920, 1080, Screen.fullScreenMode); break;
+        }
+    }
+
+    public static void ApplyDisplayMode(int index)
+    {
+        switch (index)
+        {
+            case 0: Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen; break;
+            case 1: Screen.fullScreenMode = FullScreenMode.FullScreenWindow; break;
+            case 2: Screen.fullScreenMode = FullScreenMode.Windowed; break;
+            default: Screen.fullScreenMode = FullScreenMode.FullScreenWindow; break;
+        }
+    }
 }
 
 [Serializable]
-public class GameSettings
+public class PlayerSettings
 {
-    // Audio
     public float masterVolume = 1f;
-    public float musicVolume = 0.8f;
-    public float sfxVolume = 1f;
-
-    // Graphics
-    public int qualityLevel = 2;
     public int resolutionIndex = 2;
-    public bool fullscreen = true;
-    public bool vSync = true;
-
-    // Gameplay
+    public int displayModeIndex = 1;
     public LocalizationManager.Language language = LocalizationManager.Language.Russian;
-    public bool screenShake = true;
-    public bool damageNumbers = true;
-
-    // Controls (если будут)
-    public float mouseSensitivity = 1f;
 }

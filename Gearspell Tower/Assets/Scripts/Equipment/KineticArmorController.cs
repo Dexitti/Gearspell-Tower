@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Assets.Scripts.Equipment
@@ -104,7 +105,7 @@ namespace Assets.Scripts.Equipment
                 Collider2D[] allEnemies = Physics2D.OverlapCircleAll(towerTransform.position, effectiveRange);
                 foreach (var hit in allEnemies)
                 {
-                    if (hit.CompareTag("Enemy"))
+                    if (hit.CompareTag("Enemy") || hit.CompareTag("FlyingEnemy"))
                     {
                         HealthComponent enemyHealth = hit.GetComponent<HealthComponent>();
                         if (enemyHealth != null)
@@ -119,6 +120,7 @@ namespace Assets.Scripts.Equipment
             else
             {
                 GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+                enemies.AddRange(GameObject.FindGameObjectsWithTag("FlyingEnemy"));
                 GameObject closestEnemy = null;
                 float closestDistance = effectiveRange;
 
@@ -187,7 +189,7 @@ namespace Assets.Scripts.Equipment
             Vector3 knockDir = (enemy.transform.position - towerTransform.position).normalized;
             enemy.transform.position += knockDir * knockbackForce * 0.5f;
 
-            Creature creature = enemy.GetComponent<Creature>();
+            CreatureController creature = enemy.GetComponent<CreatureController>();
             if (creature != null)
                 creature.ApplyStun(0.1f);
         }

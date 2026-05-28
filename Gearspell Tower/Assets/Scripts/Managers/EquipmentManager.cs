@@ -30,17 +30,26 @@ public class EquipmentManager : MonoBehaviour
     private void Start()
     {
         if (G.EquipmentManager == null)
-            G.EquipmentManager = this; // Для отладки (запуска Game)
+            G.EquipmentManager = this;
 
-        // Загрузка сохранения
+        InitializeGameplay();
+    }
+
+    private void InitializeGameplay()
+    {
+        G.EventManager?.ResetGameplayInitialized(); // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅпїЅ Game)
+
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         unlockedSlots = G.ProgressManager?.GetUnlockedSlots() ?? 1;
 
-        // Загрузка стартового снаряжения
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         startUnlockedEquipment = Resources.LoadAll<EquipmentData>("Data/EquipmentData")
             .Where(eqData => eqData.name == "WindmillData" || eqData.name == "FireDrillData" || eqData.name == "LightningCogsData").ToArray();
 
         //if (!G.SaveManager.IsEquipmentUnlocked("CryogenicStabilizer"))
-        //    G.SaveManager.UnlockEquipment("CryogenicStabilizer"); // Отладка
+        //    G.SaveManager.UnlockEquipment("CryogenicStabilizer"); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+
+        G.Tower?.Initialize();
 
         if (!G.ProgressManager.HasSession)
         {
@@ -53,11 +62,13 @@ public class EquipmentManager : MonoBehaviour
         }
         else
         {
-            // Применяем сохраненную сессию
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
             var session = G.ProgressManager.LoadSession();
             if (session != null)
                 G.ProgressManager.ApplySession(session);
         }
+
+        G.EventManager?.TriggerGameplayInitialized();
     }
 
     private void LoadAllPrefabs()
@@ -68,7 +79,7 @@ public class EquipmentManager : MonoBehaviour
             EquipmentController contr = prefab.GetComponent<EquipmentController>();
             allEquipmentPrefabs[contr.Data.equipmentName] = contr;
         }
-        Debug.Log($"[EquipmentManager] Префабы снаряжения загружены");
+        Debug.Log($"[EquipmentManager] пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
     }
 
     private void EquipStartEquipment()
@@ -83,7 +94,7 @@ public class EquipmentManager : MonoBehaviour
         }
 
         if (!G.ProgressManager.HasSession)
-            EquipToSlot(allEquipmentPrefabs["Windmill"], 0); // Изменить на WindmillController
+            EquipToSlot(allEquipmentPrefabs["Windmill"], 0); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ WindmillController
         else
         {
             var randomEq = unlockedEquipment[UnityEngine.Random.Range(0, unlockedEquipment.Count)];
@@ -101,7 +112,7 @@ public class EquipmentManager : MonoBehaviour
             UnequipSlot(slotIndex);
 
         EquipmentController contr = Instantiate(newEquipment, transform);
-        Debug.Log($"Снаряжение {newEquipment.name} экипировано в слот {slotIndex}");
+        Debug.Log($"пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ {newEquipment.name} пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ {slotIndex}");
 
         activeEquipment[slotIndex] = contr;
         
@@ -118,13 +129,13 @@ public class EquipmentManager : MonoBehaviour
         var eq = activeEquipment[slotIndex];
         if (eq != null)
         {
-            Debug.Log($"Снаряжение {eq.name} снято со слота {slotIndex}");
+            Debug.Log($"пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ {eq.name} пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ {slotIndex}");
             Destroy(eq.gameObject);
         }
         activeEquipment[slotIndex] = null;
     }
 
-    // === Для UpgradeSystem ===
+    // === пїЅпїЅпїЅ UpgradeSystem ===
     public bool TryUnlockNextSlot()
     {
         if (!CanUnlockNextSlot(out int cost)) return false;
@@ -135,7 +146,7 @@ public class EquipmentManager : MonoBehaviour
             unlockedSlots++;
             G.ProgressManager?.SetUnlockedSlots(unlockedSlots);
             G.EventManager?.TriggerSlotUnlocked(unlockedSlots - 1);
-            Debug.Log($"[EquipmentManager] Слот {unlockedSlots} разблокирован");
+            Debug.Log($"[EquipmentManager] пїЅпїЅпїЅпїЅ {unlockedSlots} пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
         }
 
         return true;

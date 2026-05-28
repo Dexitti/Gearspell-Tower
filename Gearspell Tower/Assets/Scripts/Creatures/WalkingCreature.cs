@@ -6,38 +6,50 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class WalkingCreature : Creature
+public class WalkingCreature : CreatureController
 {
+    private bool isAttacking = false;
+    private Coroutine attackCoroutine;
+
     protected override void Move()
     {
+        if (isAttacking) return;
         // Прямо к башне
-        Vector3 isoDirection = IsometricExtension.IsoDirection(transform.position, towerPosition);
-        Vector3 movement = IsometricExtension.IsoMovement(isoDirection, baseSpeed);
+        Vector3 dirToTower = IsometricExtension.IsoDirection(transform.position, towerPosition);
+        Vector3 movement = IsometricExtension.IsoMovement(dirToTower, currentSpeed);
         transform.position += movement;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Tower"))
+        if (other.CompareTag("Tower"))
         {
-            baseSpeed = 0;
-            OnReachedTower?.Invoke(this);
+            Attack(other.gameObject);
             G.EventManager?.TriggerEnemyReachedTower(this);
-            StartCoroutine(Attack(other));
         }
     }
 
-    IEnumerator Attack(Collider2D other)
+    protected override void Attack(GameObject target)
     {
-        while (true)
+        if (attackCoroutine != null) StopCoroutine(attackCoroutine);
+        attackCoroutine = StartCoroutine(AttackCoroutine(target));
+    }
+
+    private IEnumerator AttackCoroutine(GameObject target)
+    {
+        isAttacking = true;
+
+        var towerHealth = target.GetComponent<HealthComponent>();
+
+        while (towerHealth != null && towerHealth.isAlive)
         {
-            HealthComponent towerHealthComponent = other.GetComponent<HealthComponent>();
-            if (towerHealthComponent == null || !towerHealthComponent.isAlive) yield break;
-            towerHealthComponent.TakeDamage(baseDamage);
+            towerHealth.TakeDamage(currentDamage);
+            G.AudioManager?.PlaySFX("hit");
 
-            // Анимация атаки
-
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(attackCooldown);
         }
+
+        isAttacking = false;
+        attackCoroutine = null;
     }
 }

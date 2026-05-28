@@ -11,18 +11,21 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bb16b8a316b66784fb826de89b0a4882, type: 3}
   m_Name: Wave_06
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::WaveData
   waveName: Wave 6 - Sky Hunters
   enemySpawns:
-  - enemyPrefab: {fileID: 8516407375225930908, guid: b9f252a3c6d80b54db31a1403d96dc91, type: 3}
-    count: 2
+  - enemyPrefab: {fileID: 8516407375225930908, guid: 22fbfc05653798f498fa3161ac6958d3, type: 3}
+    count: 20
     spawnInterval: 2
-  - enemyPrefab: {fileID: 8516407375225930908, guid: 6885c6682914d9243984bfaa8ceb8b07, type: 3}
-    count: 1
-    spawnInterval: 2.5
   - enemyPrefab: {fileID: 8516407375225930908, guid: 7ac6612df4dde6346ac550cdeb3ab66b, type: 3}
-    count: 5
-    spawnInterval: 0.4
+    count: 6
+    spawnInterval: 1
+  - enemyPrefab: {fileID: 8516407375225930908, guid: 3088c44d505a2234c9f90c565fea33bf, type: 3}
+    count: 10
+    spawnInterval: 1.4
+  - enemyPrefab: {fileID: 8516407375225930908, guid: 882684cc75a34014bb4863ee9da91e4a, type: 3}
+    count: 3
+    spawnInterval: 5
   waveDialogs: []
-  gearsReward: 65
+  gearsReward: 75
   equipmentUnlocks: []

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.ParticleSystem;
 
@@ -110,7 +111,7 @@ public class AntennaController : EquipmentController
             // Оглушающая волна
             if (hasStun && UnityEngine.Random.value < stunChance)
             {
-                Creature creature = enemy.GetComponent<Creature>();
+                CreatureController creature = enemy.GetComponent<CreatureController>();
                 if (creature != null)
                     creature.ApplyStun(stunDuration);
             }
@@ -180,6 +181,7 @@ public class AntennaController : EquipmentController
         while (elapsed < duration)
         {
             GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            enemies.AddRange(GameObject.FindGameObjectsWithTag("FlyingEnemy"));
             ApplyEnemyAuras(enemies);
             elapsed += 0.5f;
             yield return new WaitForSeconds(0.5f);
@@ -197,7 +199,7 @@ public class AntennaController : EquipmentController
             Collider2D[] nearby = Physics2D.OverlapCircleAll(enemy.transform.position, auraRadius);
             foreach (var col in nearby)
             {
-                if (col.CompareTag("Enemy") && col.gameObject != enemy)
+                if ((col.CompareTag("Enemy") || col.CompareTag("FlyingEnemy")) && col.gameObject != enemy)
                 {
                     HealthComponent hp = col.GetComponent<HealthComponent>();
                     if (hp != null)

@@ -33,7 +33,7 @@ public class FireDrillProjectile : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("Enemy") || other.CompareTag("FlyingEnemy"))
         {
             HealthComponent enemyHP = other.GetComponent<HealthComponent>();
             if (enemyHP != null)
@@ -42,7 +42,7 @@ public class FireDrillProjectile : MonoBehaviour
 
                 if (hasStun && Random.value < stunChance)
                 {
-                    Creature creature = other.GetComponent<Creature>();
+                    CreatureController creature = other.GetComponent<CreatureController>();
                     if (creature != null)
                         creature.ApplyStun(stunDuration);
                 }

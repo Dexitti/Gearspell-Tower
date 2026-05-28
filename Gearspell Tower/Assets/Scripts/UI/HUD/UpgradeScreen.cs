@@ -102,6 +102,7 @@ public class UpgradeScreen : MonoBehaviour
 
     public void Close()
     {
+        G.AudioManager?.PlayButtonClick();
         panel.SetActive(false);
         G.GameManager?.CloseUpgrade();
 
@@ -156,6 +157,7 @@ public class UpgradeScreen : MonoBehaviour
     {
         if (slotIndex >= G.EquipmentManager.UnlockedSlots && G.EquipmentManager.TryUnlockNextSlot())
         {
+            G.AudioManager?.PlayButtonClick();
             AddOffers();
         }
     }
@@ -182,6 +184,7 @@ public class UpgradeScreen : MonoBehaviour
     {
         if (G.ResourceManager.Gears >= card.Data.cost)
         {
+            G.AudioManager?.PlayButtonClick();
             CardClicked?.Invoke(card.Data);
             //int index = currentOffers.IndexOf(card.Data);
             //if (index >= 0)
@@ -215,18 +218,21 @@ public class UpgradeScreen : MonoBehaviour
 
     private void Heal()
     {
+        G.AudioManager?.PlayButtonClick();
         G.UpgradeSystem?.TryHealTower();
         UpdateGlobalButtons();
     }
 
     private void RegenBoost()
     {
+        G.AudioManager?.PlayButtonClick();
         G.UpgradeSystem?.TryBoostRegen();
         UpdateGlobalButtons();
     }
 
     private void PlaceMines()
     {
+        G.AudioManager?.PlayButtonClick();
         G.UpgradeSystem?.TryPlaceTraps();
         UpdateGlobalButtons();
     }
@@ -237,12 +243,12 @@ public class UpgradeScreen : MonoBehaviour
         int gears = G.ResourceManager?.Gears ?? 0;
 
         healText.text = G.LocalizationManager.GetText("Heal", sys.HealPercent);
-        healButton.interactable = gears >= sys.HealCost;
+        healButton.interactable = sys.IsHealAvailable && gears >= sys.HealCost;
 
         regenBoostText.text = G.LocalizationManager.GetText("Regen", sys.RegenBoostDuration);
-        regenButton.interactable = gears >= sys.RegenBoostCost;
+        regenButton.interactable = sys.IsRegenBoostAvailable && gears >= sys.RegenBoostCost;
 
         placeMinesText.text = G.LocalizationManager.GetText("PlaceMines", sys.MinesCount);
-        mineButton.interactable = gears >= sys.MinesCost;
+        mineButton.interactable = sys.IsTrapsAvailable && gears >= sys.MinesCost;
     }
 }

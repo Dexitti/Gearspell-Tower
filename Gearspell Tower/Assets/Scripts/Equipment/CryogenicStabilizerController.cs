@@ -295,7 +295,7 @@ public class CryogenicStabilizerController : EquipmentController
                     Instantiate(freezeImpactEffect, enemy.transform.position, Quaternion.identity);
             }
 
-            Creature creature = enemy.GetComponent<Creature>();
+            CreatureController creature = enemy.GetComponent<CreatureController>();
             if (creature != null)
                 creature.ApplySlow(slowMultiplier, 0.5f);
         }
@@ -392,9 +392,9 @@ public class CryogenicStabilizerController : EquipmentController
             Collider2D[] enemies = Physics2D.OverlapCircleAll(center, radius);
             foreach (var col in enemies)
             {
-                if (col.CompareTag("Enemy"))
+                if (col.CompareTag("Enemy") || col.CompareTag("FlyingEnemy"))
                 {
-                    Creature creature = col.GetComponent<Creature>();
+                    CreatureController creature = col.GetComponent<CreatureController>();
                     if (creature != null)
                         creature.ApplySlow(slowMultiplier * 1.3f, tickRate + 0.1f);
                 }
@@ -418,7 +418,7 @@ public class CryogenicStabilizerController : EquipmentController
         {
             if (IsometricExtension.IsoDistance(towerTransform.position, enemy.transform.position) <= currentRange)
             {
-                Creature creature = enemy.GetComponent<Creature>();
+                CreatureController creature = enemy.GetComponent<CreatureController>();
                 if (creature != null)
                     creature.ApplyStun(freezeDuration);
             }

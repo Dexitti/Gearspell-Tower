@@ -461,7 +461,7 @@ namespace Assets.Scripts.Equipment
                         Collider2D[] pillarTargets = Physics2D.OverlapCircleAll(cogPos, lightningDamageWidth * 1.5f);
                         foreach (var col in pillarTargets)
                         {
-                            if (!col.CompareTag("Enemy")) continue;
+                            if (!(col.CompareTag("Enemy") || col.CompareTag("FlyingEnemy"))) continue;
                             HealthComponent health = col.GetComponent<HealthComponent>();
                             if (health != null && !damagedEnemies.Contains(health))
                             {

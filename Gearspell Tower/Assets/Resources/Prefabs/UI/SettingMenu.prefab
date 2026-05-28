@@ -1065,8 +1065,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 3838870578072164419, guid: 4ebe106ea8022ae4ba96c272f0051fd0, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1656,7 +1656,6 @@ MonoBehaviour:
   backButtonText: {fileID: 4335816361252443163}
   russianText: {fileID: 7452389648344507283}
   englishText: {fileID: 6934947007369688817}
-  audioMixer: {fileID: 0}
   ruLanguageToggle: {fileID: 7158115867046480592}
   enLanguageToggle: {fileID: 3602945764424565077}
   resetProgressButton: {fileID: 4857599802169907834}
@@ -4349,8 +4348,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 3838870578072164419, guid: 4ebe106ea8022ae4ba96c272f0051fd0, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -4718,8 +4717,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: -9075084212509297011, guid: 6be947a727919ce4081d251730d01f6b, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4

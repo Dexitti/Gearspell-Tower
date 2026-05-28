@@ -8,21 +8,32 @@ public class Tower : MonoBehaviour
     [Header("Parameters")]
     [SerializeField] private int regeneration = 1;
     private HealthComponent healthComponent;
+    private bool regenerationStarted;
 
     public Vector3 Position => transform.position;
     public void SetRegeneration(int value) => regeneration = value;
 
-    private void Start()
+    private void Awake()
     {
         healthComponent = GetComponent<HealthComponent>();
-        if (healthComponent != null)
-        {
-            healthComponent.MaxHealth = 1000;
-            healthComponent.OnHealthChanged += OnHealthChanged;
-            healthComponent.OnDeath += OnDeath;
-        }
+        if (healthComponent == null) return;
 
-        StartCoroutine(Regenerate());
+        healthComponent.OnHealthChanged += OnHealthChanged;
+        healthComponent.OnDeath += OnDeath;
+    }
+
+    public void Initialize()
+    {
+        if (healthComponent == null) return;
+
+        healthComponent.SetMaxHealth(1000);
+        OnHealthChanged(healthComponent.CurrentHealth, healthComponent.MaxHealth);
+
+        if (!regenerationStarted)
+        {
+            regenerationStarted = true;
+            StartCoroutine(Regenerate());
+        }
     }
 
     private void OnHealthChanged(float current, float max)

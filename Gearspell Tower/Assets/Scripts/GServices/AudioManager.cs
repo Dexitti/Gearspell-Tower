@@ -33,7 +33,6 @@ public class AudioManager : MonoBehaviour
         {
             masterVolume = Mathf.Clamp01(value);
             audioMixer.SetFloat(masterVolumeParameter, ConvertToDecibels(masterVolume));
-            SaveVolumeSettings();
         }
         get => masterVolume;
     }
@@ -60,7 +59,9 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        masterVolume = PlayerPrefs.GetFloat("MasterVolume", 1f);
+        masterVolume = G.SaveManager != null
+            ? G.SaveManager.Settings.masterVolume
+            : PlayerPrefs.GetFloat("MasterVolume", 1f);
         ApplyVolumeSettings();
         G.EventManager.OnGameStateChanged += OnGameStateChanged;
         //G.EventManager.OnEnemyKilled += OnEnemyKilled;
@@ -175,7 +176,15 @@ public class AudioManager : MonoBehaviour
     }
 
     // === Play SFX ===
+    public void PlayButtonClick()
+    {
+        PlaySFX("UI btn click sound");
+    }
 
+    public void PlayHUDClick()
+    {
+        PlaySFX("tick");
+    }
 
     // === Settings ===
     private void ApplyVolumeSettings()
@@ -189,14 +198,4 @@ public class AudioManager : MonoBehaviour
         return Mathf.Log10(volume) * 20f;
     }
 
-    public void SaveVolumeSettings()
-    {
-        PlayerPrefs.SetFloat("MasterVolume", masterVolume);
-        PlayerPrefs.Save();
-    }
-
-    private void LoadVolumeSettings()
-    {
-        masterVolume = PlayerPrefs.GetFloat("MasterVolume", 1f);
-    }
 }

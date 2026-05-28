@@ -11,15 +11,15 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bb16b8a316b66784fb826de89b0a4882, type: 3}
   m_Name: Wave_02
-  m_EditorClassIdentifier: 
-  waveName: Wave 2 - Stone Wall
+  m_EditorClassIdentifier: Assembly-CSharp::WaveData
+  waveName: Wave 2 - Steam
   enemySpawns:
   - enemyPrefab: {fileID: 8516407375225930908, guid: 22fbfc05653798f498fa3161ac6958d3, type: 3}
     count: 10
     spawnInterval: 0.8
-  - enemyPrefab: {fileID: 8516407375225930908, guid: 6c204ad43a41e1f4b8fde9093435a656, type: 3}
+  - enemyPrefab: {fileID: 8516407375225930908, guid: 7ac6612df4dde6346ac550cdeb3ab66b, type: 3}
     count: 4
-    spawnInterval: 1.5
+    spawnInterval: 3
   waveDialogs: []
-  gearsReward: 25
+  gearsReward: 20
   equipmentUnlocks: []
