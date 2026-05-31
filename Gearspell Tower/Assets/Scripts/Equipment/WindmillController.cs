@@ -47,9 +47,10 @@ public class WindmillController : EquipmentController
 
     private Vector3? GetNearestEnemy()
     {
-        GameObject[] enemyArray = GameObject.FindGameObjectsWithTag("Enemy");
-        if (enemyArray.Length == 0) return null;
-        return enemyArray
+        List<GameObject> enemyList = GameObject.FindGameObjectsWithTag("Enemy").ToList();
+        enemyList.AddRange(GameObject.FindGameObjectsWithTag("FlyingEnemy"));
+        if (enemyList.Count == 0) return null;
+        return enemyList
             .OrderBy(enemy => IsometricExtension.IsoDistance(towerTransform.position, enemy.transform.position))
             .FirstOrDefault().transform.position;
     }

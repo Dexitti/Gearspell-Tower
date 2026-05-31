@@ -19,7 +19,8 @@ MonoBehaviour:
     \u0438 \u0431\u0430\u0444\u0430\u0435\u0442 \u0441\u043E\u044E\u0437\u043D\u0438\u043A\u043E\u0432
     \u0432\u043E\u043A\u0440\u0443\u0433"
   icon: {fileID: 0}
-  attackPrefabs: []
+  attackPrefabs:
+  - {fileID: 4514352855775991252, guid: 1c18cffc78fe88b4b8042e11328e56fd, type: 3}
   health: 20
   damage: 8
   speed: 0.8

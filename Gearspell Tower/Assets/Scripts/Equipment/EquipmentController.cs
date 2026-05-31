@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.Rendering.HableCurve;
 
@@ -56,7 +58,7 @@ public abstract class EquipmentController : MonoBehaviour
                 Transform shield = towerTransform.Find("Shield(Clone)");
                 Transform shieldBorder = shield?.Find("ShieldBorder");
                 SpriteRenderer borderRenderer = shieldBorder?.GetComponent<SpriteRenderer>();
-                Sprite parapetSprite = Resources.Load<Sprite>($"Arts/Equipment and projectiles/Kinetic armor/Parapet_Shield");
+                Sprite parapetSprite = Resources.Load<Sprite>($"Arts/Projectiles/Parapet_Shield");
 
                 if (borderRenderer != null && parapetSprite != null)
                     borderRenderer.sprite = parapetSprite;
@@ -66,7 +68,7 @@ public abstract class EquipmentController : MonoBehaviour
                 Transform shieldBorderTransform = decorationInstance.transform.Find("ShieldBorder");
                 SpriteRenderer shieldBorderSprite = shieldBorderTransform?.GetComponent<SpriteRenderer>();
                 string spriteName = towerTransform.Find("Mortars and Parapet(Clone)") != null ? "Parapet_Shield" : "Roof_Shield";
-                Sprite borderSprite = Resources.Load<Sprite>($"Arts/Equipment and projectiles/Kinetic armor/{spriteName}");
+                Sprite borderSprite = Resources.Load<Sprite>($"Arts/Projectiles/{spriteName}");
 
                 if (shieldBorderSprite != null && borderSprite != null)
                     shieldBorderSprite.sprite = borderSprite;
@@ -97,8 +99,9 @@ public abstract class EquipmentController : MonoBehaviour
     IEnumerator AttackManager()
     {
         while (true) {
-            GameObject[] enemyArray = GameObject.FindGameObjectsWithTag("Enemy");
-            if (enemyArray.Length > 0)
+            List<GameObject> enemies = GameObject.FindGameObjectsWithTag("Enemy").ToList();
+            enemies.AddRange(GameObject.FindGameObjectsWithTag("FlyingEnemy"));
+            if (enemies.Count > 0)
             {
                 yield return StartCoroutine(Attack());
                 yield return new WaitForSeconds(currentAttackCooldown);

@@ -87,10 +87,11 @@ public class AntennaController : EquipmentController
 
     private void HaveAndDamageEnemiesInRange()
     {
-        GameObject[] enemyArray = GameObject.FindGameObjectsWithTag("Enemy");
+        List<GameObject> enemyList = GameObject.FindGameObjectsWithTag("Enemy").ToList();
+        enemyList.AddRange(GameObject.FindGameObjectsWithTag("FlyingEnemy"));
         hasEnemies = false;
 
-        foreach (var enemy in enemyArray)
+        foreach (var enemy in enemyList)
         {
             float distance = IsometricExtension.IsoDistance(towerTransform.position, enemy.transform.position);
             if (distance > currentRange) continue;
@@ -126,7 +127,7 @@ public class AntennaController : EquipmentController
 
         if (enemyAuras && !HasActiveAbility)
         {
-            ApplyEnemyAuras(enemyArray);
+            ApplyEnemyAuras(enemyList);
         }
     }
 
@@ -180,15 +181,15 @@ public class AntennaController : EquipmentController
 
         while (elapsed < duration)
         {
-            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            enemies.AddRange(GameObject.FindGameObjectsWithTag("FlyingEnemy"));
-            ApplyEnemyAuras(enemies);
+            List<GameObject> enemyList = GameObject.FindGameObjectsWithTag("Enemy").ToList();
+            enemyList.AddRange(GameObject.FindGameObjectsWithTag("FlyingEnemy"));
+            ApplyEnemyAuras(enemyList);
             elapsed += 0.5f;
             yield return new WaitForSeconds(0.5f);
         }
     }
 
-    private void ApplyEnemyAuras(GameObject[] enemies)
+    private void ApplyEnemyAuras(List<GameObject> enemies)
     {
         foreach (var enemy in enemies)
         {

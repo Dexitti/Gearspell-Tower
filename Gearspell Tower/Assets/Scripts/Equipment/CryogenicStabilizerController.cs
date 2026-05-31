@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Assets.Scripts.Equipment;
 using NUnit;
 using Unity.VisualScripting;
@@ -136,8 +137,9 @@ public class CryogenicStabilizerController : EquipmentController
 
     private bool AreEnemiesInRange()
     {
-        GameObject[] enemyArray = GameObject.FindGameObjectsWithTag("Enemy");
-        foreach (GameObject enemy in enemyArray)
+        List<GameObject> enemies = GameObject.FindGameObjectsWithTag("Enemy").ToList();
+        enemies.AddRange(GameObject.FindGameObjectsWithTag("FlyingEnemy"));
+        foreach (GameObject enemy in enemies)
         {
             if (IsometricExtension.IsoDistance(enemy.transform.position, towerTransform.position) <= currentRange)
                 return true;
@@ -147,17 +149,14 @@ public class CryogenicStabilizerController : EquipmentController
 
     private Vector3 GetAverageFromNearestEnemies()
     {
-        GameObject[] enemyArray = GameObject.FindGameObjectsWithTag("Enemy");
-        if (enemyArray.Length == 0) return Vector3.zero;
+        List<GameObject> enemies = GameObject.FindGameObjectsWithTag("Enemy").ToList();
+        enemies.AddRange(GameObject.FindGameObjectsWithTag("FlyingEnemy"));
+        if (enemies.Count == 0) return Vector3.zero;
 
-        Array.Sort(enemyArray, (enemy1, enemy2) =>
-            IsometricExtension.IsoDistance(enemy1.transform.position, towerTransform.position)
-            .CompareTo(IsometricExtension.IsoDistance(enemy2.transform.position, towerTransform.position))
-        );
-
+        enemies = enemies.OrderBy(enemy => IsometricExtension.IsoDistance(enemy.transform.position, towerTransform.position)).ToList();
         nearestEnemies.Clear();
 
-        foreach (GameObject enemy in enemyArray)
+        foreach (GameObject enemy in enemies)
         {
             if (enemy != null && IsometricExtension.IsoDistance(enemy.transform.position, towerTransform.position) <= currentRange)
             {
@@ -413,7 +412,8 @@ public class CryogenicStabilizerController : EquipmentController
     private IEnumerator AbsoluteZero()
     {
         // Ёффект льда и лед на каждого врага
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        List<GameObject> enemies = GameObject.FindGameObjectsWithTag("Enemy").ToList();
+        enemies.AddRange(GameObject.FindGameObjectsWithTag("FlyingEnemy"));
         foreach (var enemy in enemies)
         {
             if (IsometricExtension.IsoDistance(towerTransform.position, enemy.transform.position) <= currentRange)

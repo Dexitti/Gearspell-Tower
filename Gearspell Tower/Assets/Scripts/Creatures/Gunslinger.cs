@@ -16,6 +16,7 @@ public class Gunslinger : CreatureController
     private State currentState = State.Moving;
     private Vector3 dirToTower;
     private Coroutine attackCoroutine;
+    private bool isAttacking = false;
 
     private float orbitAngle;
 
@@ -30,7 +31,11 @@ public class Gunslinger : CreatureController
                 transform.position += movement;
 
                 if (distance <= fireDistance)
+                {
                     currentState = State.Shooting;
+                    Vector3 offset = transform.position - towerPosition;
+                    orbitAngle = Mathf.Atan2(offset.y / IsometricExtension.isoRatio, offset.x) * Mathf.Rad2Deg;
+                }
                 break;
 
             case State.Shooting:
@@ -38,17 +43,19 @@ public class Gunslinger : CreatureController
                 break;
 
             case State.Orbiting:
-                Vector3 towerPos = G.Tower.Position;
-                orbitAngle += orbitalSpeed * Time.deltaTime * 50f;
-                float rad = orbitAngle * Mathf.Deg2Rad;
-                Vector3 offsetPos = new Vector3(Mathf.Cos(rad), Mathf.Sin(rad) * 0.5f, 0) * fireDistance;
-                Vector3 targetPos = towerPos + offsetPos;
-                transform.position = Vector3.MoveTowards(transform.position, targetPos, currentSpeed * Time.deltaTime);
+                if (!isAttacking)
+                {
+                    Vector3 towerPos = G.Tower.Position;
+                    orbitAngle += orbitalSpeed * Time.deltaTime * 50f;
+                    float rad = orbitAngle * Mathf.Deg2Rad;
+                    Vector3 offsetPos = new Vector3(Mathf.Cos(rad), Mathf.Sin(rad) * 0.5f, 0) * fireDistance;
+                    Vector3 targetPos = towerPos + offsetPos;
+                    transform.position = Vector3.MoveTowards(transform.position, targetPos, currentSpeed * Time.deltaTime);
 
-                Vector3 lookDir = towerPosition - transform.position;
-                if (lookDir.x < 0) sprite.flipX = !sprite.flipX;
-                currentState = State.Shooting;
-
+                    Vector3 lookDir = towerPosition - transform.position;
+                    if (lookDir.x < 0) sprite.flipX = !sprite.flipX;
+                    currentState = State.Shooting;
+                }
                 break;
         }
     }
@@ -57,7 +64,9 @@ public class Gunslinger : CreatureController
 
     protected override void Attack(GameObject target)
     {
+        if (isAttacking) return;
         fireTimes = UnityEngine.Random.Range(2, 4);
+        isAttacking = true;
         attackCoroutine = StartCoroutine(Shoot());
         
     }
@@ -66,10 +75,15 @@ public class Gunslinger : CreatureController
     {
         for (int i = 0; i < fireTimes; i++)
         {
-            var shot = Instantiate(data.attackPrefabs[0], transform.position, Quaternion.LookRotation(dirToTower));
-            G.AudioManager?.PlaySFX("shot");
+            float angle = Mathf.Atan2(dirToTower.y, dirToTower.x) * Mathf.Rad2Deg;
+            var shot = Instantiate(data.attackPrefabs[0], transform.position, Quaternion.Euler(0, 0, angle), transform);
+            var mageShot = shot.GetComponent<MageShot>();
+            mageShot.Direction = dirToTower;
+            mageShot.Damage = currentDamage;
+            G.AudioManager?.PlaySFX("zap");
             yield return new WaitForSeconds(attackCooldown);
         }
+        isAttacking = false;
         StopCoroutine(attackCoroutine);
         currentState = State.Orbiting;
     }

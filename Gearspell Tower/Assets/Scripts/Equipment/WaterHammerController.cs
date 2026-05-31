@@ -44,9 +44,10 @@ namespace Assets.Scripts.Equipment
 
         private Transform GetStrongestEnemy()
         {
-            GameObject[] enemyArray = GameObject.FindGameObjectsWithTag("Enemy");
-            if (enemyArray.Length == 0) return null;
-            return enemyArray
+            List<GameObject> enemyList = GameObject.FindGameObjectsWithTag("Enemy").ToList();
+            enemyList.AddRange(GameObject.FindGameObjectsWithTag("FlyingEnemy"));
+            if (enemyList.Count == 0) return null;
+            return enemyList
                 .OrderByDescending(enemy => enemy.GetComponent<HealthComponent>().CurrentHealth)
                 .FirstOrDefault().transform;
         }

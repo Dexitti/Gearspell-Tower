@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class SettingsManager : MonoBehaviour, IPointerClickHandler
+public class SettingsManager : MonoBehaviour
 {
     [Header("UI Elements")]
     [SerializeField] private GameObject settingsPanel;
@@ -32,6 +32,8 @@ public class SettingsManager : MonoBehaviour, IPointerClickHandler
 
     private GameObject previousPanel;
     private bool isSyncingUi;
+    private bool wasResolutionExpanded;
+    private bool wasDisplayModeExpanded;
 
     public bool IsOpen => settingsPanel != null && settingsPanel.activeSelf;
 
@@ -49,11 +51,14 @@ public class SettingsManager : MonoBehaviour, IPointerClickHandler
 
         if (resolutionDropdown != null)
         {
-
             resolutionDropdown.onValueChanged.AddListener(_ => OnResolutionChanged());
+            wasResolutionExpanded = resolutionDropdown.IsExpanded;
         }
         if (displayModeDropdown != null)
+        {
             displayModeDropdown.onValueChanged.AddListener(_ => OnDisplayModeChanged());
+            wasDisplayModeExpanded = displayModeDropdown.IsExpanded;
+        }
 
         LoadSettings();
         SetupLanguageToggles();
@@ -62,6 +67,11 @@ public class SettingsManager : MonoBehaviour, IPointerClickHandler
             G.LocalizationManager.OnLanguageChanged += OnLanguageChanged;
 
         UpdateAllTexts();
+    }
+
+    private void Update()
+    {
+        HandleDropdownExpandState();
     }
 
     private void OnDestroy()
@@ -117,15 +127,6 @@ public class SettingsManager : MonoBehaviour, IPointerClickHandler
         return settings;
     }
 
-    public void OnPointerClick(PointerEventData eventData) // не работает!
-    {
-        TMP_Dropdown clicked = eventData.pointerPress.GetComponentInParent<TMP_Dropdown>();
-        if (clicked == resolutionDropdown || clicked == displayModeDropdown)
-        {
-            G.AudioManager?.PlayButtonClick();
-        }
-    }
-
     public void ChangeResolution()
     {
         OnResolutionChanged();
@@ -143,6 +144,7 @@ public class SettingsManager : MonoBehaviour, IPointerClickHandler
         SaveManager.ApplyDisplayMode(displayModeDropdown != null ? displayModeDropdown.value : G.SaveManager.Settings.displayModeIndex);
         SaveManager.ApplyResolution(resolutionDropdown.value);
         SaveSettings();
+        ForceCloseDropdown(resolutionDropdown);
     }
 
     private void OnDisplayModeChanged()
@@ -152,6 +154,36 @@ public class SettingsManager : MonoBehaviour, IPointerClickHandler
         SaveManager.ApplyDisplayMode(displayModeDropdown.value);
         SaveManager.ApplyResolution(resolutionDropdown != null ? resolutionDropdown.value : G.SaveManager.Settings.resolutionIndex);
         SaveSettings();
+        ForceCloseDropdown(displayModeDropdown);
+    }
+
+    private void HandleDropdownExpandState()
+    {
+        if (resolutionDropdown != null)
+        {
+            bool isExpanded = resolutionDropdown.IsExpanded;
+            if (isExpanded != wasResolutionExpanded)
+            {
+                G.AudioManager?.PlayButtonClick();
+                wasResolutionExpanded = isExpanded;
+            }
+        }
+
+        if (displayModeDropdown != null)
+        {
+            bool isExpanded = displayModeDropdown.IsExpanded;
+            if (isExpanded != wasDisplayModeExpanded)
+            {
+                G.AudioManager?.PlayButtonClick();
+                wasDisplayModeExpanded = isExpanded;
+            }
+        }
+    }
+
+    private static void ForceCloseDropdown(TMP_Dropdown dropdown)
+    {
+        if (dropdown == null || !dropdown.IsExpanded) return;
+        dropdown.Hide();
     }
 
     private void OnLanguageChanged(LocalizationManager.Language lang)

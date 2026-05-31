@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1677942294808033009}
   - component: {fileID: 3322419360828498038}
   - component: {fileID: 6551824263839173724}
-  - component: {fileID: 8928703514903301295}
+  - component: {fileID: 4278265288335485847}
   - component: {fileID: 8934240025686673645}
   - component: {fileID: 1681072530772491802}
   - component: {fileID: -6530466345027237776}
@@ -154,14 +154,14 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.7
---- !u!70 &8928703514903301295
-CapsuleCollider2D:
+--- !u!58 &4278265288335485847
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -190,13 +190,12 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 1.35}
-  m_Direction: 0
+  m_Offset: {x: -0.03, y: 0.06}
+  m_Radius: 0.24
 --- !u!114 &8934240025686673645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,7 +209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: c60a93f578b32474faa57f4d4926f93b, type: 2}
-  bodyCollider: {fileID: 6551824263839173724}
+  attackCooldown: 1
 --- !u!114 &1681072530772491802
 MonoBehaviour:
   m_ObjectHideFlags: 0

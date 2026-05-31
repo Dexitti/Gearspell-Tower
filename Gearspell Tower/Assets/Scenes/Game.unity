@@ -408,8 +408,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.6}
-  m_Size: {x: 2, y: 2.07}
+  m_Offset: {x: 0, y: -0.66}
+  m_Size: {x: 1.78, y: 1.9}
   m_Direction: 0
 --- !u!4 &1014266285 stripped
 Transform:

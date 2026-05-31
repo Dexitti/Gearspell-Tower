@@ -99,10 +99,11 @@ namespace Assets.Scripts.Equipment
 
             int reflectDamage = Mathf.RoundToInt(damage * reflectDamageMultiplier);
 
+            List<GameObject> allEnemies = GameObject.FindGameObjectsWithTag("Enemy").ToList();
+            allEnemies.AddRange(GameObject.FindGameObjectsWithTag("FlyingEnemy"));
             if (isFullCircle)
             {
                 // Атака по всем врагам вокруг
-                Collider2D[] allEnemies = Physics2D.OverlapCircleAll(towerTransform.position, effectiveRange);
                 foreach (var hit in allEnemies)
                 {
                     if (hit.CompareTag("Enemy") || hit.CompareTag("FlyingEnemy"))
@@ -119,12 +120,10 @@ namespace Assets.Scripts.Equipment
             }
             else
             {
-                GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-                enemies.AddRange(GameObject.FindGameObjectsWithTag("FlyingEnemy"));
                 GameObject closestEnemy = null;
                 float closestDistance = effectiveRange;
 
-                foreach (GameObject enemy in enemies)
+                foreach (GameObject enemy in allEnemies)
                 {
                     float distance = IsometricExtension.IsoDistance(transform.position, enemy.transform.position);
                     if (distance < closestDistance)

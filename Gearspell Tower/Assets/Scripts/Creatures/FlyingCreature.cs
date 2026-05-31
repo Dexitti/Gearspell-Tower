@@ -6,22 +6,23 @@ public class FlyingCreature : CreatureController
     private bool isAttacking = false;
     private Coroutine attackCoroutine;
     private float bobOffset;
+    Vector3 direction;
 
     private void Start()
     {
-        bobOffset = Random.Range(0f, Mathf.PI * 2f);
+        bobOffset = Random.Range(0f, 2f * Mathf.PI);
         gameObject.tag = "FlyingEnemy";
     }
 
     protected override void Move()
     {
         // Прямо к башне с покачиванием
-        Vector3 direction = (towerPosition - transform.position).normalized;
-        Vector3 movement = direction * currentSpeed * slowMultiplier * Time.deltaTime;
-        float yBob = Mathf.Sin((Time.time + bobOffset) * 2f) * 0.1f;
-        movement.y = yBob;
-
+        direction = IsometricExtension.IsoDirection(transform.position, towerPosition);
+        Vector3 movement = IsometricExtension.IsoMovement(direction, currentSpeed);
         transform.position += movement;
+        float yBob = Mathf.Sin((Time.time + bobOffset) * 7f) * 0.001f;
+        transform.position += new Vector3(0, yBob);
+
 
         // Летающие враги могут проходить сквозь препятствия
     }
@@ -45,13 +46,15 @@ public class FlyingCreature : CreatureController
         isAttacking = true;
 
         var towerHealth = target.GetComponent<HealthComponent>();
-
         while (towerHealth != null && towerHealth.isAlive)
         {
             towerHealth.TakeDamage(currentDamage);
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            var projEffect = Instantiate(data.attackPrefabs[0], transform.position + direction * 0.3f, Quaternion.Euler(0, 0, angle), transform);
             G.AudioManager?.PlaySFX("shot");
 
             yield return new WaitForSeconds(attackCooldown);
+            Destroy(projEffect, 0.6f);
         }
 
         isAttacking = false;

@@ -36,8 +36,7 @@ public abstract class CreatureController : MonoBehaviour
     protected virtual void OnEnable()
     {
         if (G.Tower != null) towerPosition = G.Tower.Position;
-        Vector3 dirToTower = IsometricExtension.IsoDirection(transform.position, towerPosition);
-        if (dirToTower.x > 0) sprite.flipX = true;
+        sprite.flipX = (transform.position - towerPosition).x > 0; // flip sprite
 
         health.OnHealthChanged += PlayDamageReceivedAnimation;
         health.OnDeath += PlayDeathAnimation;

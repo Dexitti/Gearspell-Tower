@@ -70,10 +70,11 @@ namespace Assets.Scripts.Equipment
 
         private List<Vector3> GetAttackDirections()
         {
-            GameObject[] enemyArray = GameObject.FindGameObjectsWithTag("Enemy");
-            if (enemyArray.Length == 0) return null;
+            List<GameObject> enemyList = GameObject.FindGameObjectsWithTag("Enemy").ToList();
+            enemyList.AddRange(GameObject.FindGameObjectsWithTag("FlyingEnemy"));
+            if (enemyList.Count == 0) return null;
 
-            List<Transform> enemiesInRange = enemyArray
+            List<Transform> enemiesInRange = enemyList
                 .Where(e => IsometricExtension.IsoDistance(towerTransform.position, e.transform.position) <= currentRange)
                 .Select(e => e.transform)
                 .ToList();

@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class MageShot : MonoBehaviour
 {
-    [SerializeField] private float speed = 10f;
+    [SerializeField] private float speed = 7f;
     Vector3 direction;
     int damage;
 
@@ -30,5 +30,6 @@ public class MageShot : MonoBehaviour
                 G.AudioManager?.PlaySFX("hit");
             }
         }
+        Destroy(gameObject, 0.1f);
     }
 }

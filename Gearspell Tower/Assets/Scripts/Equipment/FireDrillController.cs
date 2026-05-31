@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor.Analytics;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -80,14 +81,15 @@ public class FireDrillController : EquipmentController
 
     private void InitializeFirePoints()
     {
-        GameObject[] enemyArray = GameObject.FindGameObjectsWithTag("Enemy");
-        if (enemyArray.Length == 0)
+        List<GameObject> enemyList = GameObject.FindGameObjectsWithTag("Enemy").ToList();
+        enemyList.AddRange(GameObject.FindGameObjectsWithTag("FlyingEnemy"));
+        if (enemyList.Count == 0)
         {
             Debug.LogWarning("Нет врагов на сцене");
             return;
         }
 
-        foreach (var enemy in enemyArray)
+        foreach (var enemy in enemyList)
         {
             if (IsometricExtension.IsoDistance(towerTransform.position, enemy.transform.position) <= currentRange)
             {

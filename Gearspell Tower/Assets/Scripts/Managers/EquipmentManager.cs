@@ -37,17 +37,17 @@ public class EquipmentManager : MonoBehaviour
 
     private void InitializeGameplay()
     {
-        G.EventManager?.ResetGameplayInitialized(); // ��� ������� (������� Game)
+        G.EventManager?.ResetGameplayInitialized(); // For debug (for running Game)
 
-        // �������� ����������
+        // Load saved session data
         unlockedSlots = G.ProgressManager?.GetUnlockedSlots() ?? 1;
 
-        // �������� ���������� ����������
+        // Load initial equipment set
         startUnlockedEquipment = Resources.LoadAll<EquipmentData>("Data/EquipmentData")
             .Where(eqData => eqData.name == "WindmillData" || eqData.name == "FireDrillData" || eqData.name == "LightningCogsData").ToArray();
 
         //if (!G.SaveManager.IsEquipmentUnlocked("CryogenicStabilizer"))
-        //    G.SaveManager.UnlockEquipment("CryogenicStabilizer"); // �������
+        //    G.SaveManager.UnlockEquipment("CryogenicStabilizer"); // For debug
 
         G.Tower?.Initialize();
 
@@ -62,7 +62,7 @@ public class EquipmentManager : MonoBehaviour
         }
         else
         {
-            // ��������� ����������� ������
+            // Apply saved session
             var session = G.ProgressManager.LoadSession();
             if (session != null)
                 G.ProgressManager.ApplySession(session);
@@ -73,13 +73,13 @@ public class EquipmentManager : MonoBehaviour
 
     private void LoadAllPrefabs()
     {
-        GameObject[] prefabs = Resources.LoadAll<GameObject>("Prefabs/Controllers");
+        GameObject[] prefabs = Resources.LoadAll<GameObject>("Prefabs/Equipment/Controllers");
         foreach (GameObject prefab in prefabs)
         {
             EquipmentController contr = prefab.GetComponent<EquipmentController>();
             allEquipmentPrefabs[contr.Data.equipmentName] = contr;
         }
-        Debug.Log($"[EquipmentManager] ������� ���������� ���������");
+        Debug.Log($"[EquipmentManager] Equipment prefabs {allEquipmentPrefabs.Count} loaded");
     }
 
     private void EquipStartEquipment()
@@ -94,7 +94,7 @@ public class EquipmentManager : MonoBehaviour
         }
 
         if (!G.ProgressManager.HasSession)
-            EquipToSlot(allEquipmentPrefabs["Windmill"], 0); // �������� �� WindmillController
+            EquipToSlot(allEquipmentPrefabs["Windmill"], 0); // Changed to Windmill
         else
         {
             var randomEq = unlockedEquipment[UnityEngine.Random.Range(0, unlockedEquipment.Count)];
@@ -112,7 +112,7 @@ public class EquipmentManager : MonoBehaviour
             UnequipSlot(slotIndex);
 
         EquipmentController contr = Instantiate(newEquipment, transform);
-        Debug.Log($"���������� {newEquipment.name} ����������� � ���� {slotIndex}");
+        Debug.Log($"[EquipmentManager] Equipped {newEquipment.name} into slot {slotIndex}");
 
         activeEquipment[slotIndex] = contr;
         
@@ -129,13 +129,13 @@ public class EquipmentManager : MonoBehaviour
         var eq = activeEquipment[slotIndex];
         if (eq != null)
         {
-            Debug.Log($"���������� {eq.name} ����� �� ����� {slotIndex}");
+            Debug.Log($"[EquipmentManager] Unequipped {eq.name} from slot {slotIndex}");
             Destroy(eq.gameObject);
         }
         activeEquipment[slotIndex] = null;
     }
 
-    // === ��� UpgradeSystem ===
+    // === For UpgradeSystem ===
     public bool TryUnlockNextSlot()
     {
         if (!CanUnlockNextSlot(out int cost)) return false;
@@ -146,7 +146,7 @@ public class EquipmentManager : MonoBehaviour
             unlockedSlots++;
             G.ProgressManager?.SetUnlockedSlots(unlockedSlots);
             G.EventManager?.TriggerSlotUnlocked(unlockedSlots - 1);
-            Debug.Log($"[EquipmentManager] ���� {unlockedSlots} �������������");
+            Debug.Log($"[EquipmentManager] Slot {unlockedSlots} unlocked");
         }
 
         return true;
