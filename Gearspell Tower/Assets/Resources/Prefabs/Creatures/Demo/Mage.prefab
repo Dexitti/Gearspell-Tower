@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1677942294808033009}
   - component: {fileID: 3322419360828498038}
   - component: {fileID: 8928703514903301295}
-  - component: {fileID: -3409926579118009631}
+  - component: {fileID: -2661170795493306533}
   - component: {fileID: 1681072530772491802}
   - component: {fileID: -6530466345027237776}
   m_Layer: 0
@@ -153,14 +153,14 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: -0.02}
   m_Size: {x: 0.79, y: 1.13}
   m_Direction: 0
---- !u!114 &-3409926579118009631
+--- !u!114 &-2661170795493306533
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -173,10 +173,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gunslinger
   data: {fileID: 11400000, guid: d1c22c90e74f0bc4b8422593c648595e, type: 2}
-  attackCooldown: 0.75
+  attackCooldown: 1
   fireDistance: 3
   fireTimes: 2
-  orbitalSpeed: 6
+  orbitalSpeed: 1.2
 --- !u!114 &1681072530772491802
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -30,6 +30,6 @@ public class MageShot : MonoBehaviour
                 G.AudioManager?.PlaySFX("hit");
             }
         }
-        Destroy(gameObject, 0.1f);
+        Destroy(gameObject, 0.05f);
     }
 }

@@ -10,15 +10,20 @@ public class Gunslinger : CreatureController
 {
     [SerializeField] private float fireDistance = 3f;
     [SerializeField] private int fireTimes = 2;
-    [SerializeField] private float orbitalSpeed = 6f;
+
+    [SerializeField] private float orbitalSpeed = 1.2f;
 
     private enum State { Moving, Orbiting, Shooting }
     private State currentState = State.Moving;
+
     private Vector3 dirToTower;
     private Coroutine attackCoroutine;
     private bool isAttacking = false;
 
-    private float orbitAngle;
+    private float currentAngle;
+    private float currentOrbitDuration;
+    private float orbitTimer = 0f;
+    private int orbitDirection = 1;
 
     protected override void Move()
     {
@@ -32,35 +37,41 @@ public class Gunslinger : CreatureController
 
                 if (distance <= fireDistance)
                 {
-                    currentState = State.Shooting;
                     Vector3 offset = transform.position - towerPosition;
-                    orbitAngle = Mathf.Atan2(offset.y / IsometricExtension.isoRatio, offset.x) * Mathf.Rad2Deg;
+                    currentAngle = Mathf.Atan2(offset.y / IsometricExtension.isoRatio, offset.x);
+
+                    currentState = State.Shooting;
+                    Attack(G.Tower.gameObject);
                 }
                 break;
 
             case State.Shooting:
-                Attack(G.Tower.gameObject);
                 break;
 
             case State.Orbiting:
                 if (!isAttacking)
                 {
-                    Vector3 towerPos = G.Tower.Position;
-                    orbitAngle += orbitalSpeed * Time.deltaTime * 50f;
-                    float rad = orbitAngle * Mathf.Deg2Rad;
-                    Vector3 offsetPos = new Vector3(Mathf.Cos(rad), Mathf.Sin(rad) * 0.5f, 0) * fireDistance;
-                    Vector3 targetPos = towerPos + offsetPos;
-                    transform.position = Vector3.MoveTowards(transform.position, targetPos, currentSpeed * Time.deltaTime);
+                    currentAngle += orbitDirection * orbitalSpeed * Time.deltaTime;
+                    currentAngle = Mathf.Repeat(currentAngle, Mathf.PI * 2f);
+                    Vector3 offsetPos = new Vector3(fireDistance * Mathf.Cos(currentAngle), fireDistance * Mathf.Sin(currentAngle) * IsometricExtension.isoRatio);
+                    transform.position = towerPosition + offsetPos;
 
+                    // Поворот спрайта
                     Vector3 lookDir = towerPosition - transform.position;
-                    if (lookDir.x < 0) sprite.flipX = !sprite.flipX;
-                    currentState = State.Shooting;
+                    if (lookDir.x < 0 && !sprite.flipX) sprite.flipX = true;
+                    else if (lookDir.x > 0 && sprite.flipX) sprite.flipX = false;
+
+                    orbitTimer += Time.deltaTime;
+                    if (orbitTimer >= currentOrbitDuration)
+                    {
+                        orbitTimer = 0f;
+                        currentState = State.Shooting;
+                        Attack(G.Tower.gameObject);
+                    }
                 }
                 break;
         }
     }
-
-
 
     protected override void Attack(GameObject target)
     {
@@ -73,6 +84,7 @@ public class Gunslinger : CreatureController
 
     private IEnumerator Shoot()
     {
+        dirToTower = IsometricExtension.IsoDirection(transform.position, towerPosition);
         for (int i = 0; i < fireTimes; i++)
         {
             float angle = Mathf.Atan2(dirToTower.y, dirToTower.x) * Mathf.Rad2Deg;
@@ -83,8 +95,12 @@ public class Gunslinger : CreatureController
             G.AudioManager?.PlaySFX("zap");
             yield return new WaitForSeconds(attackCooldown);
         }
+
         isAttacking = false;
-        StopCoroutine(attackCoroutine);
+        attackCoroutine = null;
+        orbitTimer = 0f;
+        orbitDirection = UnityEngine.Random.value > 0.5f ? 1 : -1;
+        currentOrbitDuration = UnityEngine.Random.Range(25f, 55f) * Mathf.Deg2Rad / orbitalSpeed;
         currentState = State.Orbiting;
     }
 }

@@ -15,7 +15,7 @@ MonoBehaviour:
   waveName: Wave 1 - Sparks
   enemySpawns:
   - enemyPrefab: {fileID: 8516407375225930908, guid: 3088c44d505a2234c9f90c565fea33bf, type: 3}
-    count: 3
+    count: 10
     spawnInterval: 0.2
   waveDialogs: []
   gearsReward: 0

@@ -374,8 +374,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 1000
---- !u!70 &918418452
-CapsuleCollider2D:
+--- !u!60 &918418452
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -408,9 +408,37 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.66}
-  m_Size: {x: 1.78, y: 1.9}
-  m_Direction: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3.4133334, y: 3.4133334}
+    newSize: {x: 10.24, y: 10.24}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.06851487, y: -1.5244399}
+      - {x: -0.3181816, y: -1.4912962}
+      - {x: -0.43829158, y: -1.3956902}
+      - {x: -0.6368742, y: -1.2656149}
+      - {x: -0.92123413, y: -0.99655616}
+      - {x: -0.7227063, y: -0.50984526}
+      - {x: -0.44127345, y: -0.23243308}
+      - {x: -0.3524991, y: 0.17604089}
+      - {x: -0.11408773, y: 0.2721163}
+      - {x: 0.1795062, y: 0.2723483}
+      - {x: 0.40679717, y: 0.1445916}
+      - {x: 0.49663886, y: -0.2603391}
+      - {x: 0.53775, y: -0.43743455}
+      - {x: 0.6568581, y: -0.5151073}
+      - {x: 0.87374985, y: -1.0331179}
+      - {x: 0.77668285, y: -1.197739}
+      - {x: 0.53877926, y: -1.3920372}
+      - {x: 0.1857928, y: -1.4728428}
+  m_UseDelaunayMesh: 1
 --- !u!4 &1014266285 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7438305873549369398, guid: 1c2bf7763040a5f4eb3c75af29d7673d, type: 3}
