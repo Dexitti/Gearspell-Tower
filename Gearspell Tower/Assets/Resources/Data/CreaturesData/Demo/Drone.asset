@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CreatureData
   creatureName: Drone
   type: 0
-  shortDescription: "\u041B\u0435\u0433\u043A\u0438\u0439 \u043B\u0435\u0442\u0430\u044E\u0449\u0438\u0439
-    \u0431\u043E\u0442"
+  shortDescription: "\u041B\u0435\u0442\u0430\u044E\u0449\u0438\u0439 \u0431\u043E\u0442
+    \u0441 \u043F\u0440\u0438\u043B\u0438\u0447\u043D\u043E\u0439 \u043F\u0443\u0448\u043A\u043E\u0439"
   icon: {fileID: 0}
   attackPrefabs:
   - {fileID: 4514352855775991252, guid: 59a62bb32ddb7ce47944b7d9ac238f5e, type: 3}
   health: 8
   damage: 10
   speed: 1.8
-  minGearsDrop: 1
-  maxGearsDrop: 5
+  minGearsDrop: 2
+  maxGearsDrop: 8

@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WaveData
   waveName: Wave 1 - Sparks
   enemySpawns:
-  - enemyPrefab: {fileID: 8516407375225930908, guid: 3088c44d505a2234c9f90c565fea33bf, type: 3}
-    count: 10
-    spawnInterval: 0.2
+  - enemyPrefab: {fileID: 8516407375225930908, guid: 22fbfc05653798f498fa3161ac6958d3, type: 3}
+    count: 4
+    spawnInterval: 1
   waveDialogs: []
   gearsReward: 0
   equipmentUnlocks: []

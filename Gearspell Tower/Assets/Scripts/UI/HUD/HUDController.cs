@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 
 public class HUDController : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class HUDController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private TextMeshProUGUI waveNumberText;
     [SerializeField] private TextMeshProUGUI gearsText;
-
+    [SerializeField] private TextMeshProUGUI waveNameText;
     [SerializeField] private EquipmentInventoryPanel inventoryPanel;
 
     [Header("Upgrade Available Indicator")]
@@ -30,6 +31,14 @@ public class HUDController : MonoBehaviour
     [SerializeField] private SettingsManager settingsManager;
     [SerializeField] private Button mainMenuButton;
 
+    [Header("End Panels")]
+    [SerializeField] private GameObject victoryPanel;
+    [SerializeField] private Button victoryRestartButton;
+    [SerializeField] private Button victoryMainMenuButton;
+    [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private Button gameOverRestartButton;
+    [SerializeField] private Button gameOverMainMenuButton;
+
     private bool isSpeedX2 = false;
 
     private void Awake()
@@ -46,6 +55,8 @@ public class HUDController : MonoBehaviour
         speedButtonImage.sprite = speedSprite[0];
         upgradeIndicator.SetActive(false);
         pausePanel.SetActive(false);
+        victoryPanel.SetActive(false);
+        gameOverPanel.SetActive(false);
 
         if (G.EventManager == null) return;
         G.EventManager.OnGameStateChanged += OnGameStateChanged;
@@ -53,10 +64,13 @@ public class HUDController : MonoBehaviour
         G.EventManager.OnGameplayInitialized += OnGameplayInitialized;
         G.EventManager.OnWaveStarted += UpdateWaveNumber;
         G.EventManager.OnGearsChanged += UpdateGears;
+        G.EventManager.OnWaveStarted += ShowWaveName;
         G.EventManager.OnEquipmentUnlocked += OnEquipmentUnlocked;
         G.EventManager.OnSlotUnlocked += (int slot) => inventoryPanel?.Refresh();
         G.EventManager.OnEquipmentEquipped += (data, slot) => inventoryPanel?.Refresh();
         G.EventManager.OnEquipmentUpgraded += OnEquipmentUpgraded;
+        G.EventManager.OnTowerDestroyed += OnTowerDestroyed;
+        G.EventManager.OnWaveCompleted += OnWaveCompleted;
 
         SetupButtons();
 
@@ -99,6 +113,18 @@ public class HUDController : MonoBehaviour
 
         if (mainMenuButton != null)
             mainMenuButton.onClick.AddListener(ReturnToMainMenu);
+
+        if (victoryRestartButton != null)
+            victoryRestartButton.onClick.AddListener(RestartGame);
+
+        if (victoryMainMenuButton != null)
+            victoryMainMenuButton.onClick.AddListener(ReturnToMainMenu);
+
+        if (gameOverRestartButton != null)
+            gameOverRestartButton.onClick.AddListener(RestartGame);
+
+        if (gameOverMainMenuButton != null)
+            gameOverMainMenuButton.onClick.AddListener(ReturnToMainMenu);
     }
 
     private void Update()
@@ -132,8 +158,11 @@ public class HUDController : MonoBehaviour
         G.EventManager.OnGameplayInitialized -= OnGameplayInitialized;
         G.EventManager.OnWaveStarted -= UpdateWaveNumber;
         G.EventManager.OnGearsChanged -= UpdateGears;
+        G.EventManager.OnWaveStarted -= ShowWaveName;
         G.EventManager.OnEquipmentUpgraded -= OnEquipmentUpgraded;
         G.EventManager.OnEquipmentUnlocked -= OnEquipmentUnlocked;
+        G.EventManager.OnTowerDestroyed -= OnTowerDestroyed;
+        G.EventManager.OnWaveCompleted -= OnWaveCompleted;
     }
 
     private void RefreshHealthBar()
@@ -163,6 +192,18 @@ public class HUDController : MonoBehaviour
     {
         gearsText?.SetText(amount.ToString());
         CheckUpgradeAvailability();
+    }
+
+    private void ShowWaveName(int waveNumber)
+    {
+        StartCoroutine(ShowWaveNameCoroutine(waveNumber));
+    }
+
+    private IEnumerator ShowWaveNameCoroutine(int waveNumber)
+    {
+        waveNameText.text = G.LocalizationManager.GetText($"WaveName_{G.GameLoopManager.GetCurrentWaveNumber()}");
+        yield return new WaitForSeconds(2f);
+        waveNameText.text = "";
     }
 
     private void OnEquipmentChanged(EquipmentData data, int level)
@@ -236,6 +277,16 @@ public class HUDController : MonoBehaviour
         settingsManager.Open(pausePanel);
     }
 
+    private void RestartGame()
+    {
+        G.AudioManager?.PlayButtonClick();
+        Time.timeScale = 1f;
+        G.SaveManager?.ClearSave();
+        G.ProgressManager?.ClearSession();
+        G.ResourceManager?.ResetResources();
+        G.GameManager?.StartNewGame();
+    }
+
     private void ReturnToMainMenu()
     {
         G.AudioManager?.PlayButtonClick();
@@ -243,14 +294,23 @@ public class HUDController : MonoBehaviour
         G.GameManager?.ReturnToMainMenu();
     }
 
-    // === Публичные методы для обновления извне ===
-    public void ShowGameOver()
+    private void OnWaveCompleted(int waveNumber)
     {
-        // TODO: Показать панель Game Over
+        // Проверка, что последняя волна
+        int totalWaves = G.GameLoopManager?.GetTotalWaves() ?? 0;
+        if (waveNumber >= totalWaves)
+            ShowVictory();
     }
 
     public void ShowVictory()
     {
-        // TODO: Показать панель Victory
+        victoryPanel.SetActive(true);
+        Time.timeScale = 0f;
+    }
+
+    private void OnTowerDestroyed()
+    {
+        gameOverPanel.SetActive(true);
+        Time.timeScale = 0f;
     }
 }

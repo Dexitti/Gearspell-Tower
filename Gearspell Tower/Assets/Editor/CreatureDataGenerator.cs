@@ -78,7 +78,7 @@ public class CreatureDataGenerator : EditorWindow
         CreatureType.Easy => (1, 5),
         CreatureType.Regular => (2, 8),
         CreatureType.Medium => (10, 20),
-        CreatureType.Heavy => (15, 40),
+        CreatureType.Heavy => (16, 40),
         CreatureType.Boss => (85, 110),
         _ => (1, 1)
     };

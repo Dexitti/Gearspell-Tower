@@ -12,17 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb16b8a316b66784fb826de89b0a4882, type: 3}
   m_Name: Wave_03
   m_EditorClassIdentifier: Assembly-CSharp::WaveData
-  waveName: 'Wave 3 - '
+  waveName: Wave 3 - Smoke & Steam
   enemySpawns:
   - enemyPrefab: {fileID: 8516407375225930908, guid: 22fbfc05653798f498fa3161ac6958d3, type: 3}
-    count: 20
-    spawnInterval: 1
+    count: 14
+    spawnInterval: 0.8
   - enemyPrefab: {fileID: 8516407375225930908, guid: 7ac6612df4dde6346ac550cdeb3ab66b, type: 3}
-    count: 2
+    count: 6
     spawnInterval: 3
-  - enemyPrefab: {fileID: 8516407375225930908, guid: 3088c44d505a2234c9f90c565fea33bf, type: 3}
-    count: 2
-    spawnInterval: 5
   waveDialogs: []
-  gearsReward: 35
+  gearsReward: 20
   equipmentUnlocks: []

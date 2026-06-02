@@ -1,0 +1,40 @@
+{
+  "creatures": [
+    {
+      "name": "Fire_Elemental",
+      "type": "Easy",
+      "description": "Эфемерное создание из пламени",
+      "health": 6,
+      "damage": 5,
+      "speed": 1,
+      "wave": 1
+    },
+    {
+      "name": "Drone",
+      "type": "Regular",
+      "description": "Летающий бот с приличной пушкой",
+      "health": 8,
+      "damage": 10,
+      "speed": 1.8,
+      "wave": 3
+    },
+        {
+      "name": "Mage",
+      "type": "Medium",
+      "description": "Маг чистой природы. Атакует сгустками энергии и имеет хитрое поведение",
+      "health": 24,
+      "damage": 8,
+      "speed": 0.8,
+      "wave": 4
+    },
+    {
+      "name": "Spider_Golem",
+      "type": "Heavy",
+      "description": "Прочный голем, который имеет способность периодически становится невосприимчивым к урону",
+      "health": 50,
+      "damage": 15,
+      "speed": 0.5,
+      "wave": 6
+    }
+  ]
+}

@@ -101,7 +101,7 @@ public class GameLoopManager : MonoBehaviour
         }
     }
 
-    private WaveData GetCurrentWave()
+    public WaveData GetCurrentWave()
     {
         int index = currentWaveIndex;
         if (index >= waves.Length)
@@ -110,10 +110,5 @@ public class GameLoopManager : MonoBehaviour
         }
 
         return waves[index];
-    }
-
-    public void SkipWave()
-    {
-        //G.SpawnManager?.KillAllEnemies();
     }
 }
