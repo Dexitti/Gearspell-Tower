@@ -79,6 +79,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5767252631055959875, guid: 1c2bf7763040a5f4eb3c75af29d7673d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8562248622462913826}
+    - targetCorrespondingSourceObject: {fileID: 5767252631055959875, guid: 1c2bf7763040a5f4eb3c75af29d7673d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7820511126867338875}
   m_SourcePrefab: {fileID: 100100000, guid: 1c2bf7763040a5f4eb3c75af29d7673d, type: 3}
 --- !u!1 &3357113623954044729 stripped
 GameObject:
@@ -107,3 +110,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7820511126867338875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3357113623954044729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbd46ea768b766d428d3c30aeb67b266, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightningCogsDecor

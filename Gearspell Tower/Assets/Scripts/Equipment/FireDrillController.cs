@@ -74,6 +74,7 @@ public class FireDrillController : EquipmentController
         if (firePoints.Count == 0) yield break;
 
         FireShells();
+        G.AudioManager.PlaySFX("fire shot rise", 0.75f);
         yield return new WaitForSeconds(0.75f);
 
         FireDrills();
@@ -91,9 +92,9 @@ public class FireDrillController : EquipmentController
 
         foreach (var enemy in enemyList)
         {
-            if (IsometricExtension.IsoDistance(towerTransform.position, enemy.transform.position) <= currentRange)
+            if (IsometricExtension.IsoDistance(detectionOrigin, enemy.transform.position) <= currentRange)
             {
-                //Vector3 toTower = (towerTransform.position - enemy.transform.position).normalized;
+                //Vector3 toTower = (detectionOrigin - enemy.transform.position).normalized;
                 //Vector3 predictPos = enemy.transform.position + toTower * 0.5f;
                 //availableEnemies.Add(predictPos);
                 availableEnemies.Add(enemy.transform.position);
@@ -129,8 +130,9 @@ public class FireDrillController : EquipmentController
 
             }
             else shot = Instantiate(data.projectilesPrefabs[0], transform);
-            shot.transform.position = towerTransform.position + Vector3.up * 0.65f;
-            if (firePoints[i].x <= towerTransform.position.x)
+            var towerPos = G.Tower.Position;
+            shot.transform.position = towerPos + Vector3.up * 0.65f;
+            if (firePoints[i].x <= towerPos.x)
                 shot.transform.Rotate(0f, 0f, UnityEngine.Random.Range(2f, 25f));
             else shot.transform.Rotate(0f, 0f, UnityEngine.Random.Range(-25f, -2f));
         }

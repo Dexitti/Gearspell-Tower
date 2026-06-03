@@ -32,7 +32,7 @@ public class AntennaController : EquipmentController
     protected override void OnEnable()
     {
         base.OnEnable();
-        firePoint = towerTransform.position + new Vector3(0, 1.25f, 0);
+        firePoint = G.Tower.Position + new Vector3(0, 1.25f, 0);
         wavePS = GetComponent<ParticleSystem>();
         mainModule = wavePS.main;
         emissionModule = wavePS.emission;
@@ -44,7 +44,7 @@ public class AntennaController : EquipmentController
     private void SetupVisualParameters()
     {
         Transform rangeBoundary = transform.Find("RangeBoundary");
-        rangeBoundary.position = towerTransform.position;
+        rangeBoundary.position = detectionOrigin;
         rangeBoundary.localScale = new Vector3(currentRange, currentRange);
 
         shapeModule.radius = currentRange * 0.5f;
@@ -93,7 +93,7 @@ public class AntennaController : EquipmentController
 
         foreach (var enemy in enemyList)
         {
-            float distance = IsometricExtension.IsoDistance(towerTransform.position, enemy.transform.position);
+            float distance = (enemy.transform.position - detectionOrigin).magnitude;
             if (distance > currentRange) continue;
 
             hasEnemies = true;
@@ -120,7 +120,7 @@ public class AntennaController : EquipmentController
             // Импульсор — отталкивание
             if (hasKnockback)
             {
-                Vector3 knockDir = (enemy.transform.position - towerTransform.position).normalized;
+                Vector3 knockDir = (enemy.transform.position - detectionOrigin).normalized;
                 enemy.transform.position += knockDir * knockbackForce * 0.3f;
             }
         }
@@ -193,7 +193,7 @@ public class AntennaController : EquipmentController
     {
         foreach (var enemy in enemies)
         {
-            float dist = IsometricExtension.IsoDistance(towerTransform.position, enemy.transform.position);
+            float dist = IsometricExtension.IsoDistance(detectionOrigin, enemy.transform.position);
             if (dist > currentRange) continue;
 
             // Урон всем врагам вокруг этого врага

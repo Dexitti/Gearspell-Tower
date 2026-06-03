@@ -91,6 +91,6 @@ public class HealthComponent : MonoBehaviour
         style.alignment = TextAnchor.MiddleCenter;
 
         Vector3 textPosition = transform.position + Vector3.up * 0.85f;
-        //Handles.Label(textPosition, CurrentHealth.ToString(), style);
+        //UnityEditor.Handles.Label(textPosition, CurrentHealth.ToString(), style);
     }
 }

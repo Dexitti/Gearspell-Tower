@@ -33,6 +33,7 @@ public class SpiderGolem : WalkingCreature
         yield return new WaitForSeconds(invincibleDuration);
         health.OnBeforeTakeDamage -= OnBeforeTakeDamage;
 
+        G.AudioManager.PlaySFX("Protocol appear", 0.4f);
         sprite.color = Color.white;
         isInvincible = false;
     }

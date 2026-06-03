@@ -44,7 +44,7 @@ namespace Assets.Scripts.Equipment
         protected override void OnEnable()
         {
             base.OnEnable();
-            firePoint = towerTransform.position + new Vector3(0.526f, 0.211f, 0);
+            firePoint = G.Tower.Position + new Vector3(0.526f, 0.211f, 0);
             cogSpacing = currentRange / cogsAmount;
 
             for (int i = 0; i < currentProjectileCount * cogsAmount * 2; i++)
@@ -75,7 +75,7 @@ namespace Assets.Scripts.Equipment
             if (enemyList.Count == 0) return null;
 
             List<Transform> enemiesInRange = enemyList
-                .Where(e => IsometricExtension.IsoDistance(towerTransform.position, e.transform.position) <= currentRange)
+                .Where(e => IsometricExtension.IsoDistance(detectionOrigin, e.transform.position) <= currentRange)
                 .Select(e => e.transform)
                 .ToList();
             if (enemiesInRange.Count == 0) return null;
@@ -86,7 +86,7 @@ namespace Assets.Scripts.Equipment
 
             foreach (var enemy in enemiesInRange)
             {
-                Vector3 directionToEnemy = (enemy.position - towerTransform.position).normalized;
+                Vector3 directionToEnemy = (enemy.position - detectionOrigin).normalized;
                 float angle = Mathf.Atan2(directionToEnemy.y, directionToEnemy.x) * Mathf.Rad2Deg;
                 if (angle < 0) angle += 360f;
 
@@ -106,7 +106,7 @@ namespace Assets.Scripts.Equipment
                 Vector3 avgDirection = Vector3.zero;
                 foreach (var enemy in group.Value)
                 {
-                    avgDirection += (enemy.position - towerTransform.position).normalized;
+                    avgDirection += (enemy.position - detectionOrigin).normalized;
                 }
                 avgDirection.Normalize();
                 result.Add(avgDirection);
@@ -161,6 +161,7 @@ namespace Assets.Scripts.Equipment
 
         private IEnumerator AnimateCogFlight(GameObject cog, Vector3 start, Vector3 end, float flightAngle, float normalizedT)
         {
+            G.AudioManager.PlaySFX("cog_appear", 0.3f);
             float elapsed = 0f;
             SpriteRenderer renderer = cog.GetComponent<SpriteRenderer>();
             float duration = 0.4f;
@@ -235,6 +236,7 @@ namespace Assets.Scripts.Equipment
 
                 if (tick == 0 && hasLightningPillar)
                 {
+                    G.AudioManager.PlaySFX("lightning strike", 0.35f);
                     foreach (var chain in activeChains)
                         CreatePillarsForChain(chain);
                 }
@@ -299,8 +301,8 @@ namespace Assets.Scripts.Equipment
             GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
             var nearbyEnemies = enemies
-                .Where(e => IsometricExtension.IsoDistance(towerTransform.position, e.transform.position) <= currentRange)
-                .OrderBy(e => IsometricExtension.IsoDistance(towerTransform.position, e.transform.position))
+                .Where(e => IsometricExtension.IsoDistance(detectionOrigin, e.transform.position) <= currentRange)
+                .OrderBy(e => IsometricExtension.IsoDistance(detectionOrigin, e.transform.position))
                 .Take(extraBranches * activeChains.Count) // всего ответвлений = цепей × extraBranches
                 .ToList();
 
@@ -392,7 +394,7 @@ namespace Assets.Scripts.Equipment
 
         private void DealDamageAlongLightning()
         {
-            Collider2D[] allEnemies = Physics2D.OverlapCircleAll(towerTransform.position, currentRange);
+            Collider2D[] allEnemies = Physics2D.OverlapCircleAll(detectionOrigin, currentRange);
             HashSet<HealthComponent> damagedEnemies = new HashSet<HealthComponent>(); // Чтобы не дамажить одного врага несколько раз за тик
 
             foreach (var enemyCollider in allEnemies)

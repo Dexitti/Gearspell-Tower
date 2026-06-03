@@ -74,6 +74,7 @@ namespace Assets.Scripts.Equipment
             {
                 currentShieldCharges--;
                 ReflectAttack(damage);
+                G.AudioManager.PlaySFX("shield breach", 0.4f);
                 setDamage(0);
                 noHitTimer = 0f;
                 Debug.Log($"Урон ОТМЕНЕН! Осталось зарядов: {currentShieldCharges}");
@@ -185,7 +186,7 @@ namespace Assets.Scripts.Equipment
 
         private void ApplyKnockback(GameObject enemy)
         {
-            Vector3 knockDir = (enemy.transform.position - towerTransform.position).normalized;
+            Vector3 knockDir = (enemy.transform.position - detectionOrigin).normalized;
             enemy.transform.position += knockDir * knockbackForce * 0.5f;
 
             CreatureController creature = enemy.GetComponent<CreatureController>();
@@ -198,6 +199,7 @@ namespace Assets.Scripts.Equipment
             yield return new WaitForSeconds(currentAttackCooldown);
             if (currentShieldCharges < currentProjectileCount)
             {
+                G.AudioManager.PlaySFX("shine", 0.6f);
                 currentShieldCharges++;
                 if (!isShieldActive && currentShieldCharges > 0)
                 {

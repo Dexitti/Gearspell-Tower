@@ -79,6 +79,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5767252631055959875, guid: 1c2bf7763040a5f4eb3c75af29d7673d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1561275589126972437}
+    - targetCorrespondingSourceObject: {fileID: 5767252631055959875, guid: 1c2bf7763040a5f4eb3c75af29d7673d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2057084770867455361}
   m_SourcePrefab: {fileID: 100100000, guid: 1c2bf7763040a5f4eb3c75af29d7673d, type: 3}
 --- !u!1 &326767618567787862 stripped
 GameObject:
@@ -107,3 +110,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2057084770867455361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326767618567787862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adc852f6cc491a442989b7e8f119adb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WaterHammerDecor

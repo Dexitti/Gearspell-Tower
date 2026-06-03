@@ -29,7 +29,7 @@ namespace Assets.Scripts.Equipment
         protected override void OnEnable()
         {
             base.OnEnable();
-            firePoint = towerTransform.position + new Vector3(0, -0.75f, 0);
+            firePoint = G.Tower.Position + new Vector3(0, -0.75f, 0);
             rotorHangarsAnimator = decorationInstance.GetComponentInChildren<Animator>();
 
             RebuildPools();
@@ -79,11 +79,12 @@ namespace Assets.Scripts.Equipment
             if (targets == null || targets.Count == 0) yield break;
 
             rotorHangarsAnimator.SetTrigger("Attack");
+            G.AudioManager.PlaySFX("hangar gates", 0.5f);
 
             for (int i = 0; i < Mathf.Min(currentProjectileCount, targets.Count); i++)
             {
                 Transform target = targets[i];
-                if (IsometricExtension.IsoDistance(towerTransform.position, target.position) > currentRange) continue;
+                if (IsometricExtension.IsoDistance(detectionOrigin, target.position) > currentRange) continue;
 
                 Vector3 spawnPoint = CalculateSpawnPoint(target);
                 SpawnRotor(spawnPoint);
@@ -207,10 +208,10 @@ namespace Assets.Scripts.Equipment
 
         private Vector3 CalculateSpawnPoint(Transform target)
         {
-            Vector3 direction = (target.position - towerTransform.position).normalized;
-            float distance = IsometricExtension.IsoDistance(towerTransform.position, target.position);
+            Vector3 direction = (target.position - detectionOrigin).normalized;
+            float distance = IsometricExtension.IsoDistance(detectionOrigin, target.position);
 
-            return towerTransform.position + direction * (distance * 0.85f); // Опережение 15%
+            return detectionOrigin + direction * (distance * 0.85f); // Опережение 15%
         }
 
         protected override void ApplyEffect(string upgradeId)
@@ -265,7 +266,7 @@ namespace Assets.Scripts.Equipment
             foreach (var enemy in enemies)
             {
                 // Взрываем всех врагов в радиусе (условно — всех отравленных)
-                if (IsometricExtension.IsoDistance(towerTransform.position, enemy.transform.position) <= currentRange)
+                if (IsometricExtension.IsoDistance(detectionOrigin, enemy.transform.position) <= currentRange)
                 {
                     // Наносим урон вокруг
                     Collider2D[] nearby = Physics2D.OverlapCircleAll(enemy.transform.position, explosionRadius);

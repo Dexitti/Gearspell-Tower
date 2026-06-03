@@ -23,14 +23,14 @@ public class WindmillController : EquipmentController
     protected override void OnEnable()
     {
         base.OnEnable();
-        firePoint = towerTransform.position + new Vector3(0, 0.25f, 0);
+        firePoint = G.Tower.Position + new Vector3(0, 0.25f, 0);
         animator = decorationInstance.GetComponent<Animator>();
     }
 
     protected override IEnumerator Attack()
     {
         Vector3? target = GetNearestEnemy();
-        if (target == null || IsometricExtension.IsoDistance(towerTransform.position, (Vector3)target) > currentRange) yield break;
+        if (target == null || IsometricExtension.IsoDistance(detectionOrigin, (Vector3)target) > currentRange) yield break;
 
         Vector3 direction = ((Vector3)target - firePoint).normalized;
         UpdateWindmillDecorationDirection(direction);
@@ -51,7 +51,7 @@ public class WindmillController : EquipmentController
         enemyList.AddRange(GameObject.FindGameObjectsWithTag("FlyingEnemy"));
         if (enemyList.Count == 0) return null;
         return enemyList
-            .OrderBy(enemy => IsometricExtension.IsoDistance(towerTransform.position, enemy.transform.position))
+            .OrderBy(enemy => IsometricExtension.IsoDistance(detectionOrigin, enemy.transform.position))
             .FirstOrDefault().transform.position;
     }
 
@@ -77,7 +77,7 @@ public class WindmillController : EquipmentController
         GameObject prefab = forkBTaken ? data.projectilesPrefabs[1] : data.projectilesPrefabs[0];
 
         GameObject proj = Instantiate(prefab, spawnPosition, Quaternion.identity, transform);
-
+        G.AudioManager.PlaySFX("wind cut", 0.35f);
         if (forkATaken)
         {
             Vector3 scale = proj.transform.localScale;

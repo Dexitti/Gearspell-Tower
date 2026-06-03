@@ -51,7 +51,7 @@ public class FlyingCreature : CreatureController
             towerHealth.TakeDamage(currentDamage);
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             var projEffect = Instantiate(data.attackPrefabs[0], transform.position + direction * 0.3f, Quaternion.Euler(0, 0, angle), transform);
-            G.AudioManager?.PlaySFX("shot");
+            G.AudioManager?.PlaySFX("shot", 0.7f);
 
             yield return new WaitForSeconds(attackCooldown);
             Destroy(projEffect, 0.6f);

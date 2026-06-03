@@ -39,7 +39,7 @@ public class FireDrillProjectile : MonoBehaviour
             if (enemyHP != null)
             {
                 enemyHP.TakeDamage(Damage);
-
+                G.AudioManager.PlaySFXAtPosition("fire drill", other.transform.position, 7f);
                 if (hasStun && Random.value < stunChance)
                 {
                     CreatureController creature = other.GetComponent<CreatureController>();

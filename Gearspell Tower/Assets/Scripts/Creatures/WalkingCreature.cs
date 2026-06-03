@@ -44,7 +44,7 @@ public class WalkingCreature : CreatureController
         while (towerHealth != null && towerHealth.isAlive)
         {
             towerHealth.TakeDamage(currentDamage);
-            G.AudioManager?.PlaySFX("hit");
+            G.AudioManager?.PlaySFX("hit", 0.5f);
 
             yield return new WaitForSeconds(attackCooldown);
         }

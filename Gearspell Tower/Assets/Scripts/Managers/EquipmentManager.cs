@@ -94,7 +94,7 @@ public class EquipmentManager : MonoBehaviour
         }
 
         if (!G.ProgressManager.HasSession)
-            EquipToSlot(allEquipmentPrefabs["Windmill"], 0); // Changed to Windmill
+            EquipToSlot(allEquipmentPrefabs["PoisonRotors"], 0); // Changed to Windmill
         else
         {
             var randomEq = unlockedEquipment[UnityEngine.Random.Range(0, unlockedEquipment.Count)];

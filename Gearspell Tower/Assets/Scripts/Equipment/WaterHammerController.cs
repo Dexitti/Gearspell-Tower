@@ -20,7 +20,7 @@ namespace Assets.Scripts.Equipment
         protected override IEnumerator Attack()
         {
             Transform target = GetStrongestEnemy();
-            if (target == null || IsometricExtension.IsoDistance(towerTransform.position, target.position) > currentRange) yield break;
+            if (target == null || IsometricExtension.IsoDistance(detectionOrigin, target.position) > currentRange) yield break;
 
             bool flipX = UnityEngine.Random.value > 0.5f;
 

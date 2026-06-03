@@ -35,6 +35,11 @@ public class WaterHammerProjectile : MonoBehaviour
         GetComponent<CircleCollider2D>().enabled = true;
     }
 
+    public void PlayWaterSound()
+    {
+        G.AudioManager.PlaySFX("water explosion", 0.35f);
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (hasHit) return;

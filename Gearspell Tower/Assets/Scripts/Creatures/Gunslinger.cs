@@ -92,7 +92,7 @@ public class Gunslinger : CreatureController
             var mageShot = shot.GetComponent<MageShot>();
             mageShot.Direction = dirToTower;
             mageShot.Damage = currentDamage;
-            G.AudioManager?.PlaySFX("zap");
+            G.AudioManager?.PlaySFX("zap", 0.4f);
             yield return new WaitForSeconds(attackCooldown);
         }
 
@@ -102,5 +102,6 @@ public class Gunslinger : CreatureController
         orbitDirection = UnityEngine.Random.value > 0.5f ? 1 : -1;
         currentOrbitDuration = UnityEngine.Random.Range(25f, 55f) * Mathf.Deg2Rad / orbitalSpeed;
         currentState = State.Orbiting;
+        G.AudioManager.PlaySFX("dash", 0.25f);
     }
 }

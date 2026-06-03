@@ -592,7 +592,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f1329005fd119e4aa822e0a9bfa3b6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UILocalizedText
-  localizationKey: WaveName
+  localizationKey: WaveName_1
 --- !u!1 &1610713081509380217
 GameObject:
   m_ObjectHideFlags: 0

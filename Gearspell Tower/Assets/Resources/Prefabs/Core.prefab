@@ -130,6 +130,6 @@ MonoBehaviour:
   masterVolumeParameter: MasterVolume
   musicSource: {fileID: 0}
   sfxSource: {fileID: 0}
-  mainMenuMusic: {fileID: 0}
-  gameplayMusic: {fileID: 0}
+  mainMenuMusic: {fileID: 8300000, guid: 4bb5a265f5156764d887c78b8586ccb8, type: 3}
+  gameplayMusic: {fileID: 8300000, guid: 4e9a10f8b53a35343945610afb0e81d5, type: 3}
   masterVolume: 1

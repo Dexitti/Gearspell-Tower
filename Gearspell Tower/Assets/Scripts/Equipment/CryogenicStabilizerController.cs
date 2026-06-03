@@ -40,7 +40,7 @@ public class CryogenicStabilizerController : EquipmentController
     protected override void OnEnable()
     {
         base.OnEnable();
-        firePoint = towerTransform.position + new Vector3(0.713f, 1.2165f);
+        firePoint = G.Tower.Position + new Vector3(0.713f, 1.2165f);
         CreateBeams();
         CreateCollider();
     }
@@ -141,7 +141,7 @@ public class CryogenicStabilizerController : EquipmentController
         enemies.AddRange(GameObject.FindGameObjectsWithTag("FlyingEnemy"));
         foreach (GameObject enemy in enemies)
         {
-            if (IsometricExtension.IsoDistance(enemy.transform.position, towerTransform.position) <= currentRange)
+            if (IsometricExtension.IsoDistance(enemy.transform.position, detectionOrigin) <= currentRange)
                 return true;
         }
         return false;
@@ -153,12 +153,12 @@ public class CryogenicStabilizerController : EquipmentController
         enemies.AddRange(GameObject.FindGameObjectsWithTag("FlyingEnemy"));
         if (enemies.Count == 0) return Vector3.zero;
 
-        enemies = enemies.OrderBy(enemy => IsometricExtension.IsoDistance(enemy.transform.position, towerTransform.position)).ToList();
+        enemies = enemies.OrderBy(enemy => IsometricExtension.IsoDistance(enemy.transform.position, detectionOrigin)).ToList();
         nearestEnemies.Clear();
 
         foreach (GameObject enemy in enemies)
         {
-            if (enemy != null && IsometricExtension.IsoDistance(enemy.transform.position, towerTransform.position) <= currentRange)
+            if (enemy != null && IsometricExtension.IsoDistance(enemy.transform.position, detectionOrigin) <= currentRange)
             {
                 if (!nearestEnemies.Contains(enemy))
                     nearestEnemies.Add(enemy);
@@ -416,7 +416,7 @@ public class CryogenicStabilizerController : EquipmentController
         enemies.AddRange(GameObject.FindGameObjectsWithTag("FlyingEnemy"));
         foreach (var enemy in enemies)
         {
-            if (IsometricExtension.IsoDistance(towerTransform.position, enemy.transform.position) <= currentRange)
+            if (IsometricExtension.IsoDistance(detectionOrigin, enemy.transform.position) <= currentRange)
             {
                 CreatureController creature = enemy.GetComponent<CreatureController>();
                 if (creature != null)

@@ -10,6 +10,7 @@ public abstract class EquipmentController : MonoBehaviour
     [SerializeField] public EquipmentData data;
     protected GameObject decorationInstance;
     protected Transform towerTransform;
+    protected Vector3 detectionOrigin;
 
     private List<string> appliedUpgradeIds = new();
 
@@ -43,6 +44,7 @@ public abstract class EquipmentController : MonoBehaviour
     protected virtual void OnEnable()
     {
         towerTransform = G.Tower.transform;
+        detectionOrigin = towerTransform.position + new Vector3(0, -1.2f, 0);
         GameObject decoration = data.decorationPrefab;
         if (decoration == null) return;
 
@@ -136,12 +138,12 @@ public abstract class EquipmentController : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellowNice;
-        Vector3 prevPoint = transform.position + new Vector3(currentRange, 0, 0);
+        Vector3 prevPoint = detectionOrigin + new Vector3(currentRange, 0, 0);
         int segments = 32;
         for (int i = 1; i <= segments; i++)
         {
             float angle = i * 360f / segments;
-            Vector3 point = transform.position + IsometricExtension.IsoVector(angle, currentRange);
+            Vector3 point = detectionOrigin + IsometricExtension.IsoVector(angle, currentRange);
             Gizmos.DrawLine(prevPoint, point);
             prevPoint = point;
         }

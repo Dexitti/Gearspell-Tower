@@ -22,7 +22,7 @@ MonoBehaviour:
   damage: 0.75
   size: 1
   attackCooldown: 0.25
-  range: 3.5
+  range: 4.2
   projectileCount: 1
   stages:
   - upgradeData:
