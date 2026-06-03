@@ -276,9 +276,52 @@ public class UpgradeSystem : MonoBehaviour
 
     private void PlaceMines()
     {
+        Vector3 towerPos = G.Tower.Position;
+
         for (int i = 0; i < minesCount; i++)
         {
-            // TODO: Логика размещения мин
+            float distance = UnityEngine.Random.Range(2, 7.5f);
+            float angle = UnityEngine.Random.Range(0f, 360f);
+            Vector3 spawnPos = towerPos + new Vector3(0, -1.2f, 0) + IsometricExtension.IsoVector(angle, distance);
+
+            GameObject mine = Instantiate(minePrefab, spawnPos, Quaternion.identity, transform);
+            StartCoroutine(AnimateMineFlight(mine, towerPos, spawnPos));
+            activeMines.Add(mine);
         }
+    }
+
+    private IEnumerator AnimateMineFlight(GameObject mine, Vector3 start, Vector3 end)
+    {
+        float duration = 0.5f;
+        float elapsed = 0f;
+
+        SpriteRenderer sprite = mine.GetComponent<SpriteRenderer>();
+        Collider2D col = mine.GetComponent<Collider2D>();
+
+        Color c = sprite.color;
+        sprite.color = new Color(c.r, c.g, c.b, 0f);
+
+        col.enabled = false;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / duration;
+
+            Vector3 currentPos = Vector3.Lerp(start, end, t);
+            float arc = Mathf.Sin(t * Mathf.PI) * 1.5f;
+            currentPos.y += arc;
+
+            mine.transform.position = currentPos;
+
+            float alpha = Mathf.Lerp(0f, 1f, t);
+            sprite.color = new Color(c.r, c.g, c.b, alpha);
+
+            yield return null;
+        }
+
+        mine.transform.position = end;
+        if (col != null) col.enabled = true;
+        sprite.color = new Color(c.r, c.g, c.b, 1f);
     }
 }

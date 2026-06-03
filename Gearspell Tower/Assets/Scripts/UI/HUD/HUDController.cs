@@ -281,10 +281,9 @@ public class HUDController : MonoBehaviour
     {
         G.AudioManager?.PlayButtonClick();
         Time.timeScale = 1f;
-        G.SaveManager?.ClearSave();
         G.ProgressManager?.ClearSession();
         G.ResourceManager?.ResetResources();
-        G.GameManager?.StartNewGame();
+        G.GameManager?.StartGame();
     }
 
     private void ReturnToMainMenu()

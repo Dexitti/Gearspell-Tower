@@ -72,7 +72,7 @@ public class MainMenuManager : MonoBehaviour
     {
         Debug.Log("[MainMenu] Continue game");
         G.AudioManager?.PlayButtonClick();
-        G.GameManager?.StartNewGame();
+        G.GameManager?.StartGame();
 
         // TODO: Загрузить сохранения игры
     }
@@ -81,10 +81,9 @@ public class MainMenuManager : MonoBehaviour
     {
         Debug.Log("[MainMenu] New game");
         G.AudioManager?.PlayButtonClick();
-        G.SaveManager?.ClearSave();
         G.ProgressManager?.ClearSession();
         G.ResourceManager?.ResetResources();
-        G.GameManager?.StartNewGame();
+        G.GameManager?.StartGame();
     }
 
     public void OpenSettings()

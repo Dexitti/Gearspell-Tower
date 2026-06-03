@@ -183,7 +183,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlayHUDClick()
     {
-        PlaySFX("tick");
+        PlaySFX("tick", 0.85f);
     }
 
     // === Settings ===

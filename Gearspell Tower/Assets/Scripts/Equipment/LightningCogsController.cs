@@ -379,7 +379,7 @@ namespace Assets.Scripts.Equipment
                     lr.endWidth = lightningWidth * 0.8f;
                     lr.positionCount = 2;
                     lr.SetPosition(0, cogPos);
-                    lr.SetPosition(1, cogPos + Vector3.up * 3f);
+                    lr.SetPosition(1, cogPos + Vector3.up * 2f);
                     lr.startColor = lightningColor;
                     lr.endColor = new Color(lightningColor.r, lightningColor.g, lightningColor.b, 0.5f);
                     lr.sortingLayerName = "Effects";
