@@ -61,6 +61,150 @@
     { "key": "WaveName_4", "ru": "Волна 4 – Магическое вдохновение", "en": "Wave 4 – Magic Inspiration" },
     { "key": "WaveName_5", "ru": "Волна 5 – Инферно", "en": "Wave 5 – Inferno" },
     { "key": "WaveName_6", "ru": "Волна 6 – Древняя сила", "en": "Wave 6 – Ancient Force" },
-    { "key": "WaveName_7", "ru": "Волна 7 – Вторжение", "en": "Wave 7 – Invasion" }
+    { "key": "WaveName_7", "ru": "Волна 7 – Вторжение", "en": "Wave 7 – Invasion" },
+
+    { "key": "Upgrade_Windmill_Name", "ru": "Ветряная мельница", "en": "Windmill" },
+    { "key": "Upgrade_Windmill_Desc", "ru": "Выпускает частые потоки ветра в ближайшего врага", "en": "Fires frequent wind streams at the nearest enemy" },
+
+    { "key": "Upgrade_SharpStream_Name", "ru": "Острый поток", "en": "Sharp Stream" },
+    { "key": "Upgrade_SharpStream_Desc", "ru": "Увеличивает наносимый урон на {0}%", "en": "Increases damage by {0}%" },
+
+    { "key": "Upgrade_PiercingWind_Name", "ru": "Пронзающий ветер", "en": "Piercing Wind" },
+    { "key": "Upgrade_PiercingWind_Desc", "ru": "Снаряды пробивают {0} врагов и броню", "en": "Projectiles pierce {0} enemies and armor" },
+
+    { "key": "Upgrade_Gust_Name", "ru": "Шквал", "en": "Gust" },
+    { "key": "Upgrade_Gust_Desc", "ru": "Увеличивает ширину потока на {0}% и частоту выстрелов на {1}%, но снижает урон на {2}%", "en": "Increases stream width by {0}% and fire rate by {1}%, but reduces damage by {2}%" },
+
+    { "key": "Upgrade_ArmorPiercingVortex_Name", "ru": "Бронебойный вихрь", "en": "Armor-Piercing Vortex" },
+    { "key": "Upgrade_ArmorPiercingVortex_Desc", "ru": "Снаряды пробивают {0} целей и наносят на {1}% больше урона, но выстрелы реже на {2}%", "en": "Projectiles pierce {0} targets and deal {1}% more damage, but fire {2}% slower" },
+
+    { "key": "Upgrade_Hurricane_Name", "ru": "Ураган", "en": "Hurricane" },
+    { "key": "Upgrade_Hurricane_Desc", "ru": "Открывает активную способность. Выпускает {0} выстрелов широким сектором", "en": "Open active ability. Fires {0} projectiles in a wide sector" },
+
+    { "key": "Upgrade_FireDrill_Name", "ru": "Огненный бур", "en": "Fire Drill" },
+    { "key": "Upgrade_FireDrill_Desc", "ru": "Запускает в небо раскаленные буры, которые обрушиваются на врагов", "en": "Launches heated drills into the sky that crash down on enemies" },
+
+    { "key": "Upgrade_Modernization_Name", "ru": "Модернизация", "en": "Modernization" },
+    { "key": "Upgrade_Modernization_Desc", "ru": "Увеличивает количество запускаемых буров на {0}", "en": "Increases number of launched drills by {0}" },
+
+    { "key": "Upgrade_HeatUp_Name", "ru": "Разогрев", "en": "Heat Up" },
+    { "key": "Upgrade_HeatUp_Desc", "ru": "Увеличивает урон на {0}% и размер буров на {1}%", "en": "Increases damage by {0}% and drill size by {1}%" },
+
+    { "key": "Upgrade_SmallDrills_Name", "ru": "Мелкие буры", "en": "Small Drills" },
+    { "key": "Upgrade_SmallDrills_Desc", "ru": "Выпускает в {0} раз больше буров, но они меньше и слабее ({1}%)", "en": "Launches {0}x more drills, but they are smaller and deal {1}% less damage" },
+
+    { "key": "Upgrade_FlameDrills_Name", "ru": "Пламенные буры", "en": "Flame Drills" },
+    { "key": "Upgrade_FlameDrills_Desc", "ru": "Уменьшает количество буров на {0}%, но они поджигают землю и станят с шансом {1}%", "en": "Reduces drill count by {0}%, but they ignite the ground and stun with {1}% chance" },
+
+    { "key": "Upgrade_FireTornado_Name", "ru": "Огненный смерч", "en": "Fire Tornado" },
+    { "key": "Upgrade_FireTornado_Desc", "ru": "Открывает активную способность. Упавшие буры остаются и жгут врагов {0} секунд", "en": "Open active ability. Fallen drills remain and burn enemies for {0} seconds" },
+
+    { "key": "Upgrade_LightningCogs_Name", "ru": "Молниеносные шестерни", "en": "Lightning Cogs" },
+    { "key": "Upgrade_LightningCogs_Desc", "ru": "Выстреливает цепью шестеренок, между которыми пробивает молния. Бж-Зап!", "en": "Fires a chain of gears with lightning arcing between them. Z-Zap!" },
+
+    { "key": "Upgrade_Battery_Name", "ru": "Батарея", "en": "Battery" },
+    { "key": "Upgrade_Battery_Desc", "ru": "Больше шестеренок в цепи: {0} шт.", "en": "More gears in chain: {0} pcs." },
+
+    { "key": "Upgrade_ShortCircuit_Name", "ru": "Короткое замыкание", "en": "Short Circuit" },
+    { "key": "Upgrade_ShortCircuit_Desc", "ru": "Молния может прыгнуть на {0} дополнительных целей", "en": "Lightning can jump to {0} additional targets" },
+
+    { "key": "Upgrade_CascadeDischarge_Name", "ru": "Каскадный разряд", "en": "Cascade Discharge" },
+    { "key": "Upgrade_CascadeDischarge_Desc", "ru": "Количество прыжков увеличивается до {0}", "en": "Number of jumps increased to {0}" },
+
+    { "key": "Upgrade_ThunderColumn_Name", "ru": "Грозовой столб", "en": "Thunder Column" },
+    { "key": "Upgrade_ThunderColumn_Desc", "ru": "После молнии возникает грозовой столб, наносящий {0} урона", "en": "Creates a thunder column dealing {0} damage" },
+
+    { "key": "Upgrade_MagneticResonance_Name", "ru": "Магнитный резонанс", "en": "Magnetic Resonance" },
+    { "key": "Upgrade_MagneticResonance_Desc", "ru": "Открывает активную способность. Перед молнией шестерни притягивают ближайших врагов", "en": "Open active ability. Gears attract nearby enemies" },
+
+    { "key": "Upgrade_PoisonRotors_Name", "ru": "Ядовитые роторы", "en": "Poison Rotors" },
+    { "key": "Upgrade_PoisonRotors_Desc", "ru": "Скрытно прорываются к скоплениям врагов. Затем резко вырастают и начинают травить ничего не подозревающие жертвы", "en": "Stealthily approach enemies and start poisoning them" },
+
+    { "key": "Upgrade_Overload_Name", "ru": "Перегрузка", "en": "Overload" },
+    { "key": "Upgrade_Overload_Desc", "ru": "Роторы движутся на {0}% быстрее и атакуют на {1}% чаще", "en": "Rotors move {0}% faster and attack {1}% more often" },
+
+    { "key": "Upgrade_Mutagen_Name", "ru": "Мутаген", "en": "Mutagen" },
+    { "key": "Upgrade_Mutagen_Desc", "ru": "Увеличивает стаки яда до {0} и урон за стак на {1}%", "en": "Increases poison stacks to {0} and damage per stack by {1}%" },
+
+    { "key": "Upgrade_ToxicCloud_Name", "ru": "Токсичное облако", "en": "Toxic Cloud" },
+    { "key": "Upgrade_ToxicCloud_Desc", "ru": "Увеличивает область ядовитого облака ({0}%) и время жизни ротора (+{1} sec.)", "en": "Increases poison area by {0}% and lifetime by {1} sec." },
+
+    { "key": "Upgrade_SpikySalvo_Name", "ru": "Шипастый залп", "en": "Spiky Salvo" },
+    { "key": "Upgrade_SpikySalvo_Desc", "ru": "Роторы стреляют ядовитыми шипами ({0})", "en": "Rotors fire {0} poisonous spikes" },
+
+    { "key": "Upgrade_Plague_Name", "ru": "Чума", "en": "Plague" },
+    { "key": "Upgrade_Plague_Desc", "ru": "Открывает активную способность. Отравленные враги взрываются при смерти с радиусом {0}", "en": "Open active ability. Poisoned enemies explode on death with radius {0}" },
+
+    { "key": "Upgrade_CryogenicStabilizer_Name", "ru": "Криогенный стабилизатор", "en": "Cryogenic Stabilizer" },
+    { "key": "Upgrade_CryogenicStabilizer_Desc", "ru": "Извергает луч на среднюю дистанцию, замедляющий врагов", "en": "Emits a medium-range beam that slows enemies" },
+
+    { "key": "Upgrade_DeepFreeze_Name", "ru": "Глубокая заморозка", "en": "Deep Freeze" },
+    { "key": "Upgrade_DeepFreeze_Desc", "ru": "Усиливает эффект замедления на {0}%", "en": "Increases slow effect by {0}%" },
+
+    { "key": "Upgrade_IcyFootsteps_Name", "ru": "Ледяная поступь", "en": "Icy Footsteps" },
+    { "key": "Upgrade_IcyFootsteps_Desc", "ru": "После луча остаётся холодная земля на {0} сек.", "en": "Leaves cold ground for {0} sec." },
+
+    { "key": "Upgrade_Brittleness_Name", "ru": "Хрупкость", "en": "Brittleness" },
+    { "key": "Upgrade_Brittleness_Desc", "ru": "Замороженные враги получают на {0}% больше урона", "en": "Frozen enemies take {0}% more damage" },
+
+    { "key": "Upgrade_SnowAvalanche_Name", "ru": "Снежная лавина", "en": "Snow Avalanche" },
+    { "key": "Upgrade_SnowAvalanche_Desc", "ru": "Луч становится конусом на {0}°", "en": "Beam becomes a {0}° cone" },
+
+    { "key": "Upgrade_AbsoluteZero_Name", "ru": "Абсолютный ноль", "en": "Absolute Zero" },
+    { "key": "Upgrade_AbsoluteZero_Desc", "ru": "Открывает активную способность. Луч превращает врагов в ледяные статуи на {0} сек.", "en": "Open active ability. Turns enemies into ice statues for {0} sec." },
+
+    { "key": "Upgrade_WaterHammer_Name", "ru": "Водяной молот", "en": "Water Hammer" },
+    { "key": "Upgrade_WaterHammer_Desc", "ru": "Из-под земли появляется кувалда, способная раздробить скелет сильнейшему врагу", "en": "A sledgehammer emerges from the ground crushing the strongest enemy" },
+
+    { "key": "Upgrade_HeavyStrike_Name", "ru": "Тяжёлый удар", "en": "Heavy Strike" },
+    { "key": "Upgrade_HeavyStrike_Desc", "ru": "Повышает урон на {0}%", "en": "Increases damage by {0}%" },
+
+    { "key": "Upgrade_HydroBoost_Name", "ru": "Гидроускорение", "en": "Hydro Boost" },
+    { "key": "Upgrade_HydroBoost_Desc", "ru": "Атаки происходят на {0}% чаще", "en": "Attacks occur {0}% more often" },
+
+    { "key": "Upgrade_Vortex_Name", "ru": "Воронка", "en": "Vortex" },
+    { "key": "Upgrade_Vortex_Desc", "ru": "Удары станят {0} врагов в небольшой области {1}", "en": "Hits stun {0} enemies in area {1}" },
+
+    { "key": "Upgrade_RepeatTide_Name", "ru": "Повторный прилив", "en": "Repeat Tide" },
+    { "key": "Upgrade_RepeatTide_Desc", "ru": "Атаки снимают {0}% брони и +{1}% урона", "en": "Removes {0}% armor and +{1}% damage" },
+
+    { "key": "Upgrade_Avalanche_Name", "ru": "Лавина", "en": "Avalanche" },
+    { "key": "Upgrade_Avalanche_Desc", "ru": "Открывает активную способность. Наносит {0} усиливающихся удара по области", "en": "Open active ability. {0} escalating area strikes" },
+
+    { "key": "Upgrade_KineticArmor_Name", "ru": "Кинетическая броня", "en": "Kinetic Armor" },
+    { "key": "Upgrade_KineticArmor_Desc", "ru": "Окутывает башню магическим щитом, отражающим урон в обидчика", "en": "Wraps the tower in a shield that reflects damage" },
+
+    { "key": "Upgrade_Reflex_Name", "ru": "Рефлекс", "en": "Reflex" },
+    { "key": "Upgrade_Reflex_Desc", "ru": "Уменьшает перезарядку щита на {0}%", "en": "Reduces shield cooldown by {0}%" },
+
+    { "key": "Upgrade_SpikedShield_Name", "ru": "Шипастый щит", "en": "Spiked Shield" },
+    { "key": "Upgrade_SpikedShield_Desc", "ru": "Увеличивает отражённый урон на {0}% и отбрасывает", "en": "Increases reflected damage by {0}% and adds knockback" },
+
+    { "key": "Upgrade_Converter_Name", "ru": "Конвертор", "en": "Converter" },
+    { "key": "Upgrade_Converter_Desc", "ru": "Преобразует заблокированный урон во временный щит (+{0})", "en": "Grants +{0} shield charge on reflect" },
+
+    { "key": "Upgrade_KineticBarrier_Name", "ru": "Кинетический барьер", "en": "Kinetic Barrier" },
+    { "key": "Upgrade_KineticBarrier_Desc", "ru": "Рефлектует по кругу. Чем дольше не атакован, тем дальше будет атака (+{0})", "en": "reflect around the tower. Attack radius increases by up to +{0}" },
+
+    { "key": "Upgrade_Accelerator_Name", "ru": "Ускоритель", "en": "Accelerator" },
+    { "key": "Upgrade_Accelerator_Desc", "ru": "Открывает активную способность. Каждое отражение провоцирует атаку других снаряжений", "en": "Open active ability. Every reflect provokes another equipment attacks" },
+
+    { "key": "Upgrade_Antenna_Name", "ru": "Кварцевый резонатор", "en": "Quartz Resonator" },
+    { "key": "Upgrade_Antenna_Desc", "ru": "Испускает радиальные волны с большой частотой", "en": "Emits high-frequency radial waves" },
+
+    { "key": "Upgrade_Amplifier_Name", "ru": "Усилитель", "en": "Amplifier" },
+    { "key": "Upgrade_Amplifier_Desc", "ru": "Увеличивает наносимый урон на {0}%", "en": "Increases damage by {0}%" },
+
+    { "key": "Upgrade_StunningWave_Name", "ru": "Оглушающая волна", "en": "Stunning Wave" },
+    { "key": "Upgrade_StunningWave_Desc", "ru": "{0}% шанс оглушить врагов в области", "en": "{0}% chance to stun enemies" },
+
+    { "key": "Upgrade_Pulsator_Name", "ru": "Импульсор", "en": "Pulsator" },
+    { "key": "Upgrade_Pulsator_Desc", "ru": "Атаки становятся импульсными с отталкиванием", "en": "Attacks become pulsating with knockback" },
+
+    { "key": "Upgrade_Repeaters_Name", "ru": "Ретрансляторы", "en": "Repeaters" },
+    { "key": "Upgrade_Repeaters_Desc", "ru": "Урон не падает с дистанцией", "en": "Damage does not fall off with distance" },
+
+    { "key": "Upgrade_CollectivePsychosis_Name", "ru": "Коллективный психоз", "en": "Collective Psychosis" },
+    { "key": "Upgrade_CollectivePsychosis_Desc", "ru": "Открывает активную способность. У врагов появляются ауры ({0}), наносящие урон вокруг ({1}% от базового)", "en": "Open active ability. Enemies have auras for {0} seconds, dealing {1}% of the base damage" }
   ]
 }

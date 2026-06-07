@@ -25,9 +25,9 @@ public class UpgradeCard : MonoBehaviour
         data = upgradeData;
         onClick = callback;
 
-        if (nameText != null) nameText.text = data.upgradeName;
+        if (nameText != null) nameText.text = G.LocalizationManager.GetText(data.upgradeNameKey);
         if (iconImage != null) iconImage.sprite = data.icon;
-        if (descriptionText != null) descriptionText.text = data.description;
+        if (descriptionText != null) descriptionText.text = G.LocalizationManager.GetText(data.descriptionKey, data.formatArgs);
         if (costText != null) costText.text = data.cost.ToString();
 
         if (button != null)

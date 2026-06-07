@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Windmill_3
   cardType: 2
-  upgradeName: "\u0428\u043A\u0432\u0430\u043B"
+  upgradeNameKey: Upgrade_Gust_Name
   icon: {fileID: 0}
-  description: "\u0423\u0432\u0435\u043B\u0438\u0447\u0438\u0432\u0430\u0435\u0442
-    \u0448\u0438\u0440\u0438\u043D\u0443 \u043F\u043E\u0442\u043E\u043A\u0430 ()
-    \u0438 \u0447\u0430\u0441\u0442\u043E\u0442\u0443 \u0432\u044B\u0441\u0442\u0440\u0435\u043B\u043E\u0432
-    (), \u043D\u043E \u043D\u0435\u043C\u043D\u043E\u0433\u043E \u0441\u043D\u0438\u0436\u0430\u0435\u0442
-    \u0443\u0440\u043E\u043D ()"
+  descriptionKey: Upgrade_Gust_Desc
+  formatArgs:
+  - 25
+  - 35
+  - 30
   cost: 75

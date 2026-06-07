@@ -14,10 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: KineticArmor_3
   cardType: 2
-  upgradeName: "\u041A\u043E\u043D\u0432\u0435\u0440\u0442\u043E\u0440"
+  upgradeNameKey: Upgrade_Converter_Name
   icon: {fileID: 0}
-  description: "\u041F\u0440\u0435\u043E\u0431\u0440\u0430\u0437\u0443\u0435\u0442
-    \u0437\u0430\u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u0430\u043D\u043D\u044B\u0439
-    \u0443\u0440\u043E\u043D \u0432\u043E \u0432\u0440\u0435\u043C\u0435\u043D\u043D\u044B\u0439
-    \u0449\u0438\u0442 ()"
+  descriptionKey: Upgrade_Converter_Desc
+  formatArgs:
+  - 1
   cost: 75

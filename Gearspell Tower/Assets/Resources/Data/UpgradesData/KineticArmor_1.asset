@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: KineticArmor_1
   cardType: 1
-  upgradeName: "\u0420\u0435\u0444\u043B\u0435\u043A\u0441"
+  upgradeNameKey: Upgrade_Reflex_Name
   icon: {fileID: 0}
-  description: "\u0423\u043C\u0435\u043D\u044C\u0448\u0430\u0435\u0442 \u043F\u0435\u0440\u0435\u0437\u0430\u0440\u044F\u0434\u043A\u0443
-    \u0449\u0438\u0442\u0430 ()"
+  descriptionKey: Upgrade_Reflex_Desc
+  formatArgs:
+  - 34
   cost: 25

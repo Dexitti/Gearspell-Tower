@@ -201,7 +201,7 @@ public class HUDController : MonoBehaviour
 
     private IEnumerator ShowWaveNameCoroutine(int waveNumber)
     {
-        waveNameText.text = G.LocalizationManager.GetText($"WaveName_{G.GameLoopManager.GetCurrentWaveNumber()}");
+        waveNameText.text = G.LocalizationManager.GetText($"WaveName_{waveNumber}");
         yield return new WaitForSeconds(2f);
         waveNameText.text = "";
     }

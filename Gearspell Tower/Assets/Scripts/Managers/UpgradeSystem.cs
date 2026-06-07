@@ -200,7 +200,7 @@ public class UpgradeSystem : MonoBehaviour
             // Сохраняем
             G.ProgressManager?.SetEquipmentStage(targetEq.equipmentName, currentStage + 1);
             G.ProgressManager?.AddAppliedUpgrade(targetEq.equipmentName, upgrade.id);
-            Debug.Log($"[UpgradeSystem] Applied {upgrade.upgradeName} to {targetEq.equipmentName}, stage now {currentStage + 1}");
+            Debug.Log($"[UpgradeSystem] Applied {upgrade.upgradeNameKey} to {targetEq.equipmentName}, stage now {currentStage + 1}");
         }
 
         InvalidateCache();

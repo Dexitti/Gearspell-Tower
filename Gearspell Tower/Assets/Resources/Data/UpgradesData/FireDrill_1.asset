@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: FireDrill_1
   cardType: 1
-  upgradeName: "\u041C\u043E\u0434\u0435\u0440\u043D\u0438\u0437\u0430\u0446\u0438\u044F"
+  upgradeNameKey: Upgrade_Modernization_Name
   icon: {fileID: 0}
-  description: "\u0423\u0432\u0435\u043B\u0438\u0447\u0438\u0432\u0430\u0435\u0442
-    \u043A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u0437\u0430\u043F\u0443\u0441\u043A\u0430\u0435\u043C\u044B\u0445
-    \u0431\u0443\u0440\u043E\u0432 ()"
+  descriptionKey: Upgrade_Modernization_Desc
+  formatArgs:
+  - 1.7
   cost: 25

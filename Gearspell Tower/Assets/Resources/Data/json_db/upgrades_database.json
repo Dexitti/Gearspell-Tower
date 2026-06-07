@@ -6,27 +6,27 @@
         {
           "isFork": false,
           "upgrades": [
-            { "cardType": "Equipment", "upgradeName": "Ветряная мельница", "description": "Выпускает частые потоки ветра в ближайшего врага" }
+            { "cardType": "Equipment", "upgradeNameKey": "Upgrade_Windmill_Name", "descriptionKey": "Upgrade_Windmill_Desc" }
           ]
         },
         {
           "isFork": false,
           "upgrades": [
-            { "cardType": "Common", "upgradeName": "Острый поток", "description": "Увеличевает наносимый урон ()" },
-            { "cardType": "Common", "upgradeName": "Пронзающий ветер", "description": "Снаряды пробивают врагов () и броню" }
+            { "cardType": "Common", "upgradeNameKey": "Upgrade_SharpStream_Name", "descriptionKey": "Upgrade_SharpStream_Desc", "formatArgs": [50] },
+            { "cardType": "Common", "upgradeNameKey": "Upgrade_PiercingWind_Name", "descriptionKey": "Upgrade_PiercingWind_Desc", "formatArgs": [2] }
           ]
         },
         {
           "isFork": true,
           "upgrades": [
-            { "cardType": "Fork", "upgradeName": "Шквал", "description": "Увеличивает ширину потока () и частоту выстрелов (), но немного снижает урон ()" },
-            { "cardType": "Fork", "upgradeName": "Бронебойный вихрь", "description": "Снаряды пробивают больше целей () и наносят больше урона (), но выпускаются реже ()" }
+            { "cardType": "Fork", "upgradeNameKey": "Upgrade_Gust_Name", "descriptionKey": "Upgrade_Gust_Desc", "formatArgs": [25, 35, 30] },
+            { "cardType": "Fork", "upgradeNameKey": "Upgrade_ArmorPiercingVortex_Name", "descriptionKey": "Upgrade_ArmorPiercingVortex_Desc", "formatArgs": [4, 30, 20] }
           ]
         },
         {
           "isFork": false,
           "upgrades": [
-            { "cardType": "ActiveAbility", "upgradeName": "Ураган", "description": "Открывает активную способность. Стремительно выпускает множество выстрелов широким сектором" }
+            { "cardType": "ActiveAbility", "upgradeNameKey": "Upgrade_Hurricane_Name", "descriptionKey": "Upgrade_Hurricane_Desc", "formatArgs": [20] }
           ]
         }
       ]
@@ -37,27 +37,27 @@
         {
           "isFork": false,
           "upgrades": [
-            { "cardType": "Equipment", "upgradeName": "Огненный бур", "description": "Запускает в небо раскаленные буры, которые обрушиваются на врагов" }
+            { "cardType": "Equipment", "upgradeNameKey": "Upgrade_FireDrill_Name", "descriptionKey": "Upgrade_FireDrill_Desc" }
           ]
         },
         {
           "isFork": false,
           "upgrades": [
-            { "cardType": "Common", "upgradeName": "Модернизация", "description": "Увеличивает количество запускаемых буров ()" },
-            { "cardType": "Common", "upgradeName": "Разогрев", "description": "Увеличивает урон () и размер буров ()" }
+            { "cardType": "Common", "upgradeNameKey": "Upgrade_Modernization_Name", "descriptionKey": "Upgrade_Modernization_Desc", "formatArgs": [1.7] },
+            { "cardType": "Common", "upgradeNameKey": "Upgrade_HeatUp_Name", "descriptionKey": "Upgrade_HeatUp_Desc", "formatArgs": [50, 40] }
           ]
         },
         {
           "isFork": true,
           "upgrades": [
-            { "cardType": "Fork", "upgradeName": "Мелкие буры", "description": "Мортиры теперь выпускают в () раз больше буров, но они меньше и слабее ()" },
-            { "cardType": "Fork", "upgradeName": "Пламенные буры", "description": "Немного уменьшает количество буров (), но теперь они поджигают замлю и имеют шанс застанить ()" }
+            { "cardType": "Fork", "upgradeNameKey": "Upgrade_SmallDrills_Name", "descriptionKey": "Upgrade_SmallDrills_Desc", "formatArgs": [2, 45] },
+            { "cardType": "Fork", "upgradeNameKey": "Upgrade_FlameDrills_Name", "descriptionKey": "Upgrade_FlameDrills_Desc", "formatArgs": [20, 15] }
           ]
         },
         {
           "isFork": false,
           "upgrades": [
-            { "cardType": "ActiveAbility", "upgradeName": "Огненный смерч", "description": "Открывает активную способность. Упавшие буры остаются и соединяются в сеть, жгущую врагов () секунд" }
+            { "cardType": "ActiveAbility", "upgradeNameKey": "Upgrade_FireTornado_Name", "descriptionKey": "Upgrade_FireTornado_Desc", "formatArgs": [5] }
           ]
         }
       ]
@@ -68,27 +68,27 @@
         {
           "isFork": false,
           "upgrades": [
-            { "cardType": "Equipment", "upgradeName": "Молниеносные шестерни", "description": "Выстреливает цепью шестеренок, между которыми пробивает молния. Бж-Зап!" }
+            { "cardType": "Equipment", "upgradeNameKey": "Upgrade_LightningCogs_Name", "descriptionKey": "Upgrade_LightningCogs_Desc" }
           ]
         },
         {
           "isFork": false,
           "upgrades": [
-            { "cardType": "Common", "upgradeName": "Батарея", "description": "Больше шестеренок в цепи ()" },
-            { "cardType": "Common", "upgradeName": "Короткое замыкание", "description": "Молниеносная дуга может прыгнуть на () дополнительные цели от цепи" }
+            { "cardType": "Common", "upgradeNameKey": "Upgrade_Battery_Name", "descriptionKey": "Upgrade_Battery_Desc", "formatArgs": [2] },
+            { "cardType": "Common", "upgradeNameKey": "Upgrade_ShortCircuit_Name", "descriptionKey": "Upgrade_ShortCircuit_Desc", "formatArgs": [2] }
           ]
         },
         {
           "isFork": true,
           "upgrades": [
-            { "cardType": "Fork", "upgradeName": "Каскадный разряд", "description": "Количество проскоков увеличивается до ()" },
-            { "cardType": "Fork", "upgradeName": "Грозовой столб", "description": "После молнии над шестеренками возникает грозовой столб" }
+            { "cardType": "Fork", "upgradeNameKey": "Upgrade_CascadeDischarge_Name", "descriptionKey": "Upgrade_CascadeDischarge_Desc", "formatArgs": [2] },
+            { "cardType": "Fork", "upgradeNameKey": "Upgrade_ThunderColumn_Name", "descriptionKey": "Upgrade_ThunderColumn_Desc", "formatArgs": [50] }
           ]
         },
         {
           "isFork": false,
           "upgrades": [
-            { "cardType": "ActiveAbility", "upgradeName": "Магнитный резонанс", "description": "Открывает активную способность. Перед молнией шестерни притягивают ближайших врагов" }
+            { "cardType": "ActiveAbility", "upgradeNameKey": "Upgrade_MagneticResonance_Name", "descriptionKey": "Upgrade_MagneticResonance_Desc" }
           ]
         }
       ]
@@ -99,27 +99,27 @@
         {
           "isFork": false,
           "upgrades": [
-            { "cardType": "Equipment", "upgradeName": "Ядовитые роторы", "description": "Скрытно прорываются к скоплениям врагов. Затем резко вырастают и начинают травить ничего не подозревающие жертвы" }
+            { "cardType": "Equipment", "upgradeNameKey": "Upgrade_PoisonRotors_Name", "descriptionKey": "Upgrade_PoisonRotors_Desc" }
           ]
         },
         {
           "isFork": false,
           "upgrades": [
-            { "cardType": "Common", "upgradeName": "Перегрузка", "description": "Роторы движутся быстрее () и наносят урон чаще ()" },
-            { "cardType": "Common", "upgradeName": "Мутаген", "description": "Увеличивает количество стаков яда () и урон за стак ()" }
+            { "cardType": "Common", "upgradeNameKey": "Upgrade_Overload_Name", "descriptionKey": "Upgrade_Overload_Desc", "formatArgs": [50, 60] },
+            { "cardType": "Common", "upgradeNameKey": "Upgrade_Mutagen_Name", "descriptionKey": "Upgrade_Mutagen_Desc", "formatArgs": [5, 40] }
           ]
         },
         {
           "isFork": true,
           "upgrades": [
-            { "cardType": "Fork", "upgradeName": "Токсичное облако", "description": "Увеличивает область ядовитого облака () и время жизни ротора ()" },
-            { "cardType": "Fork", "upgradeName": "Шипастый залп", "description": "Роторы стреляют ядовитыми шипами ()" }
+            { "cardType": "Fork", "upgradeNameKey": "Upgrade_ToxicCloud_Name", "descriptionKey": "Upgrade_ToxicCloud_Desc", "formatArgs": [80, 70] },
+            { "cardType": "Fork", "upgradeNameKey": "Upgrade_SpikySalvo_Name", "descriptionKey": "Upgrade_SpikySalvo_Desc", "formatArgs": [4] }
           ]
         },
         {
           "isFork": false,
           "upgrades": [
-            { "cardType": "ActiveAbility", "upgradeName": "Чума", "description": "Открывает активную способность. Отравленные враги взрываются при смерти ()" }
+            { "cardType": "ActiveAbility", "upgradeNameKey": "Upgrade_Plague_Name", "descriptionKey": "Upgrade_Plague_Desc", "formatArgs": [2.5] }
           ]
         }
       ]
@@ -130,27 +130,27 @@
         {
           "isFork": false,
           "upgrades": [
-            { "cardType": "Equipment", "upgradeName": "Криогенный стабилизатор", "description": "Извергает луч на среднюю дистанцию, замедляющий врагов" }
+            { "cardType": "Equipment", "upgradeNameKey": "Upgrade_CryogenicStabilizer_Name", "descriptionKey": "Upgrade_CryogenicStabilizer_Desc", "formatArgs": [] }
           ]
         },
         {
           "isFork": false,
           "upgrades": [
-            { "cardType": "Common", "upgradeName": "Глубокая заморозка", "description": "Усиливает эффект замедления ()" },
-            { "cardType": "Common", "upgradeName": "Ледяная поступь", "description": "После луча остаётся холодная земля ()" }
+            { "cardType": "Common", "upgradeNameKey": "Upgrade_DeepFreeze_Name", "descriptionKey": "Upgrade_DeepFreeze_Desc", "formatArgs": [50] },
+            { "cardType": "Common", "upgradeNameKey": "Upgrade_IcyFootsteps_Name", "descriptionKey": "Upgrade_IcyFootsteps_Desc", "formatArgs": [4] }
           ]
         },
         {
           "isFork": true,
           "upgrades": [
-            { "cardType": "Fork", "upgradeName": "Хрупкость", "description": "Замороженные враги получают повышенный урон () от всех источников" },
-            { "cardType": "Fork", "upgradeName": "Снежная лавина", "description": "Луч становится короткий широкий конус, замедляющий врагов тем сильнее, чем они ближе к башне ()" }
+            { "cardType": "Fork", "upgradeNameKey": "Upgrade_Brittleness_Name", "descriptionKey": "Upgrade_Brittleness_Desc", "formatArgs": [100] },
+            { "cardType": "Fork", "upgradeNameKey": "Upgrade_SnowAvalanche_Name", "descriptionKey": "Upgrade_SnowAvalanche_Desc", "formatArgs": [45] }
           ]
         },
         {
           "isFork": false,
           "upgrades": [
-            { "cardType": "ActiveAbility", "upgradeName": "Абсолютный ноль", "description": "Открывает активную способность. Превращает врагов в ледяные статуи" }
+            { "cardType": "ActiveAbility", "upgradeNameKey": "Upgrade_AbsoluteZero_Name", "descriptionKey": "Upgrade_AbsoluteZero_Desc", "formatArgs": [3] }
           ]
         }
       ]
@@ -161,27 +161,27 @@
         {
           "isFork": false,
           "upgrades": [
-            { "cardType": "Equipment", "upgradeName": "Водяной молот", "description": "Из-под земли появляется кувалда, способная раздробить скелет сильнейшему врагу" }
+            { "cardType": "Equipment", "upgradeNameKey": "Upgrade_WaterHammer_Name", "descriptionKey": "Upgrade_WaterHammer_Desc" }
           ]
         },
         {
           "isFork": false,
           "upgrades": [
-            { "cardType": "Common", "upgradeName": "Тяжёлый удар", "description": "Повышает урон ()" },
-            { "cardType": "Common", "upgradeName": "Гидроускорение", "description": "Атаки происходят чаще ()" }
+            { "cardType": "Common", "upgradeNameKey": "Upgrade_HeavyStrike_Name", "descriptionKey": "Upgrade_HeavyStrike_Desc", "formatArgs": [60] },
+            { "cardType": "Common", "upgradeNameKey": "Upgrade_HydroBoost_Name", "descriptionKey": "Upgrade_HydroBoost_Desc", "formatArgs": [35] }
           ]
         },
         {
           "isFork": true,
           "upgrades": [
-            { "cardType": "Fork", "upgradeName": "Воронка", "description": "Удары станят () врагов в небольшой области ()" },
-            { "cardType": "Fork", "upgradeName": "Повторный прилив", "description": "Атаки снимают броню () и наносят дополнительный урон ()" }
+            { "cardType": "Fork", "upgradeNameKey": "Upgrade_Vortex_Name", "descriptionKey": "Upgrade_Vortex_Desc", "formatArgs": [1, 1] },
+            { "cardType": "Fork", "upgradeNameKey": "Upgrade_RepeatTide_Name", "descriptionKey": "Upgrade_RepeatTide_Desc", "formatArgs": [33, 33] }
           ]
         },
         {
           "isFork": false,
           "upgrades": [
-            { "cardType": "ActiveAbility", "upgradeName": "Лавина", "description": "Открывает активную способность. Молот наносит () усиливающихся удара по области" }
+            { "cardType": "ActiveAbility", "upgradeNameKey": "Upgrade_Avalanche_Name", "descriptionKey": "Upgrade_Avalanche_Desc", "formatArgs": [3] }
           ]
         }
       ]
@@ -192,27 +192,27 @@
         {
           "isFork": false,
           "upgrades": [
-            { "cardType": "Equipment", "upgradeName": "Кинетическая броня", "description": "Окутывает башню магическим щитом, отражающим урон в обидчика ()" }
+            { "cardType": "Equipment", "upgradeNameKey": "Upgrade_KineticArmor_Name", "descriptionKey": "Upgrade_KineticArmor_Desc" }
           ]
         },
         {
           "isFork": false,
           "upgrades": [
-            { "cardType": "Common", "upgradeName": "Рефлекс", "description": "Уменьшает перезарядку щита ()" },
-            { "cardType": "Common", "upgradeName": "Шипасный щит", "description": "Увеличивается отраженный урон () и отбрасывает врагов" }
+            { "cardType": "Common", "upgradeNameKey": "Upgrade_Reflex_Name", "descriptionKey": "Upgrade_Reflex_Desc", "formatArgs": [34] },
+            { "cardType": "Common", "upgradeNameKey": "Upgrade_SpikedShield_Name", "descriptionKey": "Upgrade_SpikedShield_Desc", "formatArgs": [50] }
           ]
         },
         {
           "isFork": true,
           "upgrades": [
-            { "cardType": "Fork", "upgradeName": "Конвертор", "description": "Преобразует заблокированный урон во временный щит ()" },
-            { "cardType": "Fork", "upgradeName": "Кинетический барьер", "description": "Рефлектует по кругу. Чем дольше не атакован, тем дальше будет атака ()" }
+            { "cardType": "Fork", "upgradeNameKey": "Upgrade_Converter_Name", "descriptionKey": "Upgrade_Converter_Desc", "formatArgs": [1] },
+            { "cardType": "Fork", "upgradeNameKey": "Upgrade_KineticBarrier_Name", "descriptionKey": "Upgrade_KineticBarrier_Desc", "formatArgs": [2] }
           ]
         },
         {
           "isFork": false,
           "upgrades": [
-            { "cardType": "ActiveAbility", "upgradeName": "Ускоритель", "description": "Открывает активную способность. Каждое отражение провоцирует атаку других снаряжений" }
+            { "cardType": "ActiveAbility", "upgradeNameKey": "Upgrade_Accelerator_Name", "descriptionKey": "Upgrade_Accelerator_Desc" }
           ]
         }
       ]
@@ -223,27 +223,27 @@
         {
           "isFork": false,
           "upgrades": [
-            { "cardType": "Equipment", "upgradeName": "Кварцевый резонатор", "description": "Испускает радиальные волны с большой частотой. С расстоянием урон рассеивается ()" }
+            { "cardType": "Equipment", "upgradeNameKey": "Upgrade_Antenna_Name", "descriptionKey": "Upgrade_Antenna_Desc" }
           ]
         },
         {
           "isFork": false,
           "upgrades": [
-            { "cardType": "Common", "upgradeName": "Усилитель", "description": "Увеличивает наносимый урон ()" },
-            { "cardType": "Common", "upgradeName": "Оглушающая волна", "description": "Враги в области имеют шанс стана ()" }
+            { "cardType": "Common", "upgradeNameKey": "Upgrade_Amplifier_Name", "descriptionKey": "Upgrade_Amplifier_Desc", "formatArgs": [50] },
+            { "cardType": "Common", "upgradeNameKey": "Upgrade_StunningWave_Name", "descriptionKey": "Upgrade_StunningWave_Desc", "formatArgs": [10] }
           ]
         },
         {
           "isFork": true,
           "upgrades": [
-            { "cardType": "Fork", "upgradeName": "Импульсор", "description": "Атаки становятся импульсными с небольшим отталкиванием" },
-            { "cardType": "Fork", "upgradeName": "Ретрансляторы", "description": "Урон не падает с дистанцией ()" }
+            { "cardType": "Fork", "upgradeNameKey": "Upgrade_Pulsator_Name", "descriptionKey": "Upgrade_Pulsator_Desc", "formatArgs": [] },
+            { "cardType": "Fork", "upgradeNameKey": "Upgrade_Repeaters_Name", "descriptionKey": "Upgrade_Repeaters_Desc", "formatArgs": [0] }
           ]
         },
         {
           "isFork": false,
           "upgrades": [
-            { "cardType": "ActiveAbility", "upgradeName": "Коллективный психоз", "description": "Открывает активную способность. У врагов появляются ауры (), наносящие урон вокруг ()" }
+            { "cardType": "ActiveAbility", "upgradeNameKey": "Upgrade_CollectivePsychosis_Name", "descriptionKey": "Upgrade_CollectivePsychosis_Desc", "formatArgs": [5, 40] }
           ]
         }
       ]

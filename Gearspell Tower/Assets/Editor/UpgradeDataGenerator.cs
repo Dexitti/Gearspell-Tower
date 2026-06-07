@@ -31,6 +31,8 @@ public class UpgradeDataGenerator : EditorWindow
         EnsureDirectory(upgradeFolder);
         EnsureDirectory(equipmentFolder);
 
+        List<LocalizationEntry> newLocalizationEntries = new();
+
         foreach (var eq in db.equipments)
         {
             int upgradeNumber = 0;
@@ -69,8 +71,19 @@ public class UpgradeDataGenerator : EditorWindow
         }
 
         so.id = id;
-        so.upgradeName = json.upgradeName;
-        so.description = json.description;
+        so.upgradeNameKey = json.upgradeNameKey;
+        so.descriptionKey = json.descriptionKey;
+
+        if (json.formatArgs != null && json.formatArgs.Length > 0)
+        {
+            so.formatArgs = new float[json.formatArgs.Length];
+            for (int i = 0; i < json.formatArgs.Length; i++)
+            {
+                so.formatArgs[i] = json.formatArgs[i];
+            }
+        }
+        else so.formatArgs = new float[0];
+        
         so.cardType = ParseCardType(json.cardType);
         so.cost = GetUpgradeCost(json.cardType);
 
@@ -151,6 +164,7 @@ public class JsonStage
 public class JsonUpgrade
 {
     public string cardType;
-    public string upgradeName;
-    public string description;
+    public string upgradeNameKey;
+    public string descriptionKey;
+    public float[] formatArgs;
 }

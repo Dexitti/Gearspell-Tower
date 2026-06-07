@@ -14,10 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: PoisonRotors_5
   cardType: 3
-  upgradeName: "\u0427\u0443\u043C\u0430"
+  upgradeNameKey: Upgrade_Plague_Name
   icon: {fileID: 0}
-  description: "\u041E\u0442\u043A\u0440\u044B\u0432\u0430\u0435\u0442 \u0430\u043A\u0442\u0438\u0432\u043D\u0443\u044E
-    \u0441\u043F\u043E\u0441\u043E\u0431\u043D\u043E\u0441\u0442\u044C. \u041E\u0442\u0440\u0430\u0432\u043B\u0435\u043D\u043D\u044B\u0435
-    \u0432\u0440\u0430\u0433\u0438 \u0432\u0437\u0440\u044B\u0432\u0430\u044E\u0442\u0441\u044F
-    \u043F\u0440\u0438 \u0441\u043C\u0435\u0440\u0442\u0438 ()"
+  descriptionKey: Upgrade_Plague_Desc
+  formatArgs:
+  - 2.5
   cost: 120

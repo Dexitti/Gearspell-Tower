@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: FireDrill_2
   cardType: 1
-  upgradeName: "\u0420\u0430\u0437\u043E\u0433\u0440\u0435\u0432"
+  upgradeNameKey: Upgrade_HeatUp_Name
   icon: {fileID: 0}
-  description: "\u0423\u0432\u0435\u043B\u0438\u0447\u0438\u0432\u0430\u0435\u0442
-    \u0443\u0440\u043E\u043D () \u0438 \u0440\u0430\u0437\u043C\u0435\u0440 \u0431\u0443\u0440\u043E\u0432
-    ()"
+  descriptionKey: Upgrade_HeatUp_Desc
+  formatArgs:
+  - 50
+  - 40
   cost: 25

@@ -14,9 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Windmill_0
   cardType: 0
-  upgradeName: "\u0412\u0435\u0442\u0440\u044F\u043D\u0430\u044F \u043C\u0435\u043B\u044C\u043D\u0438\u0446\u0430"
+  upgradeNameKey: Upgrade_Windmill_Name
   icon: {fileID: 0}
-  description: "\u0412\u044B\u043F\u0443\u0441\u043A\u0430\u0435\u0442 \u0447\u0430\u0441\u0442\u044B\u0435
-    \u043F\u043E\u0442\u043E\u043A\u0438 \u0432\u0435\u0442\u0440\u0430 \u0432 \u0431\u043B\u0438\u0436\u0430\u0439\u0448\u0435\u0433\u043E
-    \u0432\u0440\u0430\u0433\u0430"
+  descriptionKey: Upgrade_Windmill_Desc
+  formatArgs: []
   cost: 50

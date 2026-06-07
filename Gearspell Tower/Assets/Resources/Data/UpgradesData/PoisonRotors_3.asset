@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: PoisonRotors_3
   cardType: 2
-  upgradeName: "\u0422\u043E\u043A\u0441\u0438\u0447\u043D\u043E\u0435 \u043E\u0431\u043B\u0430\u043A\u043E"
+  upgradeNameKey: Upgrade_ToxicCloud_Name
   icon: {fileID: 0}
-  description: "\u0423\u0432\u0435\u043B\u0438\u0447\u0438\u0432\u0430\u0435\u0442
-    \u043E\u0431\u043B\u0430\u0441\u0442\u044C \u044F\u0434\u043E\u0432\u0438\u0442\u043E\u0433\u043E
-    \u043E\u0431\u043B\u0430\u043A\u0430 () \u0438 \u0432\u0440\u0435\u043C\u044F
-    \u0436\u0438\u0437\u043D\u0438 \u0440\u043E\u0442\u043E\u0440\u0430 ()"
+  descriptionKey: Upgrade_ToxicCloud_Desc
+  formatArgs:
+  - 80
+  - 70
   cost: 75

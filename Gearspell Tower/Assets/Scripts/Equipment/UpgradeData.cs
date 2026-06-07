@@ -7,9 +7,10 @@ public class UpgradeData : ScriptableObject
 {
     public string id = Guid.NewGuid().ToString(); // Для Save
     public UpgradeCardType cardType;
-    public string upgradeName;
+    public string upgradeNameKey;
     public Sprite icon;
-    [TextArea] public string description;
+    [TextArea] public string descriptionKey;
+    public float[] formatArgs;
     public int cost;
 }
 

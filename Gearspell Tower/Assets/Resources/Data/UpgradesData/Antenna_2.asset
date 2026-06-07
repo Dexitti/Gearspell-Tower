@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Antenna_2
   cardType: 1
-  upgradeName: "\u041E\u0433\u043B\u0443\u0448\u0430\u044E\u0449\u0430\u044F \u0432\u043E\u043B\u043D\u0430"
+  upgradeNameKey: Upgrade_StunningWave_Name
   icon: {fileID: 0}
-  description: "\u0412\u0440\u0430\u0433\u0438 \u0432 \u043E\u0431\u043B\u0430\u0441\u0442\u0438
-    \u0438\u043C\u0435\u044E\u0442 \u0448\u0430\u043D\u0441 \u0441\u0442\u0430\u043D\u0430
-    ()"
+  descriptionKey: Upgrade_StunningWave_Desc
+  formatArgs:
+  - 10
   cost: 25

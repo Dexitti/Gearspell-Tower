@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Antenna_1
   cardType: 1
-  upgradeName: "\u0423\u0441\u0438\u043B\u0438\u0442\u0435\u043B\u044C"
+  upgradeNameKey: Upgrade_Amplifier_Name
   icon: {fileID: 0}
-  description: "\u0423\u0432\u0435\u043B\u0438\u0447\u0438\u0432\u0430\u0435\u0442
-    \u043D\u0430\u043D\u043E\u0441\u0438\u043C\u044B\u0439 \u0443\u0440\u043E\u043D
-    ()"
+  descriptionKey: Upgrade_Amplifier_Desc
+  formatArgs:
+  - 50
   cost: 25

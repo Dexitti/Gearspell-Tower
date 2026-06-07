@@ -61,6 +61,18 @@ public class LocalizationManager : MonoBehaviour
         return key;
     }
 
+    public string GetText(string key, float[] args)
+    {
+        if (args == null || args.Length == 0)
+            return GetText(key);
+
+        object[] objArgs = new object[args.Length];
+        for (int i = 0; i < args.Length; i++)
+            objArgs[i] = args[i];
+
+        return GetText(key, objArgs);
+    }
+
     public string GetText(string key, params object[] args)
     {
         string template = GetText(key);

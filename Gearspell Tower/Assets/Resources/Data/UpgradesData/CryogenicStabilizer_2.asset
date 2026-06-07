@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: CryogenicStabilizer_2
   cardType: 1
-  upgradeName: "\u041B\u0435\u0434\u044F\u043D\u0430\u044F \u043F\u043E\u0441\u0442\u0443\u043F\u044C"
+  upgradeNameKey: Upgrade_IcyFootsteps_Name
   icon: {fileID: 0}
-  description: "\u041F\u043E\u0441\u043B\u0435 \u043B\u0443\u0447\u0430 \u043E\u0441\u0442\u0430\u0451\u0442\u0441\u044F
-    \u0445\u043E\u043B\u043E\u0434\u043D\u0430\u044F \u0437\u0435\u043C\u043B\u044F
-    ()"
+  descriptionKey: Upgrade_IcyFootsteps_Desc
+  formatArgs:
+  - 4
   cost: 25
