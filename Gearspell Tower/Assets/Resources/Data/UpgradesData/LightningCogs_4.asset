@@ -19,4 +19,4 @@ MonoBehaviour:
   descriptionKey: Upgrade_ThunderColumn_Desc
   formatArgs:
   - 50
-  cost: 75
+  cost: 50

@@ -31,9 +31,9 @@
     { "key": "Gears", "ru": "Шестеренки", "en": "Gears" },
     { "key": "Upgrade", "ru": "Улучшить", "en": "Upgrade" },
     { "key": "Buy", "ru": "Открыть", "en": "Buy" },
-    { "key": "Heal", "ru": "Восстановить {0}% прочности", "en": "Restore {0}% strength" },
-    { "key": "Regen", "ru": "Усилить регенерацию на {0} с.", "en": "Boost regeneration by {0} s." },
-    { "key": "PlaceMines", "ru": "Разместить мины ({0} шт.)", "en": "Place mines ({0} pcs.)" },
+    { "key": "Heal", "ru": "Восстановить {0}% прочности (200)", "en": "Restore {0}% strength (200)" },
+    { "key": "Regen", "ru": "Усилить регенерацию на {0} с. (200)", "en": "Boost regeneration by {0} s. (200)" },
+    { "key": "PlaceMines", "ru": "Разместить мины ({0} шт.) (200)", "en": "Place mines ({0} pcs.) (200)" },
 
     { "key": "Creature_Fire_Elemental", "ru": "Элементаль огня", "en": "Fire Elemental" },
     { "key": "Creature_Runic_Elemental", "ru": "Рунный элементаль", "en": "Runic Elemental" },
@@ -70,13 +70,13 @@
     { "key": "Upgrade_SharpStream_Desc", "ru": "Увеличивает наносимый урон на {0}%", "en": "Increases damage by {0}%" },
 
     { "key": "Upgrade_PiercingWind_Name", "ru": "Пронзающий ветер", "en": "Piercing Wind" },
-    { "key": "Upgrade_PiercingWind_Desc", "ru": "Снаряды пробивают {0} врагов и броню", "en": "Projectiles pierce {0} enemies and armor" },
+    { "key": "Upgrade_PiercingWind_Desc", "ru": "Снаряды пробивают {0} врага и броню", "en": "Projectiles pierce {0} enemies and armor" },
 
     { "key": "Upgrade_Gust_Name", "ru": "Шквал", "en": "Gust" },
     { "key": "Upgrade_Gust_Desc", "ru": "Увеличивает ширину потока на {0}% и частоту выстрелов на {1}%, но снижает урон на {2}%", "en": "Increases stream width by {0}% and fire rate by {1}%, but reduces damage by {2}%" },
 
     { "key": "Upgrade_ArmorPiercingVortex_Name", "ru": "Бронебойный вихрь", "en": "Armor-Piercing Vortex" },
-    { "key": "Upgrade_ArmorPiercingVortex_Desc", "ru": "Снаряды пробивают {0} целей и наносят на {1}% больше урона, но выстрелы реже на {2}%", "en": "Projectiles pierce {0} targets and deal {1}% more damage, but fire {2}% slower" },
+    { "key": "Upgrade_ArmorPiercingVortex_Desc", "ru": "Снаряды пробивают {0} цели и наносят на {1}% больше урона, но выстрелы реже на {2}%", "en": "Projectiles pierce {0} targets and deal {1}% more damage, but fire {2}% slower" },
 
     { "key": "Upgrade_Hurricane_Name", "ru": "Ураган", "en": "Hurricane" },
     { "key": "Upgrade_Hurricane_Desc", "ru": "Открывает активную способность. Выпускает {0} выстрелов широким сектором", "en": "Open active ability. Fires {0} projectiles in a wide sector" },
@@ -109,7 +109,7 @@
     { "key": "Upgrade_ShortCircuit_Desc", "ru": "Молния может прыгнуть на {0} дополнительных целей", "en": "Lightning can jump to {0} additional targets" },
 
     { "key": "Upgrade_CascadeDischarge_Name", "ru": "Каскадный разряд", "en": "Cascade Discharge" },
-    { "key": "Upgrade_CascadeDischarge_Desc", "ru": "Количество прыжков увеличивается до {0}", "en": "Number of jumps increased to {0}" },
+    { "key": "Upgrade_CascadeDischarge_Desc", "ru": "Количество проскоков увеличивается до {0}", "en": "Number of jumps increased to {0}" },
 
     { "key": "Upgrade_ThunderColumn_Name", "ru": "Грозовой столб", "en": "Thunder Column" },
     { "key": "Upgrade_ThunderColumn_Desc", "ru": "После молнии возникает грозовой столб, наносящий {0} урона", "en": "Creates a thunder column dealing {0} damage" },
@@ -157,7 +157,7 @@
     { "key": "Upgrade_WaterHammer_Desc", "ru": "Из-под земли появляется кувалда, способная раздробить скелет сильнейшему врагу", "en": "A sledgehammer emerges from the ground crushing the strongest enemy" },
 
     { "key": "Upgrade_HeavyStrike_Name", "ru": "Тяжёлый удар", "en": "Heavy Strike" },
-    { "key": "Upgrade_HeavyStrike_Desc", "ru": "Повышает урон на {0}%", "en": "Increases damage by {0}%" },
+    { "key": "Upgrade_HeavyStrike_Desc", "ru": "Повышает урон молота на {0}%", "en": "Increases hammer damage by {0}%" },
 
     { "key": "Upgrade_HydroBoost_Name", "ru": "Гидроускорение", "en": "Hydro Boost" },
     { "key": "Upgrade_HydroBoost_Desc", "ru": "Атаки происходят на {0}% чаще", "en": "Attacks occur {0}% more often" },
@@ -166,7 +166,7 @@
     { "key": "Upgrade_Vortex_Desc", "ru": "Удары станят {0} врагов в небольшой области {1}", "en": "Hits stun {0} enemies in area {1}" },
 
     { "key": "Upgrade_RepeatTide_Name", "ru": "Повторный прилив", "en": "Repeat Tide" },
-    { "key": "Upgrade_RepeatTide_Desc", "ru": "Атаки снимают {0}% брони и +{1}% урона", "en": "Removes {0}% armor and +{1}% damage" },
+    { "key": "Upgrade_RepeatTide_Desc", "ru": "Атаки наносят +{1}% урона и снимают {0}% брони", "en": "Attacks +{1}% damage and removes {0}% armor" },
 
     { "key": "Upgrade_Avalanche_Name", "ru": "Лавина", "en": "Avalanche" },
     { "key": "Upgrade_Avalanche_Desc", "ru": "Открывает активную способность. Наносит {0} усиливающихся удара по области", "en": "Open active ability. {0} escalating area strikes" },

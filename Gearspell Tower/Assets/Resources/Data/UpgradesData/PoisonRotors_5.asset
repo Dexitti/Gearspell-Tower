@@ -19,4 +19,4 @@ MonoBehaviour:
   descriptionKey: Upgrade_Plague_Desc
   formatArgs:
   - 2.5
-  cost: 120
+  cost: 80

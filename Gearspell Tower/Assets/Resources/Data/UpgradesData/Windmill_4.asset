@@ -18,7 +18,7 @@ MonoBehaviour:
   icon: {fileID: 0}
   descriptionKey: Upgrade_ArmorPiercingVortex_Desc
   formatArgs:
-  - 4
+  - 3
   - 30
   - 20
-  cost: 75
+  cost: 50

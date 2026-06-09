@@ -15,11 +15,11 @@ MonoBehaviour:
   waveName: Wave 3 - Smoke & Steam
   enemySpawns:
   - enemyPrefab: {fileID: 8516407375225930908, guid: 22fbfc05653798f498fa3161ac6958d3, type: 3}
-    count: 14
+    count: 16
     spawnInterval: 0.8
   - enemyPrefab: {fileID: 8516407375225930908, guid: 7ac6612df4dde6346ac550cdeb3ab66b, type: 3}
     count: 6
-    spawnInterval: 3
+    spawnInterval: 2.5
   waveDialogs: []
   gearsReward: 20
   equipmentUnlocks: []

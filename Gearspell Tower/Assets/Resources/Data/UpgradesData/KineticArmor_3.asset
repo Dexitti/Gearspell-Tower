@@ -19,4 +19,4 @@ MonoBehaviour:
   descriptionKey: Upgrade_Converter_Desc
   formatArgs:
   - 1
-  cost: 75
+  cost: 50

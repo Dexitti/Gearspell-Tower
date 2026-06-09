@@ -44,7 +44,7 @@ public class AntennaController : EquipmentController
     private void SetupVisualParameters()
     {
         Transform rangeBoundary = transform.Find("RangeBoundary");
-        rangeBoundary.position = detectionOrigin;
+        rangeBoundary.position = firePoint;
         rangeBoundary.localScale = new Vector3(currentRange, currentRange);
 
         shapeModule.radius = currentRange * 0.5f;

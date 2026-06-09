@@ -10,7 +10,10 @@ public class GearsDrop : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private int gearsNumber = 1;
 
-    public int GearsNumber { get; set; }
+    public int GearsNumber { 
+        get => gearsNumber;
+        set => gearsNumber = value;
+    }
 
     private void Awake()
     {
@@ -22,7 +25,7 @@ public class GearsDrop : MonoBehaviour
         if (gearsNumber < 10) spriteRenderer.sprite = gearsSprite[0];
         else if (gearsNumber < 25) spriteRenderer.sprite = gearsSprite[1];
         else spriteRenderer.sprite = gearsSprite[2];
-
+        G.ResourceManager?.AddGears(gearsNumber);
         StartCoroutine(LifetimeRoutine());
     }
 
@@ -72,7 +75,6 @@ public class GearsDrop : MonoBehaviour
             yield return null;
         }
 
-        G.ResourceManager?.AddGears(gearsNumber);
         Destroy(gameObject);
     }
 }

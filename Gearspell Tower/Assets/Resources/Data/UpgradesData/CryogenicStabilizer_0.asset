@@ -18,4 +18,4 @@ MonoBehaviour:
   icon: {fileID: 0}
   descriptionKey: Upgrade_CryogenicStabilizer_Desc
   formatArgs: []
-  cost: 50
+  cost: 30

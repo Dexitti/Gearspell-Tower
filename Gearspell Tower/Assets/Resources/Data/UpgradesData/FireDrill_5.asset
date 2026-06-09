@@ -19,4 +19,4 @@ MonoBehaviour:
   descriptionKey: Upgrade_FireTornado_Desc
   formatArgs:
   - 5
-  cost: 120
+  cost: 80

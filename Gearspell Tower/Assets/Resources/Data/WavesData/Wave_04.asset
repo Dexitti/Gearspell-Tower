@@ -15,15 +15,15 @@ MonoBehaviour:
   waveName: Wave 4 - Magic Inspiration
   enemySpawns:
   - enemyPrefab: {fileID: 8516407375225930908, guid: 22fbfc05653798f498fa3161ac6958d3, type: 3}
-    count: 20
+    count: 18
     spawnInterval: 1
   - enemyPrefab: {fileID: 8516407375225930908, guid: 7ac6612df4dde6346ac550cdeb3ab66b, type: 3}
-    count: 2
-    spawnInterval: 3
+    count: 6
+    spawnInterval: 2.4
   - enemyPrefab: {fileID: 8516407375225930908, guid: 3088c44d505a2234c9f90c565fea33bf, type: 3}
     count: 2
-    spawnInterval: 5
+    spawnInterval: 4
   waveDialogs: []
-  gearsReward: 35
+  gearsReward: 25
   equipmentUnlocks:
   - {fileID: 11400000, guid: 97f3f9a3cd3aca946a014e83304624a4, type: 2}

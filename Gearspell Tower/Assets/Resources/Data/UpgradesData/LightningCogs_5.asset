@@ -18,4 +18,4 @@ MonoBehaviour:
   icon: {fileID: 0}
   descriptionKey: Upgrade_MagneticResonance_Desc
   formatArgs: []
-  cost: 120
+  cost: 80

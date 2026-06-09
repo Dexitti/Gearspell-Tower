@@ -19,4 +19,4 @@ MonoBehaviour:
   descriptionKey: Upgrade_AbsoluteZero_Desc
   formatArgs:
   - 3
-  cost: 120
+  cost: 80

@@ -19,4 +19,4 @@ MonoBehaviour:
   descriptionKey: Upgrade_DeepFreeze_Desc
   formatArgs:
   - 50
-  cost: 25
+  cost: 20

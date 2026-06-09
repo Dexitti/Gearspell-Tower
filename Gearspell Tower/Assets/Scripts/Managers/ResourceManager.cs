@@ -21,7 +21,7 @@ public class ResourceManager : MonoBehaviour
     {
         ResetResources();
         G.EventManager?.TriggerGearsChanged(_gears);
-        G.EventManager.OnEnemyKilled += (enemy) => AddGears(50); // Debug
+        G.EventManager.OnEnemyKilled += (enemy) => AddGears(0); // Debug
     }
 
     public void ResetResources()

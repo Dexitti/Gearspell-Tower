@@ -15,14 +15,14 @@ MonoBehaviour:
   waveName: Wave 5 - Inferno
   enemySpawns:
   - enemyPrefab: {fileID: 8516407375225930908, guid: 22fbfc05653798f498fa3161ac6958d3, type: 3}
-    count: 6
-    spawnInterval: 0.8
+    count: 12
+    spawnInterval: 0.7
   - enemyPrefab: {fileID: 8516407375225930908, guid: 7ac6612df4dde6346ac550cdeb3ab66b, type: 3}
     count: 4
-    spawnInterval: 3
+    spawnInterval: 2.4
   - enemyPrefab: {fileID: 8516407375225930908, guid: 3088c44d505a2234c9f90c565fea33bf, type: 3}
-    count: 4
-    spawnInterval: 1.8
+    count: 7
+    spawnInterval: 2
   waveDialogs: []
-  gearsReward: 50
+  gearsReward: 30
   equipmentUnlocks: []

@@ -18,5 +18,5 @@ MonoBehaviour:
   icon: {fileID: 0}
   descriptionKey: Upgrade_PiercingWind_Desc
   formatArgs:
-  - 2
-  cost: 25
+  - 1
+  cost: 20

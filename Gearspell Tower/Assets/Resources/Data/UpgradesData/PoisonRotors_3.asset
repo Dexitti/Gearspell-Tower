@@ -20,4 +20,4 @@ MonoBehaviour:
   formatArgs:
   - 80
   - 70
-  cost: 75
+  cost: 50

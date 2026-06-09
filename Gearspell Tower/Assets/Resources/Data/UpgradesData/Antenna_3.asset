@@ -18,4 +18,4 @@ MonoBehaviour:
   icon: {fileID: 0}
   descriptionKey: Upgrade_Pulsator_Desc
   formatArgs: []
-  cost: 75
+  cost: 50

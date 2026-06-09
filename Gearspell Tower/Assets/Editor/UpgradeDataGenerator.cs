@@ -95,10 +95,10 @@ public class UpgradeDataGenerator : EditorWindow
     {
         return cardType switch
         {
-            "Equipment" => 50,
-            "Common" => 25,
-            "Fork" => 75,
-            "ActiveAbility" => 120,
+            "Equipment" => 30,
+            "Common" => 20,
+            "Fork" => 50,
+            "ActiveAbility" => 80,
             _ => 1
         };
     }

@@ -19,4 +19,4 @@ MonoBehaviour:
   descriptionKey: Upgrade_Brittleness_Desc
   formatArgs:
   - 100
-  cost: 75
+  cost: 50

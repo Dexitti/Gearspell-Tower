@@ -19,4 +19,4 @@ MonoBehaviour:
   descriptionKey: Upgrade_HydroBoost_Desc
   formatArgs:
   - 35
-  cost: 25
+  cost: 20

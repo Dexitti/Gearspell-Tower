@@ -3,64 +3,66 @@
     {
       "waveName": "Wave 1 - Sparks",
       "enemies": [
-        { "creatureName": "Fire_Elemental", "count": 4, "spawnInterval": 1.0 }
+        { "creatureName": "Fire_Elemental", "count": 5, "spawnInterval": 1.0 }
       ],
       "gearsReward": 0
     },
     {
       "waveName": "Wave 2 - Flame",
       "enemies": [
-        { "creatureName": "Fire_Elemental", "count": 10, "spawnInterval": 1.0 },
-        { "creatureName": "Fire_Elemental", "count": 10, "spawnInterval": 1.0 }
+        { "creatureName": "Fire_Elemental", "count": 10, "spawnInterval": 0.9 },
+        { "creatureName": "Fire_Elemental", "count": 10, "spawnInterval": 1.2 }
       ],
-      "gearsReward": 0
+      "gearsReward": 15
     },
     {
       "waveName": "Wave 3 - Smoke & Steam",
       "enemies": [
-        { "creatureName": "Fire_Elemental", "count": 14, "spawnInterval": 0.8 },
-        { "creatureName": "Drone", "count": 6, "spawnInterval": 3 }
+        { "creatureName": "Fire_Elemental", "count": 16, "spawnInterval": 0.8 },
+        { "creatureName": "Drone", "count": 6, "spawnInterval": 2.5 }
       ],
       "gearsReward": 20
     },
     {
       "waveName": "Wave 4 - Magic Inspiration",
       "enemies": [
-        { "creatureName": "Fire_Elemental", "count": 20, "spawnInterval": 1.0 },
-        { "creatureName": "Drone", "count": 2, "spawnInterval": 3 },
-        { "creatureName": "Mage", "count": 2, "spawnInterval": 5 }
+        { "creatureName": "Fire_Elemental", "count": 18, "spawnInterval": 1.0 },
+        { "creatureName": "Drone", "count": 6, "spawnInterval": 2.4 },
+        { "creatureName": "Mage", "count": 2, "spawnInterval": 4 }
       ],
-      "gearsReward": 35,
+      "gearsReward": 25,
       "equipmentUnlocks": ["CryogenicStabilizer"]
     },
     {
       "waveName": "Wave 5 - Inferno",
       "enemies": [
-        { "creatureName": "Fire_Elemental", "count": 6, "spawnInterval": 0.8 },
-        { "creatureName": "Drone", "count": 4, "spawnInterval": 3 },
-        { "creatureName": "Mage", "count": 4, "spawnInterval": 1.8 }
+        { "creatureName": "Fire_Elemental", "count": 12, "spawnInterval": 0.7 },
+        { "creatureName": "Drone", "count": 4, "spawnInterval": 2.4 },
+        { "creatureName": "Mage", "count": 7, "spawnInterval": 2 }
       ],
-      "gearsReward": 50
+      "gearsReward": 30
     },
     {
       "waveName": "Wave 6 - Ancient Force",
       "enemies": [
-        { "creatureName": "Fire_Elemental", "count": 3, "spawnInterval": 0.7 },
-        { "creatureName": "Mage", "count": 3, "spawnInterval": 1.0 },
+        { "creatureName": "Mage", "count": 2, "spawnInterval": 6 },
+        { "creatureName": "Fire_Elemental", "count": 8, "spawnInterval": 0.7 },
+        { "creatureName": "Mage", "count": 4, "spawnInterval": 1.0 },
         { "creatureName": "Spider_Golem", "count": 1, "spawnInterval": 3.0 }
       ],
-      "gearsReward": 55,
+      "gearsReward": 35,
       "equipmentUnlocks": ["WaterHammer"]
     },
     {
       "waveName": "Wave 7 - Invasion",
       "enemies": [
+        { "creatureName": "Drone", "count": 2, "spawnInterval": 2 },
         { "creatureName": "Fire_Elemental", "count": 16, "spawnInterval": 0.7 },
-        { "creatureName": "Drone", "count": 8, "spawnInterval": 1.2 },
+        { "creatureName": "Drone", "count": 6, "spawnInterval": 1.2 },
         { "creatureName": "Mage", "count": 8, "spawnInterval": 2.0 },
         { "creatureName": "Spider_Golem", "count": 2, "spawnInterval": 2.5 }
       ],
-      "gearsReward": 65
+      "gearsReward": 40
     }
   ]
 }

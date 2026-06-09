@@ -19,4 +19,4 @@ MonoBehaviour:
   descriptionKey: Upgrade_Modernization_Desc
   formatArgs:
   - 1.7
-  cost: 25
+  cost: 20

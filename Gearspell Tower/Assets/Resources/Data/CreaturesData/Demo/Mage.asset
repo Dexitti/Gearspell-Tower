@@ -25,4 +25,4 @@ MonoBehaviour:
   damage: 8
   speed: 0.8
   minGearsDrop: 10
-  maxGearsDrop: 20
+  maxGearsDrop: 30

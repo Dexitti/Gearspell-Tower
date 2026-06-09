@@ -75,10 +75,10 @@ public class CreatureDataGenerator : EditorWindow
 
     private static (int min, int max) GetDropRange(CreatureType type) => type switch
     {
-        CreatureType.Easy => (1, 5),
-        CreatureType.Regular => (2, 8),
-        CreatureType.Medium => (10, 20),
-        CreatureType.Heavy => (16, 40),
+        CreatureType.Easy => (2, 6),
+        CreatureType.Regular => (4, 10),
+        CreatureType.Medium => (12, 35),
+        CreatureType.Heavy => (30, 50),
         CreatureType.Boss => (85, 110),
         _ => (1, 1)
     };

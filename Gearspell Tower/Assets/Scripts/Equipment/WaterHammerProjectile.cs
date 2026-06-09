@@ -40,6 +40,11 @@ public class WaterHammerProjectile : MonoBehaviour
         G.AudioManager.PlaySFX("water explosion", 0.35f);
     }
 
+    private void Start()
+    {
+        Destroy(gameObject, 3f);
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (hasHit) return;

@@ -100,7 +100,7 @@ public class WindmillController : EquipmentController
         switch (upgradeId)
         {
             case "Windmill_1":
-                currentDamage = Mathf.RoundToInt(currentDamage * 1.5f);
+                currentDamage = Mathf.RoundToInt(currentDamage * 2f);
                 break;
 
             case "Windmill_2":

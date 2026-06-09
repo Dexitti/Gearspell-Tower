@@ -18,5 +18,5 @@ MonoBehaviour:
   icon: {fileID: 0}
   descriptionKey: Upgrade_SharpStream_Desc
   formatArgs:
-  - 50
-  cost: 25
+  - 100
+  cost: 20
